@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      999 字
+      998 字
     </span>
   
 
@@ -269,7 +269,7 @@
             
             <div class="markdown-body">
               <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;client-go 是官方提供的 go 语言客户端库，可以跟 K8S API Server 进行交互。如果开发者想对 K8S 进行二次开发，可直接拿来使用，不必重复造轮子。</p>
-<p>&emsp;&emsp;client-go 已集成进 K8S 源码，所以 K8S 组件之间也采用 client-go 进行通信（例如 kubectl 操作 API Server）。client-go 在源码中存放的路径是 vendor/k8s.io/client-go，如下图所示：</p>
+<p>&emsp;&emsp;client-go 已集成进 K8S 源码，所以 K8S 组件之间也采用 client-go 进行通信（例如 kubectl 操作 API Server）。client-go 在K8S 中存放的路径是 vendor/k8s.io/client-go，如下图所示：</p>
 <p><img src="/img/20210824190058.jpg" srcset="/img/loading.gif" lazyload alt="源码"></p>
 <p>&emsp;&emsp;本系列文章会全方面介绍 client-go，包括简单操作、项目结构、内部多种客户端源码实现，以及最关键的 Informer 机制（此机制是 K8s 组件之间相互通信的基石）。</p>
 <p>&emsp;&emsp;如果想真正学好 K8s，个人感觉仅仅会操作和运维是远远不够地，只有真实地触摸到代码底层，并实际了解其内部数据结构和运行机制，方能有“不畏浮云遮望眼，自缘身在最高层”的体悟。</p>
