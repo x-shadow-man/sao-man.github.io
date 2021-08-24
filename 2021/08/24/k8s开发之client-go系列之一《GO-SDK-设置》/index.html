@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      999 字
+      1k 字
     </span>
   
 
@@ -294,7 +294,7 @@
 <li><p>配置包下载代理（可选但推荐）</p>
 </li>
 </ul>
-<h2 id="4-1-下载和解压缩"><a href="#4-1-下载和解压缩" class="headerlink" title="4.1 下载和解压缩"></a>4.1 下载和解压缩</h2><p>&emsp;&emsp;在命令行执行如下指令下载和解压缩 Go SDK：</p>
+<h2 id="4-1-下载和解压缩"><a href="#4-1-下载和解压缩" class="headerlink" title="4.1 下载和解压缩"></a>4.1 下载和解压缩</h2><p>&emsp;&emsp;在命令行执行如下指令下载和解压缩 GO SDK：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">cd</span> /opt</span> <br><span class="hljs-meta">#</span><span class="bash"> yum install -y wget</span><br><span class="hljs-meta">#</span><span class="bash"> wget https://golang.google.cn/dl/go1.16.6.linux-amd64.tar.gz</span><br><span class="hljs-meta">#</span><span class="bash"> tar -zxvf go1.16.6.linux-amd64.tar.gz -C /usr/<span class="hljs-built_in">local</span></span><br></code></pre></td></tr></table></figure>
 
 
@@ -305,15 +305,15 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">source</span> /etc/profile</span><br></code></pre></td></tr></table></figure>
 
 
-<h2 id="4-3-验证-GO-SDK"><a href="#4-3-验证-GO-SDK" class="headerlink" title="4.3 验证 GO SDK"></a>4.3 验证 GO SDK</h2><p>&emsp;&emsp;go sdk 安装并设置好环境变量后，在命令行执行如下命令：</p>
+<h2 id="4-3-验证-GO-SDK"><a href="#4-3-验证-GO-SDK" class="headerlink" title="4.3 验证 GO SDK"></a>4.3 验证 GO SDK</h2><p>&emsp;&emsp;GO SDK 安装并设置好环境变量后，在命令行执行如下命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> go version</span><br>go version go1.16.6 linux/amd64<br></code></pre></td></tr></table></figure>
 
-<p>&emsp;&emsp;如果能正确显示 Go SDK 的版本（如上所示），则说明 SDK 安装并且设置成功。</p>
-<h2 id="4-4-配置包下载代理（可选但推荐）"><a href="#4-4-配置包下载代理（可选但推荐）" class="headerlink" title="4.4 配置包下载代理（可选但推荐）"></a>4.4 配置包下载代理（可选但推荐）</h2><p>&emsp;&emsp;首先声明该步骤是可选的，但笔者强烈建议执行该步骤，因为在后期项目开发中会下载很多依赖包，如果采用默认 Go SDK 代理路径（<a href="https://proxy.golang.org），要么可能下载不到（具体原因，你懂的），要么下载速度巨慢，所以建议在命令行执行下面命令进行修改：">https://proxy.golang.org），要么可能下载不到（具体原因，你懂的），要么下载速度巨慢，所以建议在命令行执行下面命令进行修改：</a></p>
+<p>&emsp;&emsp;如果能正确显示 GO SDK 的版本（如上所示），则说明 SDK 安装并且设置成功。</p>
+<h2 id="4-4-配置包下载代理（可选但推荐）"><a href="#4-4-配置包下载代理（可选但推荐）" class="headerlink" title="4.4 配置包下载代理（可选但推荐）"></a>4.4 配置包下载代理（可选但推荐）</h2><p>&emsp;&emsp;首先声明该步骤是可选的，但笔者强烈建议执行该步骤，因为在后期项目开发中会下载很多依赖包，如果采用默认代理路径（<a href="https://proxy.golang.org），要么可能下载不到（具体原因，你懂的），要么下载速度巨慢，所以建议在命令行执行下面命令进行修改：">https://proxy.golang.org），要么可能下载不到（具体原因，你懂的），要么下载速度巨慢，所以建议在命令行执行下面命令进行修改：</a></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> go env -w GOPROXY=<span class="hljs-string">&quot;https://goproxy.io,direct&quot;</span></span><br><span class="hljs-meta">#</span><span class="bash"> go env GOPROXY</span><br>https://goproxy.io,direct<br></code></pre></td></tr></table></figure>
 
-<p>&emsp;&emsp;如果命令执行后的结果如上所示，表示修改成功（即：新代理路径为 <a target="_blank" rel="noopener" href="https://goproxy.io/">https://goproxy.io</a> ）。</p>
-<p>&emsp;&emsp;自此，整个 Go SDK 设置结束，读者可以进入到实际的 Go 项目开发了。</p>
+<p>&emsp;&emsp;如果命令执行后的结果如上所示，表示修改成功（即：新代理路径已经改成 <a target="_blank" rel="noopener" href="https://goproxy.io/">https://goproxy.io</a> ）。</p>
+<p>&emsp;&emsp;自此，整个 GO SDK 设置结束，读者可以进入到实际的 GO 项目开发了。</p>
 <h1 id="5-参考文献"><a href="#5-参考文献" class="headerlink" title="5 参考文献"></a>5 参考文献</h1><p>1 <a target="_blank" rel="noopener" href="https://github.com/kubernetes/client-go">client-go 仓库</a> <a target="_blank" rel="noopener" href="https://github.com/kubernetes/client-go">https://github.com/kubernetes/client-go</a></p>
 
             </div>
