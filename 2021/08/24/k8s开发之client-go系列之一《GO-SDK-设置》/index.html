@@ -268,23 +268,7 @@
             <h1 style="display: none">K8s开发之Client-Go系列之一《GO SDK 设置》</h1>
             
             <div class="markdown-body">
-              <ul>
-<li><p>前言</p>
-</li>
-<li><p>前提</p>
-</li>
-<li><p>运行环境</p>
-</li>
-<li><p>Go SDK 设置</p>
-<ul>
-<li>下载和解压缩</li>
-<li>设置环境变量</li>
-<li>验证 Go SDK</li>
-<li>配置包下载代理（可选但推荐）</li>
-</ul>
-</li>
-</ul>
-<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;client-go 是官方提供的 go 语言客户端库，用来跟 K8s API Server 进行交互，如果开发者想对 K8s 进行二次开发，可直接拿来使用，而不必重复造轮子。</p>
+              <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;client-go 是官方提供的 go 语言客户端库，用来跟 K8s API Server 进行交互，如果开发者想对 K8s 进行二次开发，可直接拿来使用，而不必重复造轮子。</p>
 <p>&emsp;&emsp;目前 client-go 已经集成进 K8s 源码，因此 K8s 组件之间也采用 client-go 进行通信（例如 kubectl 操作 API Server）。client-go 在 K8s 源码中存放的路径是 vendor/k8s.io/client-go，如下图所示：</p>
 <p><img src="/img/20210824190058.jpg" srcset="/img/loading.gif" lazyload alt="源码"></p>
 <p>&emsp;&emsp;本系列文章会全方面介绍 client-go，包括简单操作、项目结构、内部多种客户端源码实现，以及最关键的 Informer 机制（此机制是 K8s 组件之间相互通信的基石）。</p>
