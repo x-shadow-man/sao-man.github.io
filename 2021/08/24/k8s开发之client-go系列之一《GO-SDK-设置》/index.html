@@ -271,7 +271,7 @@
               <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;client-go 是官方提供的 go 语言客户端库，可以跟 K8S API Server 进行交互。如果开发者想对 K8S 进行二次开发，可直接拿来使用，不必重复造轮子。</p>
 <p>&emsp;&emsp;client-go 已集成进 K8S 源码，所以 K8S 组件之间也采用 client-go 进行通信（例如 kubectl 操作 API Server）。client-go 在 K8S 源码中存放的路径是 vendor/k8s.io/client-go，如下图所示：</p>
 <p><img src="/img/20210824190058.jpg" srcset="/img/loading.gif" lazyload alt="client-go 在 K8S 源码中的存放路径"></p>
-<p>&emsp;&emsp;本系列文章会全方面介绍 client-go，包括快速上手、架构设计和源码剖析，在源码介绍章节会重点介绍 Informer 机制（此机制是 K8S 组件之间相互通信的基石）。</p>
+<p>&emsp;&emsp;本系列文章会全方面介绍 client-go，包括快速上手、架构设计和源码剖析，在源码剖析章节会重点介绍 Informer 机制（此机制是 K8S 组件之间相互通信的基石）。</p>
 <p>&emsp;&emsp;如果想真正学好 K8S，仅仅会操作是远远不够地，只有真实地触摸到代码底层，并实际了解其内部数据结构和运行机制，才能有“不畏浮云遮望眼，自缘身在最高层”的体悟。</p>
 <h1 id="2-前提"><a href="#2-前提" class="headerlink" title="2 前提"></a>2 前提</h1><p>&emsp;&emsp;本系列文章并不要求读者一定具备 go 语言开发能力，考虑到大多数人的认知习惯，所以笔者采用了一种先易后难、循序渐进、层层铺垫的编写方式，当然如果碰上喜欢挑战、勤于练胆、不撞南墙就浑身不舒坦的读者，本教程依旧适合，您只需要从后往前读即可。</p>
 <p>&emsp;&emsp;尽管本系列文章对读者的水平做到了最大程度的宽容，但如果想真切感受到程序运行带来的快感，建议还是配置 Go SDK、Go 项目开发环境和 K8s 运行环境。正所谓“<em>九层之台，起于累土；千里之行，始于足下</em>”，个人认为老子的话还是要听一听的。</p>
