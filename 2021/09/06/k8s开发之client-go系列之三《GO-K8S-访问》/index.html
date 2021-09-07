@@ -322,6 +322,7 @@
 
 <h2 id="4-3-4-访问-K8S-获取-Pod-列表"><a href="#4-3-4-访问-K8S-获取-Pod-列表" class="headerlink" title="4.3.4 访问 K8S 获取 Pod 列表"></a>4.3.4 访问 K8S 获取 Pod 列表</h2><p>&emsp;&emsp;下列代码利用 clientset API 获取 K8S default 命名空间下的 Pod 列表。</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">if</span> pods, err = clientset.CoreV1().Pods(<span class="hljs-string">&quot;default&quot;</span>).List(context.TODO(), meta_v1.ListOptions&#123;&#125;); err != <span class="hljs-literal">nil</span> &#123;<br>    <span class="hljs-built_in">panic</span>(err)<br>&#125; <br></code></pre></td></tr></table></figure>
+<h1 id="5-总结"><a href="#5-总结" class="headerlink" title="5.总结"></a>5.总结</h1><p>&emsp;&emsp;本节给出了一个实际样例介绍如何使用 client-go 连接 K8S，这是项目开发的基础，后续所有项目将基于此开发，请大家认真体会。</p>
 
             </div>
             <hr>
