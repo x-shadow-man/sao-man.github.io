@@ -18,7 +18,7 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>九析带你轻松完爆 service mesh - istio kiali 安装 - 九析</title>
+  <title>九析带你轻松完爆 service mesh - istio kiali bookinfo - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松完爆 service mesh - istio kiali 安装">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 service mesh - istio kiali bookinfo">
               
             </span>
 
@@ -213,7 +213,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-11 21:34" pubdate>
+      <time datetime="2021-09-11 21:42" pubdate>
         2021年9月11日 晚上
       </time>
     </span>
@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      390 字
+      778 字
     </span>
   
 
@@ -235,7 +235,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      9
        分钟
     </span>
   
@@ -265,47 +265,70 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松完爆 service mesh - istio kiali 安装</h1>
+            <h1 style="display: none">九析带你轻松完爆 service mesh - istio kiali bookinfo</h1>
             
             <div class="markdown-body">
               <p>1 前言</p>
 <p>2 邀约</p>
-<p>3 kiali 简介</p>
-<p>4 kiali 安装</p>
-<p>5 kiali 访问</p>
+<p>3 安装 istio</p>
+<p>4 安装 bookinfo 应用</p>
+<p>5 设置 kiali</p>
+<p>6 kiali 可视化 bookinfo</p>
+<p>7 注入和观察流量</p>
 <hr>
 <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516653984882.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675889827788.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio 学习"></p>
 <hr>
 <h2 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h2><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516661797993.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kaili_02"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675897514592.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio kiali bookinf_02"></p>
 <hr>
-<h2 id="3-kiali-简介"><a href="#3-kiali-简介" class="headerlink" title="3 kiali 简介"></a>3 kiali 简介</h2><p>​    kiali 是一款 istio 服务网格可视化工具，提供了服务拓补图、全链路跟踪、指标遥测、配置校验、健康检查等功能。</p>
+<h2 id="3-安装-istio"><a href="#3-安装-istio" class="headerlink" title="3 安装 istio"></a>3 安装 istio</h2><p>​    istio 安装教程请参考本人的博客《<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2474224"> istio 安装</a>》。</p>
 <hr>
-<h2 id="4-kiali-安装"><a href="#4-kiali-安装" class="headerlink" title="4 kiali 安装"></a>4 kiali 安装</h2><p>​    如果使用 istioctl 安装 istio 时采用的 profile 是 demo 的话（有关 profile 介绍，请参照本人的《 <a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2479111"> istioctl profile 介绍</a>》），默认就会安装好 kiali。istio 安装请参照本人的《<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2474224"> istio 安装</a>》博客分分钟轻松完爆。安装好后，直接执行如下命令查看 kiali 组件：</p>
-<blockquote>
-<p>kubectl get all -n istion-system</p>
-</blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516715612147.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 学习_03"></p>
+<h2 id="4-安装-bookinfo-应用"><a href="#4-安装-bookinfo-应用" class="headerlink" title="4 安装 bookinfo 应用"></a>4 安装 bookinfo 应用</h2><p>​    bookinfo 是 istio 官方提供的样例程序。有关安装、istio 注入请参考本人的博客《<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2474914"> istio bookinfo 应用</a>》。</p>
 <hr>
-<h2 id="5-kiali-访问"><a href="#5-kiali-访问" class="headerlink" title="5 kiali 访问"></a>5 kiali 访问</h2><p>​    在集群内，通过 curl 命令行工具访问 kiali：</p>
+<h2 id="5-设置-kiali"><a href="#5-设置-kiali" class="headerlink" title="5 设置 kiali"></a>5 设置 kiali</h2><p>​    kiali 是使用 istioctl 客户端工具安装 demo profile 时自动就会安装的组件，kiali 是一款 istio 服务网格可视化工具，提供了服务拓补图、全链路跟踪、指标遥测、配置校验、健康检查等功能。</p>
+<p>​    有关 kiali 的配置和简单使用请参考本人的博客《<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2479715"> kiali 安装</a>》和《<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2479767"> kiali 使用</a>》。</p>
+<hr>
+<h2 id="6-kiali-可视化-bookinfo"><a href="#6-kiali-可视化-bookinfo" class="headerlink" title="6 kiali 可视化 bookinfo"></a>6 kiali 可视化 bookinfo</h2><p>​    登录 kiali，进入 overview 菜单，选中 bookinfo 应用，如下图所示，本人布置在 jiuxi 命名空间：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675907738139.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio 视频_03"></p>
+<p>​    点击进入 jiuxi 命名空间下的 “4 Applications” ， 进入 “Applications” 视图，可见 bookinfo 样例下的 4 个微服务，并且当前这 4 个微服务状态都健康（Health ✔）如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675915689224.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio kiali_04"></p>
+<p>​    最关键的可视化内容可以查看 “Graph” 菜单，如下所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675923857146.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_kiali bookinfo_05"></p>
+<p>​    下面重点介绍 “Graph” 视图下的功能：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675930269547.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio 学习_06"></p>
 <blockquote>
-<p>curl <a target="_blank" rel="noopener" href="http://10.101.30.105:20001/"> http://10.101.30.105:20001</a></p>
+<p>1 命名空间</p>
+<p>2 分类图展示：app（应用视角，label 名为 app，并且 app 值相同的资源算作一类  app）、service（k8s服务视角）、versioned app（标记版本应用视角）、workload（k8s工作负载视角，比如  deployment、job、statefulset、daemonset）</p>
+<p>3 指标展示：Requests per second（每秒多少请求）、Requests percent（请求分布占比）、Response time（响应时间）</p>
+<p>4 显示过滤器：各种显示开关，用复选框表示；可以选择 Traffic Animation，爽爽看</p>
+<p>5 规格过滤显示：可以把它类比为 grep 命令，通过定义好的过滤规则，高亮图的某些组件或元素，比如在 find 字段输入 httpout &gt; 0.5 后回车，可看到如下截图所示</p>
+<p>6 三角形表示 k8s 服务</p>
+<p>7 圆形表示 k8s workload</p>
+<p>8 时间间隔的流量选择器：比如 1m（分钟）、5m、10m、30m、1h（小时）、3h、6h</p>
+<p>9 页面刷新频率：比如每 10 秒、每 15 秒、每 30 秒、每 1 分钟、每 5 分钟、每 15 分钟</p>
+<p>10 命名空间</p>
+<p>11 入口流量、出口流量和总流量显示</p>
+<p>12 图例说明：解释图中各个形状各代表什么意思</p>
+<p>13 layout：不同展示风格（共有三种，选择自己的喜好）</p>
 </blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516724636987.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger_04"></p>
-<p>​    上图所示 kiali 已经部署成功，服务处于就绪状态。下面改成外部浏览器可以直接访问，需要将 service 的服务类型设置为 nodeport，执行命令如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675942103722.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio kiali bookinf_07"></p>
+<hr>
+<h2 id="7-注入和观察流量"><a href="#7-注入和观察流量" class="headerlink" title="7 注入和观察流量"></a>7 注入和观察流量</h2><p>​    选择 ingressgateway svc，通过如下指令：</p>
 <blockquote>
-<p>kubectl patch svc -n istio-system kiali -p ‘{“spec”: {“type”: “NodePort”}}’</p>
+<p>kubectl get svc -n istio-system -o wide    # jiuxi 是我自定义命名空间</p>
 </blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516731417402.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 视频_05"></p>
-<p>​    打开浏览器，访问 k8s 所在服务器 IP 和 NodePort 暴露出来的端口号（这里是 31479），如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516740649530.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_06"></p>
-<p>​    默认用户名密码是 admin/admin，输入后登录：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516749156466.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_07"></p>
-<p>​    自此，九析带你轻松完爆 istio kiali 安装。关于 kiali 说明和使用将在下章说明。</p>
+<p>​    执行结果如下图：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675950551018.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_kiali bookinfo_08"></p>
+<p>​    因为服务类型是 NodePort，所以 ip 要选择宿主机 ip，而不是 svc cluster-ip 或者是 pod ip，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675958536850.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio kiali_09"></p>
+<p>​    通过 curl 命令打入流量：</p>
+<blockquote>
+<p>while true; do curl <a target="_blank" rel="noopener" href="http://10.110.101.98:30100/productpage">http://10.110.101.98:30100/productpage</a>; done</p>
+</blockquote>
+<p>​    通过 kiali graph 视图:</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675965312153.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_kiali bookinfo_10"></p>
+<p>​    自此，九析带你轻松完爆 istio kiali bookinfo 应用。</p>
 
             </div>
             <hr>
@@ -340,9 +363,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BD%BF%E7%94%A8%E7%AF%87/">
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E5%86%85%E9%83%A8%E4%BB%8B%E7%BB%8D/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio kiali 使用篇</span>
+                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio kiali 内部介绍</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -350,8 +373,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-profile-%E8%AF%A6%E8%BF%B0/">
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio profile 详述</span>
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BD%BF%E7%94%A8%E7%AF%87/">
+                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio kiali 使用篇</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -18,9 +18,25 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>归档 - 九析</title>
+  <title>九析带你轻松完爆 Istio - 网络包之 iptables netfilter 关系 - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -48,7 +64,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -187,9 +203,46 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="归档">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 Istio - 网络包之 iptables netfilter 关系">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-11 22:21" pubdate>
+        2021年9月11日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      802 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -202,100 +255,130 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 36 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2021</p>
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E5%85%B3-gateway-%E5%AE%9E%E4%BE%8B/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - 网关 gateway 实例</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E6%B5%81%E5%90%91%E4%B9%8B-iptables-chain/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - 网络流向之 iptables chain</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%8C%85%E4%B9%8B-iptables-netfilter-%E5%85%B3%E7%B3%BB/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - 网络包之 iptables netfilter 关系</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-Ingress/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-NodePort/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-hostPort/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-hostNetwork/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-destination-rule-%E4%BB%8B%E7%BB%8D/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - destination rule 介绍</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-destination-rule-%E5%AE%9E%E4%BE%8B/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - destination rule 实例</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-Istio-%E8%B7%AF%E7%94%B1%E8%A7%84%E5%88%99/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 service mesh - Istio 路由规则</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">九析带你轻松完爆 Istio - 网络包之 iptables netfilter 关系</h1>
+            
+            <div class="markdown-body">
+              <p>1 前言</p>
+<p>2 邀约</p>
+<p>3 正文</p>
+<hr>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587698518570214.png" srcset="/img/loading.gif" lazyload alt="第二十八章 九析带你轻松完爆 Istio - 网络包之 iptables netfilter 关系_k8s iptables"></p>
+<hr>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587698527213780.png" srcset="/img/loading.gif" lazyload alt="第二十八章 九析带你轻松完爆 Istio - 网络包之 iptables netfilter 关系_iptables_02"></p>
+<hr>
+<h1 id="3-正文"><a href="#3-正文" class="headerlink" title="3 正文"></a>3 正文</h1><p>​    淅淅沥沥的雨不像下在外面，而是下在心里。</p>
+<p>​    清秀的男人推开重重的府门，外面的光线一点点透进去，就像蹑手蹑脚的小偷，悄无声息。空间中有潮湿木头腐朽的味道，男人微皱一下浓眉。</p>
+<p>​    房间本是宽敞，却被大大小小的箱子叠床架屋，所以显得异常逼仄。箱子质地坚硬结实，仿佛从纹理就能看出里面的价值。有些锁已经有了锈的痕迹，但却依然古色古香。</p>
+<p>​    雨声似乎大了些，淅淅沥沥打在青石板的门阶上。男人透过门缝瞥了瞥远方，挡住视线的是一幢一幢的深不可测的门房。</p>
+<p>​    这里曾经风雨西窗，这里也曾衰草枯杨……</p>
+<p>​    男人收回目光，垂下眼睑，沉浸在一片静穆之中。</p>
+<p>​    远远的脚步声近了，门被打开又被迅速关上。一个俊俏的小厮满脸笑容又恭恭敬敬地靠近。</p>
+<p>​    老爷，这是新纳贡的单子。</p>
+<blockquote>
+<p>山东府台跟我们素有不合，他上贡皇上的礼品我统一给挡了。</p>
+<p>福建的礼品有些我觉得老佛爷不喜欢，就暂放在老爷的府上，其它我觉得合适的就送上去了。</p>
+<p>两江总督的进献的礼品太过豪奢，恐圣上震怒伤了身子，我全部都先扣下来暂存在老爷府上等待发落。</p>
+<p>……</p>
+</blockquote>
+<p>​    男人一言不发，似乎注意力全不在这里。他对小厮做事绝对是放心的。自从他当了总管之后，大大小小的规则都是他制定的。一次疏忽或纰漏都不曾有过。男人此刻心中所想到底是什么，恐怕只有他自己知道。</p>
+<p>============================================================================</p>
+<p>​    男人叫和珅、小厮叫刘全。</p>
+<p>​    和珅是帝国的柱石，它是整个帝国系统的“安全框架”，他深不可测，位于整个系统的内核空间，不可直接触达，他掌握整个帝国的数据走向。</p>
+<p>​    刘全是和珅的代理。他是和珅的心腹，为和珅出谋划策、制定一系列的事情处理规则。他不处于高墙之内，仅浮沉在市井的用户空间，却具有跟内核态打交道的能力。</p>
+<p>============================================================================</p>
+<p>​    和珅就像 linux 内核中的 netfilter 安全框架，而刘全就是 netfilter 的客户端代理工具 iptables。通过刘全，可以将相应的规则作用在和珅之上。</p>
+<p>​    netfilter 是 linux 操作系统核心层的一个数据包处理模块，主要功能如下：</p>
+<blockquote>
+<p>数据包过滤功能</p>
+<p>数据包内容修改</p>
+<p>数据包网络地址转换（NAT，net address translate）</p>
+</blockquote>
+<p>​    iptables 则是一个客户端工具，可以通过 iptables 制定一系列的规则，最终作用在 netfilter 之上，起到发挥 netfilter 功能，控制数据包流向与控制的作用。</p>
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2021/page/2/#board">2</a><a class="page-number" href="/archives/2021/page/3/#board">3</a><a class="page-number" href="/archives/2021/page/4/#board">4</a><a class="extend next" rel="next" href="/archives/2021/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
-
-
-
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/istio/">istio</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/istio/">istio</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E6%B5%81%E5%90%91%E4%B9%8B-iptables-chain/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - 网络流向之 iptables chain</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-Ingress/">
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -391,6 +474,8 @@
 
   
     
+      <script  src="/js/img-lazyload.js" ></script>
+    
   
 
 
@@ -399,9 +484,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 

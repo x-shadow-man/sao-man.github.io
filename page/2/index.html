@@ -222,31 +222,30 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-%E5%AE%89%E8%A3%85/" target="_self">
-          九析带你轻松完爆服务网格 - istio 安装
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-virtual-service-%E7%AE%80%E8%BF%B0/" target="_self">
+          九析带你轻松完爆 Istio - virtual service 简述
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-%E5%AE%89%E8%A3%85/" target="_self">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-virtual-service-%E7%AE%80%E8%BF%B0/" target="_self">
           
           
             
           
           1 前言
-2 微服务的历史
-3 istio
-4 istio 使用
-  4.1 下载 istio
-  4.2 安装 istio
-  4.3 配置 istioctl 工具路径
-  4.4 实现 istioctl 自动补全功能
-  4.5 安装学习版 istio
-  4.6 卸载 istio
-5 总结
+2 邀约
+3 virtual service 简述
+4 virtual service 样例
+  4.1 jiuxi-busybox.yaml
+  4.2 jiuxi-deployment.yaml
+  4.3 jiuxi-svc.yaml
+  4.4 jiuxi-vs.yaml
+5 Istio 注入
+6 登录客户端验证规则生效
+7 总结
 
-1 前言​    如果你对博客有任何疑问，请加微信沟通：
-​    你可以从下面截图中获取免费的、更
+1 前言​    如果你对博客有任何疑问，请告
         </a>
       </p>
 
@@ -254,7 +253,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-11 16:36" pubdate>
+            <time datetime="2021-09-11 22:01" pubdate>
               2021-09-11
             </time>
           </div>
@@ -285,20 +284,32 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/11/linux%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E3%80%8A%E5%86%85%E6%A0%B8%E5%8D%87%E7%BA%A7%E3%80%8B/" target="_self">
-          linux 系列之一《升级内核》
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-Istio-virtual-service/" target="_self">
+          九析带你轻松完爆 service mesh - Istio virtual service
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/11/linux%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E3%80%8A%E5%86%85%E6%A0%B8%E5%8D%87%E7%BA%A7%E3%80%8B/" target="_self">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-Istio-virtual-service/" target="_self">
           
           
             
           
-          1 Linux 内核与发行版&emsp;&emsp;首先解释一下 Linux 的内核和发行版概念。
-&emsp;&emsp;内核是管理计算机软硬件的程序，它提供网络协议栈、文件系统、中断处理以及内存、磁盘、进程等底层管理的能力。
-&emsp;&emsp;但是内核对用户而言是不友好的，因为它太专业。对于用户而言，他们需要享受的是实在的服务。比如有些男人就是迷恋日本电影，它管你内核不内核，他就需要播放
+          1 前言
+2 邀约
+3 虚拟服务（Virtual Service）
+4 虚拟服务跟 K8s 服务的关系
+5 虚拟服务实例
+  5.1 k8s 资源
+  5.2 Istio 资源
+  5.3 Istio 注入
+  5.4 创建客户端和客户端 Istio 注入
+
+1 前言​    如果你对博客有任何疑问，请告诉我。
+
+
+2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
         </a>
       </p>
 
@@ -306,7 +317,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-11 15:42" pubdate>
+            <time datetime="2021-09-11 21:59" pubdate>
               2021-09-11
             </time>
           </div>
@@ -315,7 +326,7 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Linux/">Linux</a>
+              <a href="/categories/istio/">istio</a>
             
           </div>
         
@@ -323,7 +334,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/kernel/">kernel</a>
+              <a href="/tags/istio/">istio</a>
             
           </div>
         
@@ -337,24 +348,30 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/06/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%89%E3%80%8AGO-K8S-%E8%AE%BF%E9%97%AE%E3%80%8B/" target="_self">
-          client-go 系列之三《go k8s 访问》
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-Istio-traffic-managem/" target="_self">
+          九析带你轻松完爆 service mesh - Istio traffic managem
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/06/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%89%E3%80%8AGO-K8S-%E8%AE%BF%E9%97%AE%E3%80%8B/" target="_self">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-Istio-traffic-managem/" target="_self">
           
           
             
           
-          1 前言&emsp;&emsp;上节介绍了 GO 项目开发的配置，本小节会利用 client-go 库实际编写一个访问 K8S 的样例。
-2 运行环境&emsp;&emsp;本系列文章使用的环境配置如下（不要求读者完全匹配，可根据自己实际情况酌情处理）：
+          1 前言
+2 邀约
+3 流量管理概述
+4 istio 流量管理 API 资源
 
-K8s        版本 :  1.19.0
-Docker  版本：20.10.8
-CentOS 版本：7.7.1908
-Go SDK 版本
+1 前言​    如果你对博客有任何疑问，请告诉我。
+
+
+2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
+
+3 流量管理概述​    流量管理的本质就是采用策略控制流量的流向和大小。
+​    Istio 流量管理模型依赖于随服务一起部署的 Envoy 代理，网格发送和接收的所有流量
         </a>
       </p>
 
@@ -362,8 +379,8 @@ Go SDK 版本
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-06 21:39" pubdate>
-              2021-09-06
+            <time datetime="2021-09-11 21:56" pubdate>
+              2021-09-11
             </time>
           </div>
         
@@ -371,7 +388,7 @@ Go SDK 版本
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/client-go/">client-go</a>
+              <a href="/categories/istio/">istio</a>
             
           </div>
         
@@ -379,7 +396,7 @@ Go SDK 版本
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/client-go/">client-go</a>
+              <a href="/tags/istio/">istio</a>
             
           </div>
         
@@ -393,24 +410,36 @@ Go SDK 版本
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/08/28/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E4%BA%8C%E3%80%8AGO-%E9%A1%B9%E7%9B%AE%E8%AE%BE%E7%BD%AE%E3%80%8B/" target="_self">
-          client-go 系列之二《go 项目设置》
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-Istio-%E6%9E%B6%E6%9E%84/" target="_self">
+          九析带你轻松完爆 service mesh - Istio 架构
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/08/28/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E4%BA%8C%E3%80%8AGO-%E9%A1%B9%E7%9B%AE%E8%AE%BE%E7%BD%AE%E3%80%8B/" target="_self">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-Istio-%E6%9E%B6%E6%9E%84/" target="_self">
           
           
             
           
-          1 前言&emsp;&emsp;上节介绍了 client-go 和 GO SDK 安装，本小节将介绍 GO 项目配置，并给出一个 GO 项目实例。
-2 运行环境&emsp;&emsp;本系列文章使用的环境配置如下（不要求读者完全匹配，可根据自己实际情况酌情处理）：
+          1 前言
+2 邀约
+3 架构概述
+4 流量概述
+5 组件介绍
+  5.1 Envoy
+  5.2 Pilot
+  5.3 Citadel
+  5.4 Galley
 
-K8s        版本 :  1.19.0
-Docker  版本：20.10.8
-CentOS 版本：7.7.1908
-Go S
+1 前言​    如果你对博客有任何疑问，请告诉我。
+
+
+2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
+
+3 架构概述​    istio 服务网格逻辑上分为数据和控制两大平面。
+
+数据平面：由一
         </a>
       </p>
 
@@ -418,8 +447,8 @@ Go S
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-28 15:50" pubdate>
-              2021-08-28
+            <time datetime="2021-09-11 21:54" pubdate>
+              2021-09-11
             </time>
           </div>
         
@@ -427,7 +456,7 @@ Go S
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/client-go/">client-go</a>
+              <a href="/categories/istio/">istio</a>
             
           </div>
         
@@ -435,7 +464,7 @@ Go S
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/client-go/">client-go</a>
+              <a href="/tags/istio/">istio</a>
             
           </div>
         
@@ -449,19 +478,33 @@ Go S
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/08/24/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E3%80%8AGO-SDK-%E8%AE%BE%E7%BD%AE%E3%80%8B/" target="_self">
-          client-go 系列之一《go sdk 配置》
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-jaeger-%E5%85%B3%E8%81%94/" target="_self">
+          九析带你轻松完爆 service mesh - istio kiali jaeger 关联
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/08/24/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E3%80%8AGO-SDK-%E8%AE%BE%E7%BD%AE%E3%80%8B/" target="_self">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-jaeger-%E5%85%B3%E8%81%94/" target="_self">
           
           
             
           
-          1 前言&emsp;&emsp;client-go 是官方提供的 go 语言客户端库，可以跟 K8S API Server 进行交互。如果开发者想对 K8S 进行二次开发，可直接拿来使用，不必重复造轮子。
-&emsp;&emsp;client-go 已集成进 K8S 源码，所以 K8S 组件之间也采用 client-go 进行通信（例如 kubectl 操作 API Server）。client-
+          1 前言
+2 邀约
+3 jaeger 介绍
+4 jaeger 安装
+5 jaeger 配置
+6 kiali 关联 jaeger
+7 设置 kiali jaeger 外部链接地址
+8 kiali jaeger 流量关联
+
+1 前言​    如果你对博客有任何疑问，请告诉我。
+
+
+2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
+
+3 jaeger 介绍​    ja
         </a>
       </p>
 
@@ -469,8 +512,8 @@ Go S
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-24 19:02" pubdate>
-              2021-08-24
+            <time datetime="2021-09-11 21:52" pubdate>
+              2021-09-11
             </time>
           </div>
         
@@ -478,7 +521,7 @@ Go S
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/client-go/">client-go</a>
+              <a href="/categories/istio/">istio</a>
             
           </div>
         
@@ -486,7 +529,7 @@ Go S
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/client-go/">client-go</a>
+              <a href="/tags/istio/">istio</a>
             
           </div>
         
@@ -500,19 +543,34 @@ Go S
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/08/14/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%B3%BB%E5%88%97%E4%B9%8B%E4%BA%8C%E3%80%8A%E4%BA%8B%E5%8A%A1%E3%80%8B/" target="_self">
-          分布式事务系列之二《事务》
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BA%B2%E5%92%8C%E6%80%A7%E8%B0%83%E5%BA%A6/" target="_self">
+          九析带你轻松完爆 service mesh - istio kiali 亲和性调度
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/08/14/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%B3%BB%E5%88%97%E4%B9%8B%E4%BA%8C%E3%80%8A%E4%BA%8B%E5%8A%A1%E3%80%8B/" target="_self">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BA%B2%E5%92%8C%E6%80%A7%E8%B0%83%E5%BA%A6/" target="_self">
           
           
             
           
-          前言&emsp;&emsp;上节介绍了单体架构，单体架构是整个漫长软件架构演进过程中使用人数最多、应用范围最广、也相对最稳定的一种架构。但随着业务多变、逻辑复杂性增加、交付时间越来越短，单体架构逐渐显出疲态，慢慢被分布式微服务架构所代替。
-&emsp;&emsp;早期单体架构解决的核心问题是信息化，信息化处理的对象是数据，数据的质量直接影响到信息化的好坏。数据质量的判断有很多维度，其中最重要维度之
+          1 前言
+2 邀约
+3 节点调度
+  3.1 节点打标
+  3.2 编写 pod
+4 kiali 亲和性调度
+  4.1 举个例子
+  4.2 节点亲和性调度（NodeAffinity）
+  4.3 kiali 节点亲和性调度
+
+1 前言​    如果你对博客有任何疑问，请告诉我。
+
+
+2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
+
+3 节点调度​    在开
         </a>
       </p>
 
@@ -520,8 +578,8 @@ Go S
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-14 21:13" pubdate>
-              2021-08-14
+            <time datetime="2021-09-11 21:49" pubdate>
+              2021-09-11
             </time>
           </div>
         
@@ -529,7 +587,7 @@ Go S
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a>
+              <a href="/categories/istio/">istio</a>
             
           </div>
         
@@ -537,7 +595,7 @@ Go S
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a>
+              <a href="/tags/istio/">istio</a>
             
           </div>
         
@@ -551,19 +609,30 @@ Go S
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/08/14/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E3%80%8A%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E3%80%8B/" target="_self">
-          分布式事务系列之一《单体架构》
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E5%86%85%E9%83%A8%E4%BB%8B%E7%BB%8D/" target="_self">
+          九析带你轻松完爆 service mesh - istio kiali 内部介绍
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/08/14/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E3%80%8A%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E3%80%8B/" target="_self">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E5%86%85%E9%83%A8%E4%BB%8B%E7%BB%8D/" target="_self">
           
           
             
           
-          前言&emsp;&emsp;分布式事务目标是解决数据一致性问题。在整个波澜壮阔的计算机科技发展史上，分布式事务并非一开始就存在，它只是历史发展的产物，随着软、硬件架构的不断更迭和演进才逐步发展起来的。
-&emsp;&emsp;我还记得那是一个夏天，窗外鸟语花香，空气中满是新鲜和幸福的味道。那时路上还没有那么多车，苏堤远没有现在人流如织。在那个还流淌着小资的年代，软件从业者是小众的文艺小清新，也就在
+          1 前言
+2 邀约
+3 预备知识
+4 kiali 组件分析
+5 config.yaml 文件
+
+1 前言​    如果你对博客有任何疑问，请告诉我。
+
+
+2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
+
+3 预备知识​    有关 kiali 介绍、安装和使用请参考本人上三篇博客《 九析带你轻松完爆 istio 服务网格系列教程》。这里介绍 istio 1.5.
         </a>
       </p>
 
@@ -571,8 +640,8 @@ Go S
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-14 18:08" pubdate>
-              2021-08-14
+            <time datetime="2021-09-11 21:46" pubdate>
+              2021-09-11
             </time>
           </div>
         
@@ -580,7 +649,7 @@ Go S
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a>
+              <a href="/categories/istio/">istio</a>
             
           </div>
         
@@ -588,7 +657,198 @@ Go S
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a>
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-bookinfo/" target="_self">
+          九析带你轻松完爆 service mesh - istio kiali bookinfo
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-bookinfo/" target="_self">
+          
+          
+            
+          
+          1 前言
+2 邀约
+3 安装 istio
+4 安装 bookinfo 应用
+5 设置 kiali
+6 kiali 可视化 bookinfo
+7 注入和观察流量
+
+1 前言​    如果你对博客有任何疑问，请告诉我。
+
+
+2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
+
+3 安装 istio​    istio 安装教程请参考本人的博客《 istio 安装》。
+
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 21:42" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/istio/">istio</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BD%BF%E7%94%A8%E7%AF%87/" target="_self">
+          九析带你轻松完爆 service mesh - istio kiali 使用篇
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BD%BF%E7%94%A8%E7%AF%87/" target="_self">
+          
+          
+            
+          
+          1 前言
+2 邀约
+3 kiali 控制台
+  3.1 Overview（概观）
+  3.2 Application（应用维度）
+  3.3 workloads（负载维度）
+  3.4 Services（服务维度）
+  3.5 Istio Config（配置维度）
+  3.6 Distributed Tracing（分布式追踪维度）
+4 kiali 架构
+
+1 前言​    如果你对博客有任何疑问
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 21:39" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/istio/">istio</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E5%AE%89%E8%A3%85/" target="_self">
+          九析带你轻松完爆 service mesh - istio kiali 安装
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E5%AE%89%E8%A3%85/" target="_self">
+          
+          
+            
+          
+          1 前言
+2 邀约
+3 kiali 简介
+4 kiali 安装
+5 kiali 访问
+
+1 前言​    如果你对博客有任何疑问，请告诉我。
+
+
+2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
+
+3 kiali 简介​    kiali 是一款 istio 服务网格可视化工具，提供了服务拓补图、全链路跟踪、指标遥测、配置校验、健康检查等功能。
+
+4 kiali 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 21:34" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/istio/">istio</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/istio/">istio</a>
             
           </div>
         
@@ -600,7 +860,7 @@ Go S
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

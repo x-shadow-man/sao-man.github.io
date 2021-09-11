@@ -18,9 +18,25 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>归档 - 九析</title>
+  <title>九析带你轻松完爆 Istio - destination rule 介绍 - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -48,7 +64,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -187,9 +203,46 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="归档">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 Istio - destination rule 介绍">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-11 22:09" pubdate>
+        2021年9月11日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      580 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      6
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -202,100 +255,119 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 36 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2021</p>
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E5%85%B3-gateway-%E5%AE%9E%E4%BE%8B/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - 网关 gateway 实例</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E6%B5%81%E5%90%91%E4%B9%8B-iptables-chain/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - 网络流向之 iptables chain</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%8C%85%E4%B9%8B-iptables-netfilter-%E5%85%B3%E7%B3%BB/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - 网络包之 iptables netfilter 关系</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-Ingress/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-NodePort/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-hostPort/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-hostNetwork/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-destination-rule-%E4%BB%8B%E7%BB%8D/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - destination rule 介绍</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-destination-rule-%E5%AE%9E%E4%BE%8B/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - destination rule 实例</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-Istio-%E8%B7%AF%E7%94%B1%E8%A7%84%E5%88%99/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 service mesh - Istio 路由规则</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">九析带你轻松完爆 Istio - destination rule 介绍</h1>
+            
+            <div class="markdown-body">
+              <p>1 前言</p>
+<p>2 邀约</p>
+<p>3 介绍</p>
+<p>4 路由策略</p>
+<p>5 样例说明</p>
+<hr>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586941964975167.png" srcset="/img/loading.gif" lazyload alt="第二十三章 九析带你轻松完爆 Istio - destination rule 介绍_Istio destination r"></p>
+<hr>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586941972382785.png" srcset="/img/loading.gif" lazyload alt="第二十三章 九析带你轻松完爆 Istio - destination rule 介绍_Istio 视频_02"></p>
+<hr>
+<h1 id="3-介绍"><a href="#3-介绍" class="headerlink" title="3 介绍"></a>3 介绍</h1><p>​    上章展示了 destination rule 一个实例。</p>
+<p>​    destination rules 是 Istio 流量路由的关键功能，它不能独自使用，必须跟 Virtual Service 共同发挥作用。当  destination rules 跟 virtual service 共同使用的时候，virtual service  决定将流量路由到逻辑地址，而 destination rules 则决定流量路由到物理地址。</p>
+<p>​    virtual service 跟 destination rules 路由关系就像变量到内存的地址映射一样，destination 代表内存实际地址，而 virtual service 作用就像程序的指针。</p>
+<p>​    destination rules 通常用在微服务的版本分组上（例如可以通过 version 标签将微服务进行分组）。通过 destination rules  的分组规则可以实现将流量路由到服务的不同版本中，进而实现类似灰度、金丝雀、蓝绿等版本分流的策略。</p>
+<p>​    destination rules 不仅可以决定把流量路由到何处，还可以制定如何路由流量（比如是轮询路由流量，还是随机路由流量等等）。有关 destination rules 选项可以参考 <a target="_blank" rel="noopener" href="https://istio.io/docs/reference/config/networking/destination-rule/"> Destination Rule 指南</a>。</p>
+<hr>
+<h1 id="4-路由策略"><a href="#4-路由策略" class="headerlink" title="4 路由策略"></a>4 路由策略</h1><p>​    默认情况下，Istio 使用轮询的负载均衡路由策略（round-robin），也就是说服务所有实例按顺序接收请求。当然 Istio 也支持如下的模型，这些模型都可以通过在 destination rule 中进行指定：</p>
+<blockquote>
+<p>Random：请求被随机分配给服务的实例</p>
+<p>Weighted：请求基于权重被分配给服务的实例</p>
+<p>Least requests：请求被分配给服务最少被访问的实例</p>
+</blockquote>
+<hr>
+<h1 id="5-样例说明"><a href="#5-样例说明" class="headerlink" title="5 样例说明"></a>5 样例说明</h1><p>​    Istio 官方给出的 destination rule 样例如下：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586941984155387.png" srcset="/img/loading.gif" lazyload alt="第二十三章 九析带你轻松完爆 Istio - destination rule 介绍_Istio 流量管理_03"></p>
+<p>​    上例 destination rule 中指定了 subsets，子集是根据 version 来定义。注意，这里 labels  内容可以自由定义，不一定非要是 version。其中的 trafficPolicy  就是流量路由到服务所有实例的策略（比如随机、轮询、按权重、最少访问等）。此外针对 v2 这个  subsets，它的路由策略比较特殊，它覆盖了默认的 RANDOM 方式，而是直接采用了 ROUND_ROBIN 方式。</p>
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2021/page/2/#board">2</a><a class="page-number" href="/archives/2021/page/3/#board">3</a><a class="page-number" href="/archives/2021/page/4/#board">4</a><a class="extend next" rel="next" href="/archives/2021/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
-
-
-
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/istio/">istio</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/istio/">istio</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-hostNetwork/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-destination-rule-%E5%AE%9E%E4%BE%8B/">
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - destination rule 实例</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -391,6 +463,8 @@
 
   
     
+      <script  src="/js/img-lazyload.js" ></script>
+    
   
 
 
@@ -399,9 +473,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 

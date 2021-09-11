@@ -18,7 +18,7 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>九析带你轻松完爆 service mesh - istio kiali 安装 - 九析</title>
+  <title>九析带你轻松完爆 service mesh - istio kiali 亲和性调度 - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松完爆 service mesh - istio kiali 安装">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 service mesh - istio kiali 亲和性调度">
               
             </span>
 
@@ -213,7 +213,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-11 21:34" pubdate>
+      <time datetime="2021-09-11 21:49" pubdate>
         2021年9月11日 晚上
       </time>
     </span>
@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      390 字
+      1k 字
     </span>
   
 
@@ -235,7 +235,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      11
        分钟
     </span>
   
@@ -265,47 +265,92 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松完爆 service mesh - istio kiali 安装</h1>
+            <h1 style="display: none">九析带你轻松完爆 service mesh - istio kiali 亲和性调度</h1>
             
             <div class="markdown-body">
               <p>1 前言</p>
 <p>2 邀约</p>
-<p>3 kiali 简介</p>
-<p>4 kiali 安装</p>
-<p>5 kiali 访问</p>
+<p>3 节点调度</p>
+<p>  3.1 节点打标</p>
+<p>  3.2 编写 pod</p>
+<p>4 kiali 亲和性调度</p>
+<p>  4.1 举个例子</p>
+<p>  4.2 节点亲和性调度（NodeAffinity）</p>
+<p>  4.3 kiali 节点亲和性调度</p>
 <hr>
 <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516653984882.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1585126831588294.png" srcset="/img/loading.gif" lazyload alt="第十五章 九析带你轻松完爆 service mesh - istio kiali 亲和性调度_istio nodeaffinity"></p>
 <hr>
 <h2 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h2><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516661797993.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kaili_02"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1585126838978145.png" srcset="/img/loading.gif" lazyload alt="第十五章 九析带你轻松完爆 service mesh - istio kiali 亲和性调度_istio 教程_02"></p>
 <hr>
-<h2 id="3-kiali-简介"><a href="#3-kiali-简介" class="headerlink" title="3 kiali 简介"></a>3 kiali 简介</h2><p>​    kiali 是一款 istio 服务网格可视化工具，提供了服务拓补图、全链路跟踪、指标遥测、配置校验、健康检查等功能。</p>
+<h2 id="3-节点调度"><a href="#3-节点调度" class="headerlink" title="3 节点调度"></a>3 节点调度</h2><p>​    在开始 kiali 亲和性调度之前，先演示一个简单的例子介绍 pod 选择调度到指定 node：</p>
+<h3 id="3-1-节点打标"><a href="#3-1-节点打标" class="headerlink" title="3.1 节点打标"></a>3.1 节点打标</h3><p>​    使用命令查看当前所有 k8s 节点：</p>
+<blockquote>
+<p>kubectl get nodes</p>
+</blockquote>
+<p>​    命令截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1585126886611373.png" srcset="/img/loading.gif" lazyload alt="第十五章 九析带你轻松完爆 service mesh - istio kiali 亲和性调度_istio 视频_03"></p>
+<p>​    现在给 k8s-w-206 这个节点打上一个标签，标签内容为 name: jiuxi，命令如下：</p>
+<blockquote>
+<p>kubectl label node k8s-w-206 name=jiuxi</p>
+</blockquote>
+<h3 id="3-2-编写-pod"><a href="#3-2-编写-pod" class="headerlink" title="3.2 编写 pod"></a>3.2 编写 pod</h3><p>​    编写 pod 资源文件 jiuxi-pod.yaml，文件中使用 nodeSelector 指定该 pod 要调度到 k8s-w-206 节点之上：</p>
+<blockquote>
+<p>apiVersion: v1</p>
+<p>kind: Pod</p>
+<p>metadata:</p>
+<p>  labels:</p>
+<p>​    app: busybox</p>
+<p>​    name: busybox</p>
+<p>spec:</p>
+<p>  containers:</p>
+<p>  - name: busybox</p>
+<p>​    image: busybox</p>
+<p>​    imagePullPolicy: IfNotPresent</p>
+<p>​    command: [ “/bin/sh”, “-c”, “sleep 3600” ]</p>
+<p>​      <strong>nodeSelector:</strong></p>
+<p>​       <strong>name: jiuxi</strong></p>
+</blockquote>
+<p>​    部署 jiuxi-pod.yaml，发现 pod 果然被调度到了 k8s-w-206 这个 node，截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1585126896217808.png" srcset="/img/loading.gif" lazyload alt="第十五章 九析带你轻松完爆 service mesh - istio kiali 亲和性调度_istio jaeger_04"></p>
 <hr>
-<h2 id="4-kiali-安装"><a href="#4-kiali-安装" class="headerlink" title="4 kiali 安装"></a>4 kiali 安装</h2><p>​    如果使用 istioctl 安装 istio 时采用的 profile 是 demo 的话（有关 profile 介绍，请参照本人的《 <a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2479111"> istioctl profile 介绍</a>》），默认就会安装好 kiali。istio 安装请参照本人的《<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2474224"> istio 安装</a>》博客分分钟轻松完爆。安装好后，直接执行如下命令查看 kiali 组件：</p>
+<h2 id="4-kiali-亲和性调度"><a href="#4-kiali-亲和性调度" class="headerlink" title="4 kiali 亲和性调度"></a>4 kiali 亲和性调度</h2><p>​    上面举例 pod 使用 nodeSelector 选择 node，这就是最简单的 k8s 调度方式。而 kiali 调度方式复杂一些，使用的是节点亲和性调度策略，使用如下命令查看：</p>
 <blockquote>
-<p>kubectl get all -n istion-system</p>
+<p>kubectl get deployments.apps kiali -n istio-system -o yaml</p>
 </blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516715612147.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 学习_03"></p>
-<hr>
-<h2 id="5-kiali-访问"><a href="#5-kiali-访问" class="headerlink" title="5 kiali 访问"></a>5 kiali 访问</h2><p>​    在集群内，通过 curl 命令行工具访问 kiali：</p>
+<p>​    命令执行结果部分显示如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1585126904929592.png" srcset="/img/loading.gif" lazyload alt="第十五章 九析带你轻松完爆 service mesh - istio kiali 亲和性调度_istio 视频_05"></p>
+<h3 id="4-1-举个例子"><a href="#4-1-举个例子" class="headerlink" title="4.1 举个例子"></a>4.1 举个例子</h3><p>​    举一个生活的例子，以前去医院看病，病人（pod）不能挑医生（node），排队叫到谁就是谁，冷冰冰完全没有亲和性而言；如今可以网上挂号了，病人也可以挑选中意的医生，这样就有了亲和性，说明社会进步了。</p>
+<p>​    当然病人在挑选医生的过程中也会有两种情况：一种是硬性（required），比如非要某医生，即使他忙，也愿意一直等下去；还有一种是软性（prefered），比如优先选择某医生，但是如果真不行，其他医生也未尝不可。</p>
+<h3 id="4-2-节点亲和性调度（NodeAffinity）"><a href="#4-2-节点亲和性调度（NodeAffinity）" class="headerlink" title="4.2 节点亲和性调度（NodeAffinity）"></a>4.2 节点亲和性调度（NodeAffinity）</h3><p>​    下面的理论可以对照上面的例子。</p>
+<p>​    节点亲和性，也就是 NodeAffinity，用来控制 pod 部署或者不能部署在哪台机器上。</p>
+<p>​    节点亲和性调度策略分为硬策略分为软策略和硬策略两种方式。硬策略是如果没有满足条件的节点，就会不断重试直到条件满足了为止；软策略是如果没有满足条件的节点，pod 就会忽略这条规则，继续完成调度过程。</p>
+<p>​    节点亲和性软硬策略的语法分别介绍如下。</p>
+<ul>
+<li><ul>
+<li>硬策略（关键字 require）：</li>
+</ul>
+</li>
+</ul>
 <blockquote>
-<p>curl <a target="_blank" rel="noopener" href="http://10.101.30.105:20001/"> http://10.101.30.105:20001</a></p>
+<p>requiredDuringSchedulingIgnoredDuringExecution：</p>
+<p>pod 必须部署到满足条件的节点上，如果节点不满足条件，就不停重试。IgnoreDuringExecution 表示 pod 部署成功后，如果节点标签发生了变化，不再满足 pod 指定的条件，pod 仍会在此节点继续运行</p>
 </blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516724636987.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger_04"></p>
-<p>​    上图所示 kiali 已经部署成功，服务处于就绪状态。下面改成外部浏览器可以直接访问，需要将 service 的服务类型设置为 nodeport，执行命令如下：</p>
+<ul>
+<li><ul>
+<li>软策略（关键字 prefer）：</li>
+</ul>
+</li>
+</ul>
 <blockquote>
-<p>kubectl patch svc -n istio-system kiali -p ‘{“spec”: {“type”: “NodePort”}}’</p>
+<p>preferredDuringSchedulingIgnoredDuringExecution：</p>
+<p>pod 优先部署到满足条件的节点，如果节点不满足条件，就忽略这些条件，调度到其他节点。</p>
+<p>IgnoredDuringExecution 表示 pod 部署成功后，如果节点标签发生变化，不再满足 pod 指定条件，pod 仍会在此节点继续运行</p>
 </blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516731417402.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 视频_05"></p>
-<p>​    打开浏览器，访问 k8s 所在服务器 IP 和 NodePort 暴露出来的端口号（这里是 31479），如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516740649530.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_06"></p>
-<p>​    默认用户名密码是 admin/admin，输入后登录：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516749156466.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_07"></p>
-<p>​    自此，九析带你轻松完爆 istio kiali 安装。关于 kiali 说明和使用将在下章说明。</p>
+<h3 id="4-3-kiali-节点亲和性调度"><a href="#4-3-kiali-节点亲和性调度" class="headerlink" title="4.3 kiali 节点亲和性调度"></a>4.3 kiali 节点亲和性调度</h3><p>​    kiali 节点亲和性调度如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1585126913155121.png" srcset="/img/loading.gif" lazyload alt="第十五章 九析带你轻松完爆 service mesh - istio kiali 亲和性调度_istio 视频_06"></p>
+<p>​    由图可知，kiali pod 有两个节点亲和性调度策略，一个软策略，一个硬策略。硬策略要求节点  beta.kubernetes.io/arch 标签值必须是  amd64, ppc64le，s390x 三个值之一，如果节点不满足此硬策略，pod 就会一直处于 pending  状态；当满足了此硬策略之后，pod 调度还要经过软策略调度，即：软策略要求节点 beta.kubernetes.io/arch 标签值为  amd64，ppc64le 和 s390x，并且不偏不倚，权重都是 2。</p>
 
             </div>
             <hr>
@@ -340,9 +385,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BD%BF%E7%94%A8%E7%AF%87/">
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-jaeger-%E5%85%B3%E8%81%94/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio kiali 使用篇</span>
+                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio kiali jaeger 关联</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -350,8 +395,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-profile-%E8%AF%A6%E8%BF%B0/">
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio profile 详述</span>
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E5%86%85%E9%83%A8%E4%BB%8B%E7%BB%8D/">
+                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio kiali 内部介绍</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

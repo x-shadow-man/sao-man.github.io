@@ -18,7 +18,7 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>九析带你轻松完爆 service mesh - istio kiali 安装 - 九析</title>
+  <title>九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松完爆 service mesh - istio kiali 安装">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress">
               
             </span>
 
@@ -213,7 +213,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-11 21:34" pubdate>
+      <time datetime="2021-09-11 22:19" pubdate>
         2021年9月11日 晚上
       </time>
     </span>
@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      390 字
+      725 字
     </span>
   
 
@@ -235,7 +235,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      8
        分钟
     </span>
   
@@ -265,47 +265,56 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松完爆 service mesh - istio kiali 安装</h1>
+            <h1 style="display: none">九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress</h1>
             
             <div class="markdown-body">
               <p>1 前言</p>
 <p>2 邀约</p>
-<p>3 kiali 简介</p>
-<p>4 kiali 安装</p>
-<p>5 kiali 访问</p>
+<p>3 Ingress 介绍</p>
+<p>4 ingress 实例</p>
+<p>  4.1 ingress 资源文件</p>
+<p>  4.2 service 资源文件</p>
+<p>  4.3 pod 资源文件</p>
+<p>5 访问 ingress</p>
+<p>  5.1 获取 ingress HOST</p>
+<p>  5.2 域名解析绑定</p>
+<p>  5.3 访问 ingress</p>
+<p>6 结论</p>
 <hr>
-<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516653984882.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587613783382115.png" srcset="/img/loading.gif" lazyload alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频"></p>
 <hr>
-<h2 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h2><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516661797993.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kaili_02"></p>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587613790304553.png" srcset="/img/loading.gif" lazyload alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_ingress-controller_02"></p>
 <hr>
-<h2 id="3-kiali-简介"><a href="#3-kiali-简介" class="headerlink" title="3 kiali 简介"></a>3 kiali 简介</h2><p>​    kiali 是一款 istio 服务网格可视化工具，提供了服务拓补图、全链路跟踪、指标遥测、配置校验、健康检查等功能。</p>
+<h1 id="3-Ingress-介绍"><a href="#3-Ingress-介绍" class="headerlink" title="3 Ingress 介绍"></a>3 Ingress 介绍</h1><p>​    Ingress 中文含义就是“入口”，非常形象地定义了这种资源的本质：Ingress 就是 k8s 的门户。</p>
+<p>​    就像一幢建筑物，比如酒店、商场等，不止一个入口，k8s 也可以定义多个入口放流量进来。</p>
+<p>​    k8s 集群必须部署一个 Ingress 控制器（比如 nginx、traefik 等），Ingress 控制器的作用就是创建 Ingress  资源，好让其生效。Ingress 控制器跟 Ingress 的关系就像 nginx 跟 nginx.conf( nginx 配置文件) 一样。</p>
+<p>​    Ingress 控制器容器内一般有两个关键的进程，分别是一个负载均衡器（比如 nginx、haproxy 等）和一个控制器守护进程。控制器守护进程会从 k8s 接收所需的 Ingress 创建需求，并将其生成一个 nginx 或 haproxy 的配置片段，并重新加载负载均衡器来使其生效。</p>
+<p>​    就拿 nginx-ingress-controller 举例，nginx 是 nginx-ingress-controller 内部进程，也是其负载均衡器，而 nginx-ingress-controller 是 k8s 的负载均衡器。</p>
+<p>nginx-ingress-controller 内部进程截图如下所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587613800164339.png" srcset="/img/loading.gif" lazyload alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频_03"></p>
 <hr>
-<h2 id="4-kiali-安装"><a href="#4-kiali-安装" class="headerlink" title="4 kiali 安装"></a>4 kiali 安装</h2><p>​    如果使用 istioctl 安装 istio 时采用的 profile 是 demo 的话（有关 profile 介绍，请参照本人的《 <a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2479111"> istioctl profile 介绍</a>》），默认就会安装好 kiali。istio 安装请参照本人的《<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2474224"> istio 安装</a>》博客分分钟轻松完爆。安装好后，直接执行如下命令查看 kiali 组件：</p>
+<h1 id="4-ingress-实例"><a href="#4-ingress-实例" class="headerlink" title="4 ingress 实例"></a>4 ingress 实例</h1><p>​    如果要展示 ingress 实例，需要三个资源文件：</p>
 <blockquote>
-<p>kubectl get all -n istion-system</p>
+<p>1 ingress 流量入口资源文件</p>
+<p>2 service 流量从入口进入后的流向资源文件</p>
+<p>3 pod 流量最终目的地资源文件</p>
 </blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516715612147.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 学习_03"></p>
+<h2 id="4-1-ingress-资源文件"><a href="#4-1-ingress-资源文件" class="headerlink" title="4.1 ingress 资源文件"></a>4.1 ingress 资源文件</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" srcset="/img/loading.gif" lazyload alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频_04"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587613808888408.png" srcset="/img/loading.gif" lazyload alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频_05"></p>
+<h2 id="4-2-service-资源文件"><a href="#4-2-service-资源文件" class="headerlink" title="4.2 service 资源文件"></a>4.2 service 资源文件</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" srcset="/img/loading.gif" lazyload alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频_04"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587613813933169.png" srcset="/img/loading.gif" lazyload alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_ingress-controller_07"></p>
+<h2 id="4-3-pod-资源文件"><a href="#4-3-pod-资源文件" class="headerlink" title="4.3 pod 资源文件"></a>4.3 pod 资源文件</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" srcset="/img/loading.gif" lazyload alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频_04"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587613818578144.png" srcset="/img/loading.gif" lazyload alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_ingress-controller_09"></p>
 <hr>
-<h2 id="5-kiali-访问"><a href="#5-kiali-访问" class="headerlink" title="5 kiali 访问"></a>5 kiali 访问</h2><p>​    在集群内，通过 curl 命令行工具访问 kiali：</p>
+<h1 id="5-访问-ingress"><a href="#5-访问-ingress" class="headerlink" title="5 访问 ingress"></a>5 访问 ingress</h1><h2 id="5-1-获取-ingress-HOST"><a href="#5-1-获取-ingress-HOST" class="headerlink" title="5.1 获取 ingress HOST"></a>5.1 获取 ingress HOST</h2><p>​    上面介绍了 nginx-ingress-controller 其实就是 k8s 的负载均衡器，或者说 nginx-ingress-controller  就是 k8s 的 nginx。那么 nginx-ingress-controller pod 所在宿主机地址就是 k8s  的入口地址。如下截图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587613823485947.png" srcset="/img/loading.gif" lazyload alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s ingress_10"></p>
+<p>​    因为我的 nginx-ingress-controller pod 直接采用的是 hostNetwork: true，也就是使用了宿主机的网络命名空间。因此这里的 Pod IP 就是宿主机的 IP，也就是说访问的时候可以直接使用此 IP。</p>
+<h2 id="5-2-域名解析绑定"><a href="#5-2-域名解析绑定" class="headerlink" title="5.2 域名解析绑定"></a>5.2 域名解析绑定</h2><p>​    编辑 /etc/hosts（centos）文件，添加域名解析定义：</p>
 <blockquote>
-<p>curl <a target="_blank" rel="noopener" href="http://10.101.30.105:20001/"> http://10.101.30.105:20001</a></p>
+<p>10.110.101.100    ingress.jiuxi.org</p>
 </blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516724636987.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger_04"></p>
-<p>​    上图所示 kiali 已经部署成功，服务处于就绪状态。下面改成外部浏览器可以直接访问，需要将 service 的服务类型设置为 nodeport，执行命令如下：</p>
+<h2 id="5-3-访问-ingress"><a href="#5-3-访问-ingress" class="headerlink" title="5.3 访问 ingress"></a>5.3 访问 ingress</h2><p>​    执行如下命令访问 ingress：</p>
 <blockquote>
-<p>kubectl patch svc -n istio-system kiali -p ‘{“spec”: {“type”: “NodePort”}}’</p>
+<p>curl <a target="_blank" rel="noopener" href="http://ingress.jiuxi.org/"> http://ingress.jiuxi.org</a></p>
 </blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516731417402.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 视频_05"></p>
-<p>​    打开浏览器，访问 k8s 所在服务器 IP 和 NodePort 暴露出来的端口号（这里是 31479），如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516740649530.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_06"></p>
-<p>​    默认用户名密码是 admin/admin，输入后登录：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516749156466.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_07"></p>
-<p>​    自此，九析带你轻松完爆 istio kiali 安装。关于 kiali 说明和使用将在下章说明。</p>
+<p>​    命令执行结果如下所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587613831548777.png" srcset="/img/loading.gif" lazyload alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_nginx-ingress-contr_11"></p>
+<hr>
+<h1 id="6-结论"><a href="#6-结论" class="headerlink" title="6 结论"></a>6 结论</h1><p>​    使用 nodeport、loadbalancer 跟 ingress 在实现路由方式上有所不同。对于 loadbalancer 和  nodeport，都是将流量导入到节点上的 kube-proxy 进程，后者再将流量转发到后面的 pod。而 Ingress  负载均衡器则将流量直接转发到选定的 Pod，这样效率更高。</p>
 
             </div>
             <hr>
@@ -340,9 +349,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BD%BF%E7%94%A8%E7%AF%87/">
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%8C%85%E4%B9%8B-iptables-netfilter-%E5%85%B3%E7%B3%BB/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio kiali 使用篇</span>
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - 网络包之 iptables netfilter 关系</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -350,8 +359,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-profile-%E8%AF%A6%E8%BF%B0/">
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio profile 详述</span>
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-NodePort/">
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

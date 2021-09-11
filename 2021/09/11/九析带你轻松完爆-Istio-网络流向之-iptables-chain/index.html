@@ -18,7 +18,7 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>九析带你轻松完爆 service mesh - istio kiali 安装 - 九析</title>
+  <title>九析带你轻松完爆 Istio - 网络流向之 iptables chain - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松完爆 service mesh - istio kiali 安装">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 Istio - 网络流向之 iptables chain">
               
             </span>
 
@@ -213,7 +213,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-11 21:34" pubdate>
+      <time datetime="2021-09-11 22:22" pubdate>
         2021年9月11日 晚上
       </time>
     </span>
@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      390 字
+      1.2k 字
     </span>
   
 
@@ -235,7 +235,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      12
        分钟
     </span>
   
@@ -265,47 +265,53 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松完爆 service mesh - istio kiali 安装</h1>
+            <h1 style="display: none">九析带你轻松完爆 Istio - 网络流向之 iptables chain</h1>
             
             <div class="markdown-body">
-              <p>1 前言</p>
+              <p> 前言</p>
 <p>2 邀约</p>
-<p>3 kiali 简介</p>
-<p>4 kiali 安装</p>
-<p>5 kiali 访问</p>
+<p>3 正文</p>
 <hr>
-<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516653984882.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587895000811110.png" srcset="/img/loading.gif" lazyload alt="第二十九章 九析带你轻松完爆 Istio - 网络流向之 iptables chain_istio 视频"></p>
 <hr>
-<h2 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h2><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516661797993.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kaili_02"></p>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587895007995640.png" srcset="/img/loading.gif" lazyload alt="第二十九章 九析带你轻松完爆 Istio - 网络流向之 iptables chain_k8s 视频_02"></p>
 <hr>
-<h2 id="3-kiali-简介"><a href="#3-kiali-简介" class="headerlink" title="3 kiali 简介"></a>3 kiali 简介</h2><p>​    kiali 是一款 istio 服务网格可视化工具，提供了服务拓补图、全链路跟踪、指标遥测、配置校验、健康检查等功能。</p>
-<hr>
-<h2 id="4-kiali-安装"><a href="#4-kiali-安装" class="headerlink" title="4 kiali 安装"></a>4 kiali 安装</h2><p>​    如果使用 istioctl 安装 istio 时采用的 profile 是 demo 的话（有关 profile 介绍，请参照本人的《 <a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2479111"> istioctl profile 介绍</a>》），默认就会安装好 kiali。istio 安装请参照本人的《<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2474224"> istio 安装</a>》博客分分钟轻松完爆。安装好后，直接执行如下命令查看 kiali 组件：</p>
+<h1 id="3-正文"><a href="#3-正文" class="headerlink" title="3 正文"></a>3 正文</h1><p>​    一切都是那么明亮，光线照在身上，暖暖的。</p>
+<p>​    仰起头，依稀能听到风声。庭院里早春的鸟儿在围墙上啁啾，三五个下人在打扫着庭院，丫鬟婆子们在天井嗑着瓜子闲聊天，嬉笑声惊动了房脊上的信鸽，扑棱棱扇动双翅滑向远处湛蓝的天空……</p>
+<p>​    我是刘全，和府的总管。外表虽然光鲜，实质却仍是一个仆人。我清楚知道自己的身份，每天小心谨慎、兢兢业业、如履薄冰般尽忠职守，日复一日、年复一年。</p>
+<p>​    很多人背后指责我狐假虎威、狗仗人势，我不解释也不能解释。我明白很多脏活必须我来做，很多坏人必须我来当。我必须做到多面，这是我的工作，更是我的天职。我知道太多讳莫如深、彼此心知肚明、但又不能点破说破的潜规则，我只能自己默默消化。我不被人理解，我习惯了。很多时候我都必须像鹰一般敏锐注视整个府邸的动态，并时时保持警惕，我不能有一丝疏漏，我不能让大人为难。</p>
+<p>​    一切波澜不惊之下往往隐藏着狂流暗涌。</p>
+<p>​    庞大帝国的中枢体系并不在黄墙之内，而是尽在府邸之中。1300 万平方公里疆域的数据全部汇集于此，并在此处做流转、做分发。咫尺便是天涯、天涯又近在咫尺。</p>
+<p>​    每天这里都在上演国泰民安、妻离子散；朔漠狼烟、塞外江南……</p>
+<p>​    我观望、处理、不带感情。晨钟暮鼓、安之若素。</p>
+<p>​    繁重的工作并没有将我压垮，因为我并不是一个人……</p>
+<p>​    我的用人标准很简单：少而精、懂协作。基于此，经过层层筛选和选拔，最后我把目光锁定在五个人身上（扑入锐、英扑特、鳌扑特、佛卧德、剖思特），这五个人各司其职，协调和控制整个帝国信息流的脉络走向。</p>
 <blockquote>
-<p>kubectl get all -n istion-system</p>
+<p>扑入锐：奏折入口。核查奏折是否跟和府有关。如果跟和府有关则将奏折转给英扑特。</p>
+<p>英扑特：接收来自扑入锐的奏折，并做规则检查，通过的奏折转给和府内部事务部门处理</p>
+<p>熬扑特：接受和府内部事务部门写的奏折或者批示英扑特递交的折子，并做规则检查，检查并处理完毕后交给剖思特。</p>
+<p>佛卧德：接受来自扑入锐的奏折，这些奏折表面跟和府无关，经过规则检查之后，直接转给剖思特。</p>
+<p>剖思特：接受来自鳌扑特和佛卧德的奏折，并做规则检查。处理完把它们送到该送的地方去。</p>
 </blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516715612147.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 学习_03"></p>
-<hr>
-<h2 id="5-kiali-访问"><a href="#5-kiali-访问" class="headerlink" title="5 kiali 访问"></a>5 kiali 访问</h2><p>​    在集群内，通过 curl 命令行工具访问 kiali：</p>
+<p>​    整个数据信息流的处理极其缜密。我将他们紧紧编制在我设计的链条里。我观察着他们，规范着他们的一举一动。每天我都要把这一幕幕绘制成图，然后牢牢地印在我的脑海里。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587894981198101.png" srcset="/img/loading.gif" lazyload alt="第二十九章 九析带你轻松完爆 Istio - 网络流向之 iptables chain_istio 视频_03"></p>
+<p>============================================================================</p>
+<p>​    数据在主机中的具体流向，一般会有三种路径：</p>
 <blockquote>
-<p>curl <a target="_blank" rel="noopener" href="http://10.101.30.105:20001/"> http://10.101.30.105:20001</a></p>
+<p>第一：数据报文通过网络、流经网卡、进入主机。经过检查，数据报文目标如果是本机，则将报文送到用户空间中的相关进程进行处理。</p>
+<p>第二：数据报文通过网络、流经网卡、进入主机。经过检查，数据报文目标如果不是本机，则将报文直接通过网卡再发送到其他主机</p>
+<p>第三：用户空间的进程产生数据报文，并将此报文通过内核空间的网络协议栈发送给网卡，再通过网卡把数据报文发送给其他主机</p>
 </blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516724636987.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger_04"></p>
-<p>​    上图所示 kiali 已经部署成功，服务处于就绪状态。下面改成外部浏览器可以直接访问，需要将 service 的服务类型设置为 nodeport，执行命令如下：</p>
+<p>​    如果数据只是在主机里流來流去，而不施加任何规则的话，世界就不会这么复杂。但是往往事与愿违，如果有人要恶意破坏系统怎么办呢？</p>
+<p>​    就像刘全为了避免不利于和府的奏折流到皇上那里而设置五人关卡一样。linux 也采用了同样的机制来控制数据流，更为巧合地是，也是五道关卡。</p>
 <blockquote>
-<p>kubectl patch svc -n istio-system kiali -p ‘{“spec”: {“type”: “NodePort”}}’</p>
+<p>prerouting（扑入锐）</p>
+<p>input（英扑特）</p>
+<p>forward（佛卧德）</p>
+<p>output（鳌扑特）</p>
+<p>postrouting（剖思特）</p>
 </blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516731417402.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 视频_05"></p>
-<p>​    打开浏览器，访问 k8s 所在服务器 IP 和 NodePort 暴露出来的端口号（这里是 31479），如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516740649530.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_06"></p>
-<p>​    默认用户名密码是 admin/admin，输入后登录：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516749156466.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_07"></p>
-<p>​    自此，九析带你轻松完爆 istio kiali 安装。关于 kiali 说明和使用将在下章说明。</p>
+<p>​    iptables 通过在上述五道关卡上设置更多的规则来对主机中流动的数据做流向控制。数据流向图如下所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587894989758506.png" srcset="/img/loading.gif" lazyload alt="第二十九章 九析带你轻松完爆 Istio - 网络流向之 iptables chain_istio 视频_04"></p>
+<p>​    未完待续……</p>
 
             </div>
             <hr>
@@ -340,9 +346,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BD%BF%E7%94%A8%E7%AF%87/">
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E5%85%B3-gateway-%E5%AE%9E%E4%BE%8B/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio kiali 使用篇</span>
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - 网关 gateway 实例</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -350,8 +356,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-profile-%E8%AF%A6%E8%BF%B0/">
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio profile 详述</span>
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%8C%85%E4%B9%8B-iptables-netfilter-%E5%85%B3%E7%B3%BB/">
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - 网络包之 iptables netfilter 关系</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

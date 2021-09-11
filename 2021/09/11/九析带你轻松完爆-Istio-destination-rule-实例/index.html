@@ -18,7 +18,7 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>九析带你轻松完爆 service mesh - istio kiali 安装 - 九析</title>
+  <title>九析带你轻松完爆 Istio - destination rule 实例 - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松完爆 service mesh - istio kiali 安装">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 Istio - destination rule 实例">
               
             </span>
 
@@ -213,7 +213,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-11 21:34" pubdate>
+      <time datetime="2021-09-11 22:07" pubdate>
         2021年9月11日 晚上
       </time>
     </span>
@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      390 字
+      881 字
     </span>
   
 
@@ -235,7 +235,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      10
        分钟
     </span>
   
@@ -265,47 +265,67 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松完爆 service mesh - istio kiali 安装</h1>
+            <h1 style="display: none">九析带你轻松完爆 Istio - destination rule 实例</h1>
             
             <div class="markdown-body">
               <p>1 前言</p>
 <p>2 邀约</p>
-<p>3 kiali 简介</p>
-<p>4 kiali 安装</p>
-<p>5 kiali 访问</p>
+<p>3 介绍</p>
+<p>4 灰度</p>
+<p>5 destination rule 样例</p>
+<p>  5.1 客户端资源文件</p>
+<p>  5.2 deployment 资源文件</p>
+<p>  5.3 service 资源文件</p>
+<p>  5.4 Istio virtual service 资源文件</p>
+<p>  5.5 Istio destination rule 资源文件</p>
+<p>6 Istio 注入</p>
+<p>7 验证 destination rule</p>
 <hr>
-<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516653984882.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921192580920.png" srcset="/img/loading.gif" lazyload alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理"></p>
 <hr>
-<h2 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h2><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516661797993.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kaili_02"></p>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921199348308.png" srcset="/img/loading.gif" lazyload alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio destination r_02"></p>
 <hr>
-<h2 id="3-kiali-简介"><a href="#3-kiali-简介" class="headerlink" title="3 kiali 简介"></a>3 kiali 简介</h2><p>​    kiali 是一款 istio 服务网格可视化工具，提供了服务拓补图、全链路跟踪、指标遥测、配置校验、健康检查等功能。</p>
+<h1 id="3-介绍"><a href="#3-介绍" class="headerlink" title="3 介绍"></a>3 介绍</h1><p>​    在上章节介绍了一个使用 Virtual Service 实现按权重（weight）分配流量的例子。整个过程如下架构图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921280361186.png" srcset="/img/loading.gif" lazyload alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 视频_03"></p>
+<p>​    整个流控过程仅仅添加了一个 virtual service 就得以解决，有关 virtual service 的代码如下所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921289867471.png" srcset="/img/loading.gif" lazyload alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio virtual servi_04"></p>
+<p>​    但是上面这种方案在于调用方通过两层服务才能调用到最终的 Pod（比如：客户端需要通过 web-svc 和 nginx-svc 才能最终调用到 Nginx  Pod）。能不能仅仅只通过一层服务就能达到这样的效果呢？（即：只通过 web-svc）。答案是必须可以。</p>
 <hr>
-<h2 id="4-kiali-安装"><a href="#4-kiali-安装" class="headerlink" title="4 kiali 安装"></a>4 kiali 安装</h2><p>​    如果使用 istioctl 安装 istio 时采用的 profile 是 demo 的话（有关 profile 介绍，请参照本人的《 <a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2479111"> istioctl profile 介绍</a>》），默认就会安装好 kiali。istio 安装请参照本人的《<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2474224"> istio 安装</a>》博客分分钟轻松完爆。安装好后，直接执行如下命令查看 kiali 组件：</p>
+<h1 id="4-灰度"><a href="#4-灰度" class="headerlink" title="4 灰度"></a>4 灰度</h1><p>​    其实上面的样例非常山寨，导致根本就没有实际工作场景可以复制，仅仅只是为了展示独立 virtual service 功能。</p>
+<p>​    但是按权重分配流量确是工作中常见的需求，比如灰度、金丝雀、蓝绿发布等。</p>
+<p>​    灰度，意味着做事并没有那么敞亮，比如，你想跟一个心仪的女子上演一幕东京爱情故事，你的做法大概是跟她暧昧、爱抚、亲吻、最后进行爱的鼓掌。整个过程的本质就是完成一次状态转移，即从孤军奋战式撸管状态转移到团队协作式鼓掌状态。</p>
+<p>​    灰度发布的过程跟上面的过程比较类似，都是亦步亦趋，循循善诱的过程。即：将版本 v1 的服务变更到版本 v2，但是却并不采用刚烈的极端做法。具体做法是先切 20% 流量给版本 v2，观察一阵子没啥异常事情发生，就再切  20% 流量，然后逐步切换剩下的其他流量，最终完成整个版本的替换以及所有用户流量的转移。</p>
+<hr>
+<h1 id="5-destination-rule-样例"><a href="#5-destination-rule-样例" class="headerlink" title="5 destination rule 样例"></a>5 destination rule 样例</h1><p>​    下面介绍使用 virtual service + destination rule 来实现灰度发布。有关 destination rule 的理论在下章节介绍。整个样例的架构图如下：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921312295542.png" srcset="/img/loading.gif" lazyload alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理_05"></p>
+<p>​    样例所需要的资源文件介绍如下：</p>
 <blockquote>
-<p>kubectl get all -n istion-system</p>
+<p># 客户端，用来访问 httpd-v1 和 httpd-v2 的容器资源文件</p>
+<p>jiuxi-client.yaml</p>
+<p># deployment，声明并定义 httpd 的资源文件</p>
+<p>jiuxi-deploy.yaml</p>
+<p># service，关联 httpd pod 的资源文件</p>
+<p>jiuxi-svc.yaml</p>
+<p># Istio virtual service，声明流量路由和权重的资源文件</p>
+<p>jiuxi-vs.yaml</p>
+<p># Istio destination rule，定义流量路由的资源文件</p>
+<p>jiuxi-dr.yaml</p>
 </blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516715612147.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 学习_03"></p>
+<h2 id="5-1-客户端资源文件"><a href="#5-1-客户端资源文件" class="headerlink" title="5.1 客户端资源文件"></a>5.1 客户端资源文件</h2><p>​    jiuxi-client.yaml:<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921328294728.png" srcset="/img/loading.gif" lazyload alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_06"></p>
+<h2 id="5-2-deployment-资源文件"><a href="#5-2-deployment-资源文件" class="headerlink" title="5.2 deployment 资源文件"></a>5.2 deployment 资源文件</h2><p>​    jiuxi-deploy.yaml：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921339777599.png" srcset="/img/loading.gif" lazyload alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理_07"></p>
+<h2 id="5-3-service-资源文件"><a href="#5-3-service-资源文件" class="headerlink" title="5.3 service 资源文件"></a>5.3 service 资源文件</h2><p>​    jiuxi-svc.yaml：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921348536422.png" srcset="/img/loading.gif" lazyload alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理_08"></p>
+<h2 id="5-4-Istio-virtual-service-资源文件"><a href="#5-4-Istio-virtual-service-资源文件" class="headerlink" title="5.4 Istio virtual service 资源文件"></a>5.4 Istio virtual service 资源文件</h2><p>​    jiuxi-vs.yaml:<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921359681595.png" srcset="/img/loading.gif" lazyload alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_09"></p>
+<h2 id="5-5-Istio-destination-rule-资源文件"><a href="#5-5-Istio-destination-rule-资源文件" class="headerlink" title="5.5 Istio destination rule 资源文件"></a>5.5 Istio destination rule 资源文件</h2><p>​    jiuxi-dr.yaml：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921368116463.png" srcset="/img/loading.gif" lazyload alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_10"></p>
 <hr>
-<h2 id="5-kiali-访问"><a href="#5-kiali-访问" class="headerlink" title="5 kiali 访问"></a>5 kiali 访问</h2><p>​    在集群内，通过 curl 命令行工具访问 kiali：</p>
+<h1 id="6-Istio-注入"><a href="#6-Istio-注入" class="headerlink" title="6 Istio 注入"></a>6 Istio 注入</h1><p>​    要使得 virtual service 和 destination rule 生效，必须要保证通讯双方都处于 Istio 服务网格之内，即：必须经过 Istio 的注入，执行语句如下：</p>
 <blockquote>
-<p>curl <a target="_blank" rel="noopener" href="http://10.101.30.105:20001/"> http://10.101.30.105:20001</a></p>
+<p>istioctl kube-inject -f jiuxi-client.yaml | kubectl apply -f -</p>
+<p>istioctl kube-inject -f jiuxi-deploy.yaml | kubectl apply -f -</p>
 </blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516724636987.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger_04"></p>
-<p>​    上图所示 kiali 已经部署成功，服务处于就绪状态。下面改成外部浏览器可以直接访问，需要将 service 的服务类型设置为 nodeport，执行命令如下：</p>
-<blockquote>
-<p>kubectl patch svc -n istio-system kiali -p ‘{“spec”: {“type”: “NodePort”}}’</p>
-</blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516731417402.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 视频_05"></p>
-<p>​    打开浏览器，访问 k8s 所在服务器 IP 和 NodePort 暴露出来的端口号（这里是 31479），如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516740649530.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_06"></p>
-<p>​    默认用户名密码是 admin/admin，输入后登录：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516749156466.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_07"></p>
-<p>​    自此，九析带你轻松完爆 istio kiali 安装。关于 kiali 说明和使用将在下章说明。</p>
+<hr>
+<h1 id="7-验证-destination-rule"><a href="#7-验证-destination-rule" class="headerlink" title="7 验证 destination rule"></a>7 验证 destination rule</h1><p>​    登入 busybox client 容器，访问 jiuxi-svc，发现 dr 已经生效，截图如下：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921382193476.png" srcset="/img/loading.gif" lazyload alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_11"></p>
+<p>​    自此，九析带你轻松完爆了 Istio destination rule 实例。</p>
 
             </div>
             <hr>
@@ -340,9 +360,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BD%BF%E7%94%A8%E7%AF%87/">
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-destination-rule-%E4%BB%8B%E7%BB%8D/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio kiali 使用篇</span>
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - destination rule 介绍</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -350,8 +370,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-profile-%E8%AF%A6%E8%BF%B0/">
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio profile 详述</span>
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-Istio-%E8%B7%AF%E7%94%B1%E8%A7%84%E5%88%99/">
+                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - Istio 路由规则</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

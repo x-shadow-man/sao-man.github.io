@@ -18,7 +18,7 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>九析带你轻松完爆 service mesh - istio kiali 安装 - 九析</title>
+  <title>九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松完爆 service mesh - istio kiali 安装">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort">
               
             </span>
 
@@ -213,7 +213,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-11 21:34" pubdate>
+      <time datetime="2021-09-11 22:14" pubdate>
         2021年9月11日 晚上
       </time>
     </span>
@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      390 字
+      673 字
     </span>
   
 
@@ -235,7 +235,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      7
        分钟
     </span>
   
@@ -265,47 +265,40 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松完爆 service mesh - istio kiali 安装</h1>
+            <h1 style="display: none">九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort</h1>
             
             <div class="markdown-body">
               <p>1 前言</p>
 <p>2 邀约</p>
-<p>3 kiali 简介</p>
-<p>4 kiali 安装</p>
-<p>5 kiali 访问</p>
+<p>3 hostPort 样例</p>
+<p>4 hostPort 与 hostNetwork 异同</p>
+<p>  4.1 相同点</p>
+<p>  4.2 不同点</p>
+<p>5 hostPort 使用场景</p>
+<p>6 注意</p>
 <hr>
-<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516653984882.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587465765267666.png" srcset="/img/loading.gif" lazyload alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_istio 流量管理"></p>
 <hr>
-<h2 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h2><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516661797993.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kaili_02"></p>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587465773277912.png" srcset="/img/loading.gif" lazyload alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_k8s 视频_02"></p>
 <hr>
-<h2 id="3-kiali-简介"><a href="#3-kiali-简介" class="headerlink" title="3 kiali 简介"></a>3 kiali 简介</h2><p>​    kiali 是一款 istio 服务网格可视化工具，提供了服务拓补图、全链路跟踪、指标遥测、配置校验、健康检查等功能。</p>
+<h1 id="3-hostPort-样例"><a href="#3-hostPort-样例" class="headerlink" title="3 hostPort 样例"></a>3 hostPort 样例</h1><p>​    样例代码如下所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587465780365910.png" srcset="/img/loading.gif" lazyload alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_k8s hostPort_03"></p>
+<p>​    pod 发布之后，便会将容器端口开放给了外部网络。外部可以通过 pod 所在宿主机和 hostPort 值访问到 Pod 内的容器提供的服务。</p>
 <hr>
-<h2 id="4-kiali-安装"><a href="#4-kiali-安装" class="headerlink" title="4 kiali 安装"></a>4 kiali 安装</h2><p>​    如果使用 istioctl 安装 istio 时采用的 profile 是 demo 的话（有关 profile 介绍，请参照本人的《 <a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2479111"> istioctl profile 介绍</a>》），默认就会安装好 kiali。istio 安装请参照本人的《<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2474224"> istio 安装</a>》博客分分钟轻松完爆。安装好后，直接执行如下命令查看 kiali 组件：</p>
+<h1 id="4-hostPort-与-hostNetwork-异同"><a href="#4-hostPort-与-hostNetwork-异同" class="headerlink" title="4 hostPort 与 hostNetwork 异同"></a>4 hostPort 与 hostNetwork 异同</h1><h2 id="4-1-相同点"><a href="#4-1-相同点" class="headerlink" title="4.1 相同点"></a>4.1 相同点</h2><p>​    hostPort 与 hostNetwork 本质上都是暴露 pod 宿主机 IP 给终端用户，因为 pod 生命周期并不固定，随时都有可能被完爆，故 IP  的不确定最终导致用户使用上的不方便；此外宿主机端口占用也导致不能在同一台机子上有多个程序使用同一端口。因此一般情况下，不要使用 hostPort 方式。</p>
+<h2 id="4-2-不同点"><a href="#4-2-不同点" class="headerlink" title="4.2 不同点"></a>4.2 不同点</h2><p>​    使用 hostNetwork，pod 实际上用的是 pod 宿主机的网络地址空间：即 pod  IP 是宿主机 IP，而非 cni 分配的 pod IP，端口是宿主机网络监听接口。</p>
+<p>使用 hostPort，pod IP 并非宿主机 IP，而是 cni 分配的 pod IP，跟其他普通的 pod 使用一样的 ip  分配方式，端口并非宿主机网络监听端口，只是使用了 DNAT 机制将 hostPort 指定的端口映射到了容器的端口之上（可以通过  iptables 命令进行查看）。外部访问此 pod 时，仍然使用宿主机和 hostPort 方式。pod ip 跟宿主机 ip 截图如下：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587465825662942.png" srcset="/img/loading.gif" lazyload alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_istio 流量管理_04"></p>
+<p>​    有关端口 DNAT 通过 iptables 命令进行查看，如下截图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587465835982578.png" srcset="/img/loading.gif" lazyload alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_istio 视频_05"></p>
+<p>​    由上图可知，pod 所在宿主机上的 iptables nat 表流向如下：</p>
 <blockquote>
-<p>kubectl get all -n istion-system</p>
+<p>1 当客户端发起 pod 访问时，比如 curl <a href="http://pod_in_host:hostPort">http://pod_in_host:hostPort</a></p>
+<p>2 网络包会流经 pod 宿主机的 prerouting chain，会命中 CNI-HOSTPORT-DNAT 链</p>
+<p>3 网络包会流经 CNI-HOSTPORT_DNAT 链中的第 3 条规则，即 DNAT 目标，此时会将 9998 端口访问的流量路由到 80 端口去</p>
 </blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516715612147.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 学习_03"></p>
+<p>​    基于此，当客户端访问 pod 所在主机的 9998 端口时，流量会自动被路由到 IP 为 10.244.11.55（也就是 pod ip）的 80 端口上。</p>
 <hr>
-<h2 id="5-kiali-访问"><a href="#5-kiali-访问" class="headerlink" title="5 kiali 访问"></a>5 kiali 访问</h2><p>​    在集群内，通过 curl 命令行工具访问 kiali：</p>
-<blockquote>
-<p>curl <a target="_blank" rel="noopener" href="http://10.101.30.105:20001/"> http://10.101.30.105:20001</a></p>
-</blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516724636987.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger_04"></p>
-<p>​    上图所示 kiali 已经部署成功，服务处于就绪状态。下面改成外部浏览器可以直接访问，需要将 service 的服务类型设置为 nodeport，执行命令如下：</p>
-<blockquote>
-<p>kubectl patch svc -n istio-system kiali -p ‘{“spec”: {“type”: “NodePort”}}’</p>
-</blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516731417402.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 视频_05"></p>
-<p>​    打开浏览器，访问 k8s 所在服务器 IP 和 NodePort 暴露出来的端口号（这里是 31479），如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516740649530.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_06"></p>
-<p>​    默认用户名密码是 admin/admin，输入后登录：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516749156466.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_07"></p>
-<p>​    自此，九析带你轻松完爆 istio kiali 安装。关于 kiali 说明和使用将在下章说明。</p>
+<h1 id="5-hostPort-使用场景"><a href="#5-hostPort-使用场景" class="headerlink" title="5 hostPort 使用场景"></a>5 hostPort 使用场景</h1><p>​    nginx-ingress-controller 就使用到了 hostPort 方式，同时开启了 80 和 443 端口，如下截图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587465846114894.png" srcset="/img/loading.gif" lazyload alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_istio 视频_06"></p>
+<hr>
+<h1 id="6-注意"><a href="#6-注意" class="headerlink" title="6 注意"></a>6 注意</h1><p>​    当 pod 同时使用了 hostNetwork 和 hostPort，那么 hostNetwork 将会直接使用宿主机网络命名空间，hostPort 其实就形同虚设了。可以认为 hostNetwork 选项优先级要高于 hostPort。</p>
 
             </div>
             <hr>
@@ -340,9 +333,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BD%BF%E7%94%A8%E7%AF%87/">
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-NodePort/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio kiali 使用篇</span>
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -350,8 +343,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-profile-%E8%AF%A6%E8%BF%B0/">
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio profile 详述</span>
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-hostNetwork/">
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

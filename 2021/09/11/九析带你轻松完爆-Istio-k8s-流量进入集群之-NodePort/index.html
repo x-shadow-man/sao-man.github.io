@@ -18,7 +18,7 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>九析带你轻松完爆 service mesh - istio kiali 安装 - 九析</title>
+  <title>九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松完爆 service mesh - istio kiali 安装">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort">
               
             </span>
 
@@ -213,7 +213,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-11 21:34" pubdate>
+      <time datetime="2021-09-11 22:16" pubdate>
         2021年9月11日 晚上
       </time>
     </span>
@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      390 字
+      513 字
     </span>
   
 
@@ -235,7 +235,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      6
        分钟
     </span>
   
@@ -265,47 +265,37 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松完爆 service mesh - istio kiali 安装</h1>
+            <h1 style="display: none">九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort</h1>
             
             <div class="markdown-body">
               <p>1 前言</p>
 <p>2 邀约</p>
-<p>3 kiali 简介</p>
-<p>4 kiali 安装</p>
-<p>5 kiali 访问</p>
+<p>3 NodePort 样例</p>
+<p>4 访问流程</p>
+<p>5 实例演示</p>
+<p>6 缺点</p>
 <hr>
-<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516653984882.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550119779184.png" srcset="/img/loading.gif" lazyload alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_k8s 视频"></p>
 <hr>
-<h2 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h2><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516661797993.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kaili_02"></p>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550126151290.png" srcset="/img/loading.gif" lazyload alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_k8s nodeport_02"></p>
 <hr>
-<h2 id="3-kiali-简介"><a href="#3-kiali-简介" class="headerlink" title="3 kiali 简介"></a>3 kiali 简介</h2><p>​    kiali 是一款 istio 服务网格可视化工具，提供了服务拓补图、全链路跟踪、指标遥测、配置校验、健康检查等功能。</p>
-<hr>
-<h2 id="4-kiali-安装"><a href="#4-kiali-安装" class="headerlink" title="4 kiali 安装"></a>4 kiali 安装</h2><p>​    如果使用 istioctl 安装 istio 时采用的 profile 是 demo 的话（有关 profile 介绍，请参照本人的《 <a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2479111"> istioctl profile 介绍</a>》），默认就会安装好 kiali。istio 安装请参照本人的《<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2474224"> istio 安装</a>》博客分分钟轻松完爆。安装好后，直接执行如下命令查看 kiali 组件：</p>
+<h1 id="3-NodePort-样例"><a href="#3-NodePort-样例" class="headerlink" title="3 NodePort 样例"></a>3 NodePort 样例</h1><p>​    跟 hostNetwork 和 hostPort 不同，NodePort 属于 service 类型之一。hostPort 和 hostNetwork 作用对象是 Pod，而 NodePort 作用对象则是 service。</p>
+<p>​    pod 文件如下所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550204849539.png" srcset="/img/loading.gif" lazyload alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_istio 教程_03"></p>
+<p>​    service 文件如下：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550210984313.png" srcset="/img/loading.gif" lazyload alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_istio 教程_04"></p>
+<p>​    创建 NodePort 服务时，用户可以在 30000 ~ 32767 范围内指定一个端口，也可以通过 patch 打补丁的方式修改 service 类型，这样 NodePort 端口将会在范围 30000 ~ 32767 之间自动分配。</p>
 <blockquote>
-<p>kubectl get all -n istion-system</p>
+<p>kubectl patch svc svc_name -n ns_name -p ‘{“type”: “NodePort”}’</p>
 </blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516715612147.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 学习_03"></p>
 <hr>
-<h2 id="5-kiali-访问"><a href="#5-kiali-访问" class="headerlink" title="5 kiali 访问"></a>5 kiali 访问</h2><p>​    在集群内，通过 curl 命令行工具访问 kiali：</p>
-<blockquote>
-<p>curl <a target="_blank" rel="noopener" href="http://10.101.30.105:20001/"> http://10.101.30.105:20001</a></p>
-</blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516724636987.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger_04"></p>
-<p>​    上图所示 kiali 已经部署成功，服务处于就绪状态。下面改成外部浏览器可以直接访问，需要将 service 的服务类型设置为 nodeport，执行命令如下：</p>
-<blockquote>
-<p>kubectl patch svc -n istio-system kiali -p ‘{“spec”: {“type”: “NodePort”}}’</p>
-</blockquote>
-<p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516731417402.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 视频_05"></p>
-<p>​    打开浏览器，访问 k8s 所在服务器 IP 和 NodePort 暴露出来的端口号（这里是 31479），如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516740649530.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_06"></p>
-<p>​    默认用户名密码是 admin/admin，输入后登录：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516749156466.png" srcset="/img/loading.gif" lazyload alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_07"></p>
-<p>​    自此，九析带你轻松完爆 istio kiali 安装。关于 kiali 说明和使用将在下章说明。</p>
+<h1 id="4-访问流程"><a href="#4-访问流程" class="headerlink" title="4 访问流程"></a>4 访问流程</h1><p>​    下图展示当 k8s svc 创建之后，k8s 集群内部都发生了哪些变化。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550218909632.png" srcset="/img/loading.gif" lazyload alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_istio 视频_05"></p>
+<p>​    当 client 发送 kubectl apply 指令给 APIServer 后，会生成相关的 service 对象，k8s 集群内的所有节点（master 和 node）上都会运行 kube-proxy 进程，如下截图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550225387994.png" srcset="/img/loading.gif" lazyload alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_istio 视频_06"></p>
+<p>​    该进程的作用就是负责跟 APIServer 进行通信并对 node 上的 pod 进行生命周期管理。如果创建了 k8s service ，那么 kube-proxy  会创建相应的 iptables 规则，并将发送到 service nodePort 的流量转发到 service 后端提供的 Pod  的相应端口上。</p>
+<hr>
+<h1 id="5-实例演示"><a href="#5-实例演示" class="headerlink" title="5 实例演示"></a>5 实例演示</h1><p>​    当执行 jiuxi-svc.yaml 资源文件后，如下截图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550231487434.png" srcset="/img/loading.gif" lazyload alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_k8s nodeport_07"></p>
+<p>​    查看网络监控接口可知 30088 对应的服务进程就是 kube-proxy，如下图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550237774324.png" srcset="/img/loading.gif" lazyload alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_k8s nodeport_08"></p>
+<p>​    当我们通过 curl 访问 hostIP:30088 时，数据包会通过 30088 端口送给 kube-proxy 进程，kube-proxy 进程会根据 k8s service 的 endpoint 将数据包路由到实际的 pod IP 和对应的端口去。如下截图查看 service 对应的  endpoints。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550245651146.png" srcset="/img/loading.gif" lazyload alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_istio 视频_09"></p>
+<hr>
+<h1 id="6-缺点"><a href="#6-缺点" class="headerlink" title="6 缺点"></a>6 缺点</h1><p>​    使用 NodePort 方式，在 k8s 集群内部，每个节点（master 或 node）上 kube-proxy 进程都会开启相关的端口。如果服务都采用这样的方式，端口就有冲突的可能。因此建议谨慎使用。</p>
 
             </div>
             <hr>
@@ -340,9 +330,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BD%BF%E7%94%A8%E7%AF%87/">
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-Ingress/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio kiali 使用篇</span>
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -350,8 +340,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-profile-%E8%AF%A6%E8%BF%B0/">
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio profile 详述</span>
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-hostPort/">
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
