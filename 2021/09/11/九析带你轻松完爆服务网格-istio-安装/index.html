@@ -18,7 +18,7 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>九析带你轻松升级 linux kernel - 九析</title>
+  <title>九析带你轻松完爆服务网格 - istio 安装 - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松升级 linux kernel">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆服务网格 - istio 安装">
               
             </span>
 
@@ -213,7 +213,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-11 15:42" pubdate>
+      <time datetime="2021-09-11 16:36" pubdate>
         2021年9月11日 下午
       </time>
     </span>
@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      2.2k 字
     </span>
   
 
@@ -235,7 +235,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      24
        分钟
     </span>
   
@@ -265,82 +265,124 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松升级 linux kernel</h1>
+            <h1 style="display: none">九析带你轻松完爆服务网格 - istio 安装</h1>
             
             <div class="markdown-body">
-              <p>1 为什么要升级内核</p>
-<p>2 内核版本查看</p>
-<p>3 自动升级</p>
-<p>4 手动升级</p>
-<p>  4.1 下载安装包</p>
-<p>  4.2 解压缩安装包</p>
-<p>  4.3 编译安装</p>
-<p>  4.4 重启</p>
-<p>5 后记</p>
-<p>  5.1 安装 elrepo yum 源</p>
-<p>  5.2 查看内核包</p>
-<p>  5.3 升级内核</p>
-<p>  5.4 修改内核启动顺序</p>
-<p>  5.5 重启</p>
+              <p>1 前言</p>
+<p>2 微服务的历史</p>
+<p>3 istio</p>
+<p>4 istio 使用</p>
+<p>  4.1 下载 istio</p>
+<p>  4.2 安装 istio</p>
+<p>  4.3 配置 istioctl 工具路径</p>
+<p>  4.4 实现 istioctl 自动补全功能</p>
+<p>  4.5 安装学习版 istio</p>
+<p>  4.6 卸载 istio</p>
+<p>5 总结</p>
 <hr>
-<h2 id="1-为什么要升级内核"><a href="#1-为什么要升级内核" class="headerlink" title="1 为什么要升级内核"></a>1 为什么要升级内核</h2><p>&emsp;&emsp;为了满足不断增长的物质和精神需要。科技发展日新月异，技术升级一日千里。新的软件、硬件被研发出来，内核为了兼容各种需求不停发展。</p>
-<p>&emsp;&emsp;首先解释一下内核和发行版的区别。内核是操作系统的魂，用来操作和管理计算机的软硬件。主要提供网络协议栈、内存管理、磁盘管理、文件系统、中断处理、进程管理等功能。</p>
-<p>&emsp;&emsp;但是内核对用户而言是不友好的，因为它太专业。对于用户而言，他们需要享受的是实实在在的服务。比如有些男人就是迷恋日本电影，它管你内核不内核，他就需要播放器，但是播放器这东西不能塞到内核。怎么办呢？于是就有好事者盘载以入，在内核之上配置一些软件、工具包、应用程序等组成一个软件包供人使用。因为每个人的口味不一样，所以对软件的选择也不一样，渐渐地就发展成了不同的软件包，这个软件包我们就称为操作系统的发行版。</p>
+<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请加微信沟通：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584453790467569.jpg" srcset="/img/loading.gif" lazyload alt="第一章 九析带你轻松完爆服务网格 - istio 安装_k8s istio"></p>
+<p>​    你可以从下面截图中获取免费的、更生动的视频资料，在 b 站搜索“九析”：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584453854320948.png" srcset="/img/loading.gif" lazyload alt="第一章 九析带你轻松完爆服务网格 - istio 安装_service mesh_02"></p>
 <hr>
-<h2 id="2-内核版本查看"><a href="#2-内核版本查看" class="headerlink" title="2 内核版本查看"></a>2 内核版本查看</h2><blockquote>
-<p>uname -r</p>
-</blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153702098.png" srcset="/img/loading.gif" lazyload alt="image-20210911153702098"></p>
+<h2 id="2-微服务的历史"><a href="#2-微服务的历史" class="headerlink" title="2 微服务的历史"></a>2 微服务的历史</h2><p>​    微服务从马丁提出到今天为止，大体上经过了四代。</p>
+<p>​    第一代（1.0  时代）：服务发现阶段。单体服务发展到微服务后，原先的通信方式从进程内函数调用发展到了不同服务器上的不同服务之间的进程调用，这样的架构变化，首先要解决的关键问题就是服务的注册与发现。代表技术便是 dubbo 和 grpc、brpc 框架之争。</p>
+<p>​    第二代（2.0 时代）：当服务发现问题解决了之后，紧接着带来的挑战便是服务治理。何为服务治理，就是除了服务之间通讯之外，还需要更深层次考虑到服务之间调用的失败重试、容错、降级、监控、安全、灰度、流控能问题。</p>
+<p>​    第三代（3.0 时代）：微服务 2.0  时代带来了解决方案的百花齐放，各方你方唱罢，我方登场，相同问题的不同解决方案纷纷亮相，一时间风云际会，好不热闹。比如网关解决方案就有  zuul、gateway；全链路监控就有 pinpoint、zipkin、jaeger  等。各种服务治理的解决方案层出不穷带来了很多的积极作用，但负面影响也随之而来，那便是标准的不统一、维护方式各异。服务治理变成了各种中间件的相互嫁接，服务治理的好坏全靠工程师的技术水平高低。基于此，服务治理的标准化、一致化需求越来越强烈，于是服务网格便应运而生。服务网格的思想便是将服务治理标准化，并统一下沉到基础设施层。就像 50、60  年代的美国，当时帮派林立，不同地盘治理的好坏主要依靠各个帮派屌不屌，但是到了后来政府能力逐渐强大和稳定，很多地下秩序不再依靠黑帮，而统一让政府规则化一样的道理。</p>
+<p>​    第四代（4.0 时代）：无服务时代，即 serveless 时代，说的时髦点就是去中心化时代。这个目前还并不成熟，本文先略去不谈。</p>
 <hr>
-<h2 id="3-自动升级"><a href="#3-自动升级" class="headerlink" title="3 自动升级"></a>3 自动升级</h2><blockquote>
-<p>yum install -y kernel</p>
-</blockquote>
-<p>&emsp;&emsp;使用 yum 升级内核是相对而言最安全的升级方式了，因为是经过发行版厂商验证过的版本。一般情况下，它并不是最新的，但却是最稳定的。</p>
-<hr>
-<h2 id="4-手动升级"><a href="#4-手动升级" class="headerlink" title="4 手动升级"></a>4 手动升级</h2><p>&emsp;&emsp;手动升级是一件比较刺激的事情。首先到 linux 内核网站膜拜一下上帝。点击<a target="_blank" rel="noopener" href="https://www.kernel.org/"> 网址</a>查看：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/spacer.gif" srcset="/img/loading.gif" lazyload alt="第一章 九析带你轻松升级 linux kernel_运维_02"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153728956.png" srcset="/img/loading.gif" lazyload alt="image-20210911153728956"></p>
-<p>&emsp;&emsp;看到没，多质朴，绝对不会亲近你，要多土就多土。我就喜欢这样的土。那个时代就是这样。想当年为了上个网，晚上趁着爹妈都睡着了偷偷摸摸爬起来把猫连上电话线，听到类似摩尔密码的滴滴声响起，心里那个激动啊，就跟当今小骚妹看到李佳琦一样一样的。</p>
-<h3 id="4-1-下载安装包"><a href="#4-1-下载安装包" class="headerlink" title="4.1 下载安装包"></a>4.1 下载安装包</h3><p>&emsp;&emsp;下载网址：<a target="_blank" rel="noopener" href="https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/"> https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/</a>。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153808360.png" srcset="/img/loading.gif" lazyload alt="image-20210911153808360"></p>
-<h3 id="4-2-解压缩安装包"><a href="#4-2-解压缩安装包" class="headerlink" title="4.2 解压缩安装包"></a>4.2 解压缩安装包</h3><blockquote>
-<p>tar -zxvf linux-4.14.tar.gz</p>
-</blockquote>
-<h3 id="4-3-编译安装"><a href="#4-3-编译安装" class="headerlink" title="4.3 编译安装"></a>4.3 编译安装</h3><blockquote>
-<p>yum install -y gcc bc openssl-devel perl </p>
-<p>make mrproper         # 删除编译生成的文件，包括内核配置文件和各种配置文件，一般只有在第一次执行内核编译前才使用这条命令</p>
-<p>make oldconfig         # 使用原有的内核配置。执行过程中需要交互，一路回车即可</p>
-<p>make             # 编译源码。所有执行操作中最耗时的部分。你可以睡个午觉</p>
-<p>make modules_install    # 将编译出的内核模块复制到 /lib/modules</p>
-<p>make install        # make是编译；make install 安装到指定位置(/boot)</p>
-</blockquote>
-<h3 id="4-4-重启"><a href="#4-4-重启" class="headerlink" title="4.4 重启"></a>4.4 重启</h3><p>&emsp;&emsp;重启后在 grub 中选择 4.14 版本。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153835264.png" srcset="/img/loading.gif" lazyload alt="image-20210911153835264"></p>
-<p>&emsp;&emsp;启动成功后，再次查看内核版本，发现已经轻松完爆：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153852122.png" srcset="/img/loading.gif" lazyload alt="image-20210911153852122"></p>
-<hr>
-<h2 id="5-后记"><a href="#5-后记" class="headerlink" title="5 后记"></a>5 后记</h2><p>&emsp;&emsp;当然为了偷懒可以采用在线升级的方式。升级步骤如下：</p>
-<h3 id="5-1-安装-elrepo-yum-源"><a href="#5-1-安装-elrepo-yum-源" class="headerlink" title="5.1 安装 elrepo yum 源"></a>5.1 安装 elrepo yum 源</h3><p>&emsp;&emsp;elrepo 是 CentOS 稳定的软件源，通过它，可以很容易将内核升级到指定版本。 elrepo 项目网址请<a target="_blank" rel="noopener" href="https://elrepo.org/tiki/tiki-index.php"> 点击</a>：</p>
+<h2 id="3-istio"><a href="#3-istio" class="headerlink" title="3 istio"></a>3 istio</h2><p>​    istio 就是微服务 3.0 时代的产物，是 service mesh 的代表性产品。由谷歌和 IBM 联手打造。借助谷歌的拳头产品  k8s，顷刻完爆众神。istio 跟 k8s 之间到底什么关系？你可以这么来理解，k8s 相当于王健林，istio  相当于王思聪。怎么说呢？k8s 负责打地基，打造基础设施，istio  负责在地基之上整合各种服务模式。大家都知道有个女的去万达影院看电影抱怨爆米花少，结果王思聪承诺给她终生免费提供爆米花的事吧。这就相当于请求失败并重试成功的典型服务治理案例。</p>
+<p>​    istio 包括如下特性：</p>
 <blockquote>
-<p>yum install -y <a target="_blank" rel="noopener" href="https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm"> https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm</a></p>
+<p>1 http, gRPC, WebSocket 和 TCP 通信的自动负载均衡</p>
+<p>2 通过丰富的路有规则、重试、故障转移和故障注入对流量行为进行细粒度控制</p>
+<p>3 可插拔的策略层和配置 API，支持访问控制，速率限制和配额</p>
+<p>4 集群内所有流量的自动度量，日志和跟踪，包括集群的入口和出口</p>
+<p>5 通过强大的基于身份和身份验证和授权，在集群中实现安全的服务间通信</p>
 </blockquote>
-<h3 id="5-2-查看内核包"><a href="#5-2-查看内核包" class="headerlink" title="5.2 查看内核包"></a>5.2 查看内核包</h3><blockquote>
-<p>yum –disablerepo=”*” –enablerepo=”elrepo-kernel” list available</p>
-</blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153911399.png" srcset="/img/loading.gif" lazyload alt="image-20210911153911399"></p>
-<h3 id="5-3-升级内核"><a href="#5-3-升级内核" class="headerlink" title="5.3 升级内核"></a>5.3 升级内核</h3><p>&emsp;&emsp;在 elrepo 源中有 ml 和 lt 两种内核。ml（mainline）为最新版本的内核，lt 为长期支持的内核。这里选择 ml 内核。</p>
+<p>​    简单总结便是：istio 负责网络数据包的流量管理（traffic management）、服务的安全保护（secure）、策略（policy，比如黑白名单制定）和可观察（observability，比如监控）。</p>
+<hr>
+<h2 id="4-istio-使用"><a href="#4-istio-使用" class="headerlink" title="4 istio 使用"></a>4 istio 使用</h2><p>​    逼逼完了理论后（其实我最不喜欢就是扯理论），开始进入完爆 istio 环节。</p>
+<h3 id="4-1-下载-istio"><a href="#4-1-下载-istio" class="headerlink" title="4.1 下载 istio"></a>4.1 下载 istio</h3><p>​    在玩 istio 之前，必须要有前置条件，那就是你要先把 k8s 完爆了，你需要首先搭建 k8s 环境。怎么搭建 k8s，你可以参考本人的《<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2453827"> 一分钟搭建 k8s 教程</a>》，不用谢。</p>
+<p>​    使用如下语句下载 istio，下载速度会有点慢。至于有多慢？谁试谁知道。而且时不时会断，所以你要时刻关注，如果失败了，需要重新执行。这种感觉就好像你在小便，后面总是有人推你，让你整个过程非常不顺畅，非常不爽。</p>
 <blockquote>
-<p>yum –enablerepo=elrepo-kernel -y install kernel-ml</p>
+<p>curl -L <a target="_blank" rel="noopener" href="https://istio.io/downloadIstio">https://istio.io/downloadIstio</a> | sh -</p>
 </blockquote>
-<h3 id="5-4-修改内核启动顺序"><a href="#5-4-修改内核启动顺序" class="headerlink" title="5.4 修改内核启动顺序"></a>5.4 修改内核启动顺序</h3><p>&emsp;&emsp;修改 /etc/default/grub 文件，将 GRUB_DEFAULT 改为 0：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153928164.png" srcset="/img/loading.gif" lazyload alt="image-20210911153928164"></p>
-<p>&emsp;&emsp;编辑完后，执行如下命令让配置生效：</p>
+<p>​    在下载过程中，如果你遭遇如下错误：</p>
 <blockquote>
-<p>grub2-mkconfig -o /boot/grub2/grub.cfg</p>
+<p>Unable to get latest Istio version. Set ISTIO_VERSION env var and re-run. For example: export ISTIO_VERSION=1.0.4</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153942984.png" srcset="/img/loading.gif" lazyload alt="image-20210911153942984"></p>
-<h3 id="5-5-重启系统"><a href="#5-5-重启系统" class="headerlink" title="5.5 重启系统"></a>5.5 重启系统</h3><blockquote>
-<p>reboot</p>
+<p>​    你需要设置一下你要下载的 istio 版本，语句如下：</p>
+<blockquote>
+<p>export ISTIO_VERSION=1.4.5</p>
 </blockquote>
+<p>​    下载成功后的截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163236926.png" srcset="/img/loading.gif" lazyload alt="image-20210911163236926"></p>
+<h3 id="4-2-安装-istio"><a href="#4-2-安装-istio" class="headerlink" title="4.2 安装 istio"></a>4.2 安装 istio</h3><p>​    安装 istio 前，首先解压缩：</p>
+<blockquote>
+<p>tar -zxvf istio-1.4.5-linux.tar.gz</p>
+</blockquote>
+<p>​    解压缩后的目录结构截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163255978.png" srcset="/img/loading.gif" lazyload alt="image-20210911163255978"></p>
+<p>​    关键目录说明如下：</p>
+<blockquote>
+<p>install/kubernetes    # istio 资源文件</p>
+<p>samples            # istio 样例</p>
+<p>bin/istioctl        # istio 客户端工具，用来手动注入 envoy</p>
+</blockquote>
+<h3 id="4-3-配置-istioctl-工具路径"><a href="#4-3-配置-istioctl-工具路径" class="headerlink" title="4.3 配置 istioctl 工具路径"></a>4.3 配置 istioctl 工具路径</h3><p>​    istioctl 是 istio 的客户端工具，其作用是手动注入 envoy 作为容器的 sidecar（边车）。什么是 sidecar？你就把它当成鸡你太美的经纪人，懂了没？就是负责跟外界打交道的。配置方式如下：</p>
+<blockquote>
+<p>cd istio-1.4.5</p>
+<p>export PATH=$PATH:$PWD/bin</p>
+</blockquote>
+<p>​    配置完，在 bash 中就可以通过 Tab 键自动补全 istioctl 命令了。但是这样够吗？完美吗？当然不。我们还有更高的要求。</p>
+<p>​    因为 istioctl 有很多配置项，仅仅使用 tab 键只能自动补全 istioctl，但是无法自动补全 istioctl manifest 类似这样的子命令。因此我们需要设置增强自动补全功能。</p>
+<h3 id="4-4-实现-istioctl-自动补全功能"><a href="#4-4-实现-istioctl-自动补全功能" class="headerlink" title="4.4 实现 istioctl 自动补全功能"></a>4.4 实现 istioctl 自动补全功能</h3><p>​    将 istio 安装包内 tools 目录下的 istioctl.bash 文件拷贝到用户根目录下：</p>
+<blockquote>
+<p>cp istio/istio-1.4.5/tools/istioctl.bash ~</p>
+</blockquote>
+<p>​    编辑 ~/.bash_profile 文件，在文件末尾添加如下内容：</p>
+<blockquote>
+<p>source ~/istioctl.bash</p>
+</blockquote>
+<p>​    添加完毕后，加载配置使配置生效：</p>
+<blockquote>
+<p>source ~/.bash_profile</p>
+</blockquote>
+<p>​    然后输入 istioctl 然后按两次 tab 键，发现增强自动补全功能已经生效：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163319451.png" srcset="/img/loading.gif" lazyload alt="image-20210911163319451"></p>
+<h3 id="4-5-安装学习版-istio"><a href="#4-5-安装学习版-istio" class="headerlink" title="4.5 安装学习版 istio"></a>4.5 安装学习版 istio</h3><p>​    为了降低学习成本，我们选择安装学习版本的 istio。如果你想直接在生产环境安装 istio，可以参考我后续的章节。</p>
+<p>​    执行如下语句安装 istio 学习版：</p>
+<blockquote>
+<p>istioctl manifest apply –set profile=demo</p>
+</blockquote>
+<p>​    安装后的截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163332691.png" srcset="/img/loading.gif" lazyload alt="image-20210911163332691"></p>
+<p>​    不要一看到 Installation complete 就高兴到尖叫！因为安装完毕不报错并不意味着你就成功了，就像你看到一个美丽、性感、火辣、清纯、高贵、华丽集一身的女人向你走过来时就以为人家觉得你长得帅想泡你一样的道理。</p>
+<p>​    使用如下命令查看一下 istio 的服务状态：</p>
+<blockquote>
+<p>kubectl get svc -n istio-system</p>
+</blockquote>
+<p>​    执行结果如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163351397.png" srcset="/img/loading.gif" lazyload alt="image-20210911163351397"></p>
+<p>​    服务使用 LoadBalancer 类型一般是在第三方云厂商支持下才有用。如果你是在自己搭建的 k8s 集群环境下一般使用 NodePort 类型。执行如下语句完爆：</p>
+<blockquote>
+<p>kubectl patch svc -n istio-system istio-ingressgateway -p ‘{“spec”: {“type”: “NodePort”}}’</p>
+</blockquote>
+<p>​    执行完毕后，再次查看 svc，发现原来的 LoadBalancer 类型已经被修改为 NodePort 类型，此外 external-ip 也从 pending 状态变成了 <none>(即：不需要)状态。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163422494.png" srcset="/img/loading.gif" lazyload alt="image-20210911163422494"></p>
+<p>​    查看 istio 的 pod 运行状态：</p>
+<blockquote>
+<p>kubectl get pod -n istio-system</p>
+</blockquote>
+<p>​    运行状态截图如下，所有 pod 状态都是 running 状态：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163442809.png" srcset="/img/loading.gif" lazyload alt="image-20210911163442809"></p>
+<p>​    自此，整个 istio 环境就被你轻松完爆了。现在你可以停下来，上厕所，喝水和尖叫了。</p>
+<h3 id="4-6-卸载-istio"><a href="#4-6-卸载-istio" class="headerlink" title="4.6 卸载 istio"></a>4.6 卸载 istio</h3><p>​    但是假如你觉得不够爽，光有建立的快感，没有破坏的快感总是觉得技术人生不够圆满的话，你可以执行如下语句轻松完爆 istio。</p>
+<blockquote>
+<p>istioctl manifest generate –set profile=demo | kubectl delete -f -</p>
+</blockquote>
+<hr>
+<h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5 总结"></a>5 总结</h2><p>​    好了，一切都回到了原点。这种感觉像极了你拥有了一个女人，然后蹂躏了一番后，又抛弃她的感觉。但是望着消失了一切后的黑乎乎的屏幕后，你或许点燃了一颗烟，问问自己，抛弃的感觉是否真的快乐？如果没有，你就把文章拉倒起点，再来一遍吧。也许当你操作完后，你会重新追回你深爱的她。</p>
 
             </div>
             <hr>
@@ -350,7 +392,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/categories/istio/">istio</a>
                     
                   </div>
                 
@@ -358,7 +400,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/kernel/">kernel</a>
+                      <a class="hover-with-bg" href="/tags/istio/">istio</a>
                     
                   </div>
                 
@@ -375,9 +417,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-%E5%AE%89%E8%A3%85/">
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-%E5%88%9D%E6%8E%A2/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆服务网格 - istio 安装</span>
+                        <span class="hidden-mobile">九析带你轻松完爆服务网格 - istio 初探</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -385,8 +427,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/06/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%89%E3%80%8AGO-K8S-%E8%AE%BF%E9%97%AE%E3%80%8B/">
-                        <span class="hidden-mobile">client-go 系列之三《go k8s 访问》</span>
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%8D%87%E7%BA%A7-linux-kernel/">
+                        <span class="hidden-mobile">九析带你轻松升级 linux kernel</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -18,7 +18,7 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>九析带你轻松升级 linux kernel - 九析</title>
+  <title>九析带你轻松完爆 service mesh - istio Gateway 设置路由 - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松升级 linux kernel">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 service mesh - istio Gateway 设置路由">
               
             </span>
 
@@ -213,7 +213,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-11 15:42" pubdate>
+      <time datetime="2021-09-11 16:58" pubdate>
         2021年9月11日 下午
       </time>
     </span>
@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1.2k 字
     </span>
   
 
@@ -235,7 +235,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      16
        分钟
     </span>
   
@@ -265,82 +265,213 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松升级 linux kernel</h1>
+            <h1 style="display: none">九析带你轻松完爆 service mesh - istio Gateway 设置路由</h1>
             
             <div class="markdown-body">
-              <p>1 为什么要升级内核</p>
-<p>2 内核版本查看</p>
-<p>3 自动升级</p>
-<p>4 手动升级</p>
-<p>  4.1 下载安装包</p>
-<p>  4.2 解压缩安装包</p>
-<p>  4.3 编译安装</p>
-<p>  4.4 重启</p>
-<p>5 后记</p>
-<p>  5.1 安装 elrepo yum 源</p>
-<p>  5.2 查看内核包</p>
-<p>  5.3 升级内核</p>
-<p>  5.4 修改内核启动顺序</p>
-<p>  5.5 重启</p>
+              <p>1 流量管理</p>
+<p>2 创建命名空间</p>
+<p>3 资源文件准备</p>
+<p>  3.1 创建网关文件</p>
+<p>  3.2 创建虚拟服务文件</p>
+<p>  3.3 创建 k8s service 文件</p>
+<p>  3.4 创建 k8s deployment 文件：</p>
+<p>  3.5 修改 istio-ingressgateway deployment</p>
+<p>4 尝试网关路由功能</p>
+<p>  4.1 确定 INGRESS_HOST</p>
+<p>  4.2 编辑浏览器所在主机 hosts 文件</p>
+<p>  4.3 访问 tomcat</p>
+<p>5 小节</p>
 <hr>
-<h2 id="1-为什么要升级内核"><a href="#1-为什么要升级内核" class="headerlink" title="1 为什么要升级内核"></a>1 为什么要升级内核</h2><p>&emsp;&emsp;为了满足不断增长的物质和精神需要。科技发展日新月异，技术升级一日千里。新的软件、硬件被研发出来，内核为了兼容各种需求不停发展。</p>
-<p>&emsp;&emsp;首先解释一下内核和发行版的区别。内核是操作系统的魂，用来操作和管理计算机的软硬件。主要提供网络协议栈、内存管理、磁盘管理、文件系统、中断处理、进程管理等功能。</p>
-<p>&emsp;&emsp;但是内核对用户而言是不友好的，因为它太专业。对于用户而言，他们需要享受的是实实在在的服务。比如有些男人就是迷恋日本电影，它管你内核不内核，他就需要播放器，但是播放器这东西不能塞到内核。怎么办呢？于是就有好事者盘载以入，在内核之上配置一些软件、工具包、应用程序等组成一个软件包供人使用。因为每个人的口味不一样，所以对软件的选择也不一样，渐渐地就发展成了不同的软件包，这个软件包我们就称为操作系统的发行版。</p>
+<h2 id="1-流量管理（traffic-management）"><a href="#1-流量管理（traffic-management）" class="headerlink" title="1 流量管理（traffic management）"></a>1 流量管理（traffic management）</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165314268.png" srcset="/img/loading.gif" lazyload alt="image-20210911165314268"></p>
+<p>​    istio 四大特性是流量管理（traffic management）、安全（security）、策略（policies）和遥测（observability）。</p>
+<p>​    本节重点介绍 istio 流量管理。流量管理的本质是对网络流量的路由和控制。生活中经常有这样的例子，比如下雨塌方，交警会疏导新的交通路线，这便是路由；比如景区周末实行单双号限行，这便是流量控制。</p>
+<p>​    在介绍流量管理之前，首先介绍一下网络流向，介绍一个 http 请求在安装了 istio 的 k8s 中都经过哪些点，有了这个介绍之后，再谈流量管理将是水到渠成的事情。</p>
+<p>​    下图便是网络流向图：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165357073.png" srcset="/img/loading.gif" lazyload alt="image-20210911165357073"></p>
+<p>​    当用户使用浏览器发起一个请求( <a target="_blank" rel="noopener" href="http://jiuxi.com/xxx">http://jiuxi.com/xxx</a> )进入 k8s 中的 istio-ingressgateway，因为在  istio-ingressgateway 上设置了 istio 的 gateway，而且此 gateway 又绑定了 virtual  service，在 virtual service 设置了 2 条路由规则，分别指向 tomcat 和 nginx 这 2 个 k8s  service，而每个 service 又关联到各自的 pod，于是此请求最终可根据 url 触达到 pod 内的容器。</p>
+<p>​    了解了请求流向的整个流程，下面介绍如何操作。前提是你已经安装好了 k8s 和 istio。关于如何安装和配置 istio，可以查看本人的系列文章第一章。</p>
 <hr>
-<h2 id="2-内核版本查看"><a href="#2-内核版本查看" class="headerlink" title="2 内核版本查看"></a>2 内核版本查看</h2><blockquote>
-<p>uname -r</p>
+<h2 id="2-创建命名空间"><a href="#2-创建命名空间" class="headerlink" title="2 创建命名空间"></a>2 创建命名空间</h2><blockquote>
+<p>kubectl create ns jiuxi</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153702098.png" srcset="/img/loading.gif" lazyload alt="image-20210911153702098"></p>
+<p>​    istio 默认安装在 jiuxi 这个命名空间下，并且设置在 jiuxi 命名空间自动注入 sidecar。相关操作请参考本人系列文章的第一章。</p>
 <hr>
-<h2 id="3-自动升级"><a href="#3-自动升级" class="headerlink" title="3 自动升级"></a>3 自动升级</h2><blockquote>
-<p>yum install -y kernel</p>
-</blockquote>
-<p>&emsp;&emsp;使用 yum 升级内核是相对而言最安全的升级方式了，因为是经过发行版厂商验证过的版本。一般情况下，它并不是最新的，但却是最稳定的。</p>
-<hr>
-<h2 id="4-手动升级"><a href="#4-手动升级" class="headerlink" title="4 手动升级"></a>4 手动升级</h2><p>&emsp;&emsp;手动升级是一件比较刺激的事情。首先到 linux 内核网站膜拜一下上帝。点击<a target="_blank" rel="noopener" href="https://www.kernel.org/"> 网址</a>查看：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/spacer.gif" srcset="/img/loading.gif" lazyload alt="第一章 九析带你轻松升级 linux kernel_运维_02"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153728956.png" srcset="/img/loading.gif" lazyload alt="image-20210911153728956"></p>
-<p>&emsp;&emsp;看到没，多质朴，绝对不会亲近你，要多土就多土。我就喜欢这样的土。那个时代就是这样。想当年为了上个网，晚上趁着爹妈都睡着了偷偷摸摸爬起来把猫连上电话线，听到类似摩尔密码的滴滴声响起，心里那个激动啊，就跟当今小骚妹看到李佳琦一样一样的。</p>
-<h3 id="4-1-下载安装包"><a href="#4-1-下载安装包" class="headerlink" title="4.1 下载安装包"></a>4.1 下载安装包</h3><p>&emsp;&emsp;下载网址：<a target="_blank" rel="noopener" href="https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/"> https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/</a>。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153808360.png" srcset="/img/loading.gif" lazyload alt="image-20210911153808360"></p>
-<h3 id="4-2-解压缩安装包"><a href="#4-2-解压缩安装包" class="headerlink" title="4.2 解压缩安装包"></a>4.2 解压缩安装包</h3><blockquote>
-<p>tar -zxvf linux-4.14.tar.gz</p>
-</blockquote>
-<h3 id="4-3-编译安装"><a href="#4-3-编译安装" class="headerlink" title="4.3 编译安装"></a>4.3 编译安装</h3><blockquote>
-<p>yum install -y gcc bc openssl-devel perl </p>
-<p>make mrproper         # 删除编译生成的文件，包括内核配置文件和各种配置文件，一般只有在第一次执行内核编译前才使用这条命令</p>
-<p>make oldconfig         # 使用原有的内核配置。执行过程中需要交互，一路回车即可</p>
-<p>make             # 编译源码。所有执行操作中最耗时的部分。你可以睡个午觉</p>
-<p>make modules_install    # 将编译出的内核模块复制到 /lib/modules</p>
-<p>make install        # make是编译；make install 安装到指定位置(/boot)</p>
-</blockquote>
-<h3 id="4-4-重启"><a href="#4-4-重启" class="headerlink" title="4.4 重启"></a>4.4 重启</h3><p>&emsp;&emsp;重启后在 grub 中选择 4.14 版本。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153835264.png" srcset="/img/loading.gif" lazyload alt="image-20210911153835264"></p>
-<p>&emsp;&emsp;启动成功后，再次查看内核版本，发现已经轻松完爆：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153852122.png" srcset="/img/loading.gif" lazyload alt="image-20210911153852122"></p>
-<hr>
-<h2 id="5-后记"><a href="#5-后记" class="headerlink" title="5 后记"></a>5 后记</h2><p>&emsp;&emsp;当然为了偷懒可以采用在线升级的方式。升级步骤如下：</p>
-<h3 id="5-1-安装-elrepo-yum-源"><a href="#5-1-安装-elrepo-yum-源" class="headerlink" title="5.1 安装 elrepo yum 源"></a>5.1 安装 elrepo yum 源</h3><p>&emsp;&emsp;elrepo 是 CentOS 稳定的软件源，通过它，可以很容易将内核升级到指定版本。 elrepo 项目网址请<a target="_blank" rel="noopener" href="https://elrepo.org/tiki/tiki-index.php"> 点击</a>：</p>
+<h2 id="3-资源文件准备"><a href="#3-资源文件准备" class="headerlink" title="3 资源文件准备"></a>3 资源文件准备</h2><p>​    从上图可知，共需要 4 个资源文件（yaml）：</p>
 <blockquote>
-<p>yum install -y <a target="_blank" rel="noopener" href="https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm"> https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm</a></p>
+<p>1 jiuxi-gateway.yaml</p>
+<p>2 jiuxi-virtual-svc.yaml</p>
+<p>3 jiuxi-svc.yaml( tomcat 和 nginx 的 service 写在一个文件）</p>
+<p>4 jiuxi-deploy.yaml（tomcat 和 nginx 的 deployment 写在一个文件）</p>
 </blockquote>
-<h3 id="5-2-查看内核包"><a href="#5-2-查看内核包" class="headerlink" title="5.2 查看内核包"></a>5.2 查看内核包</h3><blockquote>
-<p>yum –disablerepo=”*” –enablerepo=”elrepo-kernel” list available</p>
-</blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153911399.png" srcset="/img/loading.gif" lazyload alt="image-20210911153911399"></p>
-<h3 id="5-3-升级内核"><a href="#5-3-升级内核" class="headerlink" title="5.3 升级内核"></a>5.3 升级内核</h3><p>&emsp;&emsp;在 elrepo 源中有 ml 和 lt 两种内核。ml（mainline）为最新版本的内核，lt 为长期支持的内核。这里选择 ml 内核。</p>
+<h3 id="3-1-创建网关文件"><a href="#3-1-创建网关文件" class="headerlink" title="3.1 创建网关文件"></a>3.1 创建网关文件</h3><p>​    网关文件 jiuxi-gateway.yaml 文件内容如下：</p>
 <blockquote>
-<p>yum –enablerepo=elrepo-kernel -y install kernel-ml</p>
+<p>apiVersion: networking.istio.io/v1alpha3</p>
+<p>kind: Gateway</p>
+<p>metadata:</p>
+<p>  name: jiuxi-gateway</p>
+<p>  namespace: jiuxi</p>
+<p>spec:</p>
+<p>  selector:</p>
+<p>​    istio: ingressgateway</p>
+<p>servers:</p>
+<p>- hosts:</p>
+<p>  - jiuxi.com</p>
+<p>  port:</p>
+<p>​    number: 80</p>
+<p>​    name: http</p>
+<p>​    protocol: HTTP</p>
 </blockquote>
-<h3 id="5-4-修改内核启动顺序"><a href="#5-4-修改内核启动顺序" class="headerlink" title="5.4 修改内核启动顺序"></a>5.4 修改内核启动顺序</h3><p>&emsp;&emsp;修改 /etc/default/grub 文件，将 GRUB_DEFAULT 改为 0：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153928164.png" srcset="/img/loading.gif" lazyload alt="image-20210911153928164"></p>
-<p>&emsp;&emsp;编辑完后，执行如下命令让配置生效：</p>
+<p>​    创建资源：</p>
 <blockquote>
-<p>grub2-mkconfig -o /boot/grub2/grub.cfg</p>
+<p>kubectl apply -f jiuxi-gateway.yaml</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153942984.png" srcset="/img/loading.gif" lazyload alt="image-20210911153942984"></p>
-<h3 id="5-5-重启系统"><a href="#5-5-重启系统" class="headerlink" title="5.5 重启系统"></a>5.5 重启系统</h3><blockquote>
-<p>reboot</p>
+<h3 id="3-2-创建虚拟服务文件"><a href="#3-2-创建虚拟服务文件" class="headerlink" title="3.2 创建虚拟服务文件"></a>3.2 创建虚拟服务文件</h3><p>​    虚拟服务文件 jiuxi-virtual-svc.yaml 文件内容如下：</p>
+<blockquote>
+<p>apiVersion: networking.istio.io/v1alpha3</p>
+<p>kind: VirtualService</p>
+<p>metadata:</p>
+<p>  name: jiuxi-virtual-svc</p>
+<p>  namespace: jiuxi</p>
+<p>spec:</p>
+<p>  gateways:</p>
+<p>  - jiuxi-gateway</p>
+<p>  hosts:</p>
+<p>  - jiuxi.com</p>
+<p>  http:</p>
+<p>  - route:</p>
+<p>​    - destination:</p>
+<p>​       host: tomcat-svc</p>
+<p>​       port:</p>
+<p>​         number: 8080</p>
+<p>​    weight: 50</p>
+<p>​    - destination:</p>
+<p>​       host: nginx-svc</p>
+<p>​       port:</p>
+<p>​         number: 80</p>
+<p>​    weight: 50</p>
 </blockquote>
+<p>​    创建资源：</p>
+<blockquote>
+<p>kubectl apply -f jiuxi-virtual-svc.yaml</p>
+</blockquote>
+<h3 id="3-3-创建-k8s-service-文件"><a href="#3-3-创建-k8s-service-文件" class="headerlink" title="3.3 创建 k8s service 文件"></a>3.3 创建 k8s service 文件</h3><p>​    服务文件 jiuxi-svc.yaml 文件内容如下：</p>
+<blockquote>
+<p>apiVersion: v1</p>
+<p>kind: Service</p>
+<p>metadata:</p>
+<p>  name: nginx-svc</p>
+<p>  namespace: jiuxi</p>
+<p>spec:</p>
+<p>  ports:</p>
+<p>  - name: port</p>
+<p>​    port: 80</p>
+<p>​    protocol: TCP</p>
+<p>​    targetPort: 80</p>
+<p>   selector:</p>
+<p>​    app: nginx-pod</p>
+<p>-–</p>
+<p>apiVersion: v1</p>
+<p>kind: Service</p>
+<p>metadata:</p>
+<p>  name: tomcat-svc</p>
+<p>  namespace: jiuxi</p>
+<p>spec:</p>
+<p>  ports:</p>
+<p>  - name: port</p>
+<p>​    port: 8080</p>
+<p>​    protocol: TCP</p>
+<p>​    targetPort: 8080</p>
+<p>  selector:</p>
+<p>  app: tomcat-pod</p>
+</blockquote>
+<p>​    创建资源：</p>
+<blockquote>
+<p>kubectl apply -f jiuxi-svc.yaml</p>
+</blockquote>
+<h3 id="3-4-创建-k8s-deployment-文件"><a href="#3-4-创建-k8s-deployment-文件" class="headerlink" title="3.4 创建 k8s deployment 文件"></a>3.4 创建 k8s deployment 文件</h3><p>​    jiuxi-deploy 文件内容如下：</p>
+<blockquote>
+<p>apiVersion: apps/v1 </p>
+<p>kind: Deployment </p>
+<p>metadata: </p>
+<p>  labels: </p>
+<p>  app: nginx-deploy </p>
+<p>  name: nginx-deploy </p>
+<p>  namespace: jiuxi </p>
+<p>spec: </p>
+<p>  replicas: 1 </p>
+<p>  selector: </p>
+<p>​    matchLabels: </p>
+<p>​      app: nginx-pod  </p>
+<p>  template: </p>
+<p>​    metadata: </p>
+<p>​      labels: </p>
+<p>​        app: nginx-pod  </p>
+<p>​    spec: </p>
+<p>​      containers:     </p>
+<p>​      - image: nginx:1.14-alpine </p>
+<p>​        imagePullPolicy: Always </p>
+<p>​        name: nginx </p>
+<p>​        ports: </p>
+<p>​        - containerPort: 80 </p>
+<p>​          name: port </p>
+<p>​          protocol: TCP</p>
+<p> —</p>
+<p> apiVersion: apps/v1 </p>
+<p>kind: Deployment</p>
+<p>metadata: </p>
+<p>  labels: </p>
+<p>​    app: tomcat-deploy </p>
+<p>  name: tomcat-deploy </p>
+<p>  namespace: jiuxi </p>
+<p>spec: </p>
+<p>  replicas: 1 </p>
+<p>  selector: </p>
+<p>​    matchLabels: </p>
+<p>​      app: tomcat-pod  </p>
+<p>  template: </p>
+<p>​    metadata: </p>
+<p>​      labels: </p>
+<p>​        app: tomcat-pod  </p>
+<p>​    spec:</p>
+<p>​      containers:</p>
+<p>​      - image: docker.io/kubeguide/tomcat-app:v1</p>
+<p>​        imagePullPolicy: Always</p>
+<p>​        name: tomcat</p>
+<p>​        ports:</p>
+<p>​          - containerPort: 8080</p>
+<p>​          name: port</p>
+<p>​          protocol: TCP</p>
+</blockquote>
+<p>​    创建资源：</p>
+<blockquote>
+<p>kubectl apply -f jiuxi-deploy.yaml</p>
+</blockquote>
+<h3 id="3-5-修改-istio-ingressgateway-deployment"><a href="#3-5-修改-istio-ingressgateway-deployment" class="headerlink" title="3.5 修改 istio-ingressgateway deployment"></a>3.5 修改 istio-ingressgateway deployment</h3><p>​    这一步非常重要，因为默认情况下 istio-ingressgateway 对应的容器并没有暴露在服务网格之外，所以我们需要将其暴露出来。编辑 istio-system  命名空间下的 istio-ingressgateway deployment:</p>
+<blockquote>
+<p>kubectl edit deployment -n istio-system istio-ingressgateway</p>
+</blockquote>
+<p>​    修改内容如下截图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165456105.png" srcset="/img/loading.gif" lazyload alt="image-20210911165456105"></p>
+<hr>
+<h2 id="4-尝试网关路由功能"><a href="#4-尝试网关路由功能" class="headerlink" title="4 尝试网关路由功能"></a>4 尝试网关路由功能</h2><h3 id="4-1-确定-INGRESS-HOST"><a href="#4-1-确定-INGRESS-HOST" class="headerlink" title="4.1 确定 INGRESS_HOST"></a>4.1 确定 INGRESS_HOST</h3><blockquote>
+<p>kubectl get pod -n istio-system -o wide</p>
+</blockquote>
+<p>​    执行结果如下图所示，本人的 INGRESS_HOST 就是 10.110.101.205。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165522752.png" srcset="/img/loading.gif" lazyload alt="image-20210911165522752"></p>
+<h3 id="4-2-编辑浏览器所在主机-hosts-文件"><a href="#4-2-编辑浏览器所在主机-hosts-文件" class="headerlink" title="4.2 编辑浏览器所在主机 hosts 文件"></a>4.2 编辑浏览器所在主机 hosts 文件</h3><blockquote>
+<p>vim /etc/hosts    # linux</p>
+<p>c:/windows/system32/drivers/etc/hosts    # windows</p>
+</blockquote>
+<p>​    添加 DNS 记录：</p>
+<blockquote>
+<p>10.110.101.205    jiuxi.com        # 根据个人实际情况改写</p>
+</blockquote>
+<h3 id="4-3-访问-tomcat"><a href="#4-3-访问-tomcat" class="headerlink" title="4.3 访问 tomcat"></a>4.3 访问 tomcat</h3><p>​    浏览器输入 <a target="_blank" rel="noopener" href="http://jiuxi.com,帮尝试多刷新几次,你就会看到流量分别路由到/">http://jiuxi.com，帮尝试多刷新几次，你就会看到流量分别路由到</a> tomcat 和 nginx 服务去了，并且流量上基本达到了均分，各 50%。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165604673.png" srcset="/img/loading.gif" lazyload alt="image-20210911165604673"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165626103.png" srcset="/img/loading.gif" lazyload alt="image-20210911165626103"></p>
+<hr>
+<h2 id="5-小节"><a href="#5-小节" class="headerlink" title="5 小节"></a>5 小节</h2><p>​    自此我们使用了 istio 的 gateway 和 virtual service 实现了流量管理的功能。下面我们还会继续庖丁解牛 istio 其他强大的特性。</p>
 
             </div>
             <hr>
@@ -350,7 +481,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/categories/istio/">istio</a>
                     
                   </div>
                 
@@ -358,7 +489,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/kernel/">kernel</a>
+                      <a class="hover-with-bg" href="/tags/istio/">istio</a>
                     
                   </div>
                 
@@ -375,18 +506,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-%E5%AE%89%E8%A3%85/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆服务网格 - istio 安装</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/06/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%89%E3%80%8AGO-K8S-%E8%AE%BF%E9%97%AE%E3%80%8B/">
-                        <span class="hidden-mobile">client-go 系列之三《go k8s 访问》</span>
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-Bookinfo-%E5%BA%94%E7%94%A8/">
+                        <span class="hidden-mobile">九析带你轻松完爆服务网格 - istio Bookinfo 应用</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

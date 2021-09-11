@@ -18,7 +18,7 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>九析带你轻松升级 linux kernel - 九析</title>
+  <title>九析带你轻松完爆服务网格 - istio Bookinfo 应用 - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松升级 linux kernel">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆服务网格 - istio Bookinfo 应用">
               
             </span>
 
@@ -213,7 +213,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-11 15:42" pubdate>
+      <time datetime="2021-09-11 16:48" pubdate>
         2021年9月11日 下午
       </time>
     </span>
@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1.4k 字
     </span>
   
 
@@ -235,7 +235,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      16
        分钟
     </span>
   
@@ -265,82 +265,121 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松升级 linux kernel</h1>
+            <h1 style="display: none">九析带你轻松完爆服务网格 - istio Bookinfo 应用</h1>
             
             <div class="markdown-body">
-              <p>1 为什么要升级内核</p>
-<p>2 内核版本查看</p>
-<p>3 自动升级</p>
-<p>4 手动升级</p>
-<p>  4.1 下载安装包</p>
-<p>  4.2 解压缩安装包</p>
-<p>  4.3 编译安装</p>
-<p>  4.4 重启</p>
-<p>5 后记</p>
-<p>  5.1 安装 elrepo yum 源</p>
-<p>  5.2 查看内核包</p>
-<p>  5.3 升级内核</p>
-<p>  5.4 修改内核启动顺序</p>
-<p>  5.5 重启</p>
+              <p>1 前言</p>
+<p>2 bookinfo 架构介绍</p>
+<p>3 bookinfo 配置与部署</p>
+<p>  3.1 配置 istio 自动注入</p>
+<p>  3.2 部署 bookinfo 应用</p>
+<p>  3.3 验证 bookinfo 部署情况</p>
+<p>4 设置 bookinfo 网关</p>
+<p>  4.1 定义 bookinfo 入口网关</p>
+<p>  4.2 确认网关已创建</p>
+<p>5 访问 bookinfo 应用</p>
+<p>  5.1 获取 INGRESS_HOST</p>
+<p>  5.2 获取 INGRESS_PORT</p>
+<p>  5.3 通过浏览器访问 bookinfo 应用</p>
+<p>6 卸载 bookinfo 应用</p>
+<p>  6.1 验证卸载</p>
+<p>7 总结</p>
 <hr>
-<h2 id="1-为什么要升级内核"><a href="#1-为什么要升级内核" class="headerlink" title="1 为什么要升级内核"></a>1 为什么要升级内核</h2><p>&emsp;&emsp;为了满足不断增长的物质和精神需要。科技发展日新月异，技术升级一日千里。新的软件、硬件被研发出来，内核为了兼容各种需求不停发展。</p>
-<p>&emsp;&emsp;首先解释一下内核和发行版的区别。内核是操作系统的魂，用来操作和管理计算机的软硬件。主要提供网络协议栈、内存管理、磁盘管理、文件系统、中断处理、进程管理等功能。</p>
-<p>&emsp;&emsp;但是内核对用户而言是不友好的，因为它太专业。对于用户而言，他们需要享受的是实实在在的服务。比如有些男人就是迷恋日本电影，它管你内核不内核，他就需要播放器，但是播放器这东西不能塞到内核。怎么办呢？于是就有好事者盘载以入，在内核之上配置一些软件、工具包、应用程序等组成一个软件包供人使用。因为每个人的口味不一样，所以对软件的选择也不一样，渐渐地就发展成了不同的软件包，这个软件包我们就称为操作系统的发行版。</p>
+<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问或者想更深入学习 istio，请加微信群，我们一起进步：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164235979.png" srcset="/img/loading.gif" lazyload alt="image-20210911164235979"></p>
 <hr>
-<h2 id="2-内核版本查看"><a href="#2-内核版本查看" class="headerlink" title="2 内核版本查看"></a>2 内核版本查看</h2><blockquote>
-<p>uname -r</p>
-</blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153702098.png" srcset="/img/loading.gif" lazyload alt="image-20210911153702098"></p>
-<hr>
-<h2 id="3-自动升级"><a href="#3-自动升级" class="headerlink" title="3 自动升级"></a>3 自动升级</h2><blockquote>
-<p>yum install -y kernel</p>
-</blockquote>
-<p>&emsp;&emsp;使用 yum 升级内核是相对而言最安全的升级方式了，因为是经过发行版厂商验证过的版本。一般情况下，它并不是最新的，但却是最稳定的。</p>
-<hr>
-<h2 id="4-手动升级"><a href="#4-手动升级" class="headerlink" title="4 手动升级"></a>4 手动升级</h2><p>&emsp;&emsp;手动升级是一件比较刺激的事情。首先到 linux 内核网站膜拜一下上帝。点击<a target="_blank" rel="noopener" href="https://www.kernel.org/"> 网址</a>查看：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/spacer.gif" srcset="/img/loading.gif" lazyload alt="第一章 九析带你轻松升级 linux kernel_运维_02"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153728956.png" srcset="/img/loading.gif" lazyload alt="image-20210911153728956"></p>
-<p>&emsp;&emsp;看到没，多质朴，绝对不会亲近你，要多土就多土。我就喜欢这样的土。那个时代就是这样。想当年为了上个网，晚上趁着爹妈都睡着了偷偷摸摸爬起来把猫连上电话线，听到类似摩尔密码的滴滴声响起，心里那个激动啊，就跟当今小骚妹看到李佳琦一样一样的。</p>
-<h3 id="4-1-下载安装包"><a href="#4-1-下载安装包" class="headerlink" title="4.1 下载安装包"></a>4.1 下载安装包</h3><p>&emsp;&emsp;下载网址：<a target="_blank" rel="noopener" href="https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/"> https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/</a>。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153808360.png" srcset="/img/loading.gif" lazyload alt="image-20210911153808360"></p>
-<h3 id="4-2-解压缩安装包"><a href="#4-2-解压缩安装包" class="headerlink" title="4.2 解压缩安装包"></a>4.2 解压缩安装包</h3><blockquote>
-<p>tar -zxvf linux-4.14.tar.gz</p>
-</blockquote>
-<h3 id="4-3-编译安装"><a href="#4-3-编译安装" class="headerlink" title="4.3 编译安装"></a>4.3 编译安装</h3><blockquote>
-<p>yum install -y gcc bc openssl-devel perl </p>
-<p>make mrproper         # 删除编译生成的文件，包括内核配置文件和各种配置文件，一般只有在第一次执行内核编译前才使用这条命令</p>
-<p>make oldconfig         # 使用原有的内核配置。执行过程中需要交互，一路回车即可</p>
-<p>make             # 编译源码。所有执行操作中最耗时的部分。你可以睡个午觉</p>
-<p>make modules_install    # 将编译出的内核模块复制到 /lib/modules</p>
-<p>make install        # make是编译；make install 安装到指定位置(/boot)</p>
-</blockquote>
-<h3 id="4-4-重启"><a href="#4-4-重启" class="headerlink" title="4.4 重启"></a>4.4 重启</h3><p>&emsp;&emsp;重启后在 grub 中选择 4.14 版本。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153835264.png" srcset="/img/loading.gif" lazyload alt="image-20210911153835264"></p>
-<p>&emsp;&emsp;启动成功后，再次查看内核版本，发现已经轻松完爆：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153852122.png" srcset="/img/loading.gif" lazyload alt="image-20210911153852122"></p>
-<hr>
-<h2 id="5-后记"><a href="#5-后记" class="headerlink" title="5 后记"></a>5 后记</h2><p>&emsp;&emsp;当然为了偷懒可以采用在线升级的方式。升级步骤如下：</p>
-<h3 id="5-1-安装-elrepo-yum-源"><a href="#5-1-安装-elrepo-yum-源" class="headerlink" title="5.1 安装 elrepo yum 源"></a>5.1 安装 elrepo yum 源</h3><p>&emsp;&emsp;elrepo 是 CentOS 稳定的软件源，通过它，可以很容易将内核升级到指定版本。 elrepo 项目网址请<a target="_blank" rel="noopener" href="https://elrepo.org/tiki/tiki-index.php"> 点击</a>：</p>
+<h2 id="2-bookinfo-架构介绍"><a href="#2-bookinfo-架构介绍" class="headerlink" title="2 bookinfo 架构介绍"></a>2 bookinfo 架构介绍</h2><p>​    bookinfo 是 istio 的学习样例，通过 bookinfo 你可以对 istio 提供的路由、遥测等功能有更加深入的理解。</p>
+<p>​    下图是 bookinfo 在没有嵌入 istio 前的物理架构图：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164302523.png" srcset="/img/loading.gif" lazyload alt="image-20210911164302523"></p>
+<p>​    bookinfo 是一个在线书店应用，该应用由 4 个微服务组成，分别为 Product page、Reviews、Details 和 Ratings。为了表现 istio 的无侵入性，这 4 个微服务分别由 python、java、ruby 和 node 开发。下面分别说明如下：</p>
 <blockquote>
-<p>yum install -y <a target="_blank" rel="noopener" href="https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm"> https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm</a></p>
+<p>Product page：聚合服务，内容由 Reviews 和 Details 内容聚合而成</p>
+<p>Details：图书详情服务</p>
+<p>Reviews：图书评价服务（多版本）。它也是一个聚合服务，聚合了 Ratings</p>
+<p>Ratings：图书预订排名服务</p>
 </blockquote>
-<h3 id="5-2-查看内核包"><a href="#5-2-查看内核包" class="headerlink" title="5.2 查看内核包"></a>5.2 查看内核包</h3><blockquote>
-<p>yum –disablerepo=”*” –enablerepo=”elrepo-kernel” list available</p>
-</blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153911399.png" srcset="/img/loading.gif" lazyload alt="image-20210911153911399"></p>
-<h3 id="5-3-升级内核"><a href="#5-3-升级内核" class="headerlink" title="5.3 升级内核"></a>5.3 升级内核</h3><p>&emsp;&emsp;在 elrepo 源中有 ml 和 lt 两种内核。ml（mainline）为最新版本的内核，lt 为长期支持的内核。这里选择 ml 内核。</p>
+<p>​    下图是 bookinfo 嵌入 istio 后的物理架构图：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164323375.png" srcset="/img/loading.gif" lazyload alt="image-20210911164323375"></p>
+<p>​    该架构图演示了嵌入 istio 后 bookinfo 的每个微服务都会新增一个 Envoy，这个 Envoy 就是所谓的  sidecar，它会接管跟它配对的微服务的所有网络进、出口流量。其实  Envoy（sidecar）的作用就像你的手机，它正在逐渐把你变成哑巴、聋子和植物人，它承接了你所有的信息入口和出口，某些别有用心的人和组织通过对手机进行监控、遥测、路由等控制，起到控制你的思维、舆论导向、审美爱好等目的。</p>
+<hr>
+<h2 id="3-bookinfo-配置与部署"><a href="#3-bookinfo-配置与部署" class="headerlink" title="3 bookinfo 配置与部署"></a>3 bookinfo 配置与部署</h2><h3 id="3-1-配置-istio-自动注入"><a href="#3-1-配置-istio-自动注入" class="headerlink" title="3.1 配置 istio 自动注入"></a>3.1 配置 istio 自动注入</h3><p>​    因为 bookinfo 会启动多个 pod，每次手动注入 sidecar 会特别繁琐，因此我们使用批注入的方式。如果你对 sidecar 注入不了解，请参考本人的<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2474271"> 上篇</a>博客。</p>
 <blockquote>
-<p>yum –enablerepo=elrepo-kernel -y install kernel-ml</p>
+<p>kubectl create ns jiuxi    # 创建 jiuxi 命名空间</p>
+<p>kubectl label ns jiuxi istio-injection=enabled</p>
+<p>kubectl get ns jiuxi –show-labels</p>
 </blockquote>
-<h3 id="5-4-修改内核启动顺序"><a href="#5-4-修改内核启动顺序" class="headerlink" title="5.4 修改内核启动顺序"></a>5.4 修改内核启动顺序</h3><p>&emsp;&emsp;修改 /etc/default/grub 文件，将 GRUB_DEFAULT 改为 0：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153928164.png" srcset="/img/loading.gif" lazyload alt="image-20210911153928164"></p>
-<p>&emsp;&emsp;编辑完后，执行如下命令让配置生效：</p>
+<p>​    命令操作成功后截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164338022.png" srcset="/img/loading.gif" lazyload alt="image-20210911164338022"></p>
+<h3 id="3-2-部署-bookinfo-应用"><a href="#3-2-部署-bookinfo-应用" class="headerlink" title="3.2 部署 bookinfo 应用"></a>3.2 部署 bookinfo 应用</h3><p>​    在命名空间 jiuxi 中部署了 bookinfo 应用：</p>
 <blockquote>
-<p>grub2-mkconfig -o /boot/grub2/grub.cfg</p>
+<p>kubectl apply -f bookinfo/platform/kube/bookinfo.yaml -n jiuxi</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153942984.png" srcset="/img/loading.gif" lazyload alt="image-20210911153942984"></p>
-<h3 id="5-5-重启系统"><a href="#5-5-重启系统" class="headerlink" title="5.5 重启系统"></a>5.5 重启系统</h3><blockquote>
-<p>reboot</p>
+<p>​    部署过程截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164350324.png" srcset="/img/loading.gif" lazyload alt="image-20210911164350324"></p>
+<p>​    执行如下命令查看 bookinfo 的 service 列表：</p>
+<blockquote>
+<p>kubectl get svc -n jiuxi</p>
 </blockquote>
+<p>​    服务列表截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164402895.png" srcset="/img/loading.gif" lazyload alt="image-20210911164402895"></p>
+<p>​    执行如下命令查看 bookinfo 的 pod 列表：</p>
+<blockquote>
+<p>kubectl get pod -n jiuxi</p>
+</blockquote>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164416004.png" srcset="/img/loading.gif" lazyload alt="image-20210911164416004"></p>
+<h3 id="3-3-验证-bookinfo-部署情况"><a href="#3-3-验证-bookinfo-部署情况" class="headerlink" title="3.3 验证 bookinfo 部署情况"></a>3.3 验证 bookinfo 部署情况</h3><p>​    在服务列表中寻找 productpage 服务，然后使用 curl 命令验证服务是否发布成功。</p>
+<blockquote>
+<p>kubectl get svc -n jiuxi</p>
+<p>curl <a target="_blank" rel="noopener" href="http://svc_cluster_ip:9080/">http://SVC_CLUSTER_IP:9080</a> | grep -o “<title>.*</title>“</p>
+</blockquote>
+<p>​    执行成功的结果如下截图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164429965.png" srcset="/img/loading.gif" lazyload alt="image-20210911164429965"></p>
+<p>​    自此，整个 bookinfo 应用就已经成功部署了。</p>
+<hr>
+<h2 id="4-设置-bookinfo-网关"><a href="#4-设置-bookinfo-网关" class="headerlink" title="4 设置 bookinfo 网关"></a>4 设置 bookinfo 网关</h2><p>​    上面的步骤已经可以让你访问到 bookinfo 应用了。但是我知道有些同学依旧觉得寒碜，因为很多人还是通过浏览器来看世界的。</p>
+<p>​    网关就相当于你房子的大门，每当你饥肠辘辘回到家，你可以通过全开、半开、开一条缝等动作控制隔壁大妈家饭菜的饭菜香味。后续课程会专门介绍网关更深层次的原理和运用。这里你先有个粗浅的理解就可以了。</p>
+<h3 id="4-1-定义-bookinfo-入口网关"><a href="#4-1-定义-bookinfo-入口网关" class="headerlink" title="4.1 定义 bookinfo 入口网关"></a>4.1 定义 bookinfo 入口网关</h3><blockquote>
+<p>kubectl apply -f istio-1.4.5/samples/bookinfo/networking/bookinfo-gateway.yaml -n jiuxi</p>
+</blockquote>
+<h3 id="4-2-确认网关已创建"><a href="#4-2-确认网关已创建" class="headerlink" title="4.2 确认网关已创建"></a>4.2 确认网关已创建</h3><blockquote>
+<p>kubectl get gateways.networking.istio.io -n jiuxi</p>
+</blockquote>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164445960.png" srcset="/img/loading.gif" lazyload alt="image-20210911164445960"></p>
+<hr>
+<h2 id="5-访问-bookinfo-应用"><a href="#5-访问-bookinfo-应用" class="headerlink" title="5 访问 bookinfo 应用"></a>5 访问 bookinfo 应用</h2><h3 id="5-1-获取-INGRESS-HOST"><a href="#5-1-获取-INGRESS-HOST" class="headerlink" title="5.1 获取 INGRESS_HOST"></a>5.1 获取 INGRESS_HOST</h3><blockquote>
+<p>kubectl get po -l istio=ingressgateway -n istio-system -o jsonpath=’{.items[0].status.hostIP}’</p>
+</blockquote>
+<h3 id="5-2-获取-INGRESS-PORT"><a href="#5-2-获取-INGRESS-PORT" class="headerlink" title="5.2 获取 INGRESS_PORT"></a>5.2 获取 INGRESS_PORT</h3><blockquote>
+<p>kubectl -n istio-system get service istio-ingressgateway -o jsonpath=’{.spec.ports[?(@.name==”http2”)].nodePort}’</p>
+</blockquote>
+<h3 id="5-3-通过浏览器访问-bookinfo-应用"><a href="#5-3-通过浏览器访问-bookinfo-应用" class="headerlink" title="5.3 通过浏览器访问 bookinfo 应用"></a>5.3 通过浏览器访问 bookinfo 应用</h3><p>​    根据 5.1 和 5.2 获取到 host 和 port 信息，如下截图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164506614.png" srcset="/img/loading.gif" lazyload alt="image-20210911164506614"></p>
+<p>​    根据此 host 和 port，打开浏览器进行访问：</p>
+<p>​    多刷新几次页面，你会发现 bookinfo 应用使用到的多个 reviews 版本，如下所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164538736.png" srcset="/img/loading.gif" lazyload alt="image-20210911164538736"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164551497.png" srcset="/img/loading.gif" lazyload alt="image-20210911164551497"></p>
+<p>​    正好可以对应到 pod 信息：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164605008.png" srcset="/img/loading.gif" lazyload alt="image-20210911164605009"></p>
+<hr>
+<h2 id="6-卸载-bookinfo-应用"><a href="#6-卸载-bookinfo-应用" class="headerlink" title="6 卸载 bookinfo 应用"></a>6 卸载 bookinfo 应用</h2><p>​    你已经创建了 bookinfo，有了创建的快感。也许你有点怅然若失，因为你觉得你的技术人生不够圆满，你想亲身完爆你创建的一切，那么还等什么，执行下面的语句吧：</p>
+<blockquote>
+<p>./istio-1.4.5/samples/bookinfo/platform/kube/cleanup.sh</p>
+</blockquote>
+<p>​    命令执行成功后，会显示如下截图：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164619983.png" srcset="/img/loading.gif" lazyload alt="image-20210911164619983"></p>
+<h3 id="6-1-验证卸载"><a href="#6-1-验证卸载" class="headerlink" title="6.1 验证卸载"></a>6.1 验证卸载</h3><p>​    执行如下命令验证你是否成功卸载：</p>
+<blockquote>
+<p>kubectl get virtualservices.networking.istio.io -n jiuxi</p>
+<p>kubectl get destinationrules.networking.istio.io -n jiuxi</p>
+<p>kubectl get gateways.networking.istio.io -n jiuxi</p>
+<p>kubectl get pod -n jiuxi</p>
+</blockquote>
+<p>​    但是假如你觉得破坏的感觉很爽，就像嚼了炫迈一下停不下来，你可以执行如下作死命令：</p>
+<blockquote>
+<p>rm -rf /   # 你要是真敢这么做，我就崇拜你</p>
+</blockquote>
+<hr>
+<h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7 总结"></a>7 总结</h2><p>​    自此，九析已经带你轻松完爆了 Bookinfo 应用。相信在操作的过程中，你还有很多不理解的地方，但是没关系，后续九析会为你庖丁解牛的。你需要做的，就是跟着九析操作一遍，熟悉一下整个流程，后续某天你一定会在某个瞬间大声尖叫：“我得到了”。</p>
 
             </div>
             <hr>
@@ -350,7 +389,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/categories/istio/">istio</a>
                     
                   </div>
                 
@@ -358,7 +397,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/kernel/">kernel</a>
+                      <a class="hover-with-bg" href="/tags/istio/">istio</a>
                     
                   </div>
                 
@@ -375,9 +414,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-%E5%AE%89%E8%A3%85/">
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-Gateway-%E8%AE%BE%E7%BD%AE%E8%B7%AF%E7%94%B1/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆服务网格 - istio 安装</span>
+                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio Gateway 设置路由</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -385,8 +424,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/06/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%89%E3%80%8AGO-K8S-%E8%AE%BF%E9%97%AE%E3%80%8B/">
-                        <span class="hidden-mobile">client-go 系列之三《go k8s 访问》</span>
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-%E5%88%9D%E6%8E%A2/">
+                        <span class="hidden-mobile">九析带你轻松完爆服务网格 - istio 初探</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
