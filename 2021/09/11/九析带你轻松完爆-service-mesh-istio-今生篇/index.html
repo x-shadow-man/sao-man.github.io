@@ -18,7 +18,7 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>九析带你轻松完爆 service mesh - istio Gateway 设置路由 - 九析</title>
+  <title>九析带你轻松完爆 service mesh - istio 今生篇 - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松完爆 service mesh - istio Gateway 设置路由">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 service mesh - istio 今生篇">
               
             </span>
 
@@ -213,7 +213,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-11 16:58" pubdate>
+      <time datetime="2021-09-11 17:12" pubdate>
         2021年9月11日 下午
       </time>
     </span>
@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      2.2k 字
     </span>
   
 
@@ -235,7 +235,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16
+      25
        分钟
     </span>
   
@@ -265,213 +265,85 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松完爆 service mesh - istio Gateway 设置路由</h1>
+            <h1 style="display: none">九析带你轻松完爆 service mesh - istio 今生篇</h1>
             
             <div class="markdown-body">
-              <p>1 流量管理</p>
-<p>2 创建命名空间</p>
-<p>3 资源文件准备</p>
-<p>  3.1 创建网关文件</p>
-<p>  3.2 创建虚拟服务文件</p>
-<p>  3.3 创建 k8s service 文件</p>
-<p>  3.4 创建 k8s deployment 文件：</p>
-<p>  3.5 修改 istio-ingressgateway deployment</p>
-<p>4 尝试网关路由功能</p>
-<p>  4.1 确定 INGRESS_HOST</p>
-<p>  4.2 编辑浏览器所在主机 hosts 文件</p>
-<p>  4.3 访问 tomcat</p>
-<p>5 小节</p>
+              <p>1 前言</p>
+<p>2 何为服务网格（service mesh）</p>
+<p>3 何为 istio</p>
+<p>4 为什么使用 istio</p>
+<p>5 istio 核心特征</p>
+<p>  5.1 traffic management</p>
+<p>  5.2 secure</p>
+<p>  5.3 policies</p>
+<p>  5.4 observability</p>
+<p>6 多平台支持</p>
 <hr>
-<h2 id="1-流量管理（traffic-management）"><a href="#1-流量管理（traffic-management）" class="headerlink" title="1 流量管理（traffic management）"></a>1 流量管理（traffic management）</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165314268.png" srcset="/img/loading.gif" lazyload alt="image-20210911165314268"></p>
-<p>​    istio 四大特性是流量管理（traffic management）、安全（security）、策略（policies）和遥测（observability）。</p>
-<p>​    本节重点介绍 istio 流量管理。流量管理的本质是对网络流量的路由和控制。生活中经常有这样的例子，比如下雨塌方，交警会疏导新的交通路线，这便是路由；比如景区周末实行单双号限行，这便是流量控制。</p>
-<p>​    在介绍流量管理之前，首先介绍一下网络流向，介绍一个 http 请求在安装了 istio 的 k8s 中都经过哪些点，有了这个介绍之后，再谈流量管理将是水到渠成的事情。</p>
-<p>​    下图便是网络流向图：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165357073.png" srcset="/img/loading.gif" lazyload alt="image-20210911165357073"></p>
-<p>​    当用户使用浏览器发起一个请求( <a target="_blank" rel="noopener" href="http://jiuxi.com/xxx">http://jiuxi.com/xxx</a> )进入 k8s 中的 istio-ingressgateway，因为在  istio-ingressgateway 上设置了 istio 的 gateway，而且此 gateway 又绑定了 virtual  service，在 virtual service 设置了 2 条路由规则，分别指向 tomcat 和 nginx 这 2 个 k8s  service，而每个 service 又关联到各自的 pod，于是此请求最终可根据 url 触达到 pod 内的容器。</p>
-<p>​    了解了请求流向的整个流程，下面介绍如何操作。前提是你已经安装好了 k8s 和 istio。关于如何安装和配置 istio，可以查看本人的系列文章第一章。</p>
+<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171103398.png" srcset="/img/loading.gif" lazyload alt="image-20210911171103398"></p>
+<p>​    上章介绍了 istio 前世，讲述了微服务架构模型的演变史，也讲了微服务今天所遭遇的问题和面临的尴尬窘境，这里我们再复习一下。</p>
+<p>   目前微服务治理遭遇的问题：</p>
+<blockquote>
+<p><strong>服务治理方式不统一</strong>：不同服务治理的方式会引入不同的中间件，而这些中间件的技术标准和维护标准都不同。因此运维人员或者架构人员必须掌握每种中间件的使用方法，很多时候这对一个人力资源有限的科技公司并不现实。</p>
+<p><strong>重复造轮子</strong>：微服务架构是允许多语言栈、多技术栈的，但不同的技术栈针对通信、支撑服务、服务安全、服务监控、熔断/降级/限流等通用技术问题却需要各自的解决方案，实在是成本的浪费。</p>
+<p><strong>服务治理缺乏标准化</strong>：由于服务治理缺乏标准化，因此微服务治理的好坏全依靠技术人员个人的能力、经验和水平，这就有点像手工作坊时代，器物优质全靠工匠。但是无标准化显然不符合科技发展的轨迹。</p>
+</blockquote>
+<p>​    为了解决上面微服务治理中的痛点，大家普遍的诉求在于能不能有这么一个平台，既可以无侵入、透明、用户无感知的插入到现有的分布式微服务架构中，同时又可以解决一些通信所必须考虑的普遍问题（服务发现、负载均衡、超时重试、熔断/限流、监控、访问控制、认证授权等），将这些问题的解决方案统一下沉到平台层，而不再依靠引入第三方中间件（zookeeper、nginx、sentinal、hystrix、pinpoint/zipkin、spring security），并且所有的维护方式统一且标准化。</p>
+<p>​    于是服务网格出现了，istio 也出现了，而且一切出现得都是这么自然。</p>
+<blockquote>
+<p>《圣经》旧约-创世纪篇：</p>
+<p>原始太初，上帝创造了天地。地面一片空虚混沌，渊面黑暗，只有上帝的灵运行在水面上。上帝说：“要有光！”于是，就有了光。上帝把光和暗分开，把光称为白昼，把暗称为黑夜。夜晚过去后,清晨接着来临，这是第一天。</p>
+<p>上帝说：“诸水之间要有穹苍，将水分为上下。”于是创造了穹苍，把水上下分开。他称穹苍为“天空”。夜晚过去，清晨接着来临，这是第二天。</p>
+<p>……</p>
+</blockquote>
+<p>​    那么服务网格是什么？istio 又是什么呢？</p>
 <hr>
-<h2 id="2-创建命名空间"><a href="#2-创建命名空间" class="headerlink" title="2 创建命名空间"></a>2 创建命名空间</h2><blockquote>
-<p>kubectl create ns jiuxi</p>
-</blockquote>
-<p>​    istio 默认安装在 jiuxi 这个命名空间下，并且设置在 jiuxi 命名空间自动注入 sidecar。相关操作请参考本人系列文章的第一章。</p>
-<hr>
-<h2 id="3-资源文件准备"><a href="#3-资源文件准备" class="headerlink" title="3 资源文件准备"></a>3 资源文件准备</h2><p>​    从上图可知，共需要 4 个资源文件（yaml）：</p>
+<h2 id="2-何为服务网格（service-mesh）"><a href="#2-何为服务网格（service-mesh）" class="headerlink" title="2 何为服务网格（service mesh）"></a>2 何为服务网格（service mesh）</h2><p>​    下面看看 istio 是怎么描述服务网格的：</p>
 <blockquote>
-<p>1 jiuxi-gateway.yaml</p>
-<p>2 jiuxi-virtual-svc.yaml</p>
-<p>3 jiuxi-svc.yaml( tomcat 和 nginx 的 service 写在一个文件）</p>
-<p>4 jiuxi-deploy.yaml（tomcat 和 nginx 的 deployment 写在一个文件）</p>
+<p>The term service mesh is used to describe the network of microservices that make up such applications and the interactions between them. As a  service mesh grows in size and complexity, it can become harder to  understand and manage. Its requirements can include discovery, load  balancing, failure recovery, metrics, and monitoring. A service mesh  also often has more complex operational requirements, like A/B testing,  canary rollouts, rate limiting, access control, and end-to-end  authentication.</p>
 </blockquote>
-<h3 id="3-1-创建网关文件"><a href="#3-1-创建网关文件" class="headerlink" title="3.1 创建网关文件"></a>3.1 创建网关文件</h3><p>​    网关文件 jiuxi-gateway.yaml 文件内容如下：</p>
+<p>​    个人翻译如下：</p>
 <blockquote>
-<p>apiVersion: networking.istio.io/v1alpha3</p>
-<p>kind: Gateway</p>
-<p>metadata:</p>
-<p>  name: jiuxi-gateway</p>
-<p>  namespace: jiuxi</p>
-<p>spec:</p>
-<p>  selector:</p>
-<p>​    istio: ingressgateway</p>
-<p>servers:</p>
-<p>- hosts:</p>
-<p>  - jiuxi.com</p>
-<p>  port:</p>
-<p>​    number: 80</p>
-<p>​    name: http</p>
-<p>​    protocol: HTTP</p>
+<p>服务网格是对微服务组成的一个可以互相通信的网络进行治理的规范。随着微服务的增长，服务网格也会变得越来越复杂和难以理解。服务网格治理的内容除了服务发现、负载均衡、失败恢复、指标收集、监控之外，还应该具有更复杂的运维要求，比如 A/B 测试、金丝雀发布、流量限制、访问控制和端到端认证。</p>
 </blockquote>
-<p>​    创建资源：</p>
+<h2 id="3-何为-istio"><a href="#3-何为-istio" class="headerlink" title="3 何为 istio"></a>3 何为 istio</h2><p>​    上面介绍了服务网格，下面再来介绍一下 istio，仍然引用 istio 官网的定义：</p>
 <blockquote>
-<p>kubectl apply -f jiuxi-gateway.yaml</p>
+<p>Cloud platforms provide a wealth of benefits for the organizations that use  them. However, there’s no denying that adopting the cloud can put  strains on DevOps teams. Developers must use microservices to architect  for portability, meanwhile operators are managing extremely large hybrid and multi-cloud deployments. Istio lets you connect, secure, control,  and observe services.</p>
+<p>At a high level, Istio helps  reduce the complexity of these deployments, and eases the strain on your development teams. It is a completely open source service mesh that  layers transparently onto existing distributed applications. It is also a platform, including APIs that let it integrate into any logging  platform, or telemetry or policy system. Istio’s diverse feature set  lets you successfully, and efficiently, run a distributed microservice  architecture, and provides a uniform way to secure, connect, and monitor microservices.</p>
 </blockquote>
-<h3 id="3-2-创建虚拟服务文件"><a href="#3-2-创建虚拟服务文件" class="headerlink" title="3.2 创建虚拟服务文件"></a>3.2 创建虚拟服务文件</h3><p>​    虚拟服务文件 jiuxi-virtual-svc.yaml 文件内容如下：</p>
+<p>​    个人感觉介绍很啰嗦，建议你也别看了，我给你简单列举一下重点即可：</p>
 <blockquote>
-<p>apiVersion: networking.istio.io/v1alpha3</p>
-<p>kind: VirtualService</p>
-<p>metadata:</p>
-<p>  name: jiuxi-virtual-svc</p>
-<p>  namespace: jiuxi</p>
-<p>spec:</p>
-<p>  gateways:</p>
-<p>  - jiuxi-gateway</p>
-<p>  hosts:</p>
-<p>  - jiuxi.com</p>
-<p>  http:</p>
-<p>  - route:</p>
-<p>​    - destination:</p>
-<p>​       host: tomcat-svc</p>
-<p>​       port:</p>
-<p>​         number: 8080</p>
-<p>​    weight: 50</p>
-<p>​    - destination:</p>
-<p>​       host: nginx-svc</p>
-<p>​       port:</p>
-<p>​         number: 80</p>
-<p>​    weight: 50</p>
+<p>istio 是 service mesh 的具体解决方案。她就像一个尤物，不仅能满足服务网格规定的一切苛刻要求之外，还贴心地为你准备了一整套标准化、规格化的豪华级国际服务，等待着你的抽插。更难能可贵地是，拥有这么多优秀品质的她，竟然还是免费的！爽不爽！</p>
 </blockquote>
-<p>​    创建资源：</p>
+<h2 id="4-为什么使用-istio"><a href="#4-为什么使用-istio" class="headerlink" title="4 为什么使用 istio"></a>4 为什么使用 istio</h2><p>​    下面是你选择 istio 的一些理由：</p>
 <blockquote>
-<p>kubectl apply -f jiuxi-virtual-svc.yaml</p>
+<p>1 对 HTTP、gRPC、WebSocket 和 TCP 网络流量的自动负载均衡</p>
+<p>2 通过丰富多样的路由规则、重试、故障转移和故障注入机制实现对流量行为进行细粒度控制</p>
+<p>3 通过可插拔的策略层（联想成过滤器）和 API 实现对访问的控制、流量以及资源配额的限制</p>
+<p>4 集群入口、集群内部、集群出口所有网络流量的全方位跟踪、记录和度量</p>
+<p>5 保证服务之间通信的安全性</p>
 </blockquote>
-<h3 id="3-3-创建-k8s-service-文件"><a href="#3-3-创建-k8s-service-文件" class="headerlink" title="3.3 创建 k8s service 文件"></a>3.3 创建 k8s service 文件</h3><p>​    服务文件 jiuxi-svc.yaml 文件内容如下：</p>
+<h2 id="5-istio-核心特征"><a href="#5-istio-核心特征" class="headerlink" title="5 istio 核心特征"></a>5 istio 核心特征</h2><p>​    istio 官方宣扬的特性是 traffic management（流控）、secure（安全）、polices（策略）、observability（可观察）。个人感觉这样的叙述太佶屈聱牙，一点都不口语化。</p>
+<h3 id="5-1-traffic-management"><a href="#5-1-traffic-management" class="headerlink" title="5.1 traffic management"></a>5.1 traffic management</h3><p>​    这个好理解，本质就是网络流量的管理。就像早晚高峰车辆限行，以及交警在发生交通事故疏导新路，这些都是在做流量的控制和路由。</p>
+<p>​    其实流量管理并不是服务网格化才出现的，早期的微服务时代就已经有流量控制了，比如负载均衡、熔断、限流、降级等，只不过早期这些功能的实现依赖中间件（比如 nginx、hystrix），如今服务网格时代，这些功能统一下沉到基础平台 istio 去实现了。</p>
+<p>​    istio 的流控主要是通过 Envoy 组件实现。有关技术细节，哥以后会专门告诉你。</p>
+<h3 id="5-2-secure"><a href="#5-2-secure" class="headerlink" title="5.2 secure"></a>5.2 secure</h3><p>​    说到 istio 的 secure 其实是有个范围的。这里的 secure 并不是没有边界，它主要是指微服务之间通信的 secure，即 pod 对 pod、service 对 service 层面通信的 secure。众所周知，istio 是 google、ibm 以及 lyft 公司  3p 后的产物。而 istio 的 secure 正是脱胎于 google 的 ALTS（应用层传输安全）这项技术，该项技术用于验证  google 服务之间的通信，保证传输中数据的安全，即应用层服务到服务通信的防护方式。这些功能早先在微服务时代对标就是 jwt、oauth2  等技术规范。</p>
+<p>​    istio secure 主要的功能有 ACLS（访问控制）、authentication（认证，即证明你是谁）、authorization（授权，即允许你干啥）。</p>
+<p>​    istio secure 功能通过 Citadel 这个组件实现。有关技术细节，哥以后会专门告诉你。</p>
+<h3 id="5-3-policies"><a href="#5-3-policies" class="headerlink" title="5.3 policies"></a>5.3 policies</h3><p>​    istio policies 职责如下：</p>
 <blockquote>
-<p>apiVersion: v1</p>
-<p>kind: Service</p>
-<p>metadata:</p>
-<p>  name: nginx-svc</p>
-<p>  namespace: jiuxi</p>
-<p>spec:</p>
-<p>  ports:</p>
-<p>  - name: port</p>
-<p>​    port: 80</p>
-<p>​    protocol: TCP</p>
-<p>​    targetPort: 80</p>
-<p>   selector:</p>
-<p>​    app: nginx-pod</p>
-<p>-–</p>
-<p>apiVersion: v1</p>
-<p>kind: Service</p>
-<p>metadata:</p>
-<p>  name: tomcat-svc</p>
-<p>  namespace: jiuxi</p>
-<p>spec:</p>
-<p>  ports:</p>
-<p>  - name: port</p>
-<p>​    port: 8080</p>
-<p>​    protocol: TCP</p>
-<p>​    targetPort: 8080</p>
-<p>  selector:</p>
-<p>  app: tomcat-pod</p>
+<p>1 动态限制服务通信的网络速率</p>
+<p>2 限制访问服务、设置黑、白名单</p>
+<p>3 网络包头信息的重写或者重定向</p>
 </blockquote>
-<p>​    创建资源：</p>
-<blockquote>
-<p>kubectl apply -f jiuxi-svc.yaml</p>
-</blockquote>
-<h3 id="3-4-创建-k8s-deployment-文件"><a href="#3-4-创建-k8s-deployment-文件" class="headerlink" title="3.4 创建 k8s deployment 文件"></a>3.4 创建 k8s deployment 文件</h3><p>​    jiuxi-deploy 文件内容如下：</p>
-<blockquote>
-<p>apiVersion: apps/v1 </p>
-<p>kind: Deployment </p>
-<p>metadata: </p>
-<p>  labels: </p>
-<p>  app: nginx-deploy </p>
-<p>  name: nginx-deploy </p>
-<p>  namespace: jiuxi </p>
-<p>spec: </p>
-<p>  replicas: 1 </p>
-<p>  selector: </p>
-<p>​    matchLabels: </p>
-<p>​      app: nginx-pod  </p>
-<p>  template: </p>
-<p>​    metadata: </p>
-<p>​      labels: </p>
-<p>​        app: nginx-pod  </p>
-<p>​    spec: </p>
-<p>​      containers:     </p>
-<p>​      - image: nginx:1.14-alpine </p>
-<p>​        imagePullPolicy: Always </p>
-<p>​        name: nginx </p>
-<p>​        ports: </p>
-<p>​        - containerPort: 80 </p>
-<p>​          name: port </p>
-<p>​          protocol: TCP</p>
-<p> —</p>
-<p> apiVersion: apps/v1 </p>
-<p>kind: Deployment</p>
-<p>metadata: </p>
-<p>  labels: </p>
-<p>​    app: tomcat-deploy </p>
-<p>  name: tomcat-deploy </p>
-<p>  namespace: jiuxi </p>
-<p>spec: </p>
-<p>  replicas: 1 </p>
-<p>  selector: </p>
-<p>​    matchLabels: </p>
-<p>​      app: tomcat-pod  </p>
-<p>  template: </p>
-<p>​    metadata: </p>
-<p>​      labels: </p>
-<p>​        app: tomcat-pod  </p>
-<p>​    spec:</p>
-<p>​      containers:</p>
-<p>​      - image: docker.io/kubeguide/tomcat-app:v1</p>
-<p>​        imagePullPolicy: Always</p>
-<p>​        name: tomcat</p>
-<p>​        ports:</p>
-<p>​          - containerPort: 8080</p>
-<p>​          name: port</p>
-<p>​          protocol: TCP</p>
-</blockquote>
-<p>​    创建资源：</p>
-<blockquote>
-<p>kubectl apply -f jiuxi-deploy.yaml</p>
-</blockquote>
-<h3 id="3-5-修改-istio-ingressgateway-deployment"><a href="#3-5-修改-istio-ingressgateway-deployment" class="headerlink" title="3.5 修改 istio-ingressgateway deployment"></a>3.5 修改 istio-ingressgateway deployment</h3><p>​    这一步非常重要，因为默认情况下 istio-ingressgateway 对应的容器并没有暴露在服务网格之外，所以我们需要将其暴露出来。编辑 istio-system  命名空间下的 istio-ingressgateway deployment:</p>
-<blockquote>
-<p>kubectl edit deployment -n istio-system istio-ingressgateway</p>
-</blockquote>
-<p>​    修改内容如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165456105.png" srcset="/img/loading.gif" lazyload alt="image-20210911165456105"></p>
-<hr>
-<h2 id="4-尝试网关路由功能"><a href="#4-尝试网关路由功能" class="headerlink" title="4 尝试网关路由功能"></a>4 尝试网关路由功能</h2><h3 id="4-1-确定-INGRESS-HOST"><a href="#4-1-确定-INGRESS-HOST" class="headerlink" title="4.1 确定 INGRESS_HOST"></a>4.1 确定 INGRESS_HOST</h3><blockquote>
-<p>kubectl get pod -n istio-system -o wide</p>
-</blockquote>
-<p>​    执行结果如下图所示，本人的 INGRESS_HOST 就是 10.110.101.205。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165522752.png" srcset="/img/loading.gif" lazyload alt="image-20210911165522752"></p>
-<h3 id="4-2-编辑浏览器所在主机-hosts-文件"><a href="#4-2-编辑浏览器所在主机-hosts-文件" class="headerlink" title="4.2 编辑浏览器所在主机 hosts 文件"></a>4.2 编辑浏览器所在主机 hosts 文件</h3><blockquote>
-<p>vim /etc/hosts    # linux</p>
-<p>c:/windows/system32/drivers/etc/hosts    # windows</p>
-</blockquote>
-<p>​    添加 DNS 记录：</p>
-<blockquote>
-<p>10.110.101.205    jiuxi.com        # 根据个人实际情况改写</p>
-</blockquote>
-<h3 id="4-3-访问-tomcat"><a href="#4-3-访问-tomcat" class="headerlink" title="4.3 访问 tomcat"></a>4.3 访问 tomcat</h3><p>​    浏览器输入 <a target="_blank" rel="noopener" href="http://jiuxi.com,帮尝试多刷新几次,你就会看到流量分别路由到/">http://jiuxi.com，帮尝试多刷新几次，你就会看到流量分别路由到</a> tomcat 和 nginx 服务去了，并且流量上基本达到了均分，各 50%。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165604673.png" srcset="/img/loading.gif" lazyload alt="image-20210911165604673"></p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165626103.png" srcset="/img/loading.gif" lazyload alt="image-20210911165626103"></p>
-<hr>
-<h2 id="5-小节"><a href="#5-小节" class="headerlink" title="5 小节"></a>5 小节</h2><p>​    自此我们使用了 istio 的 gateway 和 virtual service 实现了流量管理的功能。下面我们还会继续庖丁解牛 istio 其他强大的特性。</p>
+<p>​    不仅如此，istio 也允许添加自定义策略，通过 istio 提供的 policy adapter 跟 istio 集成在一起。</p>
+<p>​    注意不要将 policies 跟 secure 进行混淆，policies 更多是人为进行干预控制，而 secure 重点在于安全。</p>
+<p>​    istio policies 功能实现是通过 mixer 组件实现的。有关技术细节，哥以后会专门告诉你。</p>
+<h3 id="5-4-observability"><a href="#5-4-observability" class="headerlink" title="5.4 observability"></a>5.4 observability</h3><p>​    observability 特性是指提供给你多种工具实现全方位、立体式对集群入口、集群内部、集群出口的流量进行监控、跟踪和度量。微服务早期时代监控方式是 agent 或者中间件，比如：zabbix、pinpoint、zipkin 等。</p>
+<p>​    istio observability 功能实现是通过 mixer 组件实现的。还是老样子，有关技术细节，哥以后会专门告诉你。</p>
+<h2 id="6-多平台支持"><a href="#6-多平台支持" class="headerlink" title="6 多平台支持"></a>6 多平台支持</h2><p>​    istio 可以支持多平台，比如 k8s、Consul、Mesos 以及独立虚拟机。</p>
+<p>​    以后哥都会实际为你展示，你唯一做的就是耐心等待和持续尖叫。</p>
+<p>​    自此，九析带你轻松完爆 istio 的介绍。更多精彩，敬请期待。</p>
 
             </div>
             <hr>
@@ -506,9 +378,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E5%89%8D%E4%B8%96/">
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E6%B3%A8%E5%85%A5/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio 前世</span>
+                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio 注入</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -516,8 +388,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-Bookinfo-%E5%BA%94%E7%94%A8/">
-                        <span class="hidden-mobile">九析带你轻松完爆服务网格 - istio Bookinfo 应用</span>
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E5%89%8D%E4%B8%96/">
+                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio 前世</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

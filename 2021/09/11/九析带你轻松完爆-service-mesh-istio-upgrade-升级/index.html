@@ -1,0 +1,693 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="九析">
+  <meta name="keywords" content="">
+  
+  <title>九析带你轻松完爆 service mesh - istio upgrade 升级 - 九析</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>九析</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/">
+                    
+                    主题博客
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/">
+                    
+                    配置指南
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/icon/">
+                    
+                    图标用法
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/ss.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 service mesh - istio upgrade 升级">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-11 17:42" pubdate>
+        2021年9月11日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">九析带你轻松完爆 service mesh - istio upgrade 升级</h1>
+            
+            <div class="markdown-body">
+              <p>1 前言</p>
+<p>2 升级前的准备</p>
+<p>3 升级步骤</p>
+<p>  3.1 下载新版本的 istio</p>
+<p>  3.2 解压缩 istio</p>
+<p>  3.3 设置 istioctl 环境变量</p>
+<p>  3.4 设置 istio 自动补全功能</p>
+<p>  3.5 验证新版本 istio 是否兼容老版本</p>
+<p>  3.6 创建升级配置文件</p>
+<p>  3.7 升级 istio</p>
+<p>​    3.7.1 资源等待错误</p>
+<p>​    3.7.2 资源冲突错误</p>
+<p>​    3.8 重设数据平面</p>
+<hr>
+<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173739515.png" srcset="/img/loading.gif" lazyload alt="image-20210911173739515"></p>
+<p>​    今天杭州阴天，哥的心情不怎么嗨！因为哥前期都在使用 1.4.5 版本，但是这周 istio 官方没经我允许就擅自升级到了 1.5 版本，打了我一个措手不及。但是互联网这十几年没少教育我，于是痛定思痛决定拥抱变化。</p>
+<hr>
+<h2 id="2-升级前的准备"><a href="#2-升级前的准备" class="headerlink" title="2 升级前的准备"></a>2 升级前的准备</h2><p>​    就像你撸管前要先把纸准备好一样，在升级 istio 前，要先做一些前期准备工作。</p>
+<blockquote>
+<p>1 检查 istio 版本是不是 1.4.4 或更高版本</p>
+<p>2 确定 istio 安装采用的是 istioctl 安装</p>
+</blockquote>
+<p>​    使用如下命令查看当前 istio 安装版本：</p>
+<blockquote>
+<p>istioctl version</p>
+</blockquote>
+<p>​    命令截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173755955.png" srcset="/img/loading.gif" lazyload alt="image-20210911173755955"></p>
+<p>​    由此可知，istio 当前的客户端、控制平面、数据平面的版本都是 1.4.5 版本。</p>
+<p>​    通过查看 istio pod 的镜像也可以确认当前 istio 各组件的相关版本，如下图：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173809501.png" srcset="/img/loading.gif" lazyload alt="image-20210911173809501"></p>
+<hr>
+<h2 id="3-升级步骤"><a href="#3-升级步骤" class="headerlink" title="3 升级步骤"></a>3 升级步骤</h2><h3 id="3-1-下载新版本的-istio"><a href="#3-1-下载新版本的-istio" class="headerlink" title="3.1 下载新版本的 istio"></a>3.1 下载新版本的 istio</h3><p>​    执行如下命令下载最新版的 istio：</p>
+<blockquote>
+<p>curl -L <a target="_blank" rel="noopener" href="https://istio.io/downloadIstio">https://istio.io/downloadIstio</a> | sh -</p>
+</blockquote>
+<p>​    也可以直接下载指定版本的 istio：</p>
+<blockquote>
+<p>curl -L <a target="_blank" rel="noopener" href="https://istio.io/downloadIstio">https://istio.io/downloadIstio</a> | ISTIO_VERSION=1.5.0 sh -</p>
+</blockquote>
+<p>​    当然很多情况下，你都会遭遇网络情况，如下所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173821564.png" srcset="/img/loading.gif" lazyload alt="image-20210911173821564"></p>
+<p>​    你能怎么办？你什么感觉？是不是就像大便找不到厕所？或者找到厕所却发现没坑？</p>
+<p>​    实在下不到，你也不要悲愤，可以告诉哥，哥直接发给你，不用谢！</p>
+<p>​    如下截图有没有看到，哥可以下，但是你们却下不到，你说气人不？</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173831924.png" srcset="/img/loading.gif" lazyload alt="image-20210911173831924"></p>
+<h3 id="3-2-解压缩-istio"><a href="#3-2-解压缩-istio" class="headerlink" title="3.2 解压缩 istio"></a>3.2 解压缩 istio</h3><p>​    安装 istio 前，首先解压缩：</p>
+<blockquote>
+<p>tar -zxvf istio-1.5.0-linux.tar.gz</p>
+</blockquote>
+<p>​    解压缩后的目录结构截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173847127.png" srcset="/img/loading.gif" lazyload alt="image-20210911173847127"></p>
+<p>​    关键目录、文件说明如下：</p>
+<blockquote>
+<p>1 bin/istioctl    # 客户端工具</p>
+<p>2 install    # 底层支持平台的资源文件，istio 可支持 consul、gcp、k8s 平台</p>
+<p>3 samples    # 学习样例</p>
+</blockquote>
+<h3 id="3-3-设置-istioctl-环境变量"><a href="#3-3-设置-istioctl-环境变量" class="headerlink" title="3.3 设置 istioctl 环境变量"></a>3.3 设置 istioctl 环境变量</h3><p>​    因为我曾经设置过老版本 istioctl 环境变量，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173859461.png" srcset="/img/loading.gif" lazyload alt="image-20210911173859461"></p>
+<p>​    所以首先需要通过如下命令进行删除：</p>
+<blockquote>
+<p>export PATH=<code>echo $PATH | sed -e &#39;s/:\/root\/istio\/istio-1.4.5\/bin//g&#39;</code></p>
+</blockquote>
+<p>​    删除后截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173926207.png" srcset="/img/loading.gif" lazyload alt="image-20210911173926207"></p>
+<p>​    将新版本 istioctl 路径添加到系统环境路径中：</p>
+<blockquote>
+<p>cd istio-1.5.0</p>
+<p>export PATH=$PATH:$PWD/bin</p>
+<p>istioctl version</p>
+</blockquote>
+<p>​    执行成功后，验证版本如下图所示，发现当前 istioctl 客户端版本已经更新为 1.5.0，但是控制面和数据面仍然是 1.4.5，这说明当前我们只是完成了 istio 客户端的改造，而控制面和数据面版本要升级完才会更改：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173939403.png" srcset="/img/loading.gif" lazyload alt="image-20210911173939403"></p>
+<h3 id="3-4-设置-istio-自动补全功能"><a href="#3-4-设置-istio-自动补全功能" class="headerlink" title="3.4 设置 istio 自动补全功能"></a>3.4 设置 istio 自动补全功能</h3><p>​    将 istio 安装包 tools 目录下的 istioctl.bash 拷贝到用户根目录下：</p>
+<blockquote>
+<p>cp istio-1.5.0/tools/istioctl.bash ~</p>
+</blockquote>
+<p>​    编辑 ~/.bash_profile 文件，在文件末尾添加如下内容：</p>
+<blockquote>
+<p>PATH=$PATH:$HOME/bin</p>
+<p>PATH=$PATH:/root/istio/istio-1.5.0/bin</p>
+<p>export PATH</p>
+<p>source /root/.istioctl.bash</p>
+</blockquote>
+<p>​    添加完毕后，加载配置使之生效：</p>
+<blockquote>
+<p>source ~/.bash_profile</p>
+</blockquote>
+<p>​    然后输入 istioctl 然后按两次 tab 键，发现自动补全功能已经生效：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173949422.png" srcset="/img/loading.gif" lazyload alt="image-20210911173949422"></p>
+<h3 id="3-5-验证新版本-istio-是否兼容老版本"><a href="#3-5-验证新版本-istio-是否兼容老版本" class="headerlink" title="3.5 验证新版本 istio 是否兼容老版本"></a>3.5 验证新版本 istio 是否兼容老版本</h3><p>​    执行如下命令查看新版本 istio 可兼容的版本范围：</p>
+<blockquote>
+<p>istioctl manifest versions</p>
+</blockquote>
+<p>​    如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173959253.png" srcset="/img/loading.gif" lazyload alt="image-20210911173959253"></p>
+<p>​    明确新版本 istio 可升级，则继续往下操作。</p>
+<h3 id="3-6-创建升级配置文件"><a href="#3-6-创建升级配置文件" class="headerlink" title="3.6 创建升级配置文件"></a>3.6 创建升级配置文件</h3><p>​    我以前安装 istio 采用的 profile 是 demo：</p>
+<blockquote>
+<p>istioctl manifest apply –set profile=demo</p>
+</blockquote>
+<p>​    怎么理解 profile，你可以跟下图做类比：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174010406.png" srcset="/img/loading.gif" lazyload alt="image-20210911174010406"></p>
+<p>​    也就是同样型号比如 G 级别车，一共有三个版本，每个版本就是一个 profile，每个 profile 的参数或者配置都有区别。</p>
+<p>​    你也可以通过如下命令查看你的 istio 1.5.0 版本共有几个 profile：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174020192.png" srcset="/img/loading.gif" lazyload alt="image-20210911174020192"></p>
+<p>​    但是可惜地是，istio 安装时支持 set 参数，比如你可以使用如下命令安装：</p>
+<blockquote>
+<p>istioctl manifest apply –set profile=demo</p>
+</blockquote>
+<p>​    但是 istioctl upgrade 命令不支持 –set 选项，因此，如果前期在安装的时候使用了 –set 选项，那么在升级时需要创建一个等效的配置选项文件。</p>
+<p>​    使用如下命令创建 profile 为 demo 的等效配置文件：</p>
+<blockquote>
+<p>istioctl profile dump demo &gt; demo.yaml</p>
+</blockquote>
+<h3 id="3-7-升级-istio"><a href="#3-7-升级-istio" class="headerlink" title="3.7 升级 istio"></a>3.7 升级 istio</h3><p>​    执行如下命令来升级 istio：</p>
+<blockquote>
+<p>istioctl upgrade -f demo.yaml</p>
+</blockquote>
+<p>​    升级过程截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174030581.png" srcset="/img/loading.gif" lazyload alt="image-20210911174030581"></p>
+<p>​    如果升级过程很顺畅，就可以跳过此小节继续下面的内容；如果升级过程并不顺利，可以根据下面的介绍进行修改。</p>
+<h4 id="3-7-1-资源等待错误"><a href="#3-7-1-资源等待错误" class="headerlink" title="3.7.1 资源等待错误"></a>3.7.1 资源等待错误</h4><p>​    如果在升级过程中遭遇如下日志信息：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174040082.png" srcset="/img/loading.gif" lazyload alt="image-20210911174040082"></p>
+<blockquote>
+<p>error    installer    Failed to wait for resource: resources not ready after 10m0s: timed out waiting for the condition</p>
+<p>Deployment/istio-system/istiod</p>
+</blockquote>
+<p>​    多半是因为镜像下载问题，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174050011.png" srcset="/img/loading.gif" lazyload alt="image-20210911174050011"></p>
+<p>​    可以指定 aliyun 作为镜像源：</p>
+<blockquote>
+<p>touch /etc/docker/daemon.json</p>
+<p>vim /etc/docker/daemon.json</p>
+</blockquote>
+<p>​    添加如下内容：</p>
+<blockquote>
+<p>{</p>
+<p>“registry-mirrors”: [“<a href="https://9cpn8tt6.mirror.aliyuncs.com&quot;]">https://9cpn8tt6.mirror.aliyuncs.com&quot;]</a></p>
+<p>}</p>
+</blockquote>
+<p>​    添加完成后执行如下操作：</p>
+<blockquote>
+<p>systemctl daemon-reload</p>
+<p>systemctl restart docker</p>
+</blockquote>
+<h4 id="3-7-2-资源冲突错误"><a href="#3-7-2-资源冲突错误" class="headerlink" title="3.7.2 资源冲突错误"></a>3.7.2 资源冲突错误</h4><p>​    如果在安装过程中出现如下错误：</p>
+<blockquote>
+<p>Error: failed to read the current Istio version, error: different versions of Istio components found</p>
+</blockquote>
+<p>​    错误截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174102383.png" srcset="/img/loading.gif" lazyload alt="image-20210911174102383"></p>
+<p>​    多半是因为镜像版本冲突，可以执行如下命令查看：</p>
+<blockquote>
+<p>istioctl version</p>
+</blockquote>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174112229.png" srcset="/img/loading.gif" lazyload alt="image-20210911174112229"></p>
+<p>​    改正办法是删除错误版本的 deployment 后再升级（istioctl upgrade）：</p>
+<blockquote>
+<p>kubectl delete deployments.apps -n istio-system istio-egressgateway</p>
+</blockquote>
+<p>​    升级成功后的截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174121033.png" srcset="/img/loading.gif" lazyload alt="image-20210911174121033"></p>
+<p>​    再次执行 istioctl version，可以发现 istioctl 的客户端、数据面、控制面都从 1.4.5 变成了 1.5.0。如下截图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174133509.png" srcset="/img/loading.gif" lazyload alt="image-20210911174133509"></p>
+<h3 id="3-8-重设数据平面"><a href="#3-8-重设数据平面" class="headerlink" title="3.8 重设数据平面"></a>3.8 重设数据平面</h3><p>​    从上面的截图中，其实可以发现一个端倪，就是 data plane version 有一个 proxy 仍是 1.4.5。产生这样的原因是我在升级 istio 版本前就已经手工注入了一个  deployment，现在需要重置原有数据平面。执行如下命令重置原有被注入的 nginx deployment：</p>
+<blockquote>
+<p>istioctl kube-inject -f nginx-deploy.yaml | kubectl apply -f -</p>
+</blockquote>
+<p>​    再次执行 istioctl version 命令发现客户端、数据面、控制面的版本都更新到了最新的状态，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174144682.png" srcset="/img/loading.gif" lazyload alt="image-20210911174144682"></p>
+<p>​    自此，九析带你轻松完爆 istio 的升级。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/istio/">istio</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/istio/">istio</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-profile-%E8%AF%A6%E8%BF%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio profile 详述</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E6%B3%A8%E5%85%A5%E5%90%8E%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E6%B5%81%E5%90%91/">
+                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio 注入后网络流量流向</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

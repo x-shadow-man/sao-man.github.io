@@ -18,7 +18,7 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>九析带你轻松完爆 service mesh - istio Gateway 设置路由 - 九析</title>
+  <title>九析带你轻松完爆 service mesh - istio 注入 - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松完爆 service mesh - istio Gateway 设置路由">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 service mesh - istio 注入">
               
             </span>
 
@@ -213,7 +213,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-11 16:58" pubdate>
+      <time datetime="2021-09-11 17:23" pubdate>
         2021年9月11日 下午
       </time>
     </span>
@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      1.3k 字
     </span>
   
 
@@ -235,7 +235,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16
+      15
        分钟
     </span>
   
@@ -265,213 +265,107 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松完爆 service mesh - istio Gateway 设置路由</h1>
+            <h1 style="display: none">九析带你轻松完爆 service mesh - istio 注入</h1>
             
             <div class="markdown-body">
-              <p>1 流量管理</p>
-<p>2 创建命名空间</p>
-<p>3 资源文件准备</p>
-<p>  3.1 创建网关文件</p>
-<p>  3.2 创建虚拟服务文件</p>
-<p>  3.3 创建 k8s service 文件</p>
-<p>  3.4 创建 k8s deployment 文件：</p>
-<p>  3.5 修改 istio-ingressgateway deployment</p>
-<p>4 尝试网关路由功能</p>
-<p>  4.1 确定 INGRESS_HOST</p>
-<p>  4.2 编辑浏览器所在主机 hosts 文件</p>
-<p>  4.3 访问 tomcat</p>
-<p>5 小节</p>
+              <p>1 前言</p>
+<p>2 istio 注入与平台生态影响</p>
+<p>  2.1 环境准备</p>
+<p>  2.2 istio 注入操作</p>
+<p>  2.3 istio 注入本质</p>
+<p>  2.4 istio 注入 pod 后各容器作用以及关系</p>
+<p>  2.5 istio-proxy 和 envoy 关系</p>
+<p>  2.6 istio-proxy 和 kube-proxy 关系</p>
+<p>  2.7 envoy 进程服务端口</p>
+<p>3 小节</p>
 <hr>
-<h2 id="1-流量管理（traffic-management）"><a href="#1-流量管理（traffic-management）" class="headerlink" title="1 流量管理（traffic management）"></a>1 流量管理（traffic management）</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165314268.png" srcset="/img/loading.gif" lazyload alt="image-20210911165314268"></p>
-<p>​    istio 四大特性是流量管理（traffic management）、安全（security）、策略（policies）和遥测（observability）。</p>
-<p>​    本节重点介绍 istio 流量管理。流量管理的本质是对网络流量的路由和控制。生活中经常有这样的例子，比如下雨塌方，交警会疏导新的交通路线，这便是路由；比如景区周末实行单双号限行，这便是流量控制。</p>
-<p>​    在介绍流量管理之前，首先介绍一下网络流向，介绍一个 http 请求在安装了 istio 的 k8s 中都经过哪些点，有了这个介绍之后，再谈流量管理将是水到渠成的事情。</p>
-<p>​    下图便是网络流向图：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165357073.png" srcset="/img/loading.gif" lazyload alt="image-20210911165357073"></p>
-<p>​    当用户使用浏览器发起一个请求( <a target="_blank" rel="noopener" href="http://jiuxi.com/xxx">http://jiuxi.com/xxx</a> )进入 k8s 中的 istio-ingressgateway，因为在  istio-ingressgateway 上设置了 istio 的 gateway，而且此 gateway 又绑定了 virtual  service，在 virtual service 设置了 2 条路由规则，分别指向 tomcat 和 nginx 这 2 个 k8s  service，而每个 service 又关联到各自的 pod，于是此请求最终可根据 url 触达到 pod 内的容器。</p>
-<p>​    了解了请求流向的整个流程，下面介绍如何操作。前提是你已经安装好了 k8s 和 istio。关于如何安装和配置 istio，可以查看本人的系列文章第一章。</p>
+<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171710644.png" srcset="/img/loading.gif" lazyload alt="image-20210911171710644"></p>
 <hr>
-<h2 id="2-创建命名空间"><a href="#2-创建命名空间" class="headerlink" title="2 创建命名空间"></a>2 创建命名空间</h2><blockquote>
+<h2 id="2-istio-注入与平台生态影响"><a href="#2-istio-注入与平台生态影响" class="headerlink" title="2 istio 注入与平台生态影响"></a>2 istio 注入与平台生态影响</h2><p>​    虽然 istio 是平台间独立的，不仅支持 K8s、Consul，也同样支持虚拟机，但是本文部署平台环境还是聚焦在 k8s。</p>
+<h3 id="2-1-环境准备"><a href="#2-1-环境准备" class="headerlink" title="2.1 环境准备"></a>2.1 环境准备</h3><p>​    在本系列文章的第二篇中提到过资源的 istio 注入，这里再做一个回顾。</p>
+<p>​    新建 jiuxi 命名空间：</p>
+<blockquote>
 <p>kubectl create ns jiuxi</p>
 </blockquote>
-<p>​    istio 默认安装在 jiuxi 这个命名空间下，并且设置在 jiuxi 命名空间自动注入 sidecar。相关操作请参考本人系列文章的第一章。</p>
-<hr>
-<h2 id="3-资源文件准备"><a href="#3-资源文件准备" class="headerlink" title="3 资源文件准备"></a>3 资源文件准备</h2><p>​    从上图可知，共需要 4 个资源文件（yaml）：</p>
+<p>​    编写 nginx deployment 资源文件 nginx-deploy.yaml：</p>
 <blockquote>
-<p>1 jiuxi-gateway.yaml</p>
-<p>2 jiuxi-virtual-svc.yaml</p>
-<p>3 jiuxi-svc.yaml( tomcat 和 nginx 的 service 写在一个文件）</p>
-<p>4 jiuxi-deploy.yaml（tomcat 和 nginx 的 deployment 写在一个文件）</p>
-</blockquote>
-<h3 id="3-1-创建网关文件"><a href="#3-1-创建网关文件" class="headerlink" title="3.1 创建网关文件"></a>3.1 创建网关文件</h3><p>​    网关文件 jiuxi-gateway.yaml 文件内容如下：</p>
-<blockquote>
-<p>apiVersion: networking.istio.io/v1alpha3</p>
-<p>kind: Gateway</p>
-<p>metadata:</p>
-<p>  name: jiuxi-gateway</p>
-<p>  namespace: jiuxi</p>
-<p>spec:</p>
-<p>  selector:</p>
-<p>​    istio: ingressgateway</p>
-<p>servers:</p>
-<p>- hosts:</p>
-<p>  - jiuxi.com</p>
-<p>  port:</p>
-<p>​    number: 80</p>
-<p>​    name: http</p>
-<p>​    protocol: HTTP</p>
-</blockquote>
-<p>​    创建资源：</p>
-<blockquote>
-<p>kubectl apply -f jiuxi-gateway.yaml</p>
-</blockquote>
-<h3 id="3-2-创建虚拟服务文件"><a href="#3-2-创建虚拟服务文件" class="headerlink" title="3.2 创建虚拟服务文件"></a>3.2 创建虚拟服务文件</h3><p>​    虚拟服务文件 jiuxi-virtual-svc.yaml 文件内容如下：</p>
-<blockquote>
-<p>apiVersion: networking.istio.io/v1alpha3</p>
-<p>kind: VirtualService</p>
-<p>metadata:</p>
-<p>  name: jiuxi-virtual-svc</p>
-<p>  namespace: jiuxi</p>
-<p>spec:</p>
-<p>  gateways:</p>
-<p>  - jiuxi-gateway</p>
-<p>  hosts:</p>
-<p>  - jiuxi.com</p>
-<p>  http:</p>
-<p>  - route:</p>
-<p>​    - destination:</p>
-<p>​       host: tomcat-svc</p>
-<p>​       port:</p>
-<p>​         number: 8080</p>
-<p>​    weight: 50</p>
-<p>​    - destination:</p>
-<p>​       host: nginx-svc</p>
-<p>​       port:</p>
-<p>​         number: 80</p>
-<p>​    weight: 50</p>
-</blockquote>
-<p>​    创建资源：</p>
-<blockquote>
-<p>kubectl apply -f jiuxi-virtual-svc.yaml</p>
-</blockquote>
-<h3 id="3-3-创建-k8s-service-文件"><a href="#3-3-创建-k8s-service-文件" class="headerlink" title="3.3 创建 k8s service 文件"></a>3.3 创建 k8s service 文件</h3><p>​    服务文件 jiuxi-svc.yaml 文件内容如下：</p>
-<blockquote>
-<p>apiVersion: v1</p>
-<p>kind: Service</p>
-<p>metadata:</p>
-<p>  name: nginx-svc</p>
-<p>  namespace: jiuxi</p>
-<p>spec:</p>
-<p>  ports:</p>
-<p>  - name: port</p>
-<p>​    port: 80</p>
-<p>​    protocol: TCP</p>
-<p>​    targetPort: 80</p>
-<p>   selector:</p>
-<p>​    app: nginx-pod</p>
-<p>-–</p>
-<p>apiVersion: v1</p>
-<p>kind: Service</p>
-<p>metadata:</p>
-<p>  name: tomcat-svc</p>
-<p>  namespace: jiuxi</p>
-<p>spec:</p>
-<p>  ports:</p>
-<p>  - name: port</p>
-<p>​    port: 8080</p>
-<p>​    protocol: TCP</p>
-<p>​    targetPort: 8080</p>
-<p>  selector:</p>
-<p>  app: tomcat-pod</p>
-</blockquote>
-<p>​    创建资源：</p>
-<blockquote>
-<p>kubectl apply -f jiuxi-svc.yaml</p>
-</blockquote>
-<h3 id="3-4-创建-k8s-deployment-文件"><a href="#3-4-创建-k8s-deployment-文件" class="headerlink" title="3.4 创建 k8s deployment 文件"></a>3.4 创建 k8s deployment 文件</h3><p>​    jiuxi-deploy 文件内容如下：</p>
-<blockquote>
-<p>apiVersion: apps/v1 </p>
-<p>kind: Deployment </p>
-<p>metadata: </p>
-<p>  labels: </p>
-<p>  app: nginx-deploy </p>
-<p>  name: nginx-deploy </p>
-<p>  namespace: jiuxi </p>
-<p>spec: </p>
-<p>  replicas: 1 </p>
-<p>  selector: </p>
-<p>​    matchLabels: </p>
-<p>​      app: nginx-pod  </p>
-<p>  template: </p>
-<p>​    metadata: </p>
-<p>​      labels: </p>
-<p>​        app: nginx-pod  </p>
-<p>​    spec: </p>
-<p>​      containers:     </p>
-<p>​      - image: nginx:1.14-alpine </p>
-<p>​        imagePullPolicy: Always </p>
-<p>​        name: nginx </p>
-<p>​        ports: </p>
-<p>​        - containerPort: 80 </p>
-<p>​          name: port </p>
-<p>​          protocol: TCP</p>
-<p> —</p>
-<p> apiVersion: apps/v1 </p>
+<p>apiVersion: apps/v1</p>
 <p>kind: Deployment</p>
-<p>metadata: </p>
-<p>  labels: </p>
-<p>​    app: tomcat-deploy </p>
-<p>  name: tomcat-deploy </p>
-<p>  namespace: jiuxi </p>
-<p>spec: </p>
-<p>  replicas: 1 </p>
-<p>  selector: </p>
-<p>​    matchLabels: </p>
-<p>​      app: tomcat-pod  </p>
-<p>  template: </p>
-<p>​    metadata: </p>
-<p>​      labels: </p>
-<p>​        app: tomcat-pod  </p>
+<p>metadata:</p>
+<p>  name: nginx</p>
+<p>  namespace: jiuxi</p>
+<p>  labels:</p>
+<p>  app: nginx</p>
+<p>spec:</p>
+<p>  replicas: 1</p>
+<p>  selector:</p>
+<p>​    matchLabels:</p>
+<p>​      app: nginx</p>
+<p>  template:</p>
+<p>​    metadata:</p>
+<p>​      labels:</p>
+<p>​        app: nginx</p>
 <p>​    spec:</p>
 <p>​      containers:</p>
-<p>​      - image: docker.io/kubeguide/tomcat-app:v1</p>
-<p>​        imagePullPolicy: Always</p>
-<p>​        name: tomcat</p>
+<p>​      -  name: nginx</p>
+<p>​        image: nginx:1.14-alpine</p>
 <p>​        ports:</p>
-<p>​          - containerPort: 8080</p>
-<p>​          name: port</p>
-<p>​          protocol: TCP</p>
+<p>​        - containerPort: 80</p>
 </blockquote>
-<p>​    创建资源：</p>
+<p>​    新建 nginx deployment 资源：</p>
 <blockquote>
-<p>kubectl apply -f jiuxi-deploy.yaml</p>
+<p>kubectl apply -f nginx-deploy.yaml</p>
 </blockquote>
-<h3 id="3-5-修改-istio-ingressgateway-deployment"><a href="#3-5-修改-istio-ingressgateway-deployment" class="headerlink" title="3.5 修改 istio-ingressgateway deployment"></a>3.5 修改 istio-ingressgateway deployment</h3><p>​    这一步非常重要，因为默认情况下 istio-ingressgateway 对应的容器并没有暴露在服务网格之外，所以我们需要将其暴露出来。编辑 istio-system  命名空间下的 istio-ingressgateway deployment:</p>
+<p>​    创建成功后的截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171726710.png" srcset="/img/loading.gif" lazyload alt="image-20210911171726710"></p>
+<h3 id="2-2-istio-注入操作"><a href="#2-2-istio-注入操作" class="headerlink" title="2.2 istio 注入操作"></a>2.2 istio 注入操作</h3><p>​    执行 istio 注入操作之前，须确保 istio 和 istioctl 都正确安装，安装操作请参阅《<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2474224"> 第一章</a>》。</p>
+<p>​    手动执行 istio 注入操作：</p>
 <blockquote>
-<p>kubectl edit deployment -n istio-system istio-ingressgateway</p>
+<p>istioctl kube-inject -f nginx-deploy.yaml | kubectl apply -f -</p>
 </blockquote>
-<p>​    修改内容如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165456105.png" srcset="/img/loading.gif" lazyload alt="image-20210911165456105"></p>
+<p>​    执行成功之后截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171737004.png" srcset="/img/loading.gif" lazyload alt="image-20210911171737004"></p>
+<p>​    此时 nginx pod 内部容器从原来的 1 个变成了 2 个（严格意义上应该是 3 个，因为有个启动容器执行完就结束了，因此这里看不到，后面会细说）。</p>
+<h3 id="2-3-istio-注入本质"><a href="#2-3-istio-注入本质" class="headerlink" title="2.3 istio 注入本质"></a>2.3 istio 注入本质</h3><p>​    我们再审视一下 istio 注入过程：</p>
+<blockquote>
+<p>istioctl kube-inject -f nginx-deploy.yaml | kubectl apply -f -</p>
+</blockquote>
+<p>​    该命令通过管道符 “|” 将两步操作合为一步，”|” 前在 nginx-deploy.yaml 资源文件注入 istio 内容，”|” 后部署经过 istio 注入的新的 nginx-deploy.yaml 文件。</p>
+<p>​    那么 istio 到底注入了哪些内容呢？执行如下命令查看：</p>
+<blockquote>
+<p>kubectl edit deployment -n jiuxi nginx</p>
+</blockquote>
+<p>​    发现在原来基础上增加了一个初始化容器（initContainers）：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171748249.png" srcset="/img/loading.gif" lazyload alt="image-20210911171748249"></p>
+<p>​    <img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171800364.png" srcset="/img/loading.gif" lazyload></p>
+<p>又增加了一个 istio-proxy 容器：</p>
+<p>还有一些环境变量信息，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171857892.png" srcset="/img/loading.gif" lazyload alt="image-20210911171857892"></p>
+<p>​    由此可知，istio 注入本质就是在宿主资源中添加 istio 特性，从而起到提高整个平台的能力。类似克拉克加了披风变成超人，布洛克吸附外星物质变成毒液一样的道理。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171911243.png" srcset="/img/loading.gif" lazyload alt="image-20210911171911243"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171923945.png" srcset="/img/loading.gif" lazyload alt="image-20210911171923945"></p>
+<p>​    下图展示了 istio 在 nginx pod 中注入新容器 istio-init、istio-proxy：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171936581.png" srcset="/img/loading.gif" lazyload alt="image-20210911171936581"></p>
+<h3 id="2-4-istio-注入-pod-后各容器作用以及关系"><a href="#2-4-istio-注入-pod-后各容器作用以及关系" class="headerlink" title="2.4 istio 注入 pod 后各容器作用以及关系"></a>2.4 istio 注入 pod 后各容器作用以及关系</h3><p>​    上图演示了 pod 在 istio 注入后产生了 2 个新的容器，这样原来单容器的 pod 现在变成了 3 个容器共存同一个 pod 中，而且宿主容器（nginx）跟 istio-proxy 容器还处于同一网络空间。</p>
+<blockquote>
+<p>istio-init: 初始化容器。作用是初始化 pod 网络空间，创建 iptables 规则。</p>
+<p>istio-proxy: sidecar 容器。作用是启动 pilot-agent 和 envoy 进程。</p>
+</blockquote>
+<p>​    可以通过 kubectl exec -it 命令进入 nginx pod 的 nginx 和 istio-proxy 容器，发现两个容器共享同一网络空间。如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171953779.png" srcset="/img/loading.gif" lazyload alt="image-20210911171953779"></p>
+<h3 id="2-5-istio-proxy-和-envoy-关系"><a href="#2-5-istio-proxy-和-envoy-关系" class="headerlink" title="2.5 istio-proxy 和 envoy 关系"></a>2.5 istio-proxy 和 envoy 关系</h3><p>​    envoy 其实本质与 nginx 和 haproxy 一样，都属于网络代理服务器，运行时则是一个进程。envoy 在架构设计上也采用了类似 nginx 的设计模式（多线程、非阻塞、异步IO），后面的课程我会详细讲解。</p>
+<p>​    istio-proxy 是运行在 pod 中的一个容器。该容器运行时会启动两个关键的进程 pilot-agent 和 envoy。pilot-agent 进程会定时跟 istio 的 pilot 组件进行通信，envoy 进程会接收入口和出口网络流量。istio-proxy 容器内的进程如下截图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911172004111.png" srcset="/img/loading.gif" lazyload alt="image-20210911172004111"></p>
+<h3 id="2-6-istio-proxy-和-kube-proxy-关系"><a href="#2-6-istio-proxy-和-kube-proxy-关系" class="headerlink" title="2.6 istio-proxy 和 kube-proxy 关系"></a>2.6 istio-proxy 和 kube-proxy 关系</h3><p>​    从表现形式上说，istio-proxy 是容器(运行在 pod 内)，kube-proxy 是 pod (资源类型是 daemonset)。</p>
+<p>​    从处理网络流量角度来说，istio-proxy 和 kube-proxy 本质上都是通过 iptables/netfilter 来处理网络流量。只不过 istio-proxy 和  kube-proxy 活动在不同的网络空间。istio-proxy 位于 pod 网络空间，处理的是 pod 内的网络流量，而  kube-proxy 位于宿主机网络空间，处理的是宿主机内网络流量（因为 kube-proxy 是 daemonset，因此它位于 k8s  集群的每个 node 节点上）。</p>
+<h3 id="2-7-envoy-进程服务端口"><a href="#2-7-envoy-进程服务端口" class="headerlink" title="2.7 envoy 进程服务端口"></a>2.7 envoy 进程服务端口</h3><p>​    上面我们介绍了 envoy 是运行在 istio-proxy 容器内的一个进程，改进程的作用是管理网络流量（类比 nginx），下图展示 envoy  进程开启的网络端口，网络流量可以通过端口进入到 envoy 进程内部。网络流量、网络端口和 envoy  进程的关系就像风、窗户和房屋的关系一样，风（网络流量）通过窗口（网络端口）进入到房屋（envoy），一个房屋（envoy）可以不止一个窗户（网络端口）。</p>
+<p>​    下图展示 envoy 进程监听的端口号：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911172014710.png" srcset="/img/loading.gif" lazyload alt="image-20210911172014710"></p>
+<p>​    服务端口作用截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911172033996.png" srcset="/img/loading.gif" lazyload alt="image-20210911172033996"></p>
 <hr>
-<h2 id="4-尝试网关路由功能"><a href="#4-尝试网关路由功能" class="headerlink" title="4 尝试网关路由功能"></a>4 尝试网关路由功能</h2><h3 id="4-1-确定-INGRESS-HOST"><a href="#4-1-确定-INGRESS-HOST" class="headerlink" title="4.1 确定 INGRESS_HOST"></a>4.1 确定 INGRESS_HOST</h3><blockquote>
-<p>kubectl get pod -n istio-system -o wide</p>
-</blockquote>
-<p>​    执行结果如下图所示，本人的 INGRESS_HOST 就是 10.110.101.205。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165522752.png" srcset="/img/loading.gif" lazyload alt="image-20210911165522752"></p>
-<h3 id="4-2-编辑浏览器所在主机-hosts-文件"><a href="#4-2-编辑浏览器所在主机-hosts-文件" class="headerlink" title="4.2 编辑浏览器所在主机 hosts 文件"></a>4.2 编辑浏览器所在主机 hosts 文件</h3><blockquote>
-<p>vim /etc/hosts    # linux</p>
-<p>c:/windows/system32/drivers/etc/hosts    # windows</p>
-</blockquote>
-<p>​    添加 DNS 记录：</p>
-<blockquote>
-<p>10.110.101.205    jiuxi.com        # 根据个人实际情况改写</p>
-</blockquote>
-<h3 id="4-3-访问-tomcat"><a href="#4-3-访问-tomcat" class="headerlink" title="4.3 访问 tomcat"></a>4.3 访问 tomcat</h3><p>​    浏览器输入 <a target="_blank" rel="noopener" href="http://jiuxi.com,帮尝试多刷新几次,你就会看到流量分别路由到/">http://jiuxi.com，帮尝试多刷新几次，你就会看到流量分别路由到</a> tomcat 和 nginx 服务去了，并且流量上基本达到了均分，各 50%。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165604673.png" srcset="/img/loading.gif" lazyload alt="image-20210911165604673"></p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165626103.png" srcset="/img/loading.gif" lazyload alt="image-20210911165626103"></p>
-<hr>
-<h2 id="5-小节"><a href="#5-小节" class="headerlink" title="5 小节"></a>5 小节</h2><p>​    自此我们使用了 istio 的 gateway 和 virtual service 实现了流量管理的功能。下面我们还会继续庖丁解牛 istio 其他强大的特性。</p>
+<h2 id="3-小节"><a href="#3-小节" class="headerlink" title="3 小节"></a>3 小节</h2><p>​    自此，九析带你轻松完爆了 istio 的注入以及对平台生态的影响。下章节将继续介绍 istio 注入后对网络流量的流向的改变。</p>
 
             </div>
             <hr>
@@ -506,9 +400,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E5%89%8D%E4%B8%96/">
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E6%B3%A8%E5%85%A5%E5%90%8E%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E6%B5%81%E5%90%91/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio 前世</span>
+                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio 注入后网络流量流向</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -516,8 +410,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-Bookinfo-%E5%BA%94%E7%94%A8/">
-                        <span class="hidden-mobile">九析带你轻松完爆服务网格 - istio Bookinfo 应用</span>
+                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E4%BB%8A%E7%94%9F%E7%AF%87/">
+                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio 今生篇</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
