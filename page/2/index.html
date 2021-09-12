@@ -222,31 +222,31 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Fortio-%E9%83%A8%E7%BD%B2/" target="_self">
-          九析带你轻松完爆 Istio - Fortio 部署
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E5%A4%84%E7%90%86-zombie-defunct-%E8%BF%9B%E7%A8%8B/" target="_self">
+          九析带你处理 zombie(defunct) 进程
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Fortio-%E9%83%A8%E7%BD%B2/" target="_self">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E5%A4%84%E7%90%86-zombie-defunct-%E8%BF%9B%E7%A8%8B/" target="_self">
           
           
             
           
           1 前言
-2 邀约
-3 Fortio 介绍
-4 Fortio 下载
-5 Fortio 命令行
-6 Fortio web 控制台方式
+2 僵尸进程
+  2.1 进程简介
+  2.2 僵尸进程例子
+  2.3 僵尸进程危害
+3 处理僵尸进程
+  3.1 kill 命令
+  3.2 kill 父进程
+  3.3 reboot
+  3.4 magic sysrq key 方法
 
-1 前言​    如果你对博客有任何疑问，请告诉我。
+1 前言&emsp;&emsp;在 centos7 跑 Docker 和 k8s 时，偶尔会出现 systemctl 失效的情况，现象如下：
 
-
-2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
-
-
-3 Fortio 介绍​    Fortio 是 Istio 的负载测试工具，它提供了 web 控制台和命令行控制台的操作
+Fa
         </a>
       </p>
 
@@ -254,7 +254,132 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 10:54" pubdate>
+            <time datetime="2021-09-12 20:53" pubdate>
+              2021-09-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Linux/">Linux</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/zombie/">zombie</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Vagrant/" target="_self">
+          九析带你轻松完爆 Vagrant
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Vagrant/" target="_self">
+          
+          
+            
+          
+          1 vagrant 介绍
+2 vagrant 下载安装
+3 virtualbox 下载安装
+4 vagrant 初始化
+5 vagrant 启动
+6 vagrant 登录虚拟机
+7 vagrant 退出虚拟机
+8 vagrant 查看状态
+9 vagrant 停止虚拟机
+10 vagrant 卸载虚拟机
+11 vagrant 文件
+12 vagrant centos 认证信息
+
+1 vagrant
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-12 20:48" pubdate>
+              2021-09-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Linux/">Linux</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/vagrant/">vagrant</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0/" target="_self">
+          九析带你轻松完爆 Istio - Envoy 架构概述
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0/" target="_self">
+          
+          
+            
+          
+          1 前言
+2 邀约
+3 概述
+
+1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
+
+
+2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
+3 Envoy 架构概述&emsp;&emsp;下图展示了 Envoy 架构：
+
+&emsp;&emsp;后面将根据这十个方面一一进行说明。
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-12 15:02" pubdate>
               2021-09-12
             </time>
           </div>
@@ -285,32 +410,33 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%BC%B9%E6%80%A7%E4%B9%8B%E9%87%8D%E8%AF%95%EF%BC%88retry%EF%BC%89/" target="_self">
-          九析带你轻松完爆 Istio - 网络弹性之重试（retry）
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%9B%91%E5%90%AC%E5%99%A8%E7%AE%80%E4%BB%8B/" target="_self">
+          九析带你轻松完爆 Istio - Envoy 监听器简介
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%BC%B9%E6%80%A7%E4%B9%8B%E9%87%8D%E8%AF%95%EF%BC%88retry%EF%BC%89/" target="_self">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%9B%91%E5%90%AC%E5%99%A8%E7%AE%80%E4%BB%8B/" target="_self">
           
           
             
           
           1 前言
 2 邀约
-3 网络弹性介绍
-4 重试介绍
-5 重试样例
-  5.1 jiuxi-client.yaml 文件
-  5.2 jiuxi-deploy.yaml
-  5.3 jiuxi-svc.yaml
-  5.4 jiuxi-vs.yaml
-6 重试实例部署
-  6.1 Istio 注入
-  6.2 部署 k8s service
-  6.3 部署 Istio 虚拟服务
-7 重试实例设置
-8
+3 上章总结
+4 监听器
+  4.1 TCP 监听器
+  4.2 UDP 监听器
+
+1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
+
+
+2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
+
+3 上章总结&emsp;&emsp;上节介绍了 Envoy 的基础配置信息，如下图所示：
+
+&emsp;&emsp;上面配置
         </a>
       </p>
 
@@ -318,7 +444,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 10:51" pubdate>
+            <time datetime="2021-09-12 14:57" pubdate>
               2021-09-12
             </time>
           </div>
@@ -349,32 +475,34 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%BC%B9%E6%80%A7%E4%B9%8B%E8%B6%85%E6%97%B6%EF%BC%88timeout%EF%BC%89/" target="_self">
-          九析带你轻松完爆 Istio - 网络弹性之超时（timeout）
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%B8%80%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B/" target="_self">
+          九析带你轻松完爆 Istio - Envoy 一分钟上手
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%BC%B9%E6%80%A7%E4%B9%8B%E8%B6%85%E6%97%B6%EF%BC%88timeout%EF%BC%89/" target="_self">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%B8%80%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B/" target="_self">
           
           
             
           
           1 前言
 2 邀约
-3 网络弹性介绍
-4 超时时间
-5 Istio 超时实例
-5.1    jiuxi-client.yaml 文件
-5.2 jiuxi-deploy.yaml
-5.3 jiuxi-svc.yaml
-5.4 jiuxi-vs.yaml
-6 超时实例部署
-6.1 Istio 注入
-6.2 部署 k8s service:
-6.3 部署 Istio 虚拟服务：
-7 超时实例设置
-8 超时
+3 简介
+4 Envoy 下载
+5 Envoy 运行
+6 Envoy 访问
+7 Envoy 窥视
+8 Envoy 修改
+  8.1 修改 envoy.yaml
+  8.2 创建新 Envoy 镜像
+  8.3 运行新 Envoy 镜像
+  8.4 访问新 Envoy 容器
+
+1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
+
+
+2 邀约&emsp;&emsp;
         </a>
       </p>
 
@@ -382,7 +510,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 10:46" pubdate>
+            <time datetime="2021-09-12 14:54" pubdate>
               2021-09-12
             </time>
           </div>
@@ -413,34 +541,29 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-fault-injection-%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5%E4%B9%8B%E4%B8%AD%E6%AD%A2/" target="_self">
-          九析带你轻松完爆 Istio - fault injection 故障注入之中止
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/" target="_self">
+          九析带你轻松完爆 Istio - Envoy 线程模型
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-fault-injection-%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5%E4%B9%8B%E4%B8%AD%E6%AD%A2/" target="_self">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/" target="_self">
           
           
             
           
           1 前言
 2 邀约
-3 故障注入之中止
-4 Istio 故障注入之中止实例
-  4.1 客户端资源文件
-  4.2 k8s 服务文件
-  4.3 部署工作负载（deployment）
-  4.4 虚拟服务文件
-5 验证故障注入
+3 Envoy 线程模型
+4 监听器连接负载均衡
 
-1 前言​    如果你对博客有任何疑问，请告诉我。
+1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
 
 
-2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
 
 
-3 故障注入之中止​   
+3 Envoy 线程模型&emsp;&emsp;Envoy 是单进程内包含多线程的架构设计。单进程内部包含两种线程-主线程（master thread）和工
         </a>
       </p>
 
@@ -448,7 +571,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 10:41" pubdate>
+            <time datetime="2021-09-12 14:50" pubdate>
               2021-09-12
             </time>
           </div>
@@ -479,35 +602,32 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-fault-injection-%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5/" target="_self">
-          九析带你轻松完爆 Istio - fault injection 故障注入
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%BB%8B%E7%BB%8D/" target="_self">
+          九析带你轻松完爆 Istio - Envoy 介绍
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-fault-injection-%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5/" target="_self">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%BB%8B%E7%BB%8D/" target="_self">
           
           
             
           
           1 前言
 2 邀约
-3 故障注入简介
-4 Istio 故障注入
-5 Istio 故障注入实例
-  5.1 客户端资源文件
-  5.2 k8s 服务文件
-  5.3 部署工作负载（deployment）
-  5.4 虚拟服务文件
-6 验证故障注入
+3 Envoy 介绍
+4 Envoy 特性
+  4.1 自包含
+  4.2 C++ 11 代码库
+  4.3 L3 / L4 过滤器体系架构
+  4.4 HTTP L7 过滤器体系架构
+  4.5 HTTP / 2 支持
+  4.6 MongoDB &amp; DynamoDB L7 支持
 
-1 前言​    如果你对博客有任何疑问，请告诉我。
-
-
-2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
 
 
-3 故障
+2 邀约&em
         </a>
       </p>
 
@@ -515,7 +635,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 10:36" pubdate>
+            <time datetime="2021-09-12 14:47" pubdate>
               2021-09-12
             </time>
           </div>
@@ -546,31 +666,31 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-configmap-istio-ca-root-cer/" target="_self">
-          九析带你轻松完爆 Istio - configmap istio-ca-root-cer
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86%E4%B8%89/" target="_self">
+          九析带你轻松完爆 Istio - 安全之加密三
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-configmap-istio-ca-root-cer/" target="_self">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86%E4%B8%89/" target="_self">
           
           
             
           
           1 前言
 2 邀约
-3 错误现象
-4 解决方案
+3 加密简介
+4 非对称加密介绍
+5 非对称加密原理
+6 SSL / TLS 与非对称加密
 
-1 前言​    如果你对博客有任何疑问，请告诉我。
+1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
 
 
-2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
 
 
-3 错误现象​    Istio 升级到 1.5.x，当新创建命名空间，在该命名空间中对工作负载进行 Istio 注入（自动或手动），出现 configmap 挂载错误：
-
-SetUp failed for
+3 加密简介&emsp;&emsp;加密是基础，是安全绕不开的话题。常用的加密方式有三种，分别为哈希、对称加密和非
         </a>
       </p>
 
@@ -578,7 +698,7 @@ SetUp failed for
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 10:33" pubdate>
+            <time datetime="2021-09-12 14:40" pubdate>
               2021-09-12
             </time>
           </div>
@@ -609,32 +729,30 @@ SetUp failed for
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E6%9C%8D%E5%8A%A1%E6%9D%A1%E7%9B%AE-ServiceEntry-%E5%AE%9E%E4%BE%8B/" target="_self">
-          九析带你轻松完爆 Istio - 服务条目 ServiceEntry 实例
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86%E4%BA%8C/" target="_self">
+          九析带你轻松完爆 Istio - 安全之加密二
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E6%9C%8D%E5%8A%A1%E6%9D%A1%E7%9B%AE-ServiceEntry-%E5%AE%9E%E4%BE%8B/" target="_self">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86%E4%BA%8C/" target="_self">
           
           
             
           
           1 前言
 2 邀约
-3 服务条目（Service Entries）介绍
-4 服务条目样例
-  4.1 服务条目资源
-  4.2 istio 注入客户端资源
-5 验证服务条目样例
-  5.1 登录 client
-  5.2 调整 service entiries 解析类型
-6 总结
+3 加密简介
+4 对称秘钥加密
+5 对称秘钥不足
 
-1 前言​    如果你对博客有任何疑问，请告诉我。
+1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
 
 
-2 邀约​    你可以从 b 站搜索 “九析”，获取免费
+2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
+
+3 加密简介&emsp;&emsp;加密是基础，是安全绕不开的话题。常用的加密方式有三种，分别为哈希、对称加密和非对称加密。上节我们重点介绍了 Hash，这
         </a>
       </p>
 
@@ -642,7 +760,7 @@ SetUp failed for
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 10:29" pubdate>
+            <time datetime="2021-09-12 14:38" pubdate>
               2021-09-12
             </time>
           </div>
@@ -673,28 +791,31 @@ SetUp failed for
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E5%85%B3-gateway-%E5%AE%9E%E4%BE%8B/" target="_self">
-          九析带你轻松完爆 Istio - 网关 gateway 实例
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86/" target="_self">
+          九析带你轻松完爆 Istio - 安全之加密
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E5%85%B3-gateway-%E5%AE%9E%E4%BE%8B/" target="_self">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86/" target="_self">
           
           
             
           
           1 前言
 2 邀约
-3 Istio 网关介绍
-4 Istio 网关实例资源
-  4.1 k8s 服务资源
-  4.2 k8s deployment 资源
-  4.3 Istio virtual service 资源
-  4.4 Istio gateway 资源
-5 istio-ingressgateway 配置
-  5.1 修改 istio-ingressgateway 服务类型
-  5.2 修改
+3 加密简介
+4  Hash
+
+1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
+
+
+2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
+
+3 加密简介&emsp;&emsp;加密是基础，是安全绕不开的话题。常用的加密方式有三种，分别为哈希、对称加密和非对称加密。下面分别进行介绍。
+
+4  Hash&emsp;&e
         </a>
       </p>
 
@@ -702,127 +823,8 @@ SetUp failed for
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-11 22:25" pubdate>
-              2021-09-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/istio/">istio</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/istio/">istio</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E6%B5%81%E5%90%91%E4%B9%8B-iptables-chain/" target="_self">
-          九析带你轻松完爆 Istio - 网络流向之 iptables chain
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E6%B5%81%E5%90%91%E4%B9%8B-iptables-chain/" target="_self">
-          
-          
-            
-          
-           前言
-2 邀约
-3 正文
-
-1 前言​    如果你对博客有任何疑问，请告诉我。
-
-2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
-
-3 正文​    一切都是那么明亮，光线照在身上，暖暖的。
-​    仰起头，依稀能听到风声。庭院里早春的鸟儿在围墙上啁啾，三五个下人在打扫着庭院，丫鬟婆子们在天井嗑着瓜子闲聊天，嬉笑声惊动了房脊上的信鸽，扑棱棱扇动双翅滑向远处湛
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-11 22:22" pubdate>
-              2021-09-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/istio/">istio</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/istio/">istio</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%8C%85%E4%B9%8B-iptables-netfilter-%E5%85%B3%E7%B3%BB/" target="_self">
-          九析带你轻松完爆 Istio - 网络包之 iptables netfilter 关系
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%8C%85%E4%B9%8B-iptables-netfilter-%E5%85%B3%E7%B3%BB/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 邀约
-3 正文
-
-1 前言​    如果你对博客有任何疑问，请告诉我。
-
-2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
-
-3 正文​    淅淅沥沥的雨不像下在外面，而是下在心里。
-​    清秀的男人推开重重的府门，外面的光线一点点透进去，就像蹑手蹑脚的小偷，悄无声息。空间中有潮湿木头腐朽的味道，男人微皱一下浓眉。
-​    房间本是宽敞，却被大
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-11 22:21" pubdate>
-              2021-09-11
+            <time datetime="2021-09-12 14:28" pubdate>
+              2021-09-12
             </time>
           </div>
         
@@ -850,7 +852,7 @@ SetUp failed for
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

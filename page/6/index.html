@@ -222,19 +222,30 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/08/24/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E3%80%8AGO-SDK-%E8%AE%BE%E7%BD%AE%E3%80%8B/" target="_self">
-          client-go 系列之一《go sdk 配置》
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-upgrade-%E5%8D%87%E7%BA%A7/" target="_self">
+          九析带你轻松完爆 service mesh - istio upgrade 升级
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/08/24/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E3%80%8AGO-SDK-%E8%AE%BE%E7%BD%AE%E3%80%8B/" target="_self">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-upgrade-%E5%8D%87%E7%BA%A7/" target="_self">
           
           
             
           
-          1 前言&emsp;&emsp;client-go 是官方提供的 go 语言客户端库，可以跟 K8S API Server 进行交互。如果开发者想对 K8S 进行二次开发，可直接拿来使用，不必重复造轮子。
-&emsp;&emsp;client-go 已集成进 K8S 源码，所以 K8S 组件之间也采用 client-go 进行通信（例如 kubectl 操作 API Server）。client-
+          1 前言
+2 升级前的准备
+3 升级步骤
+  3.1 下载新版本的 istio
+  3.2 解压缩 istio
+  3.3 设置 istioctl 环境变量
+  3.4 设置 istio 自动补全功能
+  3.5 验证新版本 istio 是否兼容老版本
+  3.6 创建升级配置文件
+  3.7 升级 istio
+​    3.7.1 资源等待错误
+​    3.7.2 资源冲突错误
+​    3.
         </a>
       </p>
 
@@ -242,8 +253,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-24 19:02" pubdate>
-              2021-08-24
+            <time datetime="2021-09-11 17:42" pubdate>
+              2021-09-11
             </time>
           </div>
         
@@ -251,7 +262,7 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/client-go/">client-go</a>
+              <a href="/categories/istio/">istio</a>
             
           </div>
         
@@ -259,7 +270,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/client-go/">client-go</a>
+              <a href="/tags/istio/">istio</a>
             
           </div>
         
@@ -273,19 +284,31 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/08/14/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%B3%BB%E5%88%97%E4%B9%8B%E4%BA%8C%E3%80%8A%E4%BA%8B%E5%8A%A1%E3%80%8B/" target="_self">
-          分布式事务系列之二《事务》
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E6%B3%A8%E5%85%A5%E5%90%8E%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E6%B5%81%E5%90%91/" target="_self">
+          九析带你轻松完爆 service mesh - istio 注入后网络流量流向
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/08/14/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%B3%BB%E5%88%97%E4%B9%8B%E4%BA%8C%E3%80%8A%E4%BA%8B%E5%8A%A1%E3%80%8B/" target="_self">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E6%B3%A8%E5%85%A5%E5%90%8E%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E6%B5%81%E5%90%91/" target="_self">
           
           
             
           
-          前言&emsp;&emsp;上节介绍了单体架构，单体架构是整个漫长软件架构演进过程中使用人数最多、应用范围最广、也相对最稳定的一种架构。但随着业务多变、逻辑复杂性增加、交付时间越来越短，单体架构逐渐显出疲态，慢慢被分布式微服务架构所代替。
-&emsp;&emsp;早期单体架构解决的核心问题是信息化，信息化处理的对象是数据，数据的质量直接影响到信息化的好坏。数据质量的判断有很多维度，其中最重要维度之
+          目录
+1 前言
+2 查看 iptables 规则
+  2.1 确定 pod 所在主机
+  2.2 定位 istio-proxy 容器
+  2.3 登录 istio-proxy 容器
+  2.4 查看 iptables 规则
+3 网络宏观流量流向介绍
+4 网络微观流量流向介绍
+5 istio 入口流量分析
+6 istio 出口流量分析
+7 小节
+
+1 前言​    如果你对博客有任何疑问，请告诉我。
         </a>
       </p>
 
@@ -293,8 +316,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-14 21:13" pubdate>
-              2021-08-14
+            <time datetime="2021-09-11 17:34" pubdate>
+              2021-09-11
             </time>
           </div>
         
@@ -302,7 +325,7 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a>
+              <a href="/categories/istio/">istio</a>
             
           </div>
         
@@ -310,7 +333,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a>
+              <a href="/tags/istio/">istio</a>
             
           </div>
         
@@ -324,19 +347,29 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/08/14/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E3%80%8A%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E3%80%8B/" target="_self">
-          分布式事务系列之一《单体架构》
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E6%B3%A8%E5%85%A5/" target="_self">
+          九析带你轻松完爆 service mesh - istio 注入
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/08/14/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E3%80%8A%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84%E3%80%8B/" target="_self">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E6%B3%A8%E5%85%A5/" target="_self">
           
           
             
           
-          前言&emsp;&emsp;分布式事务目标是解决数据一致性问题。在整个波澜壮阔的计算机科技发展史上，分布式事务并非一开始就存在，它只是历史发展的产物，随着软、硬件架构的不断更迭和演进才逐步发展起来的。
-&emsp;&emsp;我还记得那是一个夏天，窗外鸟语花香，空气中满是新鲜和幸福的味道。那时路上还没有那么多车，苏堤远没有现在人流如织。在那个还流淌着小资的年代，软件从业者是小众的文艺小清新，也就在
+          1 前言
+2 istio 注入与平台生态影响
+  2.1 环境准备
+  2.2 istio 注入操作
+  2.3 istio 注入本质
+  2.4 istio 注入 pod 后各容器作用以及关系
+  2.5 istio-proxy 和 envoy 关系
+  2.6 istio-proxy 和 kube-proxy 关系
+  2.7 envoy 进程服务端口
+3 小节
+
+1 前言​    如果你对博
         </a>
       </p>
 
@@ -344,8 +377,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-14 18:08" pubdate>
-              2021-08-14
+            <time datetime="2021-09-11 17:23" pubdate>
+              2021-09-11
             </time>
           </div>
         
@@ -353,7 +386,7 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a>
+              <a href="/categories/istio/">istio</a>
             
           </div>
         
@@ -361,7 +394,433 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a>
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E4%BB%8A%E7%94%9F%E7%AF%87/" target="_self">
+          九析带你轻松完爆 service mesh - istio 今生篇
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E4%BB%8A%E7%94%9F%E7%AF%87/" target="_self">
+          
+          
+            
+          
+          1 前言
+2 何为服务网格（service mesh）
+3 何为 istio
+4 为什么使用 istio
+5 istio 核心特征
+  5.1 traffic management
+  5.2 secure
+  5.3 policies
+  5.4 observability
+6 多平台支持
+
+1 前言​    如果你对博客有任何疑问，请告诉我。
+
+​    上章介绍了 istio 前世，讲述了微
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 17:12" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/istio/">istio</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E5%89%8D%E4%B8%96/" target="_self">
+          九析带你轻松完爆 service mesh - istio 前世
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E5%89%8D%E4%B8%96/" target="_self">
+          
+          
+            
+          
+          1 前言
+2 架构演变史
+  2.1 单体架构
+  2.2 垂直架构
+  2.3 微服务架构
+3 微服务架构模型演进史
+  3.1 框架与通信
+  3.2 运行时的支撑服务
+  3.3 服务安全
+  3.4 服务监控和告警
+  3.5 服务部署
+  3.6 底层服务
+  3.7 服务防护
+  3.8 全链路压测
+4 微服务架构模型全景图
+5 带来的问题
+  5.1 服务治理方式不统一
+  5.2 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 17:07" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/istio/">istio</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-Gateway-%E8%AE%BE%E7%BD%AE%E8%B7%AF%E7%94%B1/" target="_self">
+          九析带你轻松完爆 service mesh - istio Gateway 设置路由
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-Gateway-%E8%AE%BE%E7%BD%AE%E8%B7%AF%E7%94%B1/" target="_self">
+          
+          
+            
+          
+          1 流量管理
+2 创建命名空间
+3 资源文件准备
+  3.1 创建网关文件
+  3.2 创建虚拟服务文件
+  3.3 创建 k8s service 文件
+  3.4 创建 k8s deployment 文件：
+  3.5 修改 istio-ingressgateway deployment
+4 尝试网关路由功能
+  4.1 确定 INGRESS_HOST
+  4.2 编辑浏览器所在主机 hosts
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 16:58" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/istio/">istio</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-Bookinfo-%E5%BA%94%E7%94%A8/" target="_self">
+          九析带你轻松完爆服务网格 - istio Bookinfo 应用
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-Bookinfo-%E5%BA%94%E7%94%A8/" target="_self">
+          
+          
+            
+          
+          1 前言
+2 bookinfo 架构介绍
+3 bookinfo 配置与部署
+  3.1 配置 istio 自动注入
+  3.2 部署 bookinfo 应用
+  3.3 验证 bookinfo 部署情况
+4 设置 bookinfo 网关
+  4.1 定义 bookinfo 入口网关
+  4.2 确认网关已创建
+5 访问 bookinfo 应用
+  5.1 获取 INGRESS_HOST
+  5.2
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 16:48" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/istio/">istio</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-%E5%88%9D%E6%8E%A2/" target="_self">
+          九析带你轻松完爆服务网格 - istio 初探
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-%E5%88%9D%E6%8E%A2/" target="_self">
+          
+          
+            
+          
+          1 前言
+2 istio 初探
+  2.1 手动注入 sidecar
+  2.2 自动注入 sidecar
+
+1 前言​    如果你对博客有任何疑问，请加微信沟通：
+
+​    你可以从下面截图中获取免费的、更生动的视频资料，在 b 站搜索“九析”：
+
+
+2 istio 初探​    上节九析带你轻松完爆了 istio 的安装。但是我相信安装成功的小伙伴依然云里雾里，因为看着一大坨 pod 在那
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 16:40" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/istio/">istio</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-%E5%AE%89%E8%A3%85/" target="_self">
+          九析带你轻松完爆服务网格 - istio 安装
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-%E5%AE%89%E8%A3%85/" target="_self">
+          
+          
+            
+          
+          1 前言
+2 微服务的历史
+3 istio
+4 istio 使用
+  4.1 下载 istio
+  4.2 安装 istio
+  4.3 配置 istioctl 工具路径
+  4.4 实现 istioctl 自动补全功能
+  4.5 安装学习版 istio
+  4.6 卸载 istio
+5 总结
+
+1 前言​    如果你对博客有任何疑问，请加微信沟通：
+​    你可以从下面截图中获取免费的、更
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 16:36" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/istio/">istio</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/linux%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E3%80%8A%E5%86%85%E6%A0%B8%E5%8D%87%E7%BA%A7%E3%80%8B/" target="_self">
+          linux 系列之一《升级内核》
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/linux%E7%B3%BB%E5%88%97%E4%B9%8B%E4%B8%80%E3%80%8A%E5%86%85%E6%A0%B8%E5%8D%87%E7%BA%A7%E3%80%8B/" target="_self">
+          
+          
+            
+          
+          1 操作系统的内核与发行版&emsp;&emsp;首先简单解释一下操作系统的内核和发行版。
+&emsp;&emsp;内核是管理 CPU、内存、磁盘、进程、中断、文件系统和网络协议栈的程序。
+&emsp;&emsp;用户对内核感知度不高，因为用户只需要应用程序。比如某人迷恋日本电影，ta 并不在乎内核，ta 需要的只是一个播放器，这怎么办呢？于是就有好事者在内核之外预安装了一个播放器给 ta 使用，
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 15:42" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Linux/">Linux</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/kernel/">kernel</a>
             
           </div>
         
@@ -373,7 +832,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/5/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="page-number current">6</span>
+      <a class="extend prev" rel="prev" href="/page/5/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/7/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

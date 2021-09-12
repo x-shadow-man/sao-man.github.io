@@ -222,36 +222,528 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-Istio-%E6%9E%B6%E6%9E%84/" target="_self">
-          九析带你轻松完爆 service mesh - Istio 架构
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E6%B5%81%E5%90%91%E4%B9%8B-iptables-chain/" target="_self">
+          九析带你轻松完爆 Istio - 网络流向之 iptables chain
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-Istio-%E6%9E%B6%E6%9E%84/" target="_self">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E6%B5%81%E5%90%91%E4%B9%8B-iptables-chain/" target="_self">
+          
+          
+            
+          
+           前言
+2 邀约
+3 正文
+
+1 前言​    如果你对博客有任何疑问，请告诉我。
+
+2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
+3 正文​    一切都是那么明亮，光线照在身上，暖暖的。
+​    仰起头，依稀能听到风声。庭院里早春的鸟儿在围墙上啁啾，三五个下人在打扫着庭院，丫鬟婆子们在天井嗑着瓜子闲聊天，嬉笑声惊动了房脊上的信鸽，扑棱棱扇动双翅滑向远处湛
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 22:22" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/istio/">istio</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%8C%85%E4%B9%8B-iptables-netfilter-%E5%85%B3%E7%B3%BB/" target="_self">
+          九析带你轻松完爆 Istio - 网络包之 iptables netfilter 关系
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%8C%85%E4%B9%8B-iptables-netfilter-%E5%85%B3%E7%B3%BB/" target="_self">
           
           
             
           
           1 前言
 2 邀约
-3 架构概述
-4 流量概述
-5 组件介绍
-  5.1 Envoy
-  5.2 Pilot
-  5.3 Citadel
-  5.4 Galley
+3 正文
 
 1 前言​    如果你对博客有任何疑问，请告诉我。
 
+2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
+3 正文​    淅淅沥沥的雨不像下在外面，而是下在心里。
+​    清秀的男人推开重重的府门，外面的光线一点点透进去，就像蹑手蹑脚的小偷，悄无声息。空间中有潮湿木头腐朽的味道，男人微皱一下浓眉。
+​    房间本是宽敞，却被大
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 22:21" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/istio/">istio</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-Ingress/" target="_self">
+          九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-Ingress/" target="_self">
+          
+          
+            
+          
+          1 前言
+2 邀约
+3 Ingress 介绍
+4 ingress 实例
+  4.1 ingress 资源文件
+  4.2 service 资源文件
+  4.3 pod 资源文件
+5 访问 ingress
+  5.1 获取 ingress HOST
+  5.2 域名解析绑定
+  5.3 访问 ingress
+6 结论
+
+1 前言​    如果你对博客有任何疑问，请告诉我。
+
+2 邀约​    你可以
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 22:19" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/istio/">istio</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-NodePort/" target="_self">
+          九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-NodePort/" target="_self">
+          
+          
+            
+          
+          1 前言
+2 邀约
+3 NodePort 样例
+4 访问流程
+5 实例演示
+6 缺点
+
+1 前言​    如果你对博客有任何疑问，请告诉我。
+
+2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
+3 NodePort 样例​    跟 hostNetwork 和 hostPort 不同，NodePort 属于 service 类型之一。hostPort 和 host
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 22:16" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/istio/">istio</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-hostPort/" target="_self">
+          九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-hostPort/" target="_self">
+          
+          
+            
+          
+          1 前言
+2 邀约
+3 hostPort 样例
+4 hostPort 与 hostNetwork 异同
+  4.1 相同点
+  4.2 不同点
+5 hostPort 使用场景
+6 注意
+
+1 前言​    如果你对博客有任何疑问，请告诉我。
+
+2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
+3 hostPort 样例​    样例代码如下所示：
+​    pod
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 22:14" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/istio/">istio</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-hostNetwork/" target="_self">
+          九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-hostNetwork/" target="_self">
+          
+          
+            
+          
+          1 前言
+2 邀约
+3 k8s 流量进入集群方式
+4 hostNetwork 样例
+5 hostNetwork 影响
+  5.1 Pod IP 和 Port
+  5.2 node 个数跟 pod 副本数
+6 hostNetwork 使用场景
+
+1 前言​    如果你对博客有任何疑问，请告诉我。
+
+2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
+3 k8s 流量
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 22:12" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/istio/">istio</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-destination-rule-%E4%BB%8B%E7%BB%8D/" target="_self">
+          九析带你轻松完爆 Istio - destination rule 介绍
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-destination-rule-%E4%BB%8B%E7%BB%8D/" target="_self">
+          
+          
+            
+          
+          1 前言
+2 邀约
+3 介绍
+4 路由策略
+5 样例说明
+
+1 前言​    如果你对博客有任何疑问，请告诉我。
+
+2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
+
+3 介绍​    上章展示了 destination rule 一个实例。
+​    destination rules 是 Istio 流量路由的关键功能，它不能独自使用，必须跟 Virtual S
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 22:09" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/istio/">istio</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-destination-rule-%E5%AE%9E%E4%BE%8B/" target="_self">
+          九析带你轻松完爆 Istio - destination rule 实例
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-destination-rule-%E5%AE%9E%E4%BE%8B/" target="_self">
+          
+          
+            
+          
+          1 前言
+2 邀约
+3 介绍
+4 灰度
+5 destination rule 样例
+  5.1 客户端资源文件
+  5.2 deployment 资源文件
+  5.3 service 资源文件
+  5.4 Istio virtual service 资源文件
+  5.5 Istio destination rule 资源文件
+6 Istio 注入
+7 验证 destination rule
+
+1 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-11 22:07" pubdate>
+              2021-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/istio/">istio</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/istio/">istio</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-Istio-%E8%B7%AF%E7%94%B1%E8%A7%84%E5%88%99/" target="_self">
+          九析带你轻松完爆 service mesh - Istio 路由规则
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-Istio-%E8%B7%AF%E7%94%B1%E8%A7%84%E5%88%99/" target="_self">
+          
+          
+            
+          
+          1 前言
+2 邀约
+3 Routing Rule 语法
+4 Routing Rule 优先级
+5 Routing Rule 匹配规则/条件
+  5.1 基于 HttpMatchRequest
+  5.2 基于权重
+6 流量操作（HTTPRoute）
+
+1 前言​    如果你对博客有任何疑问，请告诉我。
 
 2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
 
 
-3 架构概述​    istio 服务网格逻辑上分为数据和控制两大平面。
-
-数据平面：由一
+3 R
         </a>
       </p>
 
@@ -259,7 +751,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-11 21:54" pubdate>
+            <time datetime="2021-09-11 22:04" pubdate>
               2021-09-11
             </time>
           </div>
@@ -290,33 +782,30 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-jaeger-%E5%85%B3%E8%81%94/" target="_self">
-          九析带你轻松完爆 service mesh - istio kiali jaeger 关联
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-virtual-service-%E7%AE%80%E8%BF%B0/" target="_self">
+          九析带你轻松完爆 Istio - virtual service 简述
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-jaeger-%E5%85%B3%E8%81%94/" target="_self">
+        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-virtual-service-%E7%AE%80%E8%BF%B0/" target="_self">
           
           
             
           
           1 前言
 2 邀约
-3 jaeger 介绍
-4 jaeger 安装
-5 jaeger 配置
-6 kiali 关联 jaeger
-7 设置 kiali jaeger 外部链接地址
-8 kiali jaeger 流量关联
+3 virtual service 简述
+4 virtual service 样例
+  4.1 jiuxi-busybox.yaml
+  4.2 jiuxi-deployment.yaml
+  4.3 jiuxi-svc.yaml
+  4.4 jiuxi-vs.yaml
+5 Istio 注入
+6 登录客户端验证规则生效
+7 总结
 
-1 前言​    如果你对博客有任何疑问，请告诉我。
-
-
-2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
-
-
-3 jaeger 介绍​    ja
+1 前言​    如果你对博客有任何疑问，请告
         </a>
       </p>
 
@@ -324,516 +813,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-11 21:52" pubdate>
-              2021-09-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/istio/">istio</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/istio/">istio</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BA%B2%E5%92%8C%E6%80%A7%E8%B0%83%E5%BA%A6/" target="_self">
-          九析带你轻松完爆 service mesh - istio kiali 亲和性调度
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BA%B2%E5%92%8C%E6%80%A7%E8%B0%83%E5%BA%A6/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 邀约
-3 节点调度
-  3.1 节点打标
-  3.2 编写 pod
-4 kiali 亲和性调度
-  4.1 举个例子
-  4.2 节点亲和性调度（NodeAffinity）
-  4.3 kiali 节点亲和性调度
-
-1 前言​    如果你对博客有任何疑问，请告诉我。
-
-
-2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
-
-
-3 节点调度​    在开
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-11 21:49" pubdate>
-              2021-09-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/istio/">istio</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/istio/">istio</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E5%86%85%E9%83%A8%E4%BB%8B%E7%BB%8D/" target="_self">
-          九析带你轻松完爆 service mesh - istio kiali 内部介绍
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E5%86%85%E9%83%A8%E4%BB%8B%E7%BB%8D/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 邀约
-3 预备知识
-4 kiali 组件分析
-5 config.yaml 文件
-
-1 前言​    如果你对博客有任何疑问，请告诉我。
-
-
-2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
-
-
-3 预备知识​    有关 kiali 介绍、安装和使用请参考本人上三篇博客《 九析带你轻松完爆 istio 服务网格系列教程》。这里介绍 istio 1.5.
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-11 21:46" pubdate>
-              2021-09-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/istio/">istio</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/istio/">istio</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-bookinfo/" target="_self">
-          九析带你轻松完爆 service mesh - istio kiali bookinfo
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-bookinfo/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 邀约
-3 安装 istio
-4 安装 bookinfo 应用
-5 设置 kiali
-6 kiali 可视化 bookinfo
-7 注入和观察流量
-
-1 前言​    如果你对博客有任何疑问，请告诉我。
-
-
-2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
-
-
-3 安装 istio​    istio 安装教程请参考本人的博客《 istio 安装》。
-
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-11 21:42" pubdate>
-              2021-09-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/istio/">istio</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/istio/">istio</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BD%BF%E7%94%A8%E7%AF%87/" target="_self">
-          九析带你轻松完爆 service mesh - istio kiali 使用篇
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BD%BF%E7%94%A8%E7%AF%87/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 邀约
-3 kiali 控制台
-  3.1 Overview（概观）
-  3.2 Application（应用维度）
-  3.3 workloads（负载维度）
-  3.4 Services（服务维度）
-  3.5 Istio Config（配置维度）
-  3.6 Distributed Tracing（分布式追踪维度）
-4 kiali 架构
-
-1 前言​    如果你对博客有任何疑问
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-11 21:39" pubdate>
-              2021-09-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/istio/">istio</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/istio/">istio</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E5%AE%89%E8%A3%85/" target="_self">
-          九析带你轻松完爆 service mesh - istio kiali 安装
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E5%AE%89%E8%A3%85/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 邀约
-3 kiali 简介
-4 kiali 安装
-5 kiali 访问
-
-1 前言​    如果你对博客有任何疑问，请告诉我。
-
-
-2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
-
-
-3 kiali 简介​    kiali 是一款 istio 服务网格可视化工具，提供了服务拓补图、全链路跟踪、指标遥测、配置校验、健康检查等功能。
-
-4 kiali 
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-11 21:34" pubdate>
-              2021-09-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/istio/">istio</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/istio/">istio</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-profile-%E8%AF%A6%E8%BF%B0/" target="_self">
-          九析带你轻松完爆 service mesh - istio profile 详述
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-profile-%E8%AF%A6%E8%BF%B0/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 istio 之 profile
-3 istioctl profile
-  3.1 demo
-  3.2 minimal
-  3.3 default
-  3.4 empty
-  3.5 remote
-  3.6 separate
-4 总结
-
-1 前言​    如果你对博客有任何疑问，请告诉我。
-
-​    你可以从下面截图中获取免费的、更生动的视频资料：
-
-2 istio 之 prof
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-11 17:46" pubdate>
-              2021-09-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/istio/">istio</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/istio/">istio</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-upgrade-%E5%8D%87%E7%BA%A7/" target="_self">
-          九析带你轻松完爆 service mesh - istio upgrade 升级
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-upgrade-%E5%8D%87%E7%BA%A7/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 升级前的准备
-3 升级步骤
-  3.1 下载新版本的 istio
-  3.2 解压缩 istio
-  3.3 设置 istioctl 环境变量
-  3.4 设置 istio 自动补全功能
-  3.5 验证新版本 istio 是否兼容老版本
-  3.6 创建升级配置文件
-  3.7 升级 istio
-​    3.7.1 资源等待错误
-​    3.7.2 资源冲突错误
-​    3.
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-11 17:42" pubdate>
-              2021-09-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/istio/">istio</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/istio/">istio</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E6%B3%A8%E5%85%A5%E5%90%8E%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E6%B5%81%E5%90%91/" target="_self">
-          九析带你轻松完爆 service mesh - istio 注入后网络流量流向
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E6%B3%A8%E5%85%A5%E5%90%8E%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E6%B5%81%E5%90%91/" target="_self">
-          
-          
-            
-          
-          目录
-1 前言
-2 查看 iptables 规则
-  2.1 确定 pod 所在主机
-  2.2 定位 istio-proxy 容器
-  2.3 登录 istio-proxy 容器
-  2.4 查看 iptables 规则
-3 网络宏观流量流向介绍
-4 网络微观流量流向介绍
-5 istio 入口流量分析
-6 istio 出口流量分析
-7 小节
-
-1 前言​    如果你对博客有任何疑问，请告诉我。
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-11 17:34" pubdate>
+            <time datetime="2021-09-11 22:01" pubdate>
               2021-09-11
             </time>
           </div>
@@ -862,7 +842,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/5/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/5/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

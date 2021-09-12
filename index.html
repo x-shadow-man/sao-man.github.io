@@ -222,30 +222,91 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0/" target="_self">
-          九析带你轻松完爆 Istio - Envoy 架构概述
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vim-%E6%A0%BC%E5%BC%8F%E5%8C%96-json/" target="_self">
+          九析带你轻松完爆 Linux - vim 格式化 json
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0/" target="_self">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vim-%E6%A0%BC%E5%BC%8F%E5%8C%96-json/" target="_self">
+          
+          
+            
+          
+          1 创建或编辑 .vimrc 文件
+2 vim 控制命令 :%!python json.tool
+
+1 创建或编辑 .vimrc 文件&emsp;&emsp;在用户家目录下创建 .vimrc 文件，如果已经有该文件，则直接在末尾添加如下关于格式化 json 的配置：
+
+map :%!python -m json.tool
+
+&emsp;&emsp;截图如下：
+
+
+2 vim 控制命令 :%!pyt
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-12 21:33" pubdate>
+              2021-09-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Linux/">Linux</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux/">Linux</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace-%E7%BB%AD%E4%BA%8C/" target="_self">
+          九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续二
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace-%E7%BB%AD%E4%BA%8C/" target="_self">
           
           
             
           
           1 前言
 2 邀约
-3 概述
+3 多 netns 桥接通信
+4 创建网桥
+5 分别创建 netns 跟网桥的连接
+  5.1 创建西门庆与王婆的***：
+  5.2 创建潘金莲与王婆的***：
+  5.3 查看网桥状态
+  5.4 鹊桥约会
 
 1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
 
 
 2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
-
-3 Envoy 架构概述&emsp;&emsp;下图展示了 Envoy 架构：
-
-&emsp;&emsp;后面将根据这十个方面一一进行说明。
-
         </a>
       </p>
 
@@ -253,7 +314,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 15:02" pubdate>
+            <time datetime="2021-09-12 21:31" pubdate>
               2021-09-12
             </time>
           </div>
@@ -262,7 +323,7 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/istio/">istio</a>
+              <a href="/categories/Linux/">Linux</a>
             
           </div>
         
@@ -270,7 +331,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/istio/">istio</a>
+              <a href="/tags/Linux/">Linux</a>
             
           </div>
         
@@ -284,152 +345,22 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%9B%91%E5%90%AC%E5%99%A8%E7%AE%80%E4%BB%8B/" target="_self">
-          九析带你轻松完爆 Istio - Envoy 监听器简介
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace-%E7%BB%AD/" target="_self">
+          九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%9B%91%E5%90%AC%E5%99%A8%E7%AE%80%E4%BB%8B/" target="_self">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace-%E7%BB%AD/" target="_self">
           
           
             
           
           1 前言
 2 邀约
-3 上章总结
-4 监听器
-  4.1 TCP 监听器
-  4.2 UDP 监听器
-
-1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
-
-
-2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
-
-
-3 上章总结&emsp;&emsp;上节介绍了 Envoy 的基础配置信息，如下图所示：
-
-&emsp;&emsp;上面配置
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 14:57" pubdate>
-              2021-09-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/istio/">istio</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/istio/">istio</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%B8%80%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B/" target="_self">
-          九析带你轻松完爆 Istio - Envoy 一分钟上手
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%B8%80%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 邀约
-3 简介
-4 Envoy 下载
-5 Envoy 运行
-6 Envoy 访问
-7 Envoy 窥视
-8 Envoy 修改
-  8.1 修改 envoy.yaml
-  8.2 创建新 Envoy 镜像
-  8.3 运行新 Envoy 镜像
-  8.4 访问新 Envoy 容器
-
-1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
-
-
-2 邀约&emsp;&emsp;
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 14:54" pubdate>
-              2021-09-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/istio/">istio</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/istio/">istio</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/" target="_self">
-          九析带你轻松完爆 Istio - Envoy 线程模型
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 邀约
-3 Envoy 线程模型
-4 监听器连接负载均衡
+3 多网络空间之间通信
+4 两个 netns 之间的通信
+5 两个 netns 之间通信实践
 
 1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
 
@@ -437,7 +368,7 @@
 2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
 
 
-3 Envoy 线程模型&emsp;&emsp;Envoy 是单进程内包含多线程的架构设计。单进程内部包含两种线程-主线程（master thread）和工
+3 多网络空间之间通信&emsp;&emsp;多 netns 实现了网络的隔离，每个 netns 就相当于一台独
         </a>
       </p>
 
@@ -445,7 +376,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 14:50" pubdate>
+            <time datetime="2021-09-12 21:28" pubdate>
               2021-09-12
             </time>
           </div>
@@ -454,7 +385,7 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/istio/">istio</a>
+              <a href="/categories/Linux/">Linux</a>
             
           </div>
         
@@ -462,7 +393,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/istio/">istio</a>
+              <a href="/tags/Linux/">Linux</a>
             
           </div>
         
@@ -476,32 +407,29 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%BB%8B%E7%BB%8D/" target="_self">
-          九析带你轻松完爆 Istio - Envoy 介绍
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace/" target="_self">
+          九析带你轻松完爆 Linux - 网络虚拟化之 network namespace
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%BB%8B%E7%BB%8D/" target="_self">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace/" target="_self">
           
           
             
           
           1 前言
 2 邀约
-3 Envoy 介绍
-4 Envoy 特性
-  4.1 自包含
-  4.2 C++ 11 代码库
-  4.3 L3 / L4 过滤器体系架构
-  4.4 HTTP L7 过滤器体系架构
-  4.5 HTTP / 2 支持
-  4.6 MongoDB &amp; DynamoDB L7 支持
+3 Linux network namespace 简介
+4 查看 network namespace
+5 创建 network namespace
+6 进入创建的 network namespace
+7 操作网络命名空间网络资源
 
 1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
 
 
-2 邀约&em
+2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的
         </a>
       </p>
 
@@ -509,7 +437,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 14:47" pubdate>
+            <time datetime="2021-09-12 21:25" pubdate>
               2021-09-12
             </time>
           </div>
@@ -518,7 +446,7 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/istio/">istio</a>
+              <a href="/categories/Linux/">Linux</a>
             
           </div>
         
@@ -526,7 +454,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/istio/">istio</a>
+              <a href="/tags/Linux/">Linux</a>
             
           </div>
         
@@ -540,85 +468,23 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86%E4%B8%89/" target="_self">
-          九析带你轻松完爆 Istio - 安全之加密三
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-HOST-ONLY/" target="_self">
+          九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86%E4%B8%89/" target="_self">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-HOST-ONLY/" target="_self">
           
           
             
           
           1 前言
 2 邀约
-3 加密简介
-4 非对称加密介绍
-5 非对称加密原理
-6 SSL / TLS 与非对称加密
-
-1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
-
-
-2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
-
-
-3 加密简介&emsp;&emsp;加密是基础，是安全绕不开的话题。常用的加密方式有三种，分别为哈希、对称加密和非
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 14:40" pubdate>
-              2021-09-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/istio/">istio</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/istio/">istio</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86%E4%BA%8C/" target="_self">
-          九析带你轻松完爆 Istio - 安全之加密二
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86%E4%BA%8C/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 邀约
-3 加密简介
-4 对称秘钥加密
-5 对称秘钥不足
+3 HOST-ONLY 模式介绍
+4 HOST-ONLY 模式网络拓补图
+5 宿主机和虚拟机通信
+6 虚拟机访问外网
 
 1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
 
@@ -626,7 +492,7 @@
 2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
 
 
-3 加密简介&emsp;&emsp;加密是基础，是安全绕不开的话题。常用的加密方式有三种，分别为哈希、对称加密和非对称加密。上节我们重点介绍了 Hash，这
+3 HOST-ONLY 模式介绍&emsp;&emsp;前面两章中细致分析并轻松完爆了 
         </a>
       </p>
 
@@ -634,7 +500,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 14:38" pubdate>
+            <time datetime="2021-09-12 21:21" pubdate>
               2021-09-12
             </time>
           </div>
@@ -643,7 +509,7 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/istio/">istio</a>
+              <a href="/categories/Linux/">Linux</a>
             
           </div>
         
@@ -651,7 +517,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/istio/">istio</a>
+              <a href="/tags/vmware/">vmware</a>
             
           </div>
         
@@ -665,21 +531,23 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86/" target="_self">
-          九析带你轻松完爆 Istio - 安全之加密
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-NAT/" target="_self">
+          九析带你轻松完爆 Linux - vmware 网络连接之 NAT
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86/" target="_self">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-NAT/" target="_self">
           
           
             
           
           1 前言
 2 邀约
-3 加密简介
-4  Hash
+3 NAT 介绍
+4 NAT 网络拓步说明
+5 NAT 设置
+6 Vmware Network Adapter VMnet8
 
 1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
 
@@ -687,9 +555,7 @@
 2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
 
 
-3 加密简介&emsp;&emsp;加密是基础，是安全绕不开的话题。常用的加密方式有三种，分别为哈希、对称加密和非对称加密。下面分别进行介绍。
-
-4  Hash&emsp;&e
+3 NAT 介绍&emsp;&emsp;上章节中介绍了 vmware 的三种网络
         </a>
       </p>
 
@@ -697,7 +563,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 14:28" pubdate>
+            <time datetime="2021-09-12 21:17" pubdate>
               2021-09-12
             </time>
           </div>
@@ -706,7 +572,7 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/istio/">istio</a>
+              <a href="/categories/Linux/">Linux</a>
             
           </div>
         
@@ -714,7 +580,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/istio/">istio</a>
+              <a href="/tags/vmware/">vmware</a>
             
           </div>
         
@@ -728,31 +594,30 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-SSL-%E4%B8%8E-TLS-%E7%AE%80%E4%BB%8B/" target="_self">
-          九析带你轻松完爆 Istio - SSL 与 TLS 简介
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B%E6%A1%A5%E6%8E%A5/" target="_self">
+          九析带你轻松完爆 Linux - vmware 网络连接之桥接
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-SSL-%E4%B8%8E-TLS-%E7%AE%80%E4%BB%8B/" target="_self">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B%E6%A1%A5%E6%8E%A5/" target="_self">
           
           
             
           
           1 前言
 2 邀约
-3 SSL / TLS 介绍
-4 SSL / TLS 作用
-5 SSL / TLS 历史
-6 SSL / TLS 样例
+3 网络连接方式介绍
+4 查看网络连接三种方式
+5 桥接模式（Bridged）
+6 桥接模式设置
+7 总结
 
 1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
 
-
 2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
 
-
-3 SSL / TLS 介绍&emsp;&emsp;对朋友有一个遗憾，至今都感到愧疚。
+3 网络连接方式介绍&emsp;&emsp;Vmware workstation 是一款虚拟机软件，可
         </a>
       </p>
 
@@ -760,7 +625,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 14:25" pubdate>
+            <time datetime="2021-09-12 21:12" pubdate>
               2021-09-12
             </time>
           </div>
@@ -769,7 +634,7 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/istio/">istio</a>
+              <a href="/categories/Linux/">Linux</a>
             
           </div>
         
@@ -777,7 +642,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/istio/">istio</a>
+              <a href="/tags/vmware/">vmware</a>
             
           </div>
         
@@ -791,30 +656,28 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Fortio%E3%80%81Circuit-breakers-%E6%96%AD%E8%B7%AF%E5%99%A8/" target="_self">
-          九析带你轻松完爆 Istio - Fortio、Circuit breakers 断路器
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-linux-bash/" target="_self">
+          九析带你轻松完爆 linux bash
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Fortio%E3%80%81Circuit-breakers-%E6%96%AD%E8%B7%AF%E5%99%A8/" target="_self">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-linux-bash/" target="_self">
           
           
             
           
-          1 前言
-2 邀约
-3 Circuit breakers 断路器介绍
-4 Circuit breakers 实例
-  4.1 jiuxi-deploy.yaml
-  4.2 jiuxi-svc.yaml
-  4.3 jiuxi-dr.yaml
-5 Circuit breakers 实例部署
-  5.1 Istio 注入
-  5.2 部署其他资源文件
-6 验证断路器功能
+          1 su
+2 bash 操作
+  2.1 ctrl + r
+  2.2 esc + .
+  2.3 通配符
+  2.4 作业 (jobs、&amp;、bg、fg、ctrl+z）
 
-1 前言&emsp;&em
+1 su&emsp;&emsp;su 命令是切换用户（switch user）：
+
+su - root # 作用是切换用户，同时进入 root 系统管理员用户环境。
+su root    # 作用是只切换用户，但是仍旧停
         </a>
       </p>
 
@@ -822,7 +685,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 14:22" pubdate>
+            <time datetime="2021-09-12 21:07" pubdate>
               2021-09-12
             </time>
           </div>
@@ -831,7 +694,7 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/istio/">istio</a>
+              <a href="/categories/Linux/">Linux</a>
             
           </div>
         
@@ -839,7 +702,120 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/istio/">istio</a>
+              <a href="/tags/Linux/">Linux</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-tcpdump/" target="_self">
+          九析带你轻松完爆 tcpdump
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-tcpdump/" target="_self">
+          
+          
+            
+          
+          1 前言
+2 使用
+
+1 前言&emsp;&emsp;tcpdump 是一款命令行抓包工具，普遍适用于 linux、unix、windows 操作系统中。tcpdump  工具本身依赖于库文件去获取网卡流量信息，比如在 windows 下就是 winpcap，在 linux 下就是 libpcap 等等。其中  pcap 就是 package capture 的缩写。
+
+2 使用&emsp;&em
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-12 21:03" pubdate>
+              2021-09-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Linux/">Linux</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/tcpdump/">tcpdump</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E7%8E%A9%E8%BD%AC-linux-%E8%87%AA%E5%BB%BA-DNS-%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_self">
+          九析带你玩转 linux - 自建 DNS 服务器
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E7%8E%A9%E8%BD%AC-linux-%E8%87%AA%E5%BB%BA-DNS-%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_self">
+          
+          
+            
+          
+          1 DNS 服务器安装
+2 DNS 服务器配置
+  2.1 DNS 服务器启动
+  2.2 DNS 服务器状态查看
+  2.3 DNS 服务器配置
+​    2.3.1 修改 /etc/named.conf 文件
+​    2.3.2 修改 /etc/named.rfc1912.zones 文件
+  2.4 创建 /var/named/nexus.com.zone 文件
+  2.5 DNS 服务器
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-12 21:00" pubdate>
+              2021-09-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Linux/">Linux</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/DNS/">DNS</a>
             
           </div>
         
@@ -851,7 +827,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
