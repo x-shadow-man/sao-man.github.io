@@ -1,0 +1,636 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="九析">
+  <meta name="keywords" content="">
+  
+  <title>九析带你轻松完爆 Istio - 网络弹性之重试（retry） - 九析</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>九析</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/">
+                    
+                    主题博客
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/">
+                    
+                    配置指南
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/icon/">
+                    
+                    图标用法
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/ss.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 Istio - 网络弹性之重试（retry）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-12 10:51" pubdate>
+        2021年9月12日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">九析带你轻松完爆 Istio - 网络弹性之重试（retry）</h1>
+            
+            <div class="markdown-body">
+              <p>1 前言</p>
+<p>2 邀约</p>
+<p>3 网络弹性介绍</p>
+<p>4 重试介绍</p>
+<p>5 重试样例</p>
+<p>  5.1 jiuxi-client.yaml 文件</p>
+<p>  5.2 jiuxi-deploy.yaml</p>
+<p>  5.3 jiuxi-svc.yaml</p>
+<p>  5.4 jiuxi-vs.yaml</p>
+<p>6 重试实例部署</p>
+<p>  6.1 Istio 注入</p>
+<p>  6.2 部署 k8s service</p>
+<p>  6.3 部署 Istio 虚拟服务</p>
+<p>7 重试实例设置</p>
+<p>8 重试实例验证</p>
+<hr>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590485793878575.png" srcset="/img/loading.gif" lazyload alt="第三十六章 九析带你轻松完爆 Istio - 网络弹性之重试（retry）_Istio 教程"></p>
+<hr>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590485800450604.png" srcset="/img/loading.gif" lazyload alt="第三十六章 九析带你轻松完爆 Istio - 网络弹性之重试（retry）_Istio retry_02"></p>
+<hr>
+<h1 id="3-网络弹性介绍"><a href="#3-网络弹性介绍" class="headerlink" title="3 网络弹性介绍"></a>3 网络弹性介绍</h1><p>​    网络弹性也称为运维弹性，是指网络在遇到灾难事件时快速恢复和继续运行的能力。灾难事件的范畴很广泛，比如长时间停电、网络设备故障、恶意入侵等。</p>
+<hr>
+<h1 id="4-重试介绍"><a href="#4-重试介绍" class="headerlink" title="4 重试介绍"></a>4 重试介绍</h1><p>​    你爱上一个玉女，你想把她变成欲女。于是你疯狂地追求了她。第一次，她拒绝了，你不死心；你又追求她第二次，结果她又拒绝了你，你依旧不死心；你又追求她第三次，结果她又拒绝了你，这次你不再死缠烂打，你改变了策略。你去了整型医院，你整成她的模样，结果你在夜深人静的时候你对着镜子疯狂爱抚自己。你胜利了。</p>
+<p>很多时候，换个角度，也许你就可以解决问题，只是很多人都想不到而已……</p>
+<p>​    好了，不扯淡了。言归正传。</p>
+<p>​    Istio 重试机制就是如果调用服务失败，Envoy 代理尝试连接服务的最大次数。而默认情况下，Envoy 代理在失败后并不会尝试重新连接服务，除非我们启动 Istio 重试机制。</p>
+<hr>
+<h1 id="5-重试样例"><a href="#5-重试样例" class="headerlink" title="5 重试样例"></a>5 重试样例</h1><p>​    本样例中在一次调用服务失败后最多配 3 次重试。</p>
+<p>​    本样例需要结合 Istio 故障注入模拟被调用服务宕机，假如不了解故障注入也没关系，直接执行我的样例就行。下面先展示一下整个实例的架构图：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590485808816801.png" srcset="/img/loading.gif" lazyload alt="第三十六章 九析带你轻松完爆 Istio - 网络弹性之重试（retry）_Istio 重试_04"></p>
+<p>​    架构说明如下，本实例模拟客户端调用 nginx，nginx 将请求转发给 tomcat。tomcat 通过故障注入而中止对外服务，nginx 设置如果访问 tomcat 失败则会重试 3 次。</p>
+<p>​    该实例资源文件一共有 4 个，分别如下：</p>
+<blockquote>
+<p>jiuxi-client.yaml</p>
+<p>jiuxi-deploy.yaml</p>
+<p>jiuxi-svc.yaml</p>
+<p>jiuxi-vs.yaml</p>
+</blockquote>
+<h2 id="5-1-jiuxi-client-yaml-文件"><a href="#5-1-jiuxi-client-yaml-文件" class="headerlink" title="5.1 jiuxi-client.yaml 文件"></a>5.1 jiuxi-client.yaml 文件</h2><p>​    资源内容如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590485817157460.png" srcset="/img/loading.gif" lazyload alt="第三十六章 九析带你轻松完爆 Istio - 网络弹性之重试（retry）_Istio 教程_06"></p>
+<h2 id="5-2-jiuxi-deploy-yaml"><a href="#5-2-jiuxi-deploy-yaml" class="headerlink" title="5.2 jiuxi-deploy.yaml"></a>5.2 jiuxi-deploy.yaml</h2><p>​    内容如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590485824954620.png" srcset="/img/loading.gif" lazyload alt="第三十六章 九析带你轻松完爆 Istio - 网络弹性之重试（retry）_Istio 视频_08"></p>
+<h2 id="5-3-jiuxi-svc-yaml"><a href="#5-3-jiuxi-svc-yaml" class="headerlink" title="5.3 jiuxi-svc.yaml"></a>5.3 jiuxi-svc.yaml</h2><p>​    内容如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590485831239422.png" srcset="/img/loading.gif" lazyload alt="第三十六章 九析带你轻松完爆 Istio - 网络弹性之重试（retry）_Istio 重试_10"></p>
+<h2 id="5-4-jiuxi-vs-yaml"><a href="#5-4-jiuxi-vs-yaml" class="headerlink" title="5.4 jiuxi-vs.yaml"></a>5.4 jiuxi-vs.yaml</h2><p>​    内容如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590485836248871.png" srcset="/img/loading.gif" lazyload alt="第三十六章 九析带你轻松完爆 Istio - 网络弹性之重试（retry）_Istio retires_12"></p>
+<p>​    此虚拟服务有两个知识点。</p>
+<p>​    第一：故障注入。该虚拟服务的作用对象就是 tomcat-svc。使用此故障注入后，在网格中该 tomcat 就是不可用的。</p>
+<blockquote>
+<p>http:</p>
+<p>- fault:</p>
+<p>   abort:</p>
+<p>​     percentage:</p>
+<p>​       value: 100</p>
+<p>​     httpStatus: 503</p>
+</blockquote>
+<p>​    该设置说明每次调用 tomcat-svc，都会调用失败，并且返回错误状态码 503。</p>
+<p>​    第二：重试。代码如下：</p>
+<blockquote>
+<p>http:</p>
+<p>- route:</p>
+<p>  - destination:</p>
+<p>​     host: nginx-svc</p>
+<p>  reties:</p>
+<p>   attempts: 3</p>
+</blockquote>
+<p>​    该设置说明每次调用 nginx-svc，如果调用失败的话就会重试 3 次。</p>
+<hr>
+<h1 id="6-重试实例部署"><a href="#6-重试实例部署" class="headerlink" title="6 重试实例部署"></a>6 重试实例部署</h1><h2 id="6-1-Istio-注入"><a href="#6-1-Istio-注入" class="headerlink" title="6.1 Istio 注入"></a>6.1 Istio 注入</h2><p>​    需要对 client 和 deploy 资源进行 Istio 注入，将 client、nginx、tomcat 都放到网格中。本人是手工注入 Istio，如果你设置了自动资源注入也不会有影响，一样可以轻松完爆。</p>
+<blockquote>
+<p>istioctl kube-inject -f jiuxi-client.yaml | kubectl apply -f -</p>
+<p>istioctl kube-inject -f jiuxi-deploy.yaml | kubectl apply -f -</p>
+</blockquote>
+<p>​    执行成功后，通过 kubectl get pods 查看 Istio 注入情况：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590485851519677.png" srcset="/img/loading.gif" lazyload alt="第三十六章 九析带你轻松完爆 Istio - 网络弹性之重试（retry）_Istio retry_14"></p>
+<h2 id="6-2-部署-k8s-service"><a href="#6-2-部署-k8s-service" class="headerlink" title="6.2 部署 k8s service"></a>6.2 部署 k8s service</h2><p>​    部署 jiuxi-svc.yaml：</p>
+<blockquote>
+<p>kubectl apply -f jiuxi-svc.yaml</p>
+</blockquote>
+<h2 id="6-3-部署-Istio-虚拟服务"><a href="#6-3-部署-Istio-虚拟服务" class="headerlink" title="6.3 部署 Istio 虚拟服务"></a>6.3 部署 Istio 虚拟服务</h2><p>​    部署 jiuxi-vs.yaml</p>
+<blockquote>
+<p>kubectl apply -f jiuxi-vs.yaml</p>
+</blockquote>
+<hr>
+<h1 id="7-重试实例设置"><a href="#7-重试实例设置" class="headerlink" title="7 重试实例设置"></a>7 重试实例设置</h1><p>​    因为要用到 nginx 到 tomcat 的转发功能，因此需要对 nginx 做一些设置：</p>
+<p>​    登录 nginx pod：</p>
+<blockquote>
+<p>kubectl exec -it nginx-7559f7d487-79q9p – sh</p>
+</blockquote>
+<p>​    编辑 nginx 配置文件：</p>
+<blockquote>
+<p>vi /etc/nginx/conf.d/default.conf</p>
+</blockquote>
+<p>​    添加和修改如下内容：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590485861546663.png" srcset="/img/loading.gif" lazyload alt="第三十六章 九析带你轻松完爆 Istio - 网络弹性之重试（retry）_Istio 重试_16"></p>
+<p>​    编辑完成后，再执行如下语句验证配置和让配置生效：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590485869612451.png" srcset="/img/loading.gif" lazyload alt="第三十六章 九析带你轻松完爆 Istio - 网络弹性之重试（retry）_Istio retires_18"></p>
+<p>​    自此，整个样例配置和部署完毕。</p>
+<hr>
+<h1 id="8-重试实例验证"><a href="#8-重试实例验证" class="headerlink" title="8 重试实例验证"></a>8 重试实例验证</h1><p>​    登录 client，执行如下语句：</p>
+<blockquote>
+<p>kubectl exec -it client-5b77d5949f-nzdtl – sh # 别照抄本人 pod，根据各自情况修改</p>
+</blockquote>
+<p>​    执行如下语句：</p>
+<blockquote>
+<p>wget -q -O - <a target="_blank" rel="noopener" href="http://nginx-svc/"> http://nginx-svc</a></p>
+</blockquote>
+<p>​    执行如下语句首先将 nginx 的日志打印到控制台：</p>
+<blockquote>
+<p>kubectl logs -f nginx-7559f7d487-79q9p -c istio-proxy</p>
+</blockquote>
+<p>​    执行结果如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590485878604489.png" srcset="/img/loading.gif" lazyload alt="第三十六章 九析带你轻松完爆 Istio - 网络弹性之重试（retry）_Istio retires_20"></p>
+<p>​    由上图可知，重试设置生效。</p>
+<p>​    自此，九析带你轻松完爆了 Istio 的重试（retry）机制。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/istio/">istio</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/istio/">istio</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Fortio-%E9%83%A8%E7%BD%B2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - Fortio 部署</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%BC%B9%E6%80%A7%E4%B9%8B%E8%B6%85%E6%97%B6%EF%BC%88timeout%EF%BC%89/">
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - 网络弹性之超时（timeout）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
