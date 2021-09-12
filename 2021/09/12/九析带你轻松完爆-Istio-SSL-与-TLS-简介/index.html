@@ -18,9 +18,25 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>分类 - istio - 九析</title>
+  <title>九析带你轻松完爆 Istio - SSL 与 TLS 简介 - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -48,7 +64,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -187,9 +203,46 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="分类 - istio">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 Istio - SSL 与 TLS 简介">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-12 14:25" pubdate>
+        2021年9月12日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      781 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -202,100 +255,144 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 40 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2021</p>
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-profile-%E8%AF%A6%E8%BF%B0/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 service mesh - istio profile 详述</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-upgrade-%E5%8D%87%E7%BA%A7/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 service mesh - istio upgrade 升级</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E6%B3%A8%E5%85%A5%E5%90%8E%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E6%B5%81%E5%90%91/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 service mesh - istio 注入后网络流量流向</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E6%B3%A8%E5%85%A5/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 service mesh - istio 注入</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E4%BB%8A%E7%94%9F%E7%AF%87/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 service mesh - istio 今生篇</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E5%89%8D%E4%B8%96/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 service mesh - istio 前世</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-Gateway-%E8%AE%BE%E7%BD%AE%E8%B7%AF%E7%94%B1/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 service mesh - istio Gateway 设置路由</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-Bookinfo-%E5%BA%94%E7%94%A8/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆服务网格 - istio Bookinfo 应用</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-%E5%88%9D%E6%8E%A2/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆服务网格 - istio 初探</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-%E5%AE%89%E8%A3%85/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆服务网格 - istio 安装</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">九析带你轻松完爆 Istio - SSL 与 TLS 简介</h1>
+            
+            <div class="markdown-body">
+              <p>1 前言</p>
+<p>2 邀约</p>
+<p>3 SSL / TLS 介绍</p>
+<p>4 SSL / TLS 作用</p>
+<p>5 SSL / TLS 历史</p>
+<p>6 SSL / TLS 样例</p>
+<hr>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591183354270680.png" srcset="/img/loading.gif" lazyload alt="第三十九章 九析带你轻松完爆 Istio - SSL 与 TLS 简介_Istio 教程"></p>
+<hr>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591183361270330.png" srcset="/img/loading.gif" lazyload alt="第三十九章 九析带你轻松完爆 Istio - SSL 与 TLS 简介_Istio 视频_02"></p>
+<hr>
+<h1 id="3-SSL-TLS-介绍"><a href="#3-SSL-TLS-介绍" class="headerlink" title="3 SSL / TLS 介绍"></a>3 SSL / TLS 介绍</h1><p>&emsp;&emsp;对朋友有一个遗憾，至今都感到愧疚。</p>
+<p>&emsp;&emsp;他曾是我初中的一个好友，在那个情窦初开的年级，他无可救药地爱上了一个女孩。他一直纠结到底该不该表白，无数个夜里，他鼻涕一把泪一把向我诉说对她的思念。我实在厌烦他的婆妈，于是便敷衍他，要是实在害羞不敢面对，那就干脆写个纸条，我代为转交。他想了想，加上我不停地怂恿和酒精的作用，他就照办了。纸条写好后，他郑重其事封装好交道我手中。</p>
+<p>&emsp;&emsp;我拿着他的信回到家，想都没想就打开了，上面只有一行字：“我爱你”。我看了看，然后加了两个字“妹妹”。</p>
+<p>&emsp;&emsp;结果我的朋友被骂了三年流氓，直到他初中毕业。因为那个女孩的妹妹才10岁。</p>
+<p>&emsp;&emsp;好吧，这一切都是我瞎掰的，为的就是解释 SSL / TLS。</p>
+<p>&emsp;&emsp;SSL / TLS 就是为了解决端到端通讯的信息泄露以及篡改等安全问题。它位于传输层和应用层之间。应用层的数据是明文，传输层解决的是端到端的数据可到达，而 SSL / TLS 层则处理明文数据在传递过程中的安全和可靠。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591183384588435.png" srcset="/img/loading.gif" lazyload alt="第三十九章 九析带你轻松完爆 Istio - SSL 与 TLS 简介_Istio 安全_03"></p>
+<hr>
+<h1 id="4-SSL-TLS-作用"><a href="#4-SSL-TLS-作用" class="headerlink" title="4 SSL / TLS 作用"></a>4 SSL / TLS 作用</h1><p>&emsp;&emsp;SSL / TLS 主要解决三个网络问题：</p>
+<blockquote>
+<p>保密：所有通信信息通过加密处理，防止第三方嗅探</p>
+<p>完整：通过 MAC 校验机制，一旦被篡改，通信双方会立刻发现</p>
+<p>认证：双方认证，双方都可以配备证书，防止身份被冒充</p>
+</blockquote>
+<p>&emsp;&emsp;就像我们经常看到的谍战片，不相识的特工见面首先都会拿本书或者花（认证），双方对话都是云里雾里的话（加密），谈话内容一旦出现偏差立刻会有所警觉（完整）。</p>
+<hr>
+<h1 id="5-SSL-TLS-历史"><a href="#5-SSL-TLS-历史" class="headerlink" title="5 SSL / TLS 历史"></a>5 SSL / TLS 历史</h1><blockquote>
+<p>1995 年，SSL 2.0，NetScape 提出。后因为安全问题废弃。</p>
+<p>1996 年，SSL 3.0，也因为安全问题必须禁用。</p>
+<p>1999 年，TLS 1.0，互联网标准化组织接替 NetScape 公司，发布了 SSL 3.0 升级版 TLS 1.0。</p>
+<p>2006 年，TLS 1.1 发布。</p>
+<p>2008 年，TLS 1.2 发布。目前主要使用该版本。</p>
+<p>2018 年，TLS 1.3 发布。</p>
+</blockquote>
+<p>&emsp;&emsp;总结如下：</p>
+<blockquote>
+<p>SSL 2.0 -&gt; SSL 3.0 -&gt; TLS 1.0 -&gt; TLS 1.1 -&gt; TLS 1.2 -&gt; TLS 1.3</p>
+</blockquote>
+<hr>
+<h1 id="6-SSL-TLS-样例"><a href="#6-SSL-TLS-样例" class="headerlink" title="6 SSL / TLS 样例"></a>6 SSL / TLS 样例</h1><p>&emsp;&emsp;curl 工具支持多种安全层协议，我们可以通过 –help 进行查看，截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591183398580008.png" srcset="/img/loading.gif" lazyload alt="第三十九章 九析带你轻松完爆 Istio - SSL 与 TLS 简介_Istio security_04"></p>
+<p>&emsp;&emsp;下面可以针对多种协议进行访问：</p>
+<blockquote>
+<p>curl <a target="_blank" rel="noopener" href="https://www.baidu.com/">https://www.baidu.com</a> –tlsv1.0</p>
+<p>curl <a target="_blank" rel="noopener" href="https://www.baidu.com/">https://www.baidu.com</a> –tlsv1.1</p>
+<p>curl <a target="_blank" rel="noopener" href="https://www.baidu.com/">https://www.baidu.com</a> –tlsv1.2</p>
+</blockquote>
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/categories/istio/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/categories/istio/">1</a><a class="page-number" href="/categories/istio/page/2/#board">2</a><a class="page-number" href="/categories/istio/page/3/#board">3</a><span class="page-number current">4</span>
-    </span>
-  </nav>
-
-
-
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/istio/">istio</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/istio/">istio</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - 安全之加密</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Fortio%E3%80%81Circuit-breakers-%E6%96%AD%E8%B7%AF%E5%99%A8/">
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - Fortio、Circuit breakers 断路器</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -391,6 +488,8 @@
 
   
     
+      <script  src="/js/img-lazyload.js" ></script>
+    
   
 
 
@@ -399,9 +498,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 

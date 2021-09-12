@@ -18,7 +18,7 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>九析带你轻松完爆 Istio - Fortio 部署 - 九析</title>
+  <title>九析带你轻松完爆 Istio - Fortio、Circuit breakers 断路器 - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松完爆 Istio - Fortio 部署">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 Istio - Fortio、Circuit breakers 断路器">
               
             </span>
 
@@ -213,8 +213,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-12 10:54" pubdate>
-        2021年9月12日 上午
+      <time datetime="2021-09-12 14:22" pubdate>
+        2021年9月12日 下午
       </time>
     </span>
   
@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      441 字
+      1.2k 字
     </span>
   
 
@@ -235,7 +235,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      13
        分钟
     </span>
   
@@ -265,52 +265,82 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松完爆 Istio - Fortio 部署</h1>
+            <h1 style="display: none">九析带你轻松完爆 Istio - Fortio、Circuit breakers 断路器</h1>
             
             <div class="markdown-body">
               <p>1 前言</p>
 <p>2 邀约</p>
-<p>3 Fortio 介绍</p>
-<p>4 Fortio 下载</p>
-<p>5 Fortio 命令行</p>
-<p>6 Fortio web 控制台方式</p>
+<p>3 Circuit breakers 断路器介绍</p>
+<p>4 Circuit breakers 实例</p>
+<p>  4.1 jiuxi-deploy.yaml</p>
+<p>  4.2 jiuxi-svc.yaml</p>
+<p>  4.3 jiuxi-dr.yaml</p>
+<p>5 Circuit breakers 实例部署</p>
+<p>  5.1 Istio 注入</p>
+<p>  5.2 部署其他资源文件</p>
+<p>6 验证断路器功能</p>
 <hr>
-<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590632941354098.png" srcset="/img/loading.gif" lazyload alt="第三十七章 九析带你轻松完爆 Istio - Fortio 部署_Istio 学习"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590659334512568.png" srcset="/img/loading.gif" lazyload alt="第三十八章 九析带你轻松完爆 Istio - Fortio、Circuit breakers 断路器_Istio 教程"></p>
 <hr>
-<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590632951668869.png" srcset="/img/loading.gif" lazyload alt="第三十七章 九析带你轻松完爆 Istio - Fortio 部署_Istio 免费 视频_02"></p>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590659342792972.png" srcset="/img/loading.gif" lazyload alt="第三十八章 九析带你轻松完爆 Istio - Fortio、Circuit breakers 断路器_Istio circuits_02"></p>
 <hr>
-<h1 id="3-Fortio-介绍"><a href="#3-Fortio-介绍" class="headerlink" title="3 Fortio 介绍"></a>3 Fortio 介绍</h1><p>​    Fortio 是 Istio 的负载测试工具，它提供了 web 控制台和命令行控制台的操作方式。因为后期我们在 Istio 断路器介绍中会使用到 Fortio，因此这节需要对 Fortio 进行安装和简单地操作。</p>
+<h1 id="3-Circuit-breakers-断路器介绍"><a href="#3-Circuit-breakers-断路器介绍" class="headerlink" title="3 Circuit breakers 断路器介绍"></a>3 Circuit breakers 断路器介绍</h1><p>&emsp;&emsp;印象里，很多年前，居民区靠街有一种门面房。屋子不大，粉色的灯光，开放式的推拉门。门口总是坐着一个美丽的大姐姐，每当我从路边经过，她都会露出热情的微笑。“帅哥进来玩啊”。印象中，这是她经常对我说的话。</p>
+<p>&emsp;&emsp;那时，我还很年轻，还很帅，我觉得她一定是不可救药地爱上我了，直到有一天我看到了我不愿意看到的一幕。</p>
+<p>&emsp;&emsp;还记得是一个夏日的傍晚，我刚加班完回出租房，路上又经过了她的小屋，大老远就听到她温柔的声音：“帅哥来玩啊”。连日的工作劳累让我疲惫不堪，当我终于鼓足勇气准备接受她的邀请、迎接她的感情时，忽然从身后传来一个沙哑的声音：“来了”。我回头一看，原来是一个民工打扮的人。那一刻，我觉得自己像是被耍了一样，落荒而逃。</p>
+<p>&emsp;&emsp;后来，我经常看到有民工模样的人走进那扇落地窗开拉门，有时有好几个，每当这个时候，我都会看到小姐姐会把开拉门从里面锁好，然后再把厚厚的窗帘放下……</p>
+<p>&emsp;&emsp;慢慢地，当我社会阅历丰富，我终于知道了大姐姐的职业，为人民服务。</p>
+<p>&emsp;&emsp;而记忆中的推拉门，竟是她一个弱女子面对这个世界的安全保障，是她对过载请求的一种天然防护，就像我经常使用的断路器一样。</p>
+<p>&emsp;&emsp;断路器是 Istio 提供的一个有用的技术。在微服务设置断路器可以有效保障微服务的抗操性。比如在断路器中，你可以设置服务并发连接次数限制或者服务调用失败次数，一旦达到设置的阈值，断路器将“跳闸”并停止与该主机的进一步连接。</p>
+<p>&emsp;&emsp;因为断路器适用于负载平衡池中“真正”的服务网格（Istio 资源注入后的 Pod），因此可以在 Destination Rule 配置断路器，而 Destination Rule 最终会被翻译成  Envoy 的配置，然后作用在 Envoy 上。这样当流量进入到被 Istio 注入后的 Pod，流量就会被 Envoy  拦截，这样断路器就会针对流量发生作用。</p>
 <hr>
-<h1 id="4-Fortio-下载"><a href="#4-Fortio-下载" class="headerlink" title="4 Fortio 下载"></a>4 Fortio 下载</h1><p>​    推荐使用 Fortio 的命令行操作方式，因此我们选择 rpm 的安装方式。</p>
+<h1 id="4-Circuit-breakers-实例"><a href="#4-Circuit-breakers-实例" class="headerlink" title="4 Circuit breakers 实例"></a>4 Circuit breakers 实例</h1><p>&emsp;&emsp;本实例用到 3 个资源文件：</p>
 <blockquote>
-<p>curl -L <a target="_blank" rel="noopener" href="https://github.com/fortio/fortio/releases/download/v1.3.1/fortio-1.3.1-1.x86_64.rpm">https://github.com/fortio/fortio/releases/download/v1.3.1/fortio-1.3.1-1.x86_64.rpm</a> -o fortio-1.3.1-1.x86_64.rpm</p>
-<p>rpm -ivh fortio-1.3.1-1.x86_64.rpm</p>
+<p># Istio 注入后的目标 Pod 资源</p>
+<p>jiuxi-deploy.yaml    </p>
+<p># Istio 目标规则文件</p>
+<p>jiuxi-dr.yaml</p>
+<p># Pod 资源的对外服务</p>
+<p>jiuxi-svc.yaml</p>
+</blockquote>
+<h2 id="4-1-jiuxi-deploy-yaml"><a href="#4-1-jiuxi-deploy-yaml" class="headerlink" title="4.1 jiuxi-deploy.yaml"></a>4.1 jiuxi-deploy.yaml</h2><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590659353738215.png" srcset="/img/loading.gif" lazyload alt="第三十八章 九析带你轻松完爆 Istio - Fortio、Circuit breakers 断路器_Istio 视频_04"></p>
+<h2 id="4-2-jiuxi-svc-yaml"><a href="#4-2-jiuxi-svc-yaml" class="headerlink" title="4.2 jiuxi-svc.yaml"></a>4.2 jiuxi-svc.yaml</h2><p>&emsp;&emsp;该文件是对上面 deploy 文件的一个 service 暴露：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590659364599149.png" srcset="/img/loading.gif" lazyload alt="第三十八章 九析带你轻松完爆 Istio - Fortio、Circuit breakers 断路器_Istio 断路器_06"></p>
+<h2 id="4-3-jiuxi-dr-yaml"><a href="#4-3-jiuxi-dr-yaml" class="headerlink" title="4.3 jiuxi-dr.yaml"></a>4.3 jiuxi-dr.yaml</h2><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590659385856602.png" srcset="/img/loading.gif" lazyload alt="第三十八章 九析带你轻松完爆 Istio - Fortio、Circuit breakers 断路器_Istio 视频_07"></p>
+<p>&emsp;&emsp;详细说明如下：</p>
+<blockquote>
+<p>http1MaxPendingRequests: http 请求挂起状态的最大请求数</p>
+<p>maxRequestsPerConnection: 一定时间内限制对后端服务发起的最大请求数，如果超过了此配置，就会出现限流。</p>
+<p>outlierDetection.consecutiveErrors: 拒绝连接的最大失败次数</p>
+<p>outlierDetection.interval: 触发熔断的时间间隔，在 interval 时间间隔内，达到 consecutiveErrors 即触发熔断</p>
+<p>outlierDetection.baseEjectionTime: 熔断时长</p>
+<p>maxEjectionPercent: 熔断连接最大百分比</p>
 </blockquote>
 <hr>
-<h1 id="5-Fortio-命令行"><a href="#5-Fortio-命令行" class="headerlink" title="5 Fortio 命令行"></a>5 Fortio 命令行</h1><p>​    执行如下语句向百度进行负载压测。</p>
+<h1 id="5-Circuit-breakers-实例部署"><a href="#5-Circuit-breakers-实例部署" class="headerlink" title="5 Circuit breakers 实例部署"></a>5 Circuit breakers 实例部署</h1><h2 id="5-1-Istio-注入"><a href="#5-1-Istio-注入" class="headerlink" title="5.1 Istio 注入"></a>5.1 Istio 注入</h2><p>&emsp;&emsp;对 jiuxi-deploy.yaml 文件进行 Istio 注入：</p>
 <blockquote>
-<p>fortio load -c 5 -n 20 -qps 0 <a target="_blank" rel="noopener" href="http://www.baidu.com/"> http://www.baidu.com</a></p>
+<p>istioctl kube-inject -f jiuxi-deploy.yaml | kubectl apply -f -</p>
 </blockquote>
+<p>&emsp;&emsp;执行成功后的结果如下：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590659394818991.png" srcset="/img/loading.gif" lazyload alt="第三十八章 九析带你轻松完爆 Istio - Fortio、Circuit breakers 断路器_Istio 教程_09"></p>
+<p>&emsp;&emsp;发现 nginx 容器个数已经是 2 个，就说明注入成功了。</p>
+<h2 id="5-2-部署其他资源文件"><a href="#5-2-部署其他资源文件" class="headerlink" title="5.2 部署其他资源文件"></a>5.2 部署其他资源文件</h2><p>&emsp;&emsp;直接部署 jiuxi-svc.yaml 和 jiuxi-dr.yaml：</p>
 <blockquote>
-<p># 命令解释如下：</p>
-<p># -c 表示并发数</p>
-<p># -n 一共多少请求</p>
-<p># -qps 每秒查询数，0 表示不限制</p>
+<p>kubectl apply -f jiuxi-dr.yaml</p>
+<p>kubectl apply -f jiuxi-svc.yaml</p>
 </blockquote>
-<p>​    命令执行的结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590632961627818.png" srcset="/img/loading.gif" lazyload alt="第三十七章 九析带你轻松完爆 Istio - Fortio 部署_Istio Fortio_04"></p>
+<p>&emsp;&emsp;自此，整个实例部署成功。</p>
 <hr>
-<h1 id="6-Fortio-web-控制台方式"><a href="#6-Fortio-web-控制台方式" class="headerlink" title="6 Fortio web 控制台方式"></a>6 Fortio web 控制台方式</h1><p>​    web 控制台方式就是提供给习惯使用 web 界面操作的同学一个途径来使用 Fortio。因为是基于 web 方式，所以就需要首先启动一个 web  server，这样客户端浏览器才可以访问到 web server 提供的操作界面进行负载压测。</p>
+<h1 id="6-验证断路器功能"><a href="#6-验证断路器功能" class="headerlink" title="6 验证断路器功能"></a>6 验证断路器功能</h1><p>&emsp;&emsp;使用 Istio 的负载测试工具 Fortio，有关 Fortio 的安装和使用，请参考我上章的内容，分分钟容易到爆。</p>
+<p>&emsp;&emsp;执行如下命令：</p>
 <blockquote>
-<p>nohup fortio server &amp;</p>
+<p>fortio load -c 10 -n 50 -qps 0 <a target="_blank" rel="noopener" href="http://10.103.150.90/">http://10.103.150.90</a> (CLUSTER_IP:PORT)</p>
 </blockquote>
-<p>​    默认情况 fortio server 会启动 8080 端口，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590632971586578.png" srcset="/img/loading.gif" lazyload alt="第三十七章 九析带你轻松完爆 Istio - Fortio 部署_Istio 学习_05"></p>
-<p>​    打开浏览器，输入 <a target="_blank" rel="noopener" href="http://ip:8080/fortio%EF%BC%8C%E8%AE%BF%E9%97%AE">http://IP:8080/fortio，访问</a> Fortio server：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590632982971129.png" srcset="/img/loading.gif" lazyload alt="第三十七章 九析带你轻松完爆 Istio - Fortio 部署_Istio 免费 视频_07"></p>
-<p>​    直接点击“start”按钮，将会看到压测效果：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590632992841011.png" srcset="/img/loading.gif" lazyload alt="第三十七章 九析带你轻松完爆 Istio - Fortio 部署_Istio Fortio_09">   自此，九析带你轻松完爆了 Istio Fortio 负载压测工具。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590659409585223.png" srcset="/img/loading.gif" lazyload alt="第三十八章 九析带你轻松完爆 Istio - Fortio、Circuit breakers 断路器_Istio circuits_10"></p>
+<p>&emsp;&emsp;执行结果如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1590659417525055.png" srcset="/img/loading.gif" lazyload alt="第三十八章 九析带你轻松完爆 Istio - Fortio、Circuit breakers 断路器_Istio 断路器_11"></p>
+<p>&emsp;&emsp;从执行结果来看，有 27 个报错。 说明断路器生效。</p>
+<p>&emsp;&emsp;自此，九析带你轻松完爆 Fortio、Circuit breakers 断路器功能。</p>
 
             </div>
             <hr>
@@ -345,9 +375,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Fortio%E3%80%81Circuit-breakers-%E6%96%AD%E8%B7%AF%E5%99%A8/">
+                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-SSL-%E4%B8%8E-TLS-%E7%AE%80%E4%BB%8B/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆 Istio - Fortio、Circuit breakers 断路器</span>
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - SSL 与 TLS 简介</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -355,8 +385,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%BC%B9%E6%80%A7%E4%B9%8B%E9%87%8D%E8%AF%95%EF%BC%88retry%EF%BC%89/">
-                        <span class="hidden-mobile">九析带你轻松完爆 Istio - 网络弹性之重试（retry）</span>
+                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Fortio-%E9%83%A8%E7%BD%B2/">
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - Fortio 部署</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
