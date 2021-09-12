@@ -18,9 +18,25 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>分类 - istio - 九析</title>
+  <title>九析带你轻松完爆 Istio - Envoy 介绍 - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -48,7 +64,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -187,9 +203,46 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="分类 - istio">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 Istio - Envoy 介绍">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-12 14:47" pubdate>
+        2021年9月12日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      765 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -202,100 +255,125 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 46 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2021</p>
-    
-    <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%BC%B9%E6%80%A7%E4%B9%8B%E9%87%8D%E8%AF%95%EF%BC%88retry%EF%BC%89/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - 网络弹性之重试（retry）</span>
-      <time style="float: right;">09-12</time>
-    </a>
-  
-    
-    <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%BC%B9%E6%80%A7%E4%B9%8B%E8%B6%85%E6%97%B6%EF%BC%88timeout%EF%BC%89/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - 网络弹性之超时（timeout）</span>
-      <time style="float: right;">09-12</time>
-    </a>
-  
-    
-    <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-fault-injection-%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5%E4%B9%8B%E4%B8%AD%E6%AD%A2/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - fault injection 故障注入之中止</span>
-      <time style="float: right;">09-12</time>
-    </a>
-  
-    
-    <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-fault-injection-%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - fault injection 故障注入</span>
-      <time style="float: right;">09-12</time>
-    </a>
-  
-    
-    <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-configmap-istio-ca-root-cer/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - configmap istio-ca-root-cer</span>
-      <time style="float: right;">09-12</time>
-    </a>
-  
-    
-    <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E6%9C%8D%E5%8A%A1%E6%9D%A1%E7%9B%AE-ServiceEntry-%E5%AE%9E%E4%BE%8B/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - 服务条目 ServiceEntry 实例</span>
-      <time style="float: right;">09-12</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E5%85%B3-gateway-%E5%AE%9E%E4%BE%8B/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - 网关 gateway 实例</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E6%B5%81%E5%90%91%E4%B9%8B-iptables-chain/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - 网络流向之 iptables chain</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%8C%85%E4%B9%8B-iptables-netfilter-%E5%85%B3%E7%B3%BB/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - 网络包之 iptables netfilter 关系</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-    
-    <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-Ingress/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress</span>
-      <time style="float: right;">09-11</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">九析带你轻松完爆 Istio - Envoy 介绍</h1>
+            
+            <div class="markdown-body">
+              <p>1 前言</p>
+<p>2 邀约</p>
+<p>3 Envoy 介绍</p>
+<p>4 Envoy 特性</p>
+<p>  4.1 自包含</p>
+<p>  4.2 C++ 11 代码库</p>
+<p>  4.3 L3 / L4 过滤器体系架构</p>
+<p>  4.4 HTTP L7 过滤器体系架构</p>
+<p>  4.5 HTTP / 2 支持</p>
+<p>  4.6 MongoDB &amp; DynamoDB L7 支持</p>
+<hr>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483307304493.png" srcset="/img/loading.gif" lazyload alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_envoy"></p>
+<hr>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483316585445.png" srcset="/img/loading.gif" lazyload alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_Istio 视频_02"></p>
+<hr>
+<h1 id="3-Envoy-介绍"><a href="#3-Envoy-介绍" class="headerlink" title="3 Envoy 介绍"></a>3 Envoy 介绍</h1><p>&emsp;&emsp;Envoy 是类似 Nginx 的网络边缘代理工具，是专为大型现代微服务架构而设计的。</p>
+<p>&emsp;&emsp;下图是 Nginx 使用场景：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483325727030.png" srcset="/img/loading.gif" lazyload alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_Istio 视频_03"></p>
+<p>&emsp;&emsp;上图中，Nginx 作为边缘代理，是整个网络流量的入口。通过配置 Nginx，可将访问者请求路由到后端 Server 内的 Service  进行处理。但是问题来了，如果我们想控制 Service A 和 Service B 之间的流量就没有办法了，因为它们之间并没有任何边缘代理。</p>
+<p>&emsp;&emsp;下图是 Envoy 使用场景：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483333452261.png" srcset="/img/loading.gif" lazyload alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_envoy_04"></p>
+<p>&emsp;&emsp;上图中，Envoy 不但作为边缘代理（类似  Nginx）是整个网络流量的入口，同时也可以作为服务（service）代理。这样的网络拓补结构不但可以设置访问者路由规则，也可以设置  service A 与 Service B 之间的路由规则。因此，这样就可以全方位控制微服务内部到内部、外部到内部的所有网络流量，而上图中  Nginx 仅仅控制由外到内的网络流量。</p>
+<hr>
+<h1 id="4-Envoy-特性"><a href="#4-Envoy-特性" class="headerlink" title="4 Envoy 特性"></a>4 Envoy 特性</h1><h2 id="4-1-自包含"><a href="#4-1-自包含" class="headerlink" title="4.1 自包含"></a>4.1 自包含</h2><p>&emsp;&emsp;Envoy 是自包含的设计，它和应用服务器各自独立运行，并不对服务器内的应用进行侵入。这样设计的好处在于可以支持任何语言、任何框架所编写的微服务。此外，正因为自包含、无侵入的设计可以使得升级或部署更透明和高效</p>
+<h2 id="4-2-C-11-代码库"><a href="#4-2-C-11-代码库" class="headerlink" title="4.2 C++ 11 代码库"></a>4.2 C++ 11 代码库</h2><p>&emsp;&emsp;Envoy 是基于 C++ 11 代码库进行编写的，因为 C++ 11 跟其他编程语言相比，既提供了出色的性能，又大大提高了开发人员的生产力。</p>
+<h2 id="4-3-L3-L4-过滤器体系架构"><a href="#4-3-L3-L4-过滤器体系架构" class="headerlink" title="4.3 L3 / L4 过滤器体系架构"></a>4.3 L3 / L4 过滤器体系架构</h2><p>&emsp;&emsp;Envoy 的设计采用过滤器的体系架构。它通过原生或者自定义的过滤器来执行不同的 TCP 代理任务。已经提供的原生过滤器包括原始 TCP 代理、HTTP 代理、TLS 客户端证书认证等。</p>
+<h2 id="4-4-HTTP-L7-过滤器体系架构"><a href="#4-4-HTTP-L7-过滤器体系架构" class="headerlink" title="4.4 HTTP L7 过滤器体系架构"></a>4.4 HTTP L7 过滤器体系架构</h2><p>&emsp;&emsp;Envoy 除了在 L3、L4 提供过滤器外，还在 L7 提供了 HTTP 过滤器，可以提供诸如缓冲、速率限制、路由/转发等功能。</p>
+<h2 id="4-5-HTTP-2-支持"><a href="#4-5-HTTP-2-支持" class="headerlink" title="4.5 HTTP / 2 支持"></a>4.5 HTTP / 2 支持</h2><p>&emsp;&emsp;在 HTTP 模式下运行时，Envoy 支持 HTTP / 1.1 和 HTTP / 2。这就意味着可以桥接 HTTP / 1.1 和 HTTP / 2 客户端与目标服务器的任何组合。</p>
+<h2 id="4-6-MongoDB-amp-DynamoDB-L7-支持"><a href="#4-6-MongoDB-amp-DynamoDB-L7-支持" class="headerlink" title="4.6 MongoDB &amp; DynamoDB L7 支持"></a>4.6 MongoDB &amp; DynamoDB L7 支持</h2><p>&emsp;&emsp;Envoy 支持 MongoDB 和 DynamoDB 连接的 L7 嗅探和统计信息生成。</p>
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/categories/istio/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/categories/istio/">1</a><span class="page-number current">2</span><a class="page-number" href="/categories/istio/page/3/#board">3</a><a class="page-number" href="/categories/istio/page/4/#board">4</a><a class="page-number" href="/categories/istio/page/5/#board">5</a><a class="extend next" rel="next" href="/categories/istio/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
-
-
-
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/istio/">istio</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/istio/">istio</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - Envoy 线程模型</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86%E4%B8%89/">
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - 安全之加密三</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -391,6 +469,8 @@
 
   
     
+      <script  src="/js/img-lazyload.js" ></script>
+    
   
 
 
@@ -399,9 +479,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 

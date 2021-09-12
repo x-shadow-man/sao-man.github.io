@@ -4,6 +4,156 @@
   
   
   <entry>
+    <title>九析带你轻松完爆 Istio - Envoy 监听器简介</title>
+    <link href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%9B%91%E5%90%AC%E5%99%A8%E7%AE%80%E4%BB%8B/"/>
+    <url>/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%9B%91%E5%90%AC%E5%99%A8%E7%AE%80%E4%BB%8B/</url>
+    
+    <content type="html"><![CDATA[<p>1 前言</p><p>2 邀约</p><p>3 上章总结</p><p>4 监听器</p><p>  4.1 TCP 监听器</p><p>  4.2 UDP 监听器</p><hr><h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661295647236.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 监听器"></p><hr><h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661302961492.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Istio 视频_02"></p><hr><h1 id="3-上章总结"><a href="#3-上章总结" class="headerlink" title="3 上章总结"></a>3 上章总结</h1><p>&emsp;&emsp;上节介绍了 Envoy 的基础配置信息，如下图所示：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661310554278.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 视频_03"></p><p>&emsp;&emsp;上面配置信息重点介绍了两块内容，管理信息（admin 部分）和静态配置信息（static_resources 部分）。管理信息包括 Envoy 的 web 管理控制台。在用 Docker  运行时可对外开放 9901 端口（并对所有客户端可见，即 address 为 0.0.0.0）。关于如何运行 Envoy  可参考我上一篇文章，轻松完爆就是。运行后的结果如下图所示：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661537504319.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 视频_04"></p><p>&emsp;&emsp;从上图可知，对外服务端口 9901 已经开启。打开浏览器访问，如下图所示：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661545300104.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_k8s 视频_05"></p><p>&emsp;&emsp;静态配置信息主要包括两部分内容，分别是监听器（listener，今天介绍的主角）和集群（cluster），如下图所示：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661365273203.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 监听器_06"></p><p>&emsp;&emsp;   listener 是 Envoy 对外提供的监听端口，默认 10000。客户端通过此端口可以与 Envoy  建立通讯，获取连接（connection）。此外，在监听器上还可设置过滤器链（filter_chains），链上设置多过滤器，这样的设置可保证对进入 Envoy 的网络流量（请求）进行相应的处理，比如：上图就设置了http 过滤器，即：进入 Envoy 的所有 http  网络流量，都将被路由到集群（clusters）配置中，在集群（clusters）配置了 http 网络流量最终流向端点（endpoints，即  baidu.com）。整个过程如图所示：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661577790290.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 教程_07"></p><hr><h1 id="4-监听器"><a href="#4-监听器" class="headerlink" title="4 监听器"></a>4 监听器</h1><p>&emsp;&emsp;Envoy 配置在单个进程中支持任意数量的监听器（listener）。Envoy 支持 TCP 和 UDP 的监听器。</p><h2 id="4-1-TCP-监听器"><a href="#4-1-TCP-监听器" class="headerlink" title="4.1 TCP 监听器"></a>4.1 TCP 监听器</h2><p>&emsp;&emsp;监听器上可以配置一系列的过滤器构成的链，并且根据匹配条件来选择某个链。单个过滤器链由一个或多个 L3 / L4 过滤器组成。当监听器上收到连接时，将选择匹配的过滤器链，实例化本地过滤器，并开始处理后续事件。这样通用的监听器体系架构设计使得 Envoy 可以执行绝大多数的代理任务（比如，速率限制、TLS 客户端身份认证、HTTP 连接管理、MongoDB 嗅探、原始 TCP  代理）等。</p><p>&emsp;&emsp;如上可知，监听器可以配置监听过滤器。这些过滤器在网络过滤器（以后会讲）之前进行处理。并且监听过滤器还可以操作连接（connection）的元数据，这通常会影响以后的过滤器（filter）、集群（cluster）如何处理该连接。</p><p>&emsp;&emsp;监听器也可以通过<a href="https://www.envoyproxy.io/docs/envoy/latest/configuration/listeners/lds#config-listeners-lds"> 监听器发现服务（LDS）</a>动态获取。</p><p>&emsp;&emsp;有关监听器的详细配置，<a href="https://www.envoyproxy.io/docs/envoy/latest/configuration/listeners/listeners#config-listeners"> 请点击这里</a>。</p><h2 id="4-2-UDP-监听器"><a href="#4-2-UDP-监听器" class="headerlink" title="4.2 UDP 监听器"></a>4.2 UDP 监听器</h2><p>&emsp;&emsp;Envoy 还支持 UDP 监听器，尤其是 UDP 监听器过滤器。每个监听器过滤器都会处理工作进程在监听器端口上监听的每个 UDP 数据报。实际上，UDP 监听器配置有 SO_REUSEPORT 内核选项（该选项作用是可以将多个进程绑定在同一个端口上），这将导致内核将每个 UDP  四元组一致地散列到同一个工作程序。如果需要，这可使 UDP 监听器过滤器面向“会话”。</p><p>&emsp;&emsp;自此，九析带你轻松完爆 Envoy 监听器简介，有关监听器更多的内容，请查看本人接下来的文章。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>istio</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>istio</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>九析带你轻松完爆 Istio - Envoy 一分钟上手</title>
+    <link href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%B8%80%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B/"/>
+    <url>/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%B8%80%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B/</url>
+    
+    <content type="html"><![CDATA[<p>1 前言</p><p>2 邀约</p><p>3 简介</p><p>4 Envoy 下载</p><p>5 Envoy 运行</p><p>6 Envoy 访问</p><p>7 Envoy 窥视</p><p>8 Envoy 修改</p><p>  8.1 修改 envoy.yaml</p><p>  8.2 创建新 Envoy 镜像</p><p>  8.3 运行新 Envoy 镜像</p><p>  8.4 访问新 Envoy 容器</p><hr><h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504118517590.png" srcset="/img/loading.gif" lazyload alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Envoy 教程"></p><hr><h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504125131340.png" srcset="/img/loading.gif" lazyload alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Istio 视频_02"></p><hr><h1 id="3-简介"><a href="#3-简介" class="headerlink" title="3 简介"></a>3 简介</h1><p>&emsp;&emsp;本小节使你快速上手 Envoy。在使用 Envoy 前，首先需要下载并运行它。有两种方式获取 Envoy：下载编译好的二进制包；直接下载 Envoy 的学习镜像。本文使用后者。</p><hr><h1 id="4-Envoy-下载"><a href="#4-Envoy-下载" class="headerlink" title="4 Envoy 下载"></a>4 Envoy 下载</h1><p>&emsp;&emsp;使用如下语句下载 Envoy 学习镜像：</p><blockquote><p>docker pull envoyproxy/envoy-dev:89d6c6c6fa202aa7a01e85d2d887b56c8a3268ad</p></blockquote><p>&emsp;&emsp;下载成功后的截图如下所示：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504133206795.png" srcset="/img/loading.gif" lazyload alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Envoy 教程_03"></p><hr><h1 id="5-Envoy-运行"><a href="#5-Envoy-运行" class="headerlink" title="5 Envoy 运行"></a>5 Envoy 运行</h1><p>&emsp;&emsp;使用如下语句运行 Envoy 学习镜像：</p><blockquote><p>docker run –rm -d -p 10000:10000 envoyproxy/envoy-dev:89d6c6c6fa202aa7a01e85d2d887b56c8a3268ad</p></blockquote><p>&emsp;&emsp;上述命令会对外开启 Envoy 监听器，监听器端口为 10000。Envoy 容器启动成功后，可以执行如下命令查看 envoy 对外暴露的端口：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504197389764.png" srcset="/img/loading.gif" lazyload alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Istio 视频_04"></p><hr><h1 id="6-Envoy-访问"><a href="#6-Envoy-访问" class="headerlink" title="6 Envoy 访问"></a>6 Envoy 访问</h1><p>&emsp;&emsp;使用如下语句来访问 Envoy 容器提供的 http 路由服务：</p><blockquote><p>curl -v <a href="http://localhost:10000/"> http://localhost:10000</a></p></blockquote><p>&emsp;&emsp;执行结果一般会出错，结果如下图所示：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504205343342.png" srcset="/img/loading.gif" lazyload alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_k8s 视频_05"></p><p>&emsp;&emsp;出错的原因是官方提供的 Envoy 学习镜像是将所有对该 Envoy 的 http 请求路由到美国一个知名的搜索引擎网站去，而这个网站你们都知道，但是一般情况下却都访问不了。</p><p>&emsp;&emsp;为了操作成功，需要做一定的调整，经过简单调整，你也可以对 Envoy 有比较深入的了解。</p><hr><h1 id="7-Envoy-窥视"><a href="#7-Envoy-窥视" class="headerlink" title="7 Envoy 窥视"></a>7 Envoy 窥视</h1><p>&emsp;&emsp;执行如下语句进入到 Envoy 容器内部：</p><blockquote><p>docker exec -it $(docker ps | grep -i envoy | awk ‘{print $1}’) /bin/bash</p></blockquote><p>&emsp;&emsp;进入到容器内部之后，执行 ps -ef 查看当前容器内部运行进程列表：</p><blockquote><p>ps -ef</p></blockquote><p>&emsp;&emsp;执行结果如下图所示：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504215202328.png" srcset="/img/loading.gif" lazyload alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_k8s 视频_06"></p><p>&emsp;&emsp;由上图可知 Envoy 启动时的配置文件 envoy.yaml，查看该文件内容如下所示：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504223604962.png" srcset="/img/loading.gif" lazyload alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Envoy start_07"></p><p>&emsp;&emsp;从上图中，我们可以看到基本 Envoy 配置包括两部分内容：</p><blockquote><p>admin：管理信息。配置管理服务器</p><p>static_resources: 静态配置内容。此配置包含 Envoy 启动时静态配置的所有内容，比如监听器（listener）和集群（clusters）。监听器里又配置了过滤器链（filter_chains）</p></blockquote><p>&emsp;&emsp;结论：整个 Envoy 启动都是根据 envoy.yaml 的配置。上图配置中，Envoy 对外服务监听端口是 10000，所有 http 请求都路由到 <a href="http://www.gxxgle.com./">www.gxxgle.com。</a></p><hr><h1 id="8-Envoy-修改"><a href="#8-Envoy-修改" class="headerlink" title="8 Envoy 修改"></a>8 Envoy 修改</h1><p>&emsp;&emsp;因为初始的学习配置，导致很多人无法成功访问的。我们可以修改 envoy.yaml 配置文件，改成路由到百度即可。</p><h2 id="8-1-修改-envoy-yaml"><a href="#8-1-修改-envoy-yaml" class="headerlink" title="8.1 修改 envoy.yaml"></a>8.1 修改 envoy.yaml</h2><p>&emsp;&emsp;执行如下语句将容器内的原始 envoy.yaml 配置文件拷贝到 docker 所在宿主机：</p><blockquote><p># 下面的 75f8e71991f2 代表运行的 envoy 容器</p><p>docker cp 75f8e71991f2:/etc/envoy/envoy.yaml ./</p></blockquote><p>&emsp;&emsp;编辑 envoy.yaml 文件如下：</p><blockquote><p>route:</p><p>host_rewrite: <a href="http://www.baidu.com/">www.baidu.com</a>    # 31行</p><p>socket_address:</p><p>address: <a href="http://www.baidu.com/">www.baidu.com</a>    # 49行</p><p>sni: <a href="http://www.baidu.com/">www.baidu.com</a>        # 55行</p></blockquote><p>&emsp;&emsp;修改内容如下图所示：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504236339192.png" srcset="/img/loading.gif" lazyload alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Envoy 视频_08"></p><h2 id="8-2-创建新-Envoy-镜像"><a href="#8-2-创建新-Envoy-镜像" class="headerlink" title="8.2 创建新 Envoy 镜像"></a>8.2 创建新 Envoy 镜像</h2><p>&emsp;&emsp;首先编写 Dockerfile 文件，内容如下 ：</p><blockquote><p>FROM envoyproxy/envoy-dev:89d6c6c6fa202aa7a01e85d2d887b56c8a3268ad</p><p>COPY envoy.yaml /etc/envoy/envoy.yaml</p></blockquote><p>&emsp;&emsp;接着执行如下语句创建镜像：</p><blockquote><p>docker build -t envoy:v1 .</p></blockquote><p>&emsp;&emsp;然后执行如下语句查看是否镜像创建成功：</p><blockquote><p>docker images | grep -i envoy</p></blockquote><h2 id="8-3-运行新-Envoy-镜像"><a href="#8-3-运行新-Envoy-镜像" class="headerlink" title="8.3 运行新 Envoy 镜像"></a>8.3 运行新 Envoy 镜像</h2><p>&emsp;&emsp;执行如下语句运行新创建的镜像：</p><blockquote><p>docker run -d –name envoy -p 9901:9901 -p 10000:10000 envoy:v1</p></blockquote><h2 id="8-4-访问新-Envoy-容器"><a href="#8-4-访问新-Envoy-容器" class="headerlink" title="8.4 访问新 Envoy 容器"></a>8.4 访问新 Envoy 容器</h2><p>&emsp;&emsp;执行如下语句访问新 Envoy 容器：</p><blockquote><p>curl <a href="http://localhost:10000/"> http://localhost:10000</a></p></blockquote><p>&emsp;&emsp;执行效果如下图所示：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504248859976.png" srcset="/img/loading.gif" lazyload alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_k8s 视频_09"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>istio</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>istio</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>九析带你轻松完爆 Istio - Envoy 线程模型</title>
+    <link href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/"/>
+    <url>/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</url>
+    
+    <content type="html"><![CDATA[<p>1 前言</p><p>2 邀约</p><p>3 Envoy 线程模型</p><p>4 监听器连接负载均衡</p><hr><h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593409130289324.png" srcset="/img/loading.gif" lazyload alt="第四十七章 九析带你轻松完爆 Istio - Envoy 线程模型_Istio 视频"></p><hr><h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593409138244915.png" srcset="/img/loading.gif" lazyload alt="第四十七章 九析带你轻松完爆 Istio - Envoy 线程模型_Envoy 视频_02"></p><hr><h1 id="3-Envoy-线程模型"><a href="#3-Envoy-线程模型" class="headerlink" title="3 Envoy 线程模型"></a>3 Envoy 线程模型</h1><p>&emsp;&emsp;Envoy 是单进程内包含多线程的架构设计。单进程内部包含两种线程-主线程（master thread）和工作线程（worker thread）。主线程的作用是控制、协调任务；工作线程的作用是执行监听、过滤和转发。如下图所示：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593409156694519.png" srcset="/img/loading.gif" lazyload alt="第四十七章 九析带你轻松完爆 Istio - Envoy 线程模型_Envoy 视频_03"></p><p>&emsp;&emsp;Envoy 进程启动时会开启监听端口（listener），一旦监听器接受了客户端的连接，此连接的生命周期就会绑定到 Envoy  内的一个工作线程上。由此可知，Envoy 被设计成多个单线程并行，100%  无阻塞的模式。对于大多数工作负载，我们建议将工作线程的数量配置为等于计算机上硬件线程的数量。查看 Linux 操作系统最大进程数命令为：</p><blockquote><p>sysctl kernel.pid_max 或 cat /proc/sys/kernel/pid_max</p></blockquote><hr><h1 id="4-监听器连接负载均衡"><a href="#4-监听器连接负载均衡" class="headerlink" title="4 监听器连接负载均衡"></a>4 监听器连接负载均衡</h1><p>&emsp;&emsp;默认情况下，Envoy  工作线程之间相互独立且并无联系，这意味着所有工作线程都独立尝试在监听器上接受连接，并依靠内核在线程之间做负载均衡。对于大多数工作负载，内核对这些连接的负载均衡处理会非常出色。但是，对于某些工作负载（例如，服务网格 HTTP2 / gRPC 出口），必须强制 Envoy 在工作线程和连接之间负载均衡，为了支持上述特性，Envoy  允许在其监听端口上针对连接设置不同种类的负载均衡策略。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>istio</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>istio</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>九析带你轻松完爆 Istio - Envoy 介绍</title>
+    <link href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%BB%8B%E7%BB%8D/"/>
+    <url>/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%BB%8B%E7%BB%8D/</url>
+    
+    <content type="html"><![CDATA[<p>1 前言</p><p>2 邀约</p><p>3 Envoy 介绍</p><p>4 Envoy 特性</p><p>  4.1 自包含</p><p>  4.2 C++ 11 代码库</p><p>  4.3 L3 / L4 过滤器体系架构</p><p>  4.4 HTTP L7 过滤器体系架构</p><p>  4.5 HTTP / 2 支持</p><p>  4.6 MongoDB &amp; DynamoDB L7 支持</p><hr><h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483307304493.png" srcset="/img/loading.gif" lazyload alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_envoy"></p><hr><h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483316585445.png" srcset="/img/loading.gif" lazyload alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_Istio 视频_02"></p><hr><h1 id="3-Envoy-介绍"><a href="#3-Envoy-介绍" class="headerlink" title="3 Envoy 介绍"></a>3 Envoy 介绍</h1><p>&emsp;&emsp;Envoy 是类似 Nginx 的网络边缘代理工具，是专为大型现代微服务架构而设计的。</p><p>&emsp;&emsp;下图是 Nginx 使用场景：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483325727030.png" srcset="/img/loading.gif" lazyload alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_Istio 视频_03"></p><p>&emsp;&emsp;上图中，Nginx 作为边缘代理，是整个网络流量的入口。通过配置 Nginx，可将访问者请求路由到后端 Server 内的 Service  进行处理。但是问题来了，如果我们想控制 Service A 和 Service B 之间的流量就没有办法了，因为它们之间并没有任何边缘代理。</p><p>&emsp;&emsp;下图是 Envoy 使用场景：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483333452261.png" srcset="/img/loading.gif" lazyload alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_envoy_04"></p><p>&emsp;&emsp;上图中，Envoy 不但作为边缘代理（类似  Nginx）是整个网络流量的入口，同时也可以作为服务（service）代理。这样的网络拓补结构不但可以设置访问者路由规则，也可以设置  service A 与 Service B 之间的路由规则。因此，这样就可以全方位控制微服务内部到内部、外部到内部的所有网络流量，而上图中  Nginx 仅仅控制由外到内的网络流量。</p><hr><h1 id="4-Envoy-特性"><a href="#4-Envoy-特性" class="headerlink" title="4 Envoy 特性"></a>4 Envoy 特性</h1><h2 id="4-1-自包含"><a href="#4-1-自包含" class="headerlink" title="4.1 自包含"></a>4.1 自包含</h2><p>&emsp;&emsp;Envoy 是自包含的设计，它和应用服务器各自独立运行，并不对服务器内的应用进行侵入。这样设计的好处在于可以支持任何语言、任何框架所编写的微服务。此外，正因为自包含、无侵入的设计可以使得升级或部署更透明和高效</p><h2 id="4-2-C-11-代码库"><a href="#4-2-C-11-代码库" class="headerlink" title="4.2 C++ 11 代码库"></a>4.2 C++ 11 代码库</h2><p>&emsp;&emsp;Envoy 是基于 C++ 11 代码库进行编写的，因为 C++ 11 跟其他编程语言相比，既提供了出色的性能，又大大提高了开发人员的生产力。</p><h2 id="4-3-L3-L4-过滤器体系架构"><a href="#4-3-L3-L4-过滤器体系架构" class="headerlink" title="4.3 L3 / L4 过滤器体系架构"></a>4.3 L3 / L4 过滤器体系架构</h2><p>&emsp;&emsp;Envoy 的设计采用过滤器的体系架构。它通过原生或者自定义的过滤器来执行不同的 TCP 代理任务。已经提供的原生过滤器包括原始 TCP 代理、HTTP 代理、TLS 客户端证书认证等。</p><h2 id="4-4-HTTP-L7-过滤器体系架构"><a href="#4-4-HTTP-L7-过滤器体系架构" class="headerlink" title="4.4 HTTP L7 过滤器体系架构"></a>4.4 HTTP L7 过滤器体系架构</h2><p>&emsp;&emsp;Envoy 除了在 L3、L4 提供过滤器外，还在 L7 提供了 HTTP 过滤器，可以提供诸如缓冲、速率限制、路由/转发等功能。</p><h2 id="4-5-HTTP-2-支持"><a href="#4-5-HTTP-2-支持" class="headerlink" title="4.5 HTTP / 2 支持"></a>4.5 HTTP / 2 支持</h2><p>&emsp;&emsp;在 HTTP 模式下运行时，Envoy 支持 HTTP / 1.1 和 HTTP / 2。这就意味着可以桥接 HTTP / 1.1 和 HTTP / 2 客户端与目标服务器的任何组合。</p><h2 id="4-6-MongoDB-amp-DynamoDB-L7-支持"><a href="#4-6-MongoDB-amp-DynamoDB-L7-支持" class="headerlink" title="4.6 MongoDB &amp; DynamoDB L7 支持"></a>4.6 MongoDB &amp; DynamoDB L7 支持</h2><p>&emsp;&emsp;Envoy 支持 MongoDB 和 DynamoDB 连接的 L7 嗅探和统计信息生成。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>istio</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>istio</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>九析带你轻松完爆 Istio - 安全之加密三</title>
+    <link href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86%E4%B8%89/"/>
+    <url>/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86%E4%B8%89/</url>
+    
+    <content type="html"><![CDATA[<p>1 前言</p><p>2 邀约</p><p>3 加密简介</p><p>4 非对称加密介绍</p><p>5 非对称加密原理</p><p>6 SSL / TLS 与非对称加密</p><hr><h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591602918289392.png" srcset="/img/loading.gif" lazyload alt="第四十二章 九析带你轻松完爆 Istio - 安全之加密三_Istio security"></p><hr><h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591602926907711.png" srcset="/img/loading.gif" lazyload alt="第四十二章 九析带你轻松完爆 Istio - 安全之加密三_Istio 安全_02"></p><hr><h1 id="3-加密简介"><a href="#3-加密简介" class="headerlink" title="3 加密简介"></a>3 加密简介</h1><p>&emsp;&emsp;加密是基础，是安全绕不开的话题。常用的加密方式有三种，分别为哈希、对称加密和非对称加密。上节我们重点介绍了 Hash 和对称密钥加密，这节介绍一下非对称密钥加密。</p><hr><h1 id="4-非对称加密介绍"><a href="#4-非对称加密介绍" class="headerlink" title="4 非对称加密介绍"></a>4 非对称加密介绍</h1><p>&emsp;&emsp;在上节中介绍了对称加密。在对称加密中，相同的密钥用于加密和解密，一旦密钥被偷，所有数据将无任何安全可言。因此新的加密算法需求被提出，所幸的是业界很快就有了解决方案。</p><p>&emsp;&emsp;1976 年，Diffie、Hellman 首次提出非对称加密概念。</p><p>&emsp;&emsp;1978 年，麻省理工三人组 Rivest、Shamir、Adleman 发布了 RSA 算法。</p><p>&emsp;&emsp;自此，非对称加密开始正式走向历史舞台。</p><hr><h1 id="5-非对称加密原理"><a href="#5-非对称加密原理" class="headerlink" title="5 非对称加密原理"></a>5 非对称加密原理</h1><p>&emsp;&emsp;非对称加密跟对称加密相比有两个关注点，而不是一个。除了加密算法本身，还需要一对公私钥。其中公钥用来加密、私钥用来解密。在启动通信过程中，首先生成一对公私钥，</p><p>&emsp;&emsp;公钥发送给对方，私钥则需要妥善保管。对方通过公钥对信息进行加密（加密算法会在公钥中指定），当你收到信息，就用保管好的私钥进行解密。</p><p>&emsp;&emsp;加密过程如下图所示：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592359257398290.png" srcset="/img/loading.gif" lazyload alt="第四十二章 九析带你轻松完爆 Istio - 安全之加密三_Istio 视频_03"></p><p>&emsp;&emsp;解密过程如下图所示：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592359474532732.png" srcset="/img/loading.gif" lazyload alt="第四十二章 九析带你轻松完爆 Istio - 安全之加密三_Istio 安全_04"></p><hr><h1 id="6-SSL-TLS-与非对称加密"><a href="#6-SSL-TLS-与非对称加密" class="headerlink" title="6 SSL / TLS 与非对称加密"></a>6 SSL / TLS 与非对称加密</h1><p>&emsp;&emsp;在本节介绍中，非对称加密显示出了它的安全优势，即：只要保持私钥安全，数据就是安全的。如果再结合前面的教程知道，SSL / TLS 是构建在传输层和应用层之间的虚拟层，这层主要负责数据安全。那么将非对称加密算法作为 SSL / TLS  的唯一性算法就是整个数据通路的安全解决方案了，但现实是这样的吗？答案是否定的。因为现实仍然是在 SSL / TLS  层主要使用对称加密，原因在于：双密钥架构的加密、解密开销非常高，与对称密钥相比，它需要更多的时间和 CPU  占有率，这就意味着在互联网使用非常频繁的今天，如果只通过非对称加密进行通信，那么浏览器和服务器之间数据通信会让用户等待更长的时间。</p><p>&emsp;&emsp;因此在 SSL / TLS 层经常的做法是双密钥机制在客户端和服务器交换对称密钥时才使用，此过程建立之后，客户端和服务端通信就按照对称加密进行。至于整个操作如何进行，将在后续课程中一一指出。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>istio</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>istio</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>九析带你轻松完爆 Istio - 安全之加密二</title>
+    <link href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86%E4%BA%8C/"/>
+    <url>/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86%E4%BA%8C/</url>
+    
+    <content type="html"><![CDATA[<p>1 前言</p><p>2 邀约</p><p>3 加密简介</p><p>4 对称秘钥加密</p><p>5 对称秘钥不足</p><hr><h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591588745379409.png" srcset="/img/loading.gif" lazyload alt="第四十一章 九析带你轻松完爆 Istio - 安全之加密二_Istio 安全"></p><hr><h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591588753179092.png" srcset="/img/loading.gif" lazyload alt="第四十一章 九析带你轻松完爆 Istio - 安全之加密二_Istio security_02"></p><hr><h1 id="3-加密简介"><a href="#3-加密简介" class="headerlink" title="3 加密简介"></a>3 加密简介</h1><p>&emsp;&emsp;加密是基础，是安全绕不开的话题。常用的加密方式有三种，分别为哈希、对称加密和非对称加密。上节我们重点介绍了 Hash，这节介绍一下对称密钥加密。</p><hr><h1 id="4-对称密钥加密"><a href="#4-对称密钥加密" class="headerlink" title="4  对称密钥加密"></a>4  对称密钥加密</h1><p>&emsp;&emsp;古罗马军事家凯撒大帝一生征战无数，鲜有敌手，除了卓越的军事才能之外，他对军事信息的流通和保护也特别重视，凯撒密码就是体现之一。据传，凯撒曾用此方法与其将军们进行联系。</p><p>&emsp;&emsp;凯撒密码的原理非常简单，就是将明文中的所有字母在字母表上向后（或向前）按照一个固定数目（步长）进行偏移，比如明文是 “abc”，偏移量为 3，就变成了新的字符串 “def”，其中偏移量 3 就是加密密钥（对称密钥），而字符串 “def”  就是密文。如下图所示：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591588767107074.png" srcset="/img/loading.gif" lazyload alt="第四十一章 九析带你轻松完爆 Istio - 安全之加密二_Istio security_04"></p><hr><h1 id="5-对称密钥不足"><a href="#5-对称密钥不足" class="headerlink" title="5  对称密钥不足"></a>5  对称密钥不足</h1><p>&emsp;&emsp;凯撒密码会有很多问题，这种算法很容易被破解。可以将密钥的值从 1 更改为任何值，并逐个轮询 26 个字母。如果使用计算机，破解几毫秒就搞定了。</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591588781156241.png" srcset="/img/loading.gif" lazyload alt="第四十一章 九析带你轻松完爆 Istio - 安全之加密二_Istio 免费视频_05"></p><p>&emsp;&emsp;如今，比较安全的对称密钥算法是 AES（高级加密标准）和 3DES（三重数据加密算法）。它们都被公认为很难破解。</p><p>&emsp;&emsp;即使密码再难破解，但如果偷窃者在信息交换双方共享密钥时捕获了密钥，一样会造成信息泄露。因此，就需要一种更为安全的机制来交换密码，而不让偷窃者真正看到它。这就是后文将要介绍的非对称加密算法。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>istio</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>istio</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>九析带你轻松完爆 Istio - 安全之加密</title>
     <link href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86/"/>
     <url>/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86/</url>

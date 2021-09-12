@@ -18,7 +18,7 @@
   <meta name="author" content="九析">
   <meta name="keywords" content="">
   
-  <title>九析带你轻松完爆 Istio - 安全之加密 - 九析</title>
+  <title>九析带你轻松完爆 Istio - Envoy 监听器简介 - 九析</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松完爆 Istio - 安全之加密">
+            <span class="h2" id="subtitle" title="九析带你轻松完爆 Istio - Envoy 监听器简介">
               
             </span>
 
@@ -213,7 +213,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-12 14:28" pubdate>
+      <time datetime="2021-09-12 14:57" pubdate>
         2021年9月12日 下午
       </time>
     </span>
@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      406 字
+      924 字
     </span>
   
 
@@ -235,7 +235,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      10
        分钟
     </span>
   
@@ -265,31 +265,40 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松完爆 Istio - 安全之加密</h1>
+            <h1 style="display: none">九析带你轻松完爆 Istio - Envoy 监听器简介</h1>
             
             <div class="markdown-body">
               <p>1 前言</p>
 <p>2 邀约</p>
-<p>3 加密简介</p>
-<p>4  Hash</p>
+<p>3 上章总结</p>
+<p>4 监听器</p>
+<p>  4.1 TCP 监听器</p>
+<p>  4.2 UDP 监听器</p>
 <hr>
 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591356282457280.png" srcset="/img/loading.gif" lazyload alt="第四十章 九析带你轻松完爆 Istio - 安全之加密_Istio 免费视频。"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661295647236.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 监听器"></p>
 <hr>
 <h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591356289184711.png" srcset="/img/loading.gif" lazyload alt="第四十章 九析带你轻松完爆 Istio - 安全之加密_Istio 免费视频。_02"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661302961492.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Istio 视频_02"></p>
 <hr>
-<h1 id="3-加密简介"><a href="#3-加密简介" class="headerlink" title="3 加密简介"></a>3 加密简介</h1><p>&emsp;&emsp;加密是基础，是安全绕不开的话题。常用的加密方式有三种，分别为哈希、对称加密和非对称加密。下面分别进行介绍。</p>
+<h1 id="3-上章总结"><a href="#3-上章总结" class="headerlink" title="3 上章总结"></a>3 上章总结</h1><p>&emsp;&emsp;上节介绍了 Envoy 的基础配置信息，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661310554278.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 视频_03"></p>
+<p>&emsp;&emsp;上面配置信息重点介绍了两块内容，管理信息（admin 部分）和静态配置信息（static_resources 部分）。管理信息包括 Envoy 的 web 管理控制台。在用 Docker  运行时可对外开放 9901 端口（并对所有客户端可见，即 address 为 0.0.0.0）。关于如何运行 Envoy  可参考我上一篇文章，轻松完爆就是。运行后的结果如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661537504319.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 视频_04"></p>
+<p>&emsp;&emsp;从上图可知，对外服务端口 9901 已经开启。打开浏览器访问，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661545300104.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_k8s 视频_05"></p>
+<p>&emsp;&emsp;静态配置信息主要包括两部分内容，分别是监听器（listener，今天介绍的主角）和集群（cluster），如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661365273203.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 监听器_06"></p>
+<p>&emsp;&emsp;   listener 是 Envoy 对外提供的监听端口，默认 10000。客户端通过此端口可以与 Envoy  建立通讯，获取连接（connection）。此外，在监听器上还可设置过滤器链（filter_chains），链上设置多过滤器，这样的设置可保证对进入 Envoy 的网络流量（请求）进行相应的处理，比如：上图就设置了http 过滤器，即：进入 Envoy 的所有 http  网络流量，都将被路由到集群（clusters）配置中，在集群（clusters）配置了 http 网络流量最终流向端点（endpoints，即  baidu.com）。整个过程如图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661577790290.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 教程_07"></p>
 <hr>
-<h1 id="4-Hash"><a href="#4-Hash" class="headerlink" title="4  Hash"></a>4  Hash</h1><p>&emsp;&emsp;哈希（Hash），又称散列，是数据无法恢复的一项加密技术。比如字符串 “qingsongwanbao” 经过 md5 加密后的结果就是 “a90d298c15992ad107dfafca1f1deb9c”。如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591356351862148.png" srcset="/img/loading.gif" lazyload alt="第四十章 九析带你轻松完爆 Istio - 安全之加密_Istio 加密_04"></p>
-<p>&emsp;&emsp;哈希后的结果一般情况下是不可逆的，也就是说无法根据 “a90d298c15992ad107dfafca1f1deb9c” 根据算法推导出 “qingsongwanbao”  。哈希经常的使用场景是密码。用户注册网站会员，在保存密码时就可以使用哈希，这样做即使数据库泄露，哈希后的密码被黑客获取，仍然无法推导出用户的明文密码。过程如下图所示：</p>
-<p>&emsp;&emsp;用户注册：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591356359876615.png" srcset="/img/loading.gif" lazyload alt="第四十章 九析带你轻松完爆 Istio - 安全之加密_Istio 加密_06"></p>
-<p>&emsp;&emsp;数据库被黑，用户名（hongxing）和散列后密码（5ea79ec42b3c05ec3b530276d83b3961）被盗，黑客通过盗取的用户名、散列后的密码登录，散列后的密码会再经过 Hash 变成一个新的密码值，此时就无法跟数据库原先的信息进行匹配，进而无法通过鉴权，也就无法登录网站和进行下一步操作。</p>
-<p>Hash 还常用在网站的 cookie 里，如下所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591356369229019.png" srcset="/img/loading.gif" lazyload alt="第四十章 九析带你轻松完爆 Istio - 安全之加密_Istio 免费视频。_07"></p>
-<p>&emsp;&emsp;常用的 Hash 算法有：md5、sha256、sha512 等。</p>
+<h1 id="4-监听器"><a href="#4-监听器" class="headerlink" title="4 监听器"></a>4 监听器</h1><p>&emsp;&emsp;Envoy 配置在单个进程中支持任意数量的监听器（listener）。Envoy 支持 TCP 和 UDP 的监听器。</p>
+<h2 id="4-1-TCP-监听器"><a href="#4-1-TCP-监听器" class="headerlink" title="4.1 TCP 监听器"></a>4.1 TCP 监听器</h2><p>&emsp;&emsp;监听器上可以配置一系列的过滤器构成的链，并且根据匹配条件来选择某个链。单个过滤器链由一个或多个 L3 / L4 过滤器组成。当监听器上收到连接时，将选择匹配的过滤器链，实例化本地过滤器，并开始处理后续事件。这样通用的监听器体系架构设计使得 Envoy 可以执行绝大多数的代理任务（比如，速率限制、TLS 客户端身份认证、HTTP 连接管理、MongoDB 嗅探、原始 TCP  代理）等。</p>
+<p>&emsp;&emsp;如上可知，监听器可以配置监听过滤器。这些过滤器在网络过滤器（以后会讲）之前进行处理。并且监听过滤器还可以操作连接（connection）的元数据，这通常会影响以后的过滤器（filter）、集群（cluster）如何处理该连接。</p>
+<p>&emsp;&emsp;监听器也可以通过<a target="_blank" rel="noopener" href="https://www.envoyproxy.io/docs/envoy/latest/configuration/listeners/lds#config-listeners-lds"> 监听器发现服务（LDS）</a>动态获取。</p>
+<p>&emsp;&emsp;有关监听器的详细配置，<a target="_blank" rel="noopener" href="https://www.envoyproxy.io/docs/envoy/latest/configuration/listeners/listeners#config-listeners"> 请点击这里</a>。</p>
+<h2 id="4-2-UDP-监听器"><a href="#4-2-UDP-监听器" class="headerlink" title="4.2 UDP 监听器"></a>4.2 UDP 监听器</h2><p>&emsp;&emsp;Envoy 还支持 UDP 监听器，尤其是 UDP 监听器过滤器。每个监听器过滤器都会处理工作进程在监听器端口上监听的每个 UDP 数据报。实际上，UDP 监听器配置有 SO_REUSEPORT 内核选项（该选项作用是可以将多个进程绑定在同一个端口上），这将导致内核将每个 UDP  四元组一致地散列到同一个工作程序。如果需要，这可使 UDP 监听器过滤器面向“会话”。</p>
+<p>&emsp;&emsp;自此，九析带你轻松完爆 Envoy 监听器简介，有关监听器更多的内容，请查看本人接下来的文章。</p>
 
             </div>
             <hr>
@@ -324,18 +333,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86%E4%BA%8C/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆 Istio - 安全之加密二</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-SSL-%E4%B8%8E-TLS-%E7%AE%80%E4%BB%8B/">
-                        <span class="hidden-mobile">九析带你轻松完爆 Istio - SSL 与 TLS 简介</span>
+                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%B8%80%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B/">
+                        <span class="hidden-mobile">九析带你轻松完爆 Istio - Envoy 一分钟上手</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
