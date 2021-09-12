@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>九析带你轻松完爆 Istio - Envoy 架构概述</title>
+    <link href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0/"/>
+    <url>/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0/</url>
+    
+    <content type="html"><![CDATA[<p>1 前言</p><p>2 邀约</p><p>3 概述</p><hr><h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592970103347634.png" srcset="/img/loading.gif" lazyload alt="第四十五章 九析带你轻松完爆 Istio - Envoy 架构概述_envoy 视频"></p><hr><h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592970111662295.png" srcset="/img/loading.gif" lazyload alt="第四十五章 九析带你轻松完爆 Istio - Envoy 架构概述_istio 视频_02"></p><hr><h1 id="3-Envoy-架构概述"><a href="#3-Envoy-架构概述" class="headerlink" title="3 Envoy 架构概述"></a>3 Envoy 架构概述</h1><p>&emsp;&emsp;下图展示了 Envoy 架构：</p><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592970136404676.png" srcset="/img/loading.gif" lazyload alt="第四十五章 九析带你轻松完爆 Istio - Envoy 架构概述_envoy 视频_03"></p><p>&emsp;&emsp;后面将根据这十个方面一一进行说明。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>istio</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>istio</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>九析带你轻松完爆 Istio - Envoy 监听器简介</title>
     <link href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%9B%91%E5%90%AC%E5%99%A8%E7%AE%80%E4%BB%8B/"/>
     <url>/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%9B%91%E5%90%AC%E5%99%A8%E7%AE%80%E4%BB%8B/</url>
