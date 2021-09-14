@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      900 字
+      908 字
     </span>
   
 
@@ -299,10 +299,9 @@
 <h1 id="5-定制升级"><a href="#5-定制升级" class="headerlink" title="5 定制升级"></a>5 定制升级</h1><p>&emsp;&emsp;上面在线升级方式升级的版本一般较老，如果既想在线安装，又想指定版本，可采用定制升级。</p>
 <h2 id="5-1-安装-elrepo-yum-源"><a href="#5-1-安装-elrepo-yum-源" class="headerlink" title="5.1 安装 elrepo yum 源"></a>5.1 安装 elrepo yum 源</h2><p>&emsp;&emsp;elrepo 是 CentOS 稳定的软件源，可以通过它将内核升级到指定版本，elrepo 网址请<a target="_blank" rel="noopener" href="https://elrepo.org/tiki/tiki-index.php">点击</a>：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> yum install -y https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm</span><br></code></pre></td></tr></table></figure>
-<h2 id="5-2-查看内核包"><a href="#5-2-查看内核包" class="headerlink" title="5.2 查看内核包"></a>5.2 查看内核包</h2><blockquote>
-<p>yum –disablerepo=”*” –enablerepo=”elrepo-kernel” list available</p>
-</blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153911399.png" srcset="/img/loading.gif" lazyload alt="image-20210911153911399"></p>
+<h2 id="5-2-查看内核版本列表"><a href="#5-2-查看内核版本列表" class="headerlink" title="5.2 查看内核版本列表"></a>5.2 查看内核版本列表</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> yum --disablerepo=<span class="hljs-string">&quot;*&quot;</span> --enablerepo=<span class="hljs-string">&quot;elrepo-kernel&quot;</span> list available</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153911399.png" srcset="/img/loading.gif" lazyload alt="内核版本列表"></p>
 <h2 id="5-3-升级内核"><a href="#5-3-升级内核" class="headerlink" title="5.3 升级内核"></a>5.3 升级内核</h2><p>&emsp;&emsp;在 elrepo 源中有 ml 和 lt 两种内核。ml（mainline）为最新版本的内核，lt 为长期支持的内核。这里选择 ml 内核。</p>
 <blockquote>
 <p>yum –enablerepo=elrepo-kernel -y install kernel-ml</p>
