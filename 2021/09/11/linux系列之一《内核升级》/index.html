@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      940 字
+      952 字
     </span>
   
 
@@ -277,10 +277,9 @@
 <p>&emsp;&emsp;命令执行结果如下所示：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">[root@localhost ~]# uname -r<br>3.10.0-327.el7.x86_64<br></code></pre></td></tr></table></figure>
 <hr>
-<h1 id="3-自动升级"><a href="#3-自动升级" class="headerlink" title="3 自动升级"></a>3 自动升级</h1><blockquote>
-<p>yum install -y kernel</p>
-</blockquote>
-<p>&emsp;&emsp;使用 yum 升级内核是相对而言最安全的升级方式了，因为是经过发行版厂商验证过的版本。一般情况下，它并不是最新的，但却是最稳定的。</p>
+<h1 id="3-yum-默认升级"><a href="#3-yum-默认升级" class="headerlink" title="3 yum 默认升级"></a>3 yum 默认升级</h1><p>&emsp;&emsp;使用如下命令进行 yum 默认升级：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> yum install -y kernel</span><br></code></pre></td></tr></table></figure>
+<p>&emsp;&emsp;使用 yum 默认升级内核方式是最安全的升级方式，因为该版本是发行版厂商验证过的版本。它并不是最新的，但却是最稳定的。</p>
 <hr>
 <h1 id="4-手动升级"><a href="#4-手动升级" class="headerlink" title="4 手动升级"></a>4 手动升级</h1><p>&emsp;&emsp;手动升级是一件比较刺激的事情。首先到 linux 内核网站膜拜一下上帝。点击<a target="_blank" rel="noopener" href="https://www.kernel.org/"> 网址</a>查看：</p>
 <p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/spacer.gif" srcset="/img/loading.gif" lazyload alt="第一章 九析带你轻松升级 linux kernel_运维_02"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153728956.png" srcset="/img/loading.gif" lazyload alt="image-20210911153728956"></p>
