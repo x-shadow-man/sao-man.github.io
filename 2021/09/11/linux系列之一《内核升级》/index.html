@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      895 字
+      909 字
     </span>
   
 
@@ -294,8 +294,8 @@
 <h2 id="4-3-编译安装步骤"><a href="#4-3-编译安装步骤" class="headerlink" title="4.3 编译安装步骤"></a>4.3 编译安装步骤</h2><p>&emsp;&emsp;编译安装步骤如下，只需一步一步执行即可。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> yum install -y gcc bc openssl-devel perl</span> <br><span class="hljs-meta">#</span><span class="bash"> make mrproper  <span class="hljs-comment"># 删除编译生成的文件，包括内核配置文件和各种配置文件，一般只在第一次执行内核编译前才使用此命令</span></span><br><span class="hljs-meta">#</span><span class="bash"> make oldconfig <span class="hljs-comment"># 使用原有的内核配置。执行过程中需要交互，一路回车即可</span></span><br><span class="hljs-meta">#</span><span class="bash"> make 		 <span class="hljs-comment"># 编译源码。所有执行操作中最耗时的部分。你可以睡个午觉</span></span><br><span class="hljs-meta">#</span><span class="bash"> make modules_install	<span class="hljs-comment"># 将编译出的内核模块复制到 /lib/modules</span></span><br><span class="hljs-meta">#</span><span class="bash"> make install		<span class="hljs-comment"># make是编译；make install 安装到指定位置(/boot)</span></span><br></code></pre></td></tr></table></figure>
 
-<h2 id="4-4-重启"><a href="#4-4-重启" class="headerlink" title="4.4 重启"></a>4.4 重启</h2><p>&emsp;&emsp;重启后在 grub 中选择 4.14 版本。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153835264.png" srcset="/img/loading.gif" lazyload alt="image-20210911153835264"></p>
+<h2 id="4-4-重启"><a href="#4-4-重启" class="headerlink" title="4.4 重启"></a>4.4 重启</h2><p>&emsp;&emsp;编译安装后，重启系统，发现 4.14 版本已经成功安装，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153835264.png" srcset="/img/loading.gif" lazyload alt="grub 版本信息"></p>
 <p>&emsp;&emsp;启动成功后，再次查看内核版本，发现已经轻松完爆：</p>
 <p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153852122.png" srcset="/img/loading.gif" lazyload alt="image-20210911153852122"></p>
 <hr>
