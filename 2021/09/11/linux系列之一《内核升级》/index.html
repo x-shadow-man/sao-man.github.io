@@ -281,15 +281,14 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> uname -r</span><br></code></pre></td></tr></table></figure>
 <p>&emsp;&emsp;命令执行结果如下所示：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">[root@localhost ~]# uname -r<br>3.10.0-327.el7.x86_64<br></code></pre></td></tr></table></figure>
-<hr>
+
 <h1 id="3-在线升级"><a href="#3-在线升级" class="headerlink" title="3 在线升级"></a>3 在线升级</h1><p>&emsp;&emsp;使用 yum 在线升级是最安全的升级方式，因为使用该方式升级的版本是经过厂商验证过的版本，虽然它并不是最新的，但却是最稳定的。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> yum install -y kernel</span><br></code></pre></td></tr></table></figure>
 
-<hr>
 <h1 id="4-手动升级"><a href="#4-手动升级" class="headerlink" title="4 手动升级"></a>4 手动升级</h1><p>&emsp;&emsp;手动升级是一件比较刺激的事情，升级前需要到 <a target="_blank" rel="noopener" href="https://www.kernel.org/">linux 内核网站</a> 下载指定版本的内核包：</p>
 <p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153728956.png" srcset="/img/loading.gif" lazyload alt="linux 内核网站"></p>
-<h2 id="4-1-下载安装包"><a href="#4-1-下载安装包" class="headerlink" title="4.1 下载安装包"></a>4.1 下载安装包</h2><p>&emsp;&emsp;下载网址：<a target="_blank" rel="noopener" href="https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/"> https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/</a>。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153808360.png" srcset="/img/loading.gif" lazyload alt="image-20210911153808360"></p>
+<h2 id="4-1-下载安装包"><a href="#4-1-下载安装包" class="headerlink" title="4.1 下载安装包"></a>4.1 下载安装包</h2><p>&emsp;&emsp;手动升级采用 4.x 版本，<a target="_blank" rel="noopener" href="https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/"> 下载网址</a>。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153808360.png" srcset="/img/loading.gif" lazyload alt="linux 4.x 内核版本网"></p>
 <h2 id="4-2-解压缩安装包"><a href="#4-2-解压缩安装包" class="headerlink" title="4.2 解压缩安装包"></a>4.2 解压缩安装包</h2><blockquote>
 <p>tar -zxvf linux-4.14.tar.gz</p>
 </blockquote>
