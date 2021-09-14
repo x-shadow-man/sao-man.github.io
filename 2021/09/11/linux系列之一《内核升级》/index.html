@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      902 字
+      916 字
     </span>
   
 
@@ -235,7 +235,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      11
        分钟
     </span>
   
@@ -297,10 +297,8 @@
 <h2 id="4-4-重启"><a href="#4-4-重启" class="headerlink" title="4.4 重启"></a>4.4 重启</h2><p>&emsp;&emsp;编译安装后重启系统，发现 4.14 版本已经成功安装，如下图所示：</p>
 <p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153835264.png" srcset="/img/loading.gif" lazyload alt="grub 版本信息"></p>
 <h1 id="5-定制升级"><a href="#5-定制升级" class="headerlink" title="5 定制升级"></a>5 定制升级</h1><p>&emsp;&emsp;上面在线升级方式升级的版本一般较老，如果既想在线安装，又想指定版本，可采用定制升级。</p>
-<h2 id="5-1-安装-elrepo-yum-源"><a href="#5-1-安装-elrepo-yum-源" class="headerlink" title="5.1 安装 elrepo yum 源"></a>5.1 安装 elrepo yum 源</h2><p>&emsp;&emsp;elrepo 是 CentOS 稳定的软件源，可以通过它很容易将内核升级到指定版本。elrepo 网址请<a target="_blank" rel="noopener" href="https://elrepo.org/tiki/tiki-index.php">点击</a>：</p>
-<blockquote>
-<p>yum install -y <a target="_blank" rel="noopener" href="https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm"> https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm</a></p>
-</blockquote>
+<h2 id="5-1-安装-elrepo-yum-源"><a href="#5-1-安装-elrepo-yum-源" class="headerlink" title="5.1 安装 elrepo yum 源"></a>5.1 安装 elrepo yum 源</h2><p>&emsp;&emsp;elrepo 是 CentOS 稳定的软件源，可以通过它很容易将内核升级到指定版本，elrepo 网址请<a target="_blank" rel="noopener" href="https://elrepo.org/tiki/tiki-index.php">点击</a>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> yum install -y [ https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm](https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm)</span><br></code></pre></td></tr></table></figure>
 <h2 id="5-2-查看内核包"><a href="#5-2-查看内核包" class="headerlink" title="5.2 查看内核包"></a>5.2 查看内核包</h2><blockquote>
 <p>yum –disablerepo=”*” –enablerepo=”elrepo-kernel” list available</p>
 </blockquote>
