@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      908 字
+      904 字
     </span>
   
 
@@ -302,10 +302,9 @@
 <h2 id="5-2-查看内核版本列表"><a href="#5-2-查看内核版本列表" class="headerlink" title="5.2 查看内核版本列表"></a>5.2 查看内核版本列表</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> yum --disablerepo=<span class="hljs-string">&quot;*&quot;</span> --enablerepo=<span class="hljs-string">&quot;elrepo-kernel&quot;</span> list available</span><br></code></pre></td></tr></table></figure>
 
 <p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153911399.png" srcset="/img/loading.gif" lazyload alt="内核版本列表"></p>
-<h2 id="5-3-升级内核"><a href="#5-3-升级内核" class="headerlink" title="5.3 升级内核"></a>5.3 升级内核</h2><p>&emsp;&emsp;在 elrepo 源中有 ml 和 lt 两种内核。ml（mainline）为最新版本的内核，lt 为长期支持的内核。这里选择 ml 内核。</p>
-<blockquote>
-<p>yum –enablerepo=elrepo-kernel -y install kernel-ml</p>
-</blockquote>
+<h2 id="5-3-升级内核"><a href="#5-3-升级内核" class="headerlink" title="5.3 升级内核"></a>5.3 升级内核</h2><p>&emsp;&emsp;elrepo 源有ml、lt两种内核。ml(mainline)为最新版本的内核，lt为长期支持的内核，我们选择 ml。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> yum --enablerepo=elrepo-kernel -y install kernel-ml</span><br></code></pre></td></tr></table></figure>
+
 <h2 id="5-4-修改内核启动顺序"><a href="#5-4-修改内核启动顺序" class="headerlink" title="5.4 修改内核启动顺序"></a>5.4 修改内核启动顺序</h2><p>&emsp;&emsp;修改 /etc/default/grub 文件，将 GRUB_DEFAULT 改为 0：</p>
 <p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153928164.png" srcset="/img/loading.gif" lazyload alt="image-20210911153928164"></p>
 <p>&emsp;&emsp;编辑完后，执行如下命令让配置生效：</p>
