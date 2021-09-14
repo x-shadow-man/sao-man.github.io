@@ -225,7 +225,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      952 字
+      978 字
     </span>
   
 
@@ -271,15 +271,20 @@
               <h1 id="1-操作系统的内核与发行版"><a href="#1-操作系统的内核与发行版" class="headerlink" title="1 操作系统的内核与发行版"></a>1 操作系统的内核与发行版</h1><p>&emsp;&emsp;首先简单解释一下操作系统的内核和发行版。</p>
 <p>&emsp;&emsp;内核是管理 CPU、内存、磁盘、进程、中断、文件系统和网络协议栈的程序。</p>
 <p>&emsp;&emsp;用户对内核感知度不高，因为用户只需要应用程序。比如某人迷恋日本电影，ta 并不在乎内核，ta 需要的只是一个播放器，这怎么办呢？于是就有好事者在内核之外预安装了一个播放器给 ta 使用，随着类似的需求不断增多，预安装的程序也越来越多，逐渐就发展成了内核和应用程序集的”结合体”，这个”结合体”我们就称之为操作系统的发行版，比如我们耳熟能详的 Red Hat、CentOS、Ubuntu 都属于操作系统的发行版。</p>
-<p>&emsp;&emsp;本节我们讨论如何升级 linux 内核。</p>
+<p>&emsp;&emsp;本节我们讨论如何升级 linux 内核，常见下列三种方式：</p>
+<ul>
+<li>yum 在线升级</li>
+<li>离线升级</li>
+<li>yum 在线升级指定版本</li>
+</ul>
 <h1 id="2-查看内核版本"><a href="#2-查看内核版本" class="headerlink" title="2 查看内核版本"></a>2 查看内核版本</h1><p>&emsp;&emsp;使用如下命令查看当前内核版本：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> uname -r</span><br></code></pre></td></tr></table></figure>
 <p>&emsp;&emsp;命令执行结果如下所示：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">[root@localhost ~]# uname -r<br>3.10.0-327.el7.x86_64<br></code></pre></td></tr></table></figure>
 <hr>
-<h1 id="3-yum-默认升级"><a href="#3-yum-默认升级" class="headerlink" title="3 yum 默认升级"></a>3 yum 默认升级</h1><p>&emsp;&emsp;使用如下命令进行 yum 默认升级：</p>
+<h1 id="3-yum-在线升级"><a href="#3-yum-在线升级" class="headerlink" title="3 yum 在线升级"></a>3 yum 在线升级</h1><p>&emsp;&emsp;执行如下命令进行 yum 在线升级：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> yum install -y kernel</span><br></code></pre></td></tr></table></figure>
-<p>&emsp;&emsp;使用 yum 默认升级内核方式是最安全的升级方式，因为该版本是发行版厂商验证过的版本。它并不是最新的，但却是最稳定的。</p>
+<p>&emsp;&emsp;使用 yum 在线安装是最安全的升级方式，因为该版本是经过发行版厂商验证过的版本，虽然它并不是最新的，但却是最稳定的。</p>
 <hr>
 <h1 id="4-手动升级"><a href="#4-手动升级" class="headerlink" title="4 手动升级"></a>4 手动升级</h1><p>&emsp;&emsp;手动升级是一件比较刺激的事情。首先到 linux 内核网站膜拜一下上帝。点击<a target="_blank" rel="noopener" href="https://www.kernel.org/"> 网址</a>查看：</p>
 <p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/spacer.gif" srcset="/img/loading.gif" lazyload alt="第一章 九析带你轻松升级 linux kernel_运维_02"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911153728956.png" srcset="/img/loading.gif" lazyload alt="image-20210911153728956"></p>
