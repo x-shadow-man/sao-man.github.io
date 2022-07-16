@@ -1,274 +1,239 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
-
-
-
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1 前言 2 邀约 3 安装 istio 4 安装 bookinfo 应用 5 设置 kiali 6 kiali 可视化 bookinfo 7 注入和观察流量  1 前言​    如果你对博客有任何疑问，请告诉我。   2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：   3 安装 istio​    istio 安装教程请参考本人的博客《 istio 安装》。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="九析带你轻松完爆 service mesh - istio kiali bookinfo">
+<meta property="og:url" content="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-bookinfo/index.html">
+<meta property="og:site_name" content="九析">
+<meta property="og:description" content="1 前言 2 邀约 3 安装 istio 4 安装 bookinfo 应用 5 设置 kiali 6 kiali 可视化 bookinfo 7 注入和观察流量  1 前言​    如果你对博客有任何疑问，请告诉我。   2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：   3 安装 istio​    istio 安装教程请参考本人的博客《 istio 安装》。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675889827788.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675897514592.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675907738139.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675915689224.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675923857146.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675930269547.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675942103722.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675950551018.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675958536850.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675965312153.png">
+<meta property="article:published_time" content="2021-09-11T13:42:48.000Z">
+<meta property="article:modified_time" content="2021-09-11T13:43:39.087Z">
+<meta property="article:author" content="九析">
+<meta property="article:tag" content="istio">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675889827788.png">
+
+
+<link rel="canonical" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-bookinfo/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-bookinfo/","path":"2021/09/11/九析带你轻松完爆-service-mesh-istio-kiali-bookinfo/","title":"九析带你轻松完爆 service mesh - istio kiali bookinfo"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>九析带你轻松完爆 service mesh - istio kiali bookinfo | 九析</title>
   
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="九析">
-  <meta name="keywords" content="">
-  
-  <title>九析带你轻松完爆 service mesh - istio kiali bookinfo - 九析</title>
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
 
 
 
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>九析</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" target="_self" role="button"
-                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="iconfont icon-books"></i>
-                文档
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/">
-                    
-                    主题博客
-                  </a>
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/">
-                    
-                    配置指南
-                  </a>
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/icon/">
-                    
-                    图标用法
-                  </a>
-                
-              </div>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
     </div>
   </div>
-</nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/ss.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松完爆 service mesh - istio kiali bookinfo">
-              
-            </span>
+  <div class="site-meta">
 
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-11 21:42" pubdate>
-        2021年9月11日 晚上
-      </time>
-    </span>
-  
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">九析</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      778 字
-    </span>
-  
 
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      9
-       分钟
-    </span>
-  
 
+
+
+
+
+</div>
+        
   
-  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">1 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%82%80%E7%BA%A6"><span class="nav-number">2.</span> <span class="nav-text">2 邀约</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85-istio"><span class="nav-number">3.</span> <span class="nav-text">3 安装 istio</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%AE%89%E8%A3%85-bookinfo-%E5%BA%94%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">4 安装 bookinfo 应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E8%AE%BE%E7%BD%AE-kiali"><span class="nav-number">5.</span> <span class="nav-text">5 设置 kiali</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-kiali-%E5%8F%AF%E8%A7%86%E5%8C%96-bookinfo"><span class="nav-number">6.</span> <span class="nav-text">6 kiali 可视化 bookinfo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E6%B3%A8%E5%85%A5%E5%92%8C%E8%A7%82%E5%AF%9F%E6%B5%81%E9%87%8F"><span class="nav-number">7.</span> <span class="nav-text">7 注入和观察流量</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">九析</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
 </div>
 
-            
-          </div>
 
-          
+
         </div>
       </div>
     </div>
-  </header>
+  </aside>
+  <div class="sidebar-dimmer"></div>
 
-  <main>
+
+    </header>
+
     
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-bookinfo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="九析">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="九析">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="九析带你轻松完爆 service mesh - istio kiali bookinfo | 九析">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          九析带你轻松完爆 service mesh - istio kiali bookinfo
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
 
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松完爆 service mesh - istio kiali bookinfo</h1>
-            
-            <div class="markdown-body">
-              <p>1 前言</p>
+      <time title="创建时间：2021-09-11 21:42:48 / 修改时间：21:43:39" itemprop="dateCreated datePublished" datetime="2021-09-11T21:42:48+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/istio/" itemprop="url" rel="index"><span itemprop="name">istio</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>1 前言</p>
 <p>2 邀约</p>
 <p>3 安装 istio</p>
 <p>4 安装 bookinfo 应用</p>
@@ -277,10 +242,10 @@
 <p>7 注入和观察流量</p>
 <hr>
 <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675889827788.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio 学习"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675889827788.png" alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio 学习"></p>
 <hr>
 <h2 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h2><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675897514592.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio kiali bookinf_02"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675897514592.png" alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio kiali bookinf_02"></p>
 <hr>
 <h2 id="3-安装-istio"><a href="#3-安装-istio" class="headerlink" title="3 安装 istio"></a>3 安装 istio</h2><p>​    istio 安装教程请参考本人的博客《<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2474224"> istio 安装</a>》。</p>
 <hr>
@@ -290,13 +255,13 @@
 <p>​    有关 kiali 的配置和简单使用请参考本人的博客《<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2479715"> kiali 安装</a>》和《<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2479767"> kiali 使用</a>》。</p>
 <hr>
 <h2 id="6-kiali-可视化-bookinfo"><a href="#6-kiali-可视化-bookinfo" class="headerlink" title="6 kiali 可视化 bookinfo"></a>6 kiali 可视化 bookinfo</h2><p>​    登录 kiali，进入 overview 菜单，选中 bookinfo 应用，如下图所示，本人布置在 jiuxi 命名空间：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675907738139.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio 视频_03"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675907738139.png" alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio 视频_03"></p>
 <p>​    点击进入 jiuxi 命名空间下的 “4 Applications” ， 进入 “Applications” 视图，可见 bookinfo 样例下的 4 个微服务，并且当前这 4 个微服务状态都健康（Health ✔）如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675915689224.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio kiali_04"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675915689224.png" alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio kiali_04"></p>
 <p>​    最关键的可视化内容可以查看 “Graph” 菜单，如下所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675923857146.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_kiali bookinfo_05"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675923857146.png" alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_kiali bookinfo_05"></p>
 <p>​    下面重点介绍 “Graph” 视图下的功能：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675930269547.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio 学习_06"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675930269547.png" alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio 学习_06"></p>
 <blockquote>
 <p>1 命名空间</p>
 <p>2 分类图展示：app（应用视角，label 名为 app，并且 app 值相同的资源算作一类  app）、service（k8s服务视角）、versioned app（标记版本应用视角）、workload（k8s工作负载视角，比如  deployment、job、statefulset、daemonset）</p>
@@ -312,259 +277,82 @@
 <p>12 图例说明：解释图中各个形状各代表什么意思</p>
 <p>13 layout：不同展示风格（共有三种，选择自己的喜好）</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675942103722.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio kiali bookinf_07"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675942103722.png" alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio kiali bookinf_07"></p>
 <hr>
 <h2 id="7-注入和观察流量"><a href="#7-注入和观察流量" class="headerlink" title="7 注入和观察流量"></a>7 注入和观察流量</h2><p>​    选择 ingressgateway svc，通过如下指令：</p>
 <blockquote>
 <p>kubectl get svc -n istio-system -o wide    # jiuxi 是我自定义命名空间</p>
 </blockquote>
 <p>​    执行结果如下图：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675950551018.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_kiali bookinfo_08"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675950551018.png" alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_kiali bookinfo_08"></p>
 <p>​    因为服务类型是 NodePort，所以 ip 要选择宿主机 ip，而不是 svc cluster-ip 或者是 pod ip，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675958536850.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio kiali_09"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675958536850.png" alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_istio kiali_09"></p>
 <p>​    通过 curl 命令打入流量：</p>
 <blockquote>
 <p>while true; do curl <a target="_blank" rel="noopener" href="http://10.110.101.98:30100/productpage">http://10.110.101.98:30100/productpage</a>; done</p>
 </blockquote>
 <p>​    通过 kiali graph 视图:</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675965312153.png" srcset="/img/loading.gif" lazyload alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_kiali bookinfo_10"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584675965312153.png" alt="第十三章 九析带你轻松完爆 service mesh - istio kiali bookinfo_kiali bookinfo_10"></p>
 <p>​    自此，九析带你轻松完爆 istio kiali bookinfo 应用。</p>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/istio/">istio</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/istio/">istio</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E5%86%85%E9%83%A8%E4%BB%8B%E7%BB%8D/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio kiali 内部介绍</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BD%BF%E7%94%A8%E7%AF%87/">
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio kiali 使用篇</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
     </div>
+
     
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/istio/" rel="tag"># istio</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E4%BD%BF%E7%94%A8%E7%AF%87/" rel="prev" title="九析带你轻松完爆 service mesh - istio kiali 使用篇">
+                  <i class="fa fa-chevron-left"></i> 九析带你轻松完爆 service mesh - istio kiali 使用篇
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E5%86%85%E9%83%A8%E4%BB%8B%E7%BB%8D/" rel="next" title="九析带你轻松完爆 service mesh - istio kiali 内部介绍">
+                  九析带你轻松完爆 service mesh - istio kiali 内部介绍 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
 </div>
 
-      </div>
-    
-  </div>
+
+
+
+
+
 </div>
-
-<!-- Custom -->
-
-
-    
-
-    
-      <a id="scroll-top-button" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-    
-
-    
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
-  
-  <div class="statistics">
-    
-    
+  <footer class="footer">
+    <div class="footer-inner">
 
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">九析</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
+    </div>
+  </footer>
 
   
-
-  
-</footer>
-
-
-  <!-- SCRIPTS -->
-  
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    
-      <script  src="/js/img-lazyload.js" ></script>
-    
-  
-
-
-
-  
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
 
@@ -572,8 +360,10 @@
 
 
 
-<!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script>
+  
+
+
+
 
 
 </body>

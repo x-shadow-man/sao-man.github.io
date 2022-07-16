@@ -1,938 +1,1583 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
-
-
-
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="website">
+<meta property="og:title" content="九析">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="九析">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="九析">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>九析</title>
   
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="九析">
-  <meta name="keywords" content="">
-  
-  <title>九析</title>
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
 
 
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-
-<body>
-  <header style="height: 100vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>九析</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" target="_self" role="button"
-                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="iconfont icon-books"></i>
-                文档
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/">
-                    
-                    主题博客
-                  </a>
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/">
-                    
-                    配置指南
-                  </a>
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/icon/">
-                    
-                    图标用法
-                  </a>
-                
-              </div>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
     </div>
   </div>
-</nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/ss.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="">
-              
-            </span>
+  <div class="site-meta">
 
-            
-          </div>
-
-          
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
-          
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          style=margin-top:0>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/19/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9B%E3%80%8AGO-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E3%80%8B/" target="_self">
-          client-go 系列之四《go 反序列化》
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/19/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9B%E3%80%8AGO-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E3%80%8B/" target="_self">
-          
-          
-            
-          
-          1 前言&emsp;&emsp;本节介绍如何反序列化 yaml 文件，并将其转换为 K8S Deployment 对象。
-
-备注：有关 GO SDK 安装、GO 项目配置请查看本系列前面的文章，本文不再赘述。
-
-2 序列化与反序列化&emsp;&emsp;1907年3月12日，一个叫斯坦因的英国人来到敦煌，随后的几天里，他通过小恩小惠取得了守护人王道士的信任，并在3月16日进入了千佛洞。
-&ems
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-19 11:16" pubdate>
-              2021-09-19
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/client-go/">client-go</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/clien-go/">clien-go</a>
-            
-          </div>
-        
-      </div>
-    </article>
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">九析</h1>
+      <i class="logo-line"></i>
+    </a>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vim-%E6%A0%BC%E5%BC%8F%E5%8C%96-json/" target="_self">
-          九析带你轻松完爆 Linux - vim 格式化 json
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vim-%E6%A0%BC%E5%BC%8F%E5%8C%96-json/" target="_self">
-          
-          
-            
-          
-          1 创建或编辑 .vimrc 文件
-2 vim 控制命令 :%!python json.tool
-
-1 创建或编辑 .vimrc 文件&emsp;&emsp;在用户家目录下创建 .vimrc 文件，如果已经有该文件，则直接在末尾添加如下关于格式化 json 的配置：
-
-map :%!python -m json.tool
-
-&emsp;&emsp;截图如下：
-
-
-2 vim 控制命令 :%!pyt
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 21:33" pubdate>
-              2021-09-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Linux/">Linux</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">Linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace-%E7%BB%AD%E4%BA%8C/" target="_self">
-          九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续二
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace-%E7%BB%AD%E4%BA%8C/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 邀约
-3 多 netns 桥接通信
-4 创建网桥
-5 分别创建 netns 跟网桥的连接
-  5.1 创建西门庆与王婆的***：
-  5.2 创建潘金莲与王婆的***：
-  5.3 查看网桥状态
-  5.4 鹊桥约会
-
-1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
-
-
-2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 21:31" pubdate>
-              2021-09-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Linux/">Linux</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">Linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace-%E7%BB%AD/" target="_self">
-          九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace-%E7%BB%AD/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 邀约
-3 多网络空间之间通信
-4 两个 netns 之间的通信
-5 两个 netns 之间通信实践
-
-1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
-
-
-2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
-
-
-3 多网络空间之间通信&emsp;&emsp;多 netns 实现了网络的隔离，每个 netns 就相当于一台独
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 21:28" pubdate>
-              2021-09-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Linux/">Linux</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">Linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace/" target="_self">
-          九析带你轻松完爆 Linux - 网络虚拟化之 network namespace
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 邀约
-3 Linux network namespace 简介
-4 查看 network namespace
-5 创建 network namespace
-6 进入创建的 network namespace
-7 操作网络命名空间网络资源
-
-1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
-
-
-2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 21:25" pubdate>
-              2021-09-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Linux/">Linux</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">Linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-HOST-ONLY/" target="_self">
-          九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-HOST-ONLY/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 邀约
-3 HOST-ONLY 模式介绍
-4 HOST-ONLY 模式网络拓补图
-5 宿主机和虚拟机通信
-6 虚拟机访问外网
-
-1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
-
-
-2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
-
-
-3 HOST-ONLY 模式介绍&emsp;&emsp;前面两章中细致分析并轻松完爆了 
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 21:21" pubdate>
-              2021-09-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Linux/">Linux</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/vmware/">vmware</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-NAT/" target="_self">
-          九析带你轻松完爆 Linux - vmware 网络连接之 NAT
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-NAT/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 邀约
-3 NAT 介绍
-4 NAT 网络拓步说明
-5 NAT 设置
-6 Vmware Network Adapter VMnet8
-
-1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
-
-
-2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
-
-
-3 NAT 介绍&emsp;&emsp;上章节中介绍了 vmware 的三种网络
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 21:17" pubdate>
-              2021-09-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Linux/">Linux</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/vmware/">vmware</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B%E6%A1%A5%E6%8E%A5/" target="_self">
-          九析带你轻松完爆 Linux - vmware 网络连接之桥接
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B%E6%A1%A5%E6%8E%A5/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 邀约
-3 网络连接方式介绍
-4 查看网络连接三种方式
-5 桥接模式（Bridged）
-6 桥接模式设置
-7 总结
-
-1 前言&emsp;&emsp;如果你对博客有任何疑问，请告诉我。
-
-2 邀约&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：
-
-3 网络连接方式介绍&emsp;&emsp;Vmware workstation 是一款虚拟机软件，可
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 21:12" pubdate>
-              2021-09-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Linux/">Linux</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/vmware/">vmware</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-linux-bash/" target="_self">
-          九析带你轻松完爆 linux bash
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-linux-bash/" target="_self">
-          
-          
-            
-          
-          1 su
-2 bash 操作
-  2.1 ctrl + r
-  2.2 esc + .
-  2.3 通配符
-  2.4 作业 (jobs、&amp;、bg、fg、ctrl+z）
-
-1 su&emsp;&emsp;su 命令是切换用户（switch user）：
-
-su - root # 作用是切换用户，同时进入 root 系统管理员用户环境。
-su root    # 作用是只切换用户，但是仍旧停
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 21:07" pubdate>
-              2021-09-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Linux/">Linux</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">Linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-tcpdump/" target="_self">
-          九析带你轻松完爆 tcpdump
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-tcpdump/" target="_self">
-          
-          
-            
-          
-          1 前言
-2 使用
-
-1 前言&emsp;&emsp;tcpdump 是一款命令行抓包工具，普遍适用于 linux、unix、windows 操作系统中。tcpdump  工具本身依赖于库文件去获取网卡流量信息，比如在 windows 下就是 winpcap，在 linux 下就是 libpcap 等等。其中  pcap 就是 package capture 的缩写。
-
-2 使用&emsp;&em
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-12 21:03" pubdate>
-              2021-09-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Linux/">Linux</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/tcpdump/">tcpdump</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-
-
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
-
-
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-
-    
-      <a id="scroll-top-button" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
     </div>
   </div>
 </div>
-    
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">九析</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
 
     
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/19/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9B%E3%80%8AGO-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E3%80%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="九析">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="九析">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 九析">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/19/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9B%E3%80%8AGO-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E3%80%8B/" class="post-title-link" itemprop="url">client-go 系列之四《go 反序列化》</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-09-19 11:16:05" itemprop="dateCreated datePublished" datetime="2021-09-19T11:16:05+08:00">2021-09-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-09-21 23:15:08" itemprop="dateModified" datetime="2021-09-21T23:15:08+08:00">2021-09-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/client-go/" itemprop="url" rel="index"><span itemprop="name">client-go</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;本节介绍如何反序列化 yaml 文件，并将其转换为 K8S Deployment 对象。</p>
+<blockquote>
+<p>备注：有关 GO SDK 安装、GO 项目配置请查看本系列前面的文章，本文不再赘述。</p>
+</blockquote>
+<h1 id="2-序列化与反序列化"><a href="#2-序列化与反序列化" class="headerlink" title="2 序列化与反序列化"></a>2 序列化与反序列化</h1><p>&emsp;&emsp;1907年3月12日，一个叫斯坦因的英国人来到敦煌，随后的几天里，他通过小恩小惠取得了守护人王道士的信任，并在3月16日进入了千佛洞。</p>
+<p>&emsp;&emsp;那一天，一个震惊世界的文化奇迹从历史的尘封中露出真貌，这——便是敦煌。</p>
+<p>&emsp;&emsp;那里曾经风雨西窗，那里曾经衰草斜阳。</p>
+<p>&emsp;&emsp;斯坦因以极低的价格买走了许多珍贵的文物，其中不乏精美的壁画。因为有些壁画实在过于庞大，为了方便运输，斯坦因竟然“肢解”了它们，尽管这些壁画在到达英国后经过了重新拼装，但却带来了不可估量的艺术损失。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/dea1a354e9794e24ae97e2125bc4c0d8_th.jpeg" alt="被切割的敦煌壁画"></p>
+<p>&emsp;&emsp;斯坦因先将壁画切割成碎片，再从碎片恢复成原样的过程，就是对象的序列化与反序列化过程。</p>
+<p>&emsp;&emsp;序列化和反序列化的本质是实现对象数据类型转换（比如对象转换成切片），而对象类型转换的目的是方便数据的存储和传输。        </p>
+<h1 id="3-运行环境"><a href="#3-运行环境" class="headerlink" title="3 运行环境"></a>3 运行环境</h1><p>&emsp;&emsp;本系列文章使用的环境配置如下（不要求读者完全匹配，可根据自己实际情况酌情处理）：</p>
+<ul>
+<li>K8s        版本 :  <strong>1.19.0</strong></li>
+<li>Docker  版本：<strong>20.10.8</strong></li>
+<li>CentOS 版本：<strong>7.7.1908</strong></li>
+<li>Go SDK 版本：<strong>go1.16.6 linux/amd64</strong></li>
+</ul>
+<h1 id="4-项目代码"><a href="#4-项目代码" class="headerlink" title="4 项目代码"></a>4 项目代码</h1><p>&emsp;&emsp;进入 GO 项目根目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span> <span class="variable">$GOPATH</span>/src</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;新建 k8s-unmarshal 目录，并在目录下创建 busybox.yaml 文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> mkdir k8s-unmarshal</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span> k8s-unmarshal</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> touch busybox.yaml</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;编辑 busybox.yaml，在文件中创建一个 deployment 声明：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">busybox</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">busybox</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">busybox</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">busybox</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">busybox</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">busybox</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">busybox</span></span><br><span class="line">        <span class="attr">imagePullPolicy:</span> <span class="string">IfNotPresent</span></span><br><span class="line">        <span class="attr">command:</span> [ <span class="string">&quot;/bin/sh&quot;</span>, <span class="string">&quot;-c&quot;</span>, <span class="string">&quot;sleep 3600&quot;</span> ]</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;其次创建 main.go 文件:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> touch main.go</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;编辑 main.go 文件，添加如下代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    json2 <span class="string">&quot;encoding/json&quot;</span></span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;io/ioutil&quot;</span></span><br><span class="line"></span><br><span class="line">    v1 <span class="string">&quot;k8s.io/api/apps/v1&quot;</span></span><br><span class="line">    yaml2 <span class="string">&quot;k8s.io/apimachinery/pkg/util/yaml&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    yaml, err := ioutil.ReadFile(<span class="string">&quot;./busybox.yaml&quot;</span>) </span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;   </span><br><span class="line"></span><br><span class="line">    json, err := yaml2.ToJSON(yaml) </span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;   </span><br><span class="line"></span><br><span class="line">    deployment := v1.Deployment&#123;&#125;</span><br><span class="line">    err = json2.Unmarshal(json, &amp;deployment)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;   </span><br><span class="line"></span><br><span class="line">    fmt.Println(deployment)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-运行项目"><a href="#5-运行项目" class="headerlink" title="5 运行项目"></a>5 运行项目</h1><p>&emsp;&emsp;如果想运行成功上面的代码样例，需执行如下两个步骤：</p>
+<ul>
+<li>创建 go.mod</li>
+<li>运行 main.go</li>
+</ul>
+<h2 id="5-1-创建-go-mod"><a href="#5-1-创建-go-mod" class="headerlink" title="5.1 创建 go.mod"></a>5.1 创建 go.mod</h2><p>&emsp;&emsp;go mod 在 GO v1.11 版本引入，在 v1.12 版本基本稳定，到 v1.13 版本的时候默认是打开的，可以使用如下命令查看：        </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master-1 k8s-unmarsha]# go env | grep -i GO111MODULE</span><br><span class="line">GO111MODULE=&quot;on&quot;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;执行下列命令创建 go.mod 文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master-1 k8s-unmarsha]# go mod init</span><br><span class="line">go: creating new go.mod: module k8s-unmarsha</span><br><span class="line">go: to add module requirements and sums:</span><br><span class="line">	go mod tidy</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;如果执行结果如上所示，还需要继续执行下面指令（备注，如果指令执行失败，大概率是依赖包下不到，可参考本系列第一篇文章配置好下载包代理）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master-1 k8s-unmarshal]# go mod tidy</span><br><span class="line">go: finding module for package k8s.io/apimachinery/pkg/util/yaml</span><br><span class="line">go: finding module for package k8s.io/api/apps/v1</span><br><span class="line">go: found k8s.io/api/apps/v1 in k8s.io/api v0.22.2</span><br><span class="line">go: found k8s.io/apimachinery/pkg/util/yaml in k8s.io/apimachinery v0.22.2</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;执行完毕后， $GOPATH/src/k8s-unmarsha 目录结构如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master-1 k8s-unmarshal]# tree</span><br><span class="line">.</span><br><span class="line">├── busybox.yaml</span><br><span class="line">├── go.mod</span><br><span class="line">├── go.sum</span><br><span class="line">└── main.go</span><br><span class="line"></span><br><span class="line">0 directories, 4 files</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-2-运行-main-go"><a href="#5-2-运行-main-go" class="headerlink" title="5.2 运行 main.go"></a>5.2 运行 main.go</h2><p>&emsp;&emsp;运行 main.go：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master<span class="number">-1</span> k8s-unmarshal]# <span class="keyword">go</span> run main.<span class="keyword">go</span></span><br><span class="line">&#123;&#123;Deployment apps/v1&#125; &#123;busybox      <span class="number">0</span> <span class="number">0001</span><span class="number">-01</span><span class="number">-01</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> +<span class="number">0000</span> UTC &lt;<span class="literal">nil</span>&gt; &lt;<span class="literal">nil</span>&gt; <span class="keyword">map</span>[app:busybox] <span class="keyword">map</span>[] [] []  []&#125; &#123;<span class="number">0xc000293128</span> &amp;LabelSelector&#123;MatchLabels:<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;app: busybox,&#125;,MatchExpressions:[]LabelSelectorRequirement&#123;&#125;,&#125; &#123;&#123;busybox      <span class="number">0</span> <span class="number">0001</span><span class="number">-01</span><span class="number">-01</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> +<span class="number">0000</span> UTC &lt;<span class="literal">nil</span>&gt; &lt;<span class="literal">nil</span>&gt; <span class="keyword">map</span>[app:busybox] <span class="keyword">map</span>[] [] []  []&#125; &#123;[] [] [&#123;busybox busybox [/bin/sh -c sleep <span class="number">3600</span>] []  [] [] [] &#123;<span class="keyword">map</span>[] <span class="keyword">map</span>[]&#125; [] [] <span class="literal">nil</span> <span class="literal">nil</span> <span class="literal">nil</span> <span class="literal">nil</span>   IfNotPresent <span class="literal">nil</span> <span class="literal">false</span> <span class="literal">false</span> <span class="literal">false</span>&#125;] []  &lt;<span class="literal">nil</span>&gt; &lt;<span class="literal">nil</span>&gt;  <span class="keyword">map</span>[]   &lt;<span class="literal">nil</span>&gt;  <span class="literal">false</span> <span class="literal">false</span> <span class="literal">false</span> &lt;<span class="literal">nil</span>&gt; <span class="literal">nil</span> []   <span class="literal">nil</span>  [] []  &lt;<span class="literal">nil</span>&gt; <span class="literal">nil</span> [] &lt;<span class="literal">nil</span>&gt; &lt;<span class="literal">nil</span>&gt; &lt;<span class="literal">nil</span>&gt; <span class="keyword">map</span>[] [] &lt;<span class="literal">nil</span>&gt;&#125;&#125; &#123; <span class="literal">nil</span>&#125; <span class="number">0</span> &lt;<span class="literal">nil</span>&gt; <span class="literal">false</span> &lt;<span class="literal">nil</span>&gt;&#125; &#123;<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> [] &lt;<span class="literal">nil</span>&gt;&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;如果命令输出上述结果则表示程序执行成功。</p>
+<p>&emsp;&emsp;自此，成功将 yaml 文件<em><strong>反序列化</strong></em> 为 K8S deployment 对象。</p>
+<h2 id="5-3-代码解释"><a href="#5-3-代码解释" class="headerlink" title="5.3 代码解释"></a>5.3 代码解释</h2><p>&emsp;&emsp;下面简单介绍代码逻辑。</p>
+<h3 id="5-3-1-读取-yaml-格式文件"><a href="#5-3-1-读取-yaml-格式文件" class="headerlink" title="5.3.1 读取 yaml 格式文件"></a>5.3.1 读取 yaml 格式文件</h3><p>&emsp;&emsp;下面代码作用是读取当前目录下 busybox.yaml 资源文件，并以字节切片的数据类型保存在变量 yaml 中，如果读取失败直接报错退出。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yaml, err := ioutil.ReadFile(<span class="string">&quot;./busybox.yaml&quot;</span>) </span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="built_in">panic</span>(err)</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+<h3 id="5-3-2-转换成-json-切片格式"><a href="#5-3-2-转换成-json-切片格式" class="headerlink" title="5.3.2 转换成 json 切片格式"></a>5.3.2 转换成 json 切片格式</h3><p>&emsp;&emsp;下面代码作用是读取上面生成的 yaml 字节切片，并将其转换为 json 格式的字节切片数据类型。读者如果觉得费解，可以简单理解为单纯的数据类型转换即可。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">json, err := yaml2.ToJSON(yaml) </span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="built_in">panic</span>(err)</span><br><span class="line">&#125;   </span><br></pre></td></tr></table></figure>
+<h3 id="5-3-3-反序列化字节切片"><a href="#5-3-3-反序列化字节切片" class="headerlink" title="5.3.3 反序列化字节切片"></a>5.3.3 反序列化字节切片</h3><p>&emsp;&emsp;下面代码根据上面创建好的 json 字节切片，再利用 encoding/json 库的 Unmarshal 方法将字节切片类型反序列成 K8S deployment 对象。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deployment := v1.Deployment&#123;&#125;</span><br><span class="line">err = json2.Unmarshal(json, &amp;deployment)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">  <span class="built_in">panic</span>(err)</span><br><span class="line">&#125;     </span><br></pre></td></tr></table></figure>
+<h1 id="6-总结"><a href="#6-总结" class="headerlink" title="6 总结"></a>6 总结</h1><p>&emsp;&emsp;本小节介绍了如何将 yaml 文件反序列化为 deployment 对象，下节笔者将会带领读者深入到 K8S 源码，看看 Deployment 对象的内部结构组成。更多精彩，敬请期待。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vim-%E6%A0%BC%E5%BC%8F%E5%8C%96-json/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="九析">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="九析">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 九析">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vim-%E6%A0%BC%E5%BC%8F%E5%8C%96-json/" class="post-title-link" itemprop="url">九析带你轻松完爆 Linux - vim 格式化 json</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-09-12 21:33:25 / 修改时间：21:34:09" itemprop="dateCreated datePublished" datetime="2021-09-12T21:33:25+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>1 创建或编辑 .vimrc 文件</p>
+<p>2 vim 控制命令 :%!python json.tool</p>
+<hr>
+<h1 id="1-创建或编辑-vimrc-文件"><a href="#1-创建或编辑-vimrc-文件" class="headerlink" title="1 创建或编辑 .vimrc 文件"></a>1 创建或编辑 .vimrc 文件</h1><p>&emsp;&emsp;在用户家目录下创建 .vimrc 文件，如果已经有该文件，则直接在末尾添加如下关于格式化 json 的配置：</p>
+<blockquote>
+<p>map <F4><Esc>:%!python -m json.tool<CR></p>
+</blockquote>
+<p>&emsp;&emsp;截图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1596177201107956.png" alt="第十三章 九析带你轻松完爆 Linux - vim 格式化 json_linux 学习_02"></p>
+<hr>
+<h1 id="2-vim-控制命令-python-json-tool"><a href="#2-vim-控制命令-python-json-tool" class="headerlink" title="2 vim 控制命令 :%!python json.tool"></a>2 vim 控制命令 :%!python json.tool</h1><p>&emsp;&emsp;使用 vim 编辑器打开某个 json 格式的文件，然后进行命令编辑模式执行如下格式化过滤语句：</p>
+<blockquote>
+<p>%!python -m json.tool</p>
+</blockquote>
+<p>&emsp;&emsp;截图如下所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1596177208525240.png" alt="第十三章 九析带你轻松完爆 Linux - vim 格式化 json_vim 格式化 json_03"></p>
+<p>&emsp;&emsp;最终执行结果如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1596177217232856.png" alt="第十三章 九析带你轻松完爆 Linux - vim 格式化 json_linux 视频_04"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace-%E7%BB%AD%E4%BA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="九析">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="九析">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 九析">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace-%E7%BB%AD%E4%BA%8C/" class="post-title-link" itemprop="url">九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续二</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-09-12 21:31:45 / 修改时间：21:32:21" itemprop="dateCreated datePublished" datetime="2021-09-12T21:31:45+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>1 前言</p>
+<p>2 邀约</p>
+<p>3 多 netns 桥接通信</p>
+<p>4 创建网桥</p>
+<p>5 分别创建 netns 跟网桥的连接</p>
+<p>  5.1 创建西门庆与王婆的***：</p>
+<p>  5.2 创建潘金莲与王婆的***：</p>
+<p>  5.3 查看网桥状态</p>
+<p>  5.4 鹊桥约会</p>
+<hr>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589360364852535.png" alt="第十二章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续二_ip link veth"></p>
+<hr>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589360374644030.png" alt="第十二章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续二_ip link veth_02"></p>
+<hr>
+<h1 id="3-多-netns-桥接通信"><a href="#3-多-netns-桥接通信" class="headerlink" title="3 多 netns 桥接通信"></a>3 多 netns 桥接通信</h1><p>&emsp;&emsp;西门庆和潘金莲一见钟情、情比金坚、冲破世俗的眼光偷偷地交往了。</p>
+<p>&emsp;&emsp;为了捍卫心中的爱情，西门庆投巨资，偷偷买下了潘金莲家隔壁的房产。</p>
+<p>&emsp;&emsp;白天，当武大出去摆地摊的时候，西门庆就让下人将***架在两家房檐之上，自己攀爬过去与心上人愉快地进行爱之鼓掌。如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589360383712298.png" alt="第十二章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续二_ip netns add_03"></p>
+<p>&emsp;&emsp;流光容易把人抛，红了樱桃、绿了芭蕉，美好的光阴如流水般从指缝滑过。</p>
+<p>&emsp;&emsp;正所谓好花不常开，好景不常在，多事的巧歌向武大告知了此事，武大闻后勃然大怒，气愤难消，心中不禁怒吼，“西门这个死扑街，丢你老母”。</p>
+<p>&emsp;&emsp;武大有了情绪，回到家闷闷不乐。潘金莲似乎猜到事情不妙，只好低眉顺目，尽量多做些家务，不惹武大生气。</p>
+<p>&emsp;&emsp;武大心中不爽，于是花园中溜达，一抬头看到了墙头上绿色的***，立刻猜中了缘由，二话不说，回到屋中取出利斧，三下五除二砍断了绿梯。为了保险，武大又从集市买了一条疯狗，置于园中，等一切妥当之后，武大蹲在墙角下拿出旱烟点上，吧嗒吧嗒抽得好不惬意。</p>
+<p>&emsp;&emsp;现在 netns 的拓补图如下所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589360390572691.png" alt="第十二章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续二_ip netns exec_04"></p>
+<p>&emsp;&emsp;做完了这一切，武大开心地又出门开工去了。他就是这么豪迈，就是这么任性。</p>
+<p>&emsp;&emsp;联系被切断，西门庆和潘金莲只能望洋兴叹。</p>
+<p>&emsp;&emsp;春天到了，一切都是那么盎然，潘金莲在庭院中顾影自怜。正所谓良辰美景奈何天，赏心悦事谁家院。就在她觉得此情无计可消除，才下眉头，又上心头时，突然闻得有人敲门。敲门一看原来是街坊王婆。</p>
+<p>&emsp;&emsp;王婆一直都是个助人为乐、雪中送炭的热心肠，年轻的时候还被街道表彰并赋予优秀 38 红旗手称号。</p>
+<p>&emsp;&emsp;    潘金莲一看是王婆，立即把她引入客厅。王婆落座后就说：“有段日子没见你了，怕你出事就来看看。你最近生活情况如何？武大有没有家暴你、有没有 PUA 你。</p>
+<p>&emsp;&emsp;潘金莲一时懵逼，欲语还休。</p>
+<p>&emsp;&emsp;两个不同经历、拥有不同故事的女人面对面坐着，谁也不说话。天地间一时静谧，时间慢慢温柔了伤痛。</p>
+<p>&emsp;&emsp;    “我爱他，尽管他是个渣男。”潘金莲鼓足勇气说道。</p>
+<p>&emsp;&emsp;“你不后悔？”王婆其实早就洞穿了一切。</p>
+<p>&emsp;&emsp;“不后悔。”</p>
+<p>&emsp;&emsp;“那我帮你”。王婆总是这么善解人意。</p>
+<p>&emsp;&emsp;“怎么帮？武大这个刚烈的汉子把绿***给砍了。”</p>
+<p>&emsp;&emsp;“没事。小事一桩。你俩可以不通过绿梯。”</p>
+<p>&emsp;&emsp;“那通过？”</p>
+<p>&emsp;&emsp;“桥！”难道你没听过方文山作曲、王力宏作曲的“缘分一道桥”吗？</p>
+<p>&emsp;&emsp;“没。”</p>
+<p>&emsp;&emsp;“那我给你唱唱。谈爱恨，不能潦草，红尘烧啊烧，以生死，无愧证明谁重要，这缘分，像一道桥，故事瞧一瞧……”</p>
+<p>&emsp;&emsp;潘金莲皱起了眉头，因为王婆唱歌发出的声音就像一脚踩到了鸭脖子上。不过这歌词写得当真不赖。</p>
+<p>&emsp;&emsp;“可是我们哪有桥？”潘金莲不禁问道。</p>
+<p>&emsp;&emsp;“我家就是你们的桥啊！这样西门大官人就可以通过我家到你家里来喽！”，王婆欢快地说。</p>
+<p>&emsp;&emsp;“原来如此！”</p>
+<hr>
+<h1 id="4-创建网桥"><a href="#4-创建网桥" class="headerlink" title="4 创建网桥"></a>4 创建网桥</h1><p>&emsp;&emsp;使用如下语句创建虚拟网桥：</p>
+<blockquote>
+<p>ip link add wangpo type bridge</p>
+</blockquote>
+<p>&emsp;&emsp;虚拟网桥创建成功后，还需要启动它。也就是只有王婆家的门保持开放，西门庆才可以通过王婆访问到潘金莲。</p>
+<p>&emsp;&emsp;启用网桥的命令如下：</p>
+<blockquote>
+<p>ip link set wangpo up</p>
+</blockquote>
+<p>&emsp;&emsp;目标网络拓补图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589364281832340.png" alt="第十二章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续二_ip link veth_05"></p>
+<hr>
+<h1 id="5-分别创建-netns-跟网桥的连接"><a href="#5-分别创建-netns-跟网桥的连接" class="headerlink" title="5 分别创建 netns 跟网桥的连接"></a>5 分别创建 netns 跟网桥的连接</h1><h2 id="5-1-创建西门庆与王婆的"><a href="#5-1-创建西门庆与王婆的" class="headerlink" title="5.1 创建西门庆与王婆的***"></a>5.1 创建西门庆与王婆的***</h2><blockquote>
+<p>ip link add wangpo4ximen type veth peer name ximen4wangpo</p>
+</blockquote>
+<p>&emsp;&emsp;命令执行结果如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589360403761668.png" alt="第十二章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续二_ip netns exec_06"></p>
+<p>&emsp;&emsp;架好西门庆到王婆这端的***：</p>
+<blockquote>
+<p>ip link set ximen4wangpo netns ximenqing</p>
+<p>ip netns exec ximenqing ip addr add dev ximen4wangpo 192.168.188.69/24</p>
+</blockquote>
+<p>&emsp;&emsp;启用西门庆到王婆端的***：</p>
+<blockquote>
+<p>ip netns exec ximenqing ip link set ximen4wangpo up</p>
+</blockquote>
+<p>&emsp;&emsp;架好王婆到西门庆这端的***：</p>
+<blockquote>
+<p>ip link set wangpo4ximen master wangpo</p>
+</blockquote>
+<p>&emsp;&emsp;启用王婆到西门庆端的***：</p>
+<blockquote>
+<p>ip link set wangpo4ximen up</p>
+</blockquote>
+<h2 id="5-2-创建潘金莲与王婆的"><a href="#5-2-创建潘金莲与王婆的" class="headerlink" title="5.2 创建潘金莲与王婆的***"></a>5.2 创建潘金莲与王婆的***</h2><blockquote>
+<p>ip link add wp4pjl type veth peer name pjl4wp</p>
+</blockquote>
+<p>&emsp;&emsp;架好潘金莲到王婆这端的***：</p>
+<blockquote>
+<p>ip link set pjl4wp netns panjinlian</p>
+<p>ip netns exec panjinlian ip addr add dev pjl4wp 192.168.188.96/24</p>
+</blockquote>
+<p>&emsp;&emsp;启用潘金莲到王婆这端的***：</p>
+<blockquote>
+<p>ip netns exec panjinlian ip link set pjl4wp up</p>
+</blockquote>
+<p>&emsp;&emsp;架好王婆到潘金莲这端的***：</p>
+<blockquote>
+<p>ip link set wp4pjl master wangpo    </p>
+</blockquote>
+<p>&emsp;&emsp;启用王婆到潘金莲端的***：</p>
+<blockquote>
+<p>ip link set wp4pjl up</p>
+</blockquote>
+<h2 id="5-3-查看网桥状态"><a href="#5-3-查看网桥状态" class="headerlink" title="5.3 查看网桥状态"></a>5.3 查看网桥状态</h2><blockquote>
+<p>bridge link</p>
+</blockquote>
+<p>&emsp;&emsp;命令执行结果如下所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589360412826556.png" alt="第十二章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续二_ip netns add_08"></p>
+<h2 id="5-4-鹊桥约会"><a href="#5-4-鹊桥约会" class="headerlink" title="5.4 鹊桥约会"></a>5.4 鹊桥约会</h2><p>&emsp;&emsp;一切准备就绪，该让西门庆和潘金莲相会了，作为男人，西门庆当然要主动一点：</p>
+<blockquote>
+<p>ip netns exec ximenqing ping -c 3 192.168.188.96</p>
+</blockquote>
+<p>&emsp;&emsp;命令执行结果如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589360421386518.png" alt="第十二章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续二_ip link_10"></p>
+<p>&emsp;&emsp;最终，西门庆跟潘金莲再次有情人终成眷属。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589364245275917.png" alt="第十二章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续二_ip netns exec_11"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace-%E7%BB%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="九析">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="九析">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 九析">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace-%E7%BB%AD/" class="post-title-link" itemprop="url">九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-09-12 21:28:21 / 修改时间：21:28:54" itemprop="dateCreated datePublished" datetime="2021-09-12T21:28:21+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>1 前言</p>
+<p>2 邀约</p>
+<p>3 多网络空间之间通信</p>
+<p>4 两个 netns 之间的通信</p>
+<p>5 两个 netns 之间通信实践</p>
+<hr>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589341343299037.png" alt="第十一章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续_linux netns exec"></p>
+<hr>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589341351231485.png" alt="第十一章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续_linux netns exec_02"></p>
+<hr>
+<h1 id="3-多网络空间之间通信"><a href="#3-多网络空间之间通信" class="headerlink" title="3 多网络空间之间通信"></a>3 多网络空间之间通信</h1><p>&emsp;&emsp;多 netns 实现了网络的隔离，每个 netns 就相当于一台独立的主机，把这些 netns 用网络设备连接起来就可以实现多 netns 通信，就实现了局域网的功能。</p>
+<hr>
+<h1 id="4-两个-netns-之间的通信"><a href="#4-两个-netns-之间的通信" class="headerlink" title="4 两个 netns 之间的通信"></a>4 两个 netns 之间的通信</h1><p>&emsp;&emsp;就像用一根网线把两台物理机连通就可以实现通信一样，两台 netns 通信也是同样的思路。所以要先创建一根虚拟的网线出来，这根网线就是 veth pair。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589341361565172.png" alt="第十一章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续_linux ip addr_04"></p>
+<p>&emsp;&emsp;首先创建 2 个 netns（潘金莲、西门庆）：</p>
+<blockquote>
+<p>ip netns add ximenqing</p>
+<p>ip netns add panjinlian</p>
+</blockquote>
+<p>&emsp;&emsp;接着执行如下指令创建 Veth pair：</p>
+<blockquote>
+<p>ip link add panjinlian type veth peer name ximenqing</p>
+</blockquote>
+<p>&emsp;&emsp;该命令会生成月老的一条红线，可以通过 ip link 指令查看到：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589341371855363.png" alt="第十一章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续_linux netns exec_06"></p>
+<hr>
+<h1 id="5-两个-netns-之间通信实践"><a href="#5-两个-netns-之间通信实践" class="headerlink" title="5 两个 netns 之间通信实践"></a>5 两个 netns 之间通信实践</h1><p>&emsp;&emsp;在上面，我们创建了西门庆、潘金莲以及它们之间思念的红线，现在是时候将红线的两头种在西门庆和潘金莲的心中了，正所谓：我住长江头，君住长江尾，日夜思君不见君，共饮一江水。</p>
+<blockquote>
+<p>ip link set panjinlian netns ximenqing</p>
+<p>ip link set ximenqing netns panjinlian</p>
+</blockquote>
+<p>&emsp;&emsp;上面命令执行完毕之后，在宿主机执行 ip link 后，发现前面创建的红线已经不见了。下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589341410521834.png" alt="第十一章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续_linux ip addr_07"></p>
+<p>&emsp;&emsp;原因就在于它们已经被西门庆和潘金莲牢牢印在心底了。如下所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589341419380923.png" alt="第十一章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续_ip link netns_08"></p>
+<p>&emsp;&emsp;但是仅仅有相思苦还是无计可施的，需要让他们能够相见，相见的途径就是让他们确切知道对方的住址。如下所示：</p>
+<blockquote>
+<p>ip netns exec panjinlian ip addr add dev ximenqing 192.168.188.69/24</p>
+<p>ip netns exec ximenqing ip addr add dev panjinlian 192.168.188.96/24</p>
+</blockquote>
+<p>&emsp;&emsp;一切都准备就绪了，但是还缺少了一点什么，对，那就是需要点燃他们之间的欲火，来吧，还等什么呢？</p>
+<blockquote>
+<p>ip netns exec ximenqing ip link set panjinlian up</p>
+<p>ip netns exec panjinlian ip link set ximenqing up</p>
+</blockquote>
+<p>&emsp;&emsp;正所谓金风玉露一相逢，便胜却人间无数。现在这对热恋中的青年男女可以尽情地进行爱的鼓掌了，他们可以尽情施展 69 姿势。</p>
+<blockquote>
+<p>ip netns exec ximenqing ping -c 3 192.168.188.69</p>
+</blockquote>
+<p>&emsp;&emsp;命令执行结果如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589341432235419.png" alt="第十一章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace 续_linux netns exec_09"></p>
+<p>&emsp;&emsp;自此，九析已经带你轻松完爆了多个 netns 通信。有关西门大官人和潘家大小姐的后续待下次分解。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="九析">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="九析">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 九析">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace/" class="post-title-link" itemprop="url">九析带你轻松完爆 Linux - 网络虚拟化之 network namespace</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-09-12 21:25:48 / 修改时间：21:26:31" itemprop="dateCreated datePublished" datetime="2021-09-12T21:25:48+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>1 前言</p>
+<p>2 邀约</p>
+<p>3 Linux network namespace 简介</p>
+<p>4 查看 network namespace</p>
+<p>5 创建 network namespace</p>
+<p>6 进入创建的 network namespace</p>
+<p>7 操作网络命名空间网络资源</p>
+<hr>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589337247198648.png" alt="第十章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace_ip addr"></p>
+<hr>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589337257625595.png" alt="第十章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace_linux 命名空间_02"></p>
+<hr>
+<h1 id="3-Linux-network-namespace-简介"><a href="#3-Linux-network-namespace-简介" class="headerlink" title="3 Linux network namespace 简介"></a>3 Linux network namespace 简介</h1><p>&emsp;&emsp;network namespace 是 linux 内核提供的特性，是网络虚拟化的重要功能，使用它可以创建多个相互独立且隔离的网络空间。</p>
+<hr>
+<h1 id="4-查看-network-namespace"><a href="#4-查看-network-namespace" class="headerlink" title="4 查看 network namespace"></a>4 查看 network namespace</h1><p>&emsp;&emsp;使用如下命令可以查看当前系统的 network namespace：</p>
+<blockquote>
+<p>ip netns ls</p>
+</blockquote>
+<p>&emsp;&emsp;默认情况下，并没有 network namespace。</p>
+<p>&emsp;&emsp;可以通过如下命令查看 netns 用法：</p>
+<blockquote>
+<p>ip netns help</p>
+</blockquote>
+<p>&emsp;&emsp;执行结果如下所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589337267227846.png" alt="第十章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace_linux 命名空间_04"></p>
+<hr>
+<h1 id="5-创建-network-namespace"><a href="#5-创建-network-namespace" class="headerlink" title="5 创建 network namespace"></a>5 创建 network namespace</h1><p>&emsp;&emsp;使用如下命令创建网络命名空间：</p>
+<blockquote>
+<p>ip netns add lvcha</p>
+</blockquote>
+<p>&emsp;&emsp;上述命令会创建一个名叫“绿茶”的网络命名空间，并且还会在 /var/run/netns 目录下面创建一个 lvcha 的文件。</p>
+<hr>
+<h1 id="6-进入创建的-network-namespace"><a href="#6-进入创建的-network-namespace" class="headerlink" title="6 进入创建的 network namespace"></a>6 进入创建的 network namespace</h1><p>&emsp;&emsp;网络空间一旦创建，该网络空间下就会有独立的网卡、路由表、arp 表、iptables 等跟网络相关的资源。</p>
+<p>&emsp;&emsp;执行如下命令进入创建的网络命名空间：</p>
+<blockquote>
+<p>ip netns exec lvcha bash</p>
+</blockquote>
+<p>&emsp;&emsp;进入 lvcha 的 network namespace 后，可以执行如下命令查看跟该网络命名空间相关的资源信息：</p>
+<blockquote>
+<p>route -n  # 查看路由</p>
+<p>iptables -nvL     # 查看 filter 表防火墙规则</p>
+<p>arp -n        # 查看 arp 表信息</p>
+<p>ifconfig    # 查看启用的网卡信息</p>
+<p>ip link        # 查看网卡信息，不包括 IP 信息</p>
+<p>ip addr        # 查看网卡信息，包括 IP 信息</p>
+</blockquote>
+<p>&emsp;&emsp;初始情况下，网络命名空间中只有 lo 网卡信息，并且该信息还处于停用状态，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589337277111195.png" alt="第十章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace_linux network ns_06"></p>
+<p>&emsp;&emsp;退出网络命名空间通过命令 exit 即可。</p>
+<hr>
+<h1 id="7-操作网络命名空间网络资源"><a href="#7-操作网络命名空间网络资源" class="headerlink" title="7 操作网络命名空间网络资源"></a>7 操作网络命名空间网络资源</h1><p>&emsp;&emsp;通过 ip netns exec 命令不仅可以进入 network namespace，而且还可以在网络空间外直接操作该网络空间内的网络资源，只需要在 ip netns exec 网络地址空间名后添加命令即可：</p>
+<blockquote>
+<p>ip netns exec lvcha ip link        # 查看 lvcha 空间中的网卡信息</p>
+<p>ip netns exec lvcha ip link set lo up     # 启用 lvcha 空间中 lo 网卡</p>
+<p>ip netns exec lvcha ping -c 3 127.0.0.1 # lvcha 空间中访问 lo 网卡</p>
+</blockquote>
+<p>&emsp;&emsp;lvcha 空间中访问 lo 网卡结果如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589337286434057.png" alt="第十章 九析带你轻松完爆 Linux - 网络虚拟化之 network namespace_ip addr_08"></p>
+<p>&emsp;&emsp;自此，九析带你轻松完爆单 network namespace 的操作。有关多 network namespace 之间的通信可以看我下节内容。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-HOST-ONLY/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="九析">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="九析">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 九析">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-HOST-ONLY/" class="post-title-link" itemprop="url">九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-09-12 21:21:55 / 修改时间：21:23:45" itemprop="dateCreated datePublished" datetime="2021-09-12T21:21:55+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>1 前言</p>
+<p>2 邀约</p>
+<p>3 HOST-ONLY 模式介绍</p>
+<p>4 HOST-ONLY 模式网络拓补图</p>
+<p>5 宿主机和虚拟机通信</p>
+<p>6 虚拟机访问外网</p>
+<hr>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188050180720.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接"></p>
+<hr>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188059971635.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_linux_02"></p>
+<hr>
+<h1 id="3-HOST-ONLY-模式介绍"><a href="#3-HOST-ONLY-模式介绍" class="headerlink" title="3 HOST-ONLY 模式介绍"></a>3 HOST-ONLY 模式介绍</h1><p>&emsp;&emsp;前面两章中细致分析并轻松完爆了 Bridged 和 NAT 方式，有了这两种方式的认识，接下来了解 HOST-ONLY 方式就会更容易一些。</p>
+<p>&emsp;&emsp;vmware 如果采用 HOST-ONLY 网络连接模式，则会绑定 VMnet1 虚拟交换机，同时会绑定虚拟网卡 vmware network adapter vmnet1。如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188069574714.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_04"></p>
+<p>&emsp;&emsp;HOST-ONLY 使用场景是虚拟机之间通信或者虚拟机与宿主机之间通信，而不作为跟互联网通信用。当然如果虚拟机也能联网，只需将宿主机网卡共享给 vmware network adapter vmnet1 即可。</p>
+<hr>
+<h1 id="4-HOST-ONLY-模式网络拓补图"><a href="#4-HOST-ONLY-模式网络拓补图" class="headerlink" title="4 HOST-ONLY 模式网络拓补图"></a>4 HOST-ONLY 模式网络拓补图</h1><p>&emsp;&emsp;网络拓补图如下所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188502803604.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware bridged_06"></p>
+<hr>
+<h1 id="5-宿主机和虚拟机通信"><a href="#5-宿主机和虚拟机通信" class="headerlink" title="5 宿主机和虚拟机通信"></a>5 宿主机和虚拟机通信</h1><p>&emsp;&emsp;如果要保持宿主机和虚拟机可以通信，首先要保证 vmware network adapter vmnet1 处于已启用状态，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188516938160.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_08"></p>
+<p>&emsp;&emsp;选择已经创建完毕的虚拟机，然后点击“编辑虚拟机设置选项”：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188524728701.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_linux_10"></p>
+<p>&emsp;&emsp;在“虚拟机设置”弹出框中，指定网络连接为“仅主机模式”，然后点击“确定”：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188532190976.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware bridged_12"></p>
+<p>&emsp;&emsp;启动虚拟机。设置为 dhcp 方式，即：自动分配 IP 方式。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188541740374.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware bridged_14"></p>
+<p>&emsp;&emsp;然后重启网络：</p>
+<blockquote>
+<p>systemctl restart network</p>
+</blockquote>
+<p>&emsp;&emsp;宿主机 vmware network adapter vmnet1 信息如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188549784963.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_linux_16"></p>
+<p>&emsp;&emsp;虚拟机网卡信息如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188557742480.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware nat_18"></p>
+<p>&emsp;&emsp;重启网络，宿主机访问虚拟机可以连通，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188564287676.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware bridged_20"></p>
+<p>&emsp;&emsp;虚拟机访问宿主机也可以连通，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188574832806.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_22"></p>
+<p>&emsp;&emsp;如果虚拟机无法访问宿主机，而宿主机却可以正常访问虚拟机，关闭宿主机防火墙重新尝试，一般可以轻松完爆。</p>
+<hr>
+<h1 id="6-虚拟机访问外网"><a href="#6-虚拟机访问外网" class="headerlink" title="6 虚拟机访问外网"></a>6 虚拟机访问外网</h1><p>&emsp;&emsp;由网络拓补可知，如果虚拟机要联通外网，必须要通过宿主机物理网卡共享给 vmware network adapter vmnet1。具体操作方式如下：</p>
+<p>&emsp;&emsp;选择宿主机上网网卡，比如本人是通过无线网卡上网，那么打开网络连接，选中上网网卡，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188584629036.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware bridged_24"></p>
+<p>&emsp;&emsp;右键网卡选择“属性”，在弹出框中选择“共享”，然后再选择 Internet 连接共享，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188599453126.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware host-only_26"></p>
+<p>&emsp;&emsp;宿主机网卡绑定 vmnet1 虚拟网卡之后，再次查看 vmnet1 虚拟网卡信息，发现此时网卡信息已经改变，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188607319360.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware nat_27"></p>
+<p>&emsp;&emsp;编辑 vmware 的“虚拟网络编辑器”，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188615426782.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_30"></p>
+<p>&emsp;&emsp;在弹出框中选择“更改设置”，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188623321047.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_32"></p>
+<p>&emsp;&emsp;修改 vmnet1 的子网信息，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188633661731.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware host-only_33"></p>
+<p>&emsp;&emsp;编辑虚拟机的网卡信息，添加网关和 DNS 配置，分别制定为宿主机 vmnet1 虚拟网卡的 IP。如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188643405064.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware host-only_36"></p>
+<p>&emsp;&emsp;重启网络访问外网，发现可以轻松完爆：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188650191681.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware nat_38"></p>
+<p>&emsp;&emsp;如果你发现无法访问外网，可以通过设置路由的方式，添加默认网关，网关地址为 192.168.137.1。如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188661792308.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_40"></p>
+<p>&emsp;&emsp;自此，九析带你轻松完爆了 vmware 网络连接的三种方式。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-NAT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="九析">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="九析">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 九析">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-NAT/" class="post-title-link" itemprop="url">九析带你轻松完爆 Linux - vmware 网络连接之 NAT</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-09-12 21:17:06 / 修改时间：21:17:41" itemprop="dateCreated datePublished" datetime="2021-09-12T21:17:06+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>1 前言</p>
+<p>2 邀约</p>
+<p>3 NAT 介绍</p>
+<p>4 NAT 网络拓步说明</p>
+<p>5 NAT 设置</p>
+<p>6 Vmware Network Adapter VMnet8</p>
+<hr>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924406903490.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_wmware vmnet0"></p>
+<hr>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924415220912.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_vmware vmnet8_02"></p>
+<hr>
+<h1 id="3-NAT-介绍"><a href="#3-NAT-介绍" class="headerlink" title="3 NAT 介绍"></a>3 NAT 介绍</h1><p>&emsp;&emsp;上章节中介绍了 vmware 的三种网络连接方式的桥接，知道桥接方式的组网虚拟机必须跟宿主机网卡必须处于同一网段。如果在你的网络 IP 资源相对紧张，且你又迫切希望虚拟机可以联网，此时 NAT 就可以轻松完爆。</p>
+<p>&emsp;&emsp;处于 NAT 网络连接下的多个虚拟机同处于一个局域网，且该局域网网络跟宿主机所在局域网网络不同。NAT 网络下的虚拟机可以通过宿主机网卡单向跟宿主机网络中的其他主机通信或者访问外网，但是反过来却不成立。</p>
+<hr>
+<h1 id="4-NAT-网络拓步说明"><a href="#4-NAT-网络拓步说明" class="headerlink" title="4 NAT 网络拓步说明"></a>4 NAT 网络拓步说明</h1><p>&emsp;&emsp;NAT 网络拓补图如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924451847283.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_vmware nat_03"></p>
+<p>&emsp;&emsp;NAT 模式中，宿主机内所有虚拟机通过 VMnet8 虚拟交换机互连，这样虚拟机之间就可以互相通信。此外 VMnet8  虚拟交换机上又连接了另外两个虚拟设备：虚拟 NAT 和虚拟 DHCP 服务器，后者解决连接在虚拟交换器 VMnet8 上的其他虚拟机的 IP  自动分配问题，虚拟 NAT 解决的是虚拟机跟外界通信数据报文的地址转换问题。从上面网络拓补图来看虚拟机并不依靠虚拟网卡 vmware  network adapter vmnet8 来联网的。而 vmware network adapter vmnet8  只是提供宿主机跟各个虚拟机的通信功能，如果我们关闭此虚拟网卡，只会导致宿主机无法访问虚拟机，但并不会导致虚拟机访问不了宿主机，因为虚拟机可以通过 NAT 设备跟宿主机网卡通信。后续我会带你们轻松完爆进行验证。</p>
+<p>&emsp;&emsp;本人 vmware network adapter vmnet8 信息如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924467863025.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_vmware nat_05"></p>
+<p>&emsp;&emsp;本人实际使用无线网卡上网，无线网卡信息如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924475113736.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_wmware vmnet0_07"></p>
+<hr>
+<h1 id="5-NAT-设置"><a href="#5-NAT-设置" class="headerlink" title="5 NAT 设置"></a>5 NAT 设置</h1><p>&emsp;&emsp;打开 vmware，首先创建需要的虚拟机（一个或多个），然后选择“编辑”-&gt;“虚拟网络编辑器”，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924483882914.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_wmware vmnet0_08"></p>
+<p>&emsp;&emsp;弹出框中查看 VMnet8 模式下的虚拟 NAT 和虚拟 DHCP 设置信息，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924491194045.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_wmware vmnet0_09"></p>
+<p>&emsp;&emsp;从虚拟 NAT 设置中可知网关 IP 信息：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924502728205.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_vmware vmnet0 vmnet_10"></p>
+<p>&emsp;&emsp;从虚拟 DHCP 设置中可知虚拟机网卡所分配的 IP 网段信息：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924513933669.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_vmware vmnet0 vmnet_11"></p>
+<p>&emsp;&emsp;掌握了虚拟交换机 VMnet8 相关信息后，创建虚拟机，创建完后，点击“编辑虚拟机设置”：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924521486051.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_vmware vmnet0 vmnet_12"></p>
+<p>&emsp;&emsp;在弹出框“虚拟机设置”中，网络连接选择 “NAT模式”：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924530688563.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_vmware 网络连接_13"></p>
+<p>&emsp;&emsp;设置完毕后，进入虚拟机操作系统 centos，编辑网卡文件：</p>
+<blockquote>
+<p>vi /etc/sysconfig/network-scripts/ifcfg-ens32</p>
+</blockquote>
+<p>&emsp;&emsp;有两种方式设置网卡文件。</p>
+<p>&emsp;&emsp;第一种方式：直接将 BOOTPROTO 设置为 dhcp，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924539356308.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_vmware vmnet8_15"></p>
+<p>&emsp;&emsp;设置完毕后，重启网络：</p>
+<blockquote>
+<p>systemctl restart network</p>
+</blockquote>
+<p>&emsp;&emsp;查看网卡信息，发现 IP 已经自动分配，且处于虚拟 DHCP 默认分配的地址段：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924548835625.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_vmware nat_17"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924559736989.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_vmware nat_19"></p>
+<p>&emsp;&emsp;虚拟机可以访问外网和宿主机，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924566524564.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_vmware vmnet8_21"></p>
+<p>&emsp;&emsp;宿主机访问虚拟机，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924575813341.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_vmware vmnet8_23"></p>
+<p>&emsp;&emsp;第二种方式，采用静态 IP 方式，同样修改网卡文件：</p>
+<blockquote>
+<p>vi /etc/sysconfig/network-scripts/ifcfg-ens32</p>
+</blockquote>
+<blockquote>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924583986837.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_vmware vmnet8_25"></p>
+</blockquote>
+<hr>
+<h1 id="6-Vmware-Network-Adapter-VMnet8"><a href="#6-Vmware-Network-Adapter-VMnet8" class="headerlink" title="6 Vmware Network Adapter VMnet8"></a>6 Vmware Network Adapter VMnet8</h1><p>&emsp;&emsp;上面我们介绍过一个知识点，虚拟机访问外网或者宿主机并不通过 vmware network adapter vmnet8，vmware network adapter vmnet8  是宿主机跟虚拟机通信的媒介，下面我们来证明一下。进入操作系统的网络连接，停用 vmware network adapter  vmnet8，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924594111361.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_vmware vmnet0 vmnet_27"></p>
+<p>&emsp;&emsp;禁用 vmnet8 网络适配器之后，打开 cmd，使用 ping 访问虚拟机，发现此时已经访问不通了：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924604848245.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_vmware vmnet0 vmnet_29"></p>
+<p>&emsp;&emsp;但是在虚拟机内部，再次访问宿主机和外网，发现网络仍然是通的，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588924612185616.png" alt="第八章 九析带你轻松完爆 Linux - vmware 网络连接之 NAT_vmware vmnet8_31"></p>
+<p>&emsp;&emsp;自此，九析带你轻松完爆 Linux - vmware 网络连接之 NAT 模式。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B%E6%A1%A5%E6%8E%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="九析">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="九析">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 九析">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B%E6%A1%A5%E6%8E%A5/" class="post-title-link" itemprop="url">九析带你轻松完爆 Linux - vmware 网络连接之桥接</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-09-12 21:12:23 / 修改时间：21:13:13" itemprop="dateCreated datePublished" datetime="2021-09-12T21:12:23+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>1 前言</p>
+<p>2 邀约</p>
+<p>3 网络连接方式介绍</p>
+<p>4 查看网络连接三种方式</p>
+<p>5 桥接模式（Bridged）</p>
+<p>6 桥接模式设置</p>
+<p>7 总结</p>
+<hr>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588845581631987.png" alt="第七章 九析带你轻松完爆 Linux - vmware 网络连接之桥接_linux 教程"></p>
+<hr>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588845588391293.png" alt="第七章 九析带你轻松完爆 Linux - vmware 网络连接之桥接_vmware 网络连接_02"></p>
+<hr>
+<h1 id="3-网络连接方式介绍"><a href="#3-网络连接方式介绍" class="headerlink" title="3 网络连接方式介绍"></a>3 网络连接方式介绍</h1><p>&emsp;&emsp;Vmware workstation 是一款虚拟机软件，可以用它创建虚拟机。VMware 提供了三种网络连接的方式，可以结合自己实际的使用场景来选择不同的网络连接方法。这三种网络连接方式分别为：</p>
+<blockquote>
+<p>桥接模式（Bridged）</p>
+<p>网络地址转换模式（NAT）</p>
+<p>主机模式（Host-Only）</p>
+</blockquote>
+<p>&emsp;&emsp;不同的网络连接方式使用不同的网络通信介质，下表是针对上面网络连接方式对应的通信介质：</p>
+<blockquote>
+<p>VMnet0</p>
+<p>VMnet1</p>
+<p>VMnet8</p>
+</blockquote>
+<p>&emsp;&emsp;因此一旦选择了网络连接方式，相当于同时指定了网络通讯介质。其实这里的通信介质（VMnet0、VMnet1、VMnet8）就是用软件的方式实现的交换机（switch），即：虚拟交换机。不同网络通信介质搭配不同的网络适配器（即网卡，无论是软网卡、虚拟网卡还是实际网卡）。下表是针对上面的网络通讯介质对应的网络适配器：</p>
+<blockquote>
+<p>宿主机网卡（无线、有线）</p>
+<p>VMware Virtual Ethernet Adapter for VMnet1</p>
+<p>VMware Virtual Ethernet Adapter for VMnet8</p>
+</blockquote>
+<p>&emsp;&emsp;简单来说，如果你一旦选定了虚拟机的网络连接方式，那么同时也就选定了虚拟交换机（VMnetN）、同时选定了配套的网络适配器。</p>
+<hr>
+<h1 id="4-查看网络连接三种方式"><a href="#4-查看网络连接三种方式" class="headerlink" title="4 查看网络连接三种方式"></a>4 查看网络连接三种方式</h1><p>&emsp;&emsp;vmware 三种网络连接方式的查看方式如下：</p>
+<p>&emsp;&emsp;选择“虚拟网络编辑器”：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588845599365850.png" alt="第七章 九析带你轻松完爆 Linux - vmware 网络连接之桥接_linux 视频_03"></p>
+<p>&emsp;&emsp;选择更改设置：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588845608616385.png" alt="第七章 九析带你轻松完爆 Linux - vmware 网络连接之桥接_linux 视频_04"></p>
+<p>&emsp;&emsp;三种网络连接方式如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588845615267925.png" alt="第七章 九析带你轻松完爆 Linux - vmware 网络连接之桥接_linux 视频_05"></p>
+<hr>
+<h1 id="5-桥接模式（Bridged）"><a href="#5-桥接模式（Bridged）" class="headerlink" title="5 桥接模式（Bridged）"></a>5 桥接模式（Bridged）</h1><p>&emsp;&emsp;桥接模式本质就是宿主机网卡跟虚拟机网卡通过虚拟网桥进行通信。比如我宿主机使用的是无线网卡，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588845622804908.png" alt="第七章 九析带你轻松完爆 Linux - vmware 网络连接之桥接_vmware 桥接_06"></p>
+<p>&emsp;&emsp;我的虚拟机网卡如下图所示，本人虚拟机运行 centos，虚拟机网卡是 ens32：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588845628249721.png" alt="第七章 九析带你轻松完爆 Linux - vmware 网络连接之桥接_linux 视频_07"></p>
+<p>&emsp;&emsp;宿主机内运行 windows 操作系统，宿主机内运行的虚拟机内部运行 linux  操作系统，它们各自有各自的网卡（一实一虚）。我们不妨可以将它们看成两台不同的终端，如果希望这两台终端可以通信，可以通过网线直连、集线器（hub）或者交换机（switch）。在上面我们说过 VMnet0 就是桥接模式的虚拟交换机（或者网桥），自此可知：宿主机网卡（无线或者有线）跟 VMnet0 相连，而虚拟机中的虚拟网卡（比如  ens32 ）也跟 VMnet0 相连，自此构成整个数据流向通路。</p>
+<p>&emsp;&emsp;而 VMnet0  实际上就是一个虚拟的网桥（交换机），这个网桥有很多端口，一个端口用于连接宿主机网卡，其他端口负责连接虚拟机虚拟网卡，它们的位置是对等的。此外，网桥其实是不用配置 IP 的，这也是为什么你在 vmware 软件安装后只能看到 VMnet1 和 VMnet8，但却看不到 VMnet0 的原因。</p>
+<p>&emsp;&emsp;上述过程可以跟公司的内部网络做类比，一个公司由 4 个 IT 人员组成，每个人员都配置了一台笔记本，网管设置了一台交换机，这台交换机跟一台路由器相连，IT  人员的网线都插在这台交换机上。路由器开启了 dhcp 功能给大家自动分配处于同网段的 IP，这样这 4 台笔记本可以互相通信。</p>
+<p>&emsp;&emsp;采用桥接方式的虚拟机如果要跟宿主机进行通信，必须要跟宿主机网卡设置在同一个网段、子网掩码、网关。就好像上面的 4 人 IT 公司一样，所有笔记本要能互相通信必须要在同一个网段一样。当然如果你的路由器开启了 DHCP  功能后，你就不用人为进行设置了，当然如果你想证明自己很屌，即使路由器 DHCP 功能开启后，你仍然可以手动进行设置虚拟机网卡。</p>
+<p>&emsp;&emsp;桥接模式的网络通信如下图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588847887189271.png" alt="第七章 九析带你轻松完爆 Linux - vmware 网络连接之桥接_vmware 桥接_08"></p>
+<p>&emsp;&emsp;宿主机内部就像实现了一个小型的局域网一样。这个局域网内部的每台主机都处于相同的网段（子网掩码相同），并且网关和 DNS 都相同。其中虚拟网桥会转发宿主机网卡接收到的广播和组播，以及目标为虚拟交换机网段的单播。所以，与虚拟交换机连接的虚拟网卡（例  ens32）接收到了路由器发出的 DHCP 信息以及路由更新。</p>
+<p>&emsp;&emsp;上面的网络拓步图如果我想起了张艺谋的长城，如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588847923149568.png" alt="第七章 九析带你轻松完爆 Linux - vmware 网络连接之桥接_linux 教程_09"></p>
+<p>&emsp;&emsp;巧合的是，长城的插曲就是方文山作词、王力宏作曲的《缘分一道桥》，这里正好可以比喻成虚拟网桥，而景甜在这里就充当网桥（虚拟交换机），起到连接宿主机网卡（达蒙）和各个虚拟机网卡（不同女兵）之间通信的媒介。</p>
+<hr>
+<h1 id="6-桥接模式设置"><a href="#6-桥接模式设置" class="headerlink" title="6 桥接模式设置"></a>6 桥接模式设置</h1><p>&emsp;&emsp;使用 vmware 创建虚拟机成功之后，选择指定虚拟机的“编辑虚拟机设置”连接：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588845674907704.png" alt="第七章 九析带你轻松完爆 Linux - vmware 网络连接之桥接_vmware bridge_10"></p>
+<p>&emsp;&emsp;在弹出框“虚拟机中设置”中选中“网络连接”中的桥接模式：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588845687590219.png" alt="第七章 九析带你轻松完爆 Linux - vmware 网络连接之桥接_vmware bridge_11"></p>
+<p>&emsp;&emsp;设置完毕后，启动虚拟机中的 centos（本人 centos7），启动完毕后，编辑网卡文件：</p>
+<blockquote>
+<p>vi /etc/sysconfig/network-scripts/ifcfg-ens32</p>
+</blockquote>
+<p>&emsp;&emsp;添加 IPADDR、NETMASK、DNS、GATEWAY 信息，以及修改 BOOTPROTO  信息，网络配置信息可以参考你的物理网卡信息，比如本人采用的是无线网卡，那么有关该网卡的 IP、子网掩码、DNS 和 网关信息如下图所示，通过命令 ipconfig/all：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588845700886426.png" alt="第七章 九析带你轻松完爆 Linux - vmware 网络连接之桥接_linux 视频_12"></p>
+<p>&emsp;&emsp;那么相应的虚拟机网卡信息配置内容如下：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588845710114155.png" alt="第七章 九析带你轻松完爆 Linux - vmware 网络连接之桥接_linux 视频_13"></p>
+<p>&emsp;&emsp;设置好后执行如下命令重启网络：</p>
+<blockquote>
+<p>systemctl restart network</p>
+</blockquote>
+<p>&emsp;&emsp;重启网络成功后可以通过 ping 命令来检查宿主机跟宿主机内的虚拟机是否网络通信正常。如果宿主机可以访问虚拟机而虚拟机无法访问到宿主机的话，可以考虑关闭宿主机的防火墙。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588845720310552.png" alt="第七章 九析带你轻松完爆 Linux - vmware 网络连接之桥接_vmware bridge_14"></p>
+<hr>
+<h1 id="7-总结"><a href="#7-总结" class="headerlink" title="7 总结"></a>7 总结</h1><p>&emsp;&emsp;其实，从某种程度上类比来看，桥接模式就好像在物理网卡上创建了多个 IP。下面演示如何在 centos 上针对同一个网卡创建多个 IP。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1588845731342791.png" alt="第七章 九析带你轻松完爆 Linux - vmware 网络连接之桥接_linux 视频_15"></p>
+<p>&emsp;&emsp;自此，九析带你轻松完爆 Linux 之 vmware 网络连接设置之桥接模式。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-linux-bash/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="九析">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="九析">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 九析">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-linux-bash/" class="post-title-link" itemprop="url">九析带你轻松完爆 linux bash</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-09-12 21:07:06 / 修改时间：21:07:45" itemprop="dateCreated datePublished" datetime="2021-09-12T21:07:06+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>1 su</p>
+<p>2 bash 操作</p>
+<p>  2.1 ctrl + r</p>
+<p>  2.2 esc + .</p>
+<p>  2.3 通配符</p>
+<p>  2.4 作业 (jobs、&amp;、bg、fg、ctrl+z）</p>
+<hr>
+<h1 id="1-su"><a href="#1-su" class="headerlink" title="1 su"></a>1 su</h1><p>&emsp;&emsp;su 命令是切换用户（switch user）：</p>
+<blockquote>
+<p>su - root # 作用是切换用户，同时进入 root 系统管理员用户环境。</p>
+<p>su root    # 作用是只切换用户，但是仍旧停留在原用户环境中。</p>
+</blockquote>
+<p>&emsp;&emsp;比如你去泡温泉，如果前台给你一张 vip 卡，即 “-“ ，那么你进去就可以有一个属于自己的包间；如果什么都不给你，即没有 “-“，即使你进去了，也只能给其他人共用同一个池子。</p>
+<p>&emsp;&emsp;在 vagrant 用户环境中声明了一个变量 NAME，如果切换到 root 用户时不加 “-“，首先你会发现 root 用户仍然在  vagrant 目录里，并仍然可以打印出本来在 vagrant 用户环境中的变量 NAME 值，说明只是换了 root  身份，但是环境依然是  vagrant 环境。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912210515458.png" alt="image-20210912210515458"></p>
+<p>&emsp;&emsp;如果切换 root 用户时加了 “-“，你会发现不仅切换到了 root 自己的用户目录下，同时也不能打印原本在 vagrant 用户环境下的 NAME 值了。由此说明不仅切换了用户，同时还切换了用户的环境。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912210532317.png" alt="image-20210912210532317"></p>
+<hr>
+<h1 id="2-bash-操作"><a href="#2-bash-操作" class="headerlink" title="2 bash 操作"></a>2 bash 操作</h1><p>&emsp;&emsp;    在终端控制台中操作命令。</p>
+<h2 id="2-1-ctrl-r"><a href="#2-1-ctrl-r" class="headerlink" title="2.1 ctrl + r"></a>2.1 ctrl + r</h2><p>&emsp;&emsp;历史记录匹配命令。根据你输入的内容，检索你的 history 命令，如果有匹配就直接显示出来。</p>
+<p>&emsp;&emsp;比如曾经执行过命令 ls /var，然后按下 ctrl + r，再按下一个字母 v，就可以自动匹配我曾经输入的 ls /var 命令。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912210549050.png" alt="image-20210912210549050"></p>
+<h2 id="2-2-esc"><a href="#2-2-esc" class="headerlink" title="2.2 esc + ."></a>2.2 esc + .</h2><p>&emsp;&emsp;先输入下面命令并执行：</p>
+<blockquote>
+<p>ls /var</p>
+</blockquote>
+<p>&emsp;&emsp;再输入 echo，然后再输入 esc 和 . ，你会发现 bash 自动把上面命令的选项 /var 直接复制到了 echo 命令后面：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912210602035.png" alt="image-20210912210602035"></p>
+<h2 id="2-3-通配符"><a href="#2-3-通配符" class="headerlink" title="2.3 通配符"></a>2.3 通配符</h2><blockquote>
+<p>[0-9]: 表示匹配 0～9 中的任何一个数字</p>
+</blockquote>
+<h2 id="2-4-作业-jobs、-amp-、bg、fg、ctrl-z）"><a href="#2-4-作业-jobs、-amp-、bg、fg、ctrl-z）" class="headerlink" title="2.4 作业 (jobs、&amp;、bg、fg、ctrl+z）"></a>2.4 作业 (jobs、&amp;、bg、fg、ctrl+z）</h2><blockquote>
+<p>ctrl + c：表示终止进程</p>
+<p>ctrl + z：表示暂停进程</p>
+<p>&amp;： 表示将进程放到后台运行</p>
+<p>jobs：查看当前后台运行的进程</p>
+<p>bg num：在后台运行序列号为 num 的进程</p>
+<p>fg num：将后台序列号为 num 的进程放到前台来执行</p>
+</blockquote>
+<p>&emsp;&emsp;上面命令的执行效果如下图所示：</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912210615706.png" alt="image-20210912210615706"></p>
+<p>&emsp;&emsp;自此，轻松完爆 linux bash 操作。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-tcpdump/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="九析">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="九析">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 九析">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-tcpdump/" class="post-title-link" itemprop="url">九析带你轻松完爆 tcpdump</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-09-12 21:03:55 / 修改时间：21:04:31" itemprop="dateCreated datePublished" datetime="2021-09-12T21:03:55+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>1 前言</p>
+<p>2 使用</p>
+<hr>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;tcpdump 是一款命令行抓包工具，普遍适用于 linux、unix、windows 操作系统中。tcpdump  工具本身依赖于库文件去获取网卡流量信息，比如在 windows 下就是 winpcap，在 linux 下就是 libpcap 等等。其中  pcap 就是 package capture 的缩写。</p>
+<hr>
+<h1 id="2-使用"><a href="#2-使用" class="headerlink" title="2 使用"></a>2 使用</h1><p>&emsp;&emsp;直接使用如下命令查看流量信息：</p>
+<blockquote>
+<p>tcpdump</p>
+</blockquote>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912210147706.png" alt="image-20210912210147706"></p>
+<p>&emsp;&emsp;命令执行会会抓取通过该主机的所有网络流量。每一行表示一条流量记录，比如：</p>
+<blockquote>
+<p>18:23:11.591431 ARP, Request who-has 192.168.31.100 tell 192.168.31.85, length 28</p>
+</blockquote>
+<p>&emsp;&emsp;这行表示一个数据包是在什么时间发生的，属于什么协议（ARP），协议内容是网络上一台主机广播寻找 IP 为 192.168.31.100 的主机。</p>
+<h2 id="2-1-抓取指定数量数据包"><a href="#2-1-抓取指定数量数据包" class="headerlink" title="2.1 抓取指定数量数据包"></a>2.1 抓取指定数量数据包</h2><p>&emsp;&emsp;使用 -c(count)  抓取指定数量的数据包:</p>
+<blockquote>
+<p>tcpdump -c 3</p>
+</blockquote>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912210206139.png" alt="image-20210912210206139"></p>
+<h2 id="2-2-保存抓包记录"><a href="#2-2-保存抓包记录" class="headerlink" title="2.2 保存抓包记录"></a>2.2 保存抓包记录</h2><p>&emsp;&emsp;使用 -w(write) 保存抓包记录：</p>
+<blockquote>
+<p>tcpdump -c 6 -w tcpdump.out</p>
+</blockquote>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912210219445.png" alt="image-20210912210219445"></p>
+<h2 id="2-3-读取抓包记录"><a href="#2-3-读取抓包记录" class="headerlink" title="2.3 读取抓包记录"></a>2.3 读取抓包记录</h2><p>&emsp;&emsp;使用 -r(read) 从指定文件读取抓包记录：</p>
+<blockquote>
+<p>tcpdump -r tcpdump.out</p>
+</blockquote>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912210232575.png" alt="image-20210912210232575"></p>
+<h2 id="2-4-查询当前网卡"><a href="#2-4-查询当前网卡" class="headerlink" title="2.4 查询当前网卡"></a>2.4 查询当前网卡</h2><p>&emsp;&emsp;使用 -D 列出宿主机所有网卡信息：</p>
+<blockquote>
+<p>tcpdump -D</p>
+</blockquote>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912210245224.png" alt="image-20210912210245224"></p>
+<h2 id="2-5-查看指定网络流量数据"><a href="#2-5-查看指定网络流量数据" class="headerlink" title="2.5 查看指定网络流量数据"></a>2.5 查看指定网络流量数据</h2><p>&emsp;&emsp;有时我们只想查看通过指定网卡的网络流量数据，可以使用 -i(interface)  参数轻松完爆。比如我想查看环回网卡（lo，也就是 127.x.x.x)  的流量信息，就可以直接使用如下命令：</p>
+<blockquote>
+<p>tcpdump -i lo0</p>
+</blockquote>
+<p>&emsp;&emsp;再打开一个命令行终端：</p>
+<blockquote>
+<p>ping 127.0.0.1</p>
+</blockquote>
+<p>&emsp;&emsp;再回到运行 tcpdump 命令行终端中，可以看到已经捕捉并显示出流量信息数据。</p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912210258945.png" alt="image-20210912210258945"></p>
+<p>&emsp;&emsp;自此，轻松完爆 tcpdump。</p>
+<h2 id="2-6-查看指定网络流量数据"><a href="#2-6-查看指定网络流量数据" class="headerlink" title="2.6 查看指定网络流量数据"></a>2.6 查看指定网络流量数据</h2><p>&emsp;&emsp;如果你想查看出口流量情况，可以指定 host 选项，如下图所示：</p>
+<blockquote>
+<p>tcpdump -i eth0 host <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+</div>
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
-  
-  <div class="statistics">
-    
-    
+  <footer class="footer">
+    <div class="footer-inner">
 
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">九析</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
+    </div>
+  </footer>
 
   
-
-  
-</footer>
-
-
-  <!-- SCRIPTS -->
-  
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    
-  
-
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
 
@@ -940,63 +1585,10 @@ su root    # 作用是只切换用户，但是仍旧停
 
 
 
-
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
   
 
 
 
-
-
-<!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script>
 
 
 </body>

@@ -1,274 +1,250 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
-
-
-
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1 前言 2 邀约 3 HOST-ONLY 模式介绍 4 HOST-ONLY 模式网络拓补图 5 宿主机和虚拟机通信 6 虚拟机访问外网  1 前言&amp;emsp;&amp;emsp;如果你对博客有任何疑问，请告诉我。   2 邀约&amp;emsp;&amp;emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：   3 HOST-ONLY 模式介绍&amp;emsp;&amp;emsp;前面两章中细致分析并轻松完爆了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY">
+<meta property="og:url" content="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-HOST-ONLY/index.html">
+<meta property="og:site_name" content="九析">
+<meta property="og:description" content="1 前言 2 邀约 3 HOST-ONLY 模式介绍 4 HOST-ONLY 模式网络拓补图 5 宿主机和虚拟机通信 6 虚拟机访问外网  1 前言&amp;emsp;&amp;emsp;如果你对博客有任何疑问，请告诉我。   2 邀约&amp;emsp;&amp;emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：   3 HOST-ONLY 模式介绍&amp;emsp;&amp;emsp;前面两章中细致分析并轻松完爆了">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188050180720.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188059971635.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188069574714.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188502803604.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188516938160.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188524728701.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188532190976.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188541740374.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188549784963.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188557742480.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188564287676.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188574832806.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188584629036.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188599453126.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188607319360.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188615426782.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188623321047.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188633661731.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188643405064.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188650191681.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188661792308.png">
+<meta property="article:published_time" content="2021-09-12T13:21:55.000Z">
+<meta property="article:modified_time" content="2021-09-12T13:23:45.925Z">
+<meta property="article:author" content="九析">
+<meta property="article:tag" content="vmware">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188050180720.png">
+
+
+<link rel="canonical" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-HOST-ONLY/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-HOST-ONLY/","path":"2021/09/12/九析带你轻松完爆-Linux-vmware-网络连接之-HOST-ONLY/","title":"九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY | 九析</title>
   
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="九析">
-  <meta name="keywords" content="">
-  
-  <title>九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY - 九析</title>
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
 
 
 
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>九析</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" target="_self" role="button"
-                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="iconfont icon-books"></i>
-                文档
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/">
-                    
-                    主题博客
-                  </a>
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/">
-                    
-                    配置指南
-                  </a>
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/icon/">
-                    
-                    图标用法
-                  </a>
-                
-              </div>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
     </div>
   </div>
-</nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/ss.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY">
-              
-            </span>
+  <div class="site-meta">
 
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-12 21:21" pubdate>
-        2021年9月12日 晚上
-      </time>
-    </span>
-  
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">九析</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      886 字
-    </span>
-  
 
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      10
-       分钟
-    </span>
-  
 
+
+
+
+
+</div>
+        
   
-  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">1 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E9%82%80%E7%BA%A6"><span class="nav-number">2.</span> <span class="nav-text">2 邀约</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-HOST-ONLY-%E6%A8%A1%E5%BC%8F%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.</span> <span class="nav-text">3 HOST-ONLY 模式介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-HOST-ONLY-%E6%A8%A1%E5%BC%8F%E7%BD%91%E7%BB%9C%E6%8B%93%E8%A1%A5%E5%9B%BE"><span class="nav-number">4.</span> <span class="nav-text">4 HOST-ONLY 模式网络拓补图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%92%8C%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%80%9A%E4%BF%A1"><span class="nav-number">5.</span> <span class="nav-text">5 宿主机和虚拟机通信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%AE%BF%E9%97%AE%E5%A4%96%E7%BD%91"><span class="nav-number">6.</span> <span class="nav-text">6 虚拟机访问外网</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">九析</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
 </div>
 
-            
-          </div>
 
-          
+
         </div>
       </div>
     </div>
-  </header>
+  </aside>
+  <div class="sidebar-dimmer"></div>
 
-  <main>
+
+    </header>
+
     
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-HOST-ONLY/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="九析">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="九析">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY | 九析">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
 
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY</h1>
-            
-            <div class="markdown-body">
-              <p>1 前言</p>
+      <time title="创建时间：2021-09-12 21:21:55 / 修改时间：21:23:45" itemprop="dateCreated datePublished" datetime="2021-09-12T21:21:55+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>1 前言</p>
 <p>2 邀约</p>
 <p>3 HOST-ONLY 模式介绍</p>
 <p>4 HOST-ONLY 模式网络拓补图</p>
@@ -276,297 +252,120 @@
 <p>6 虚拟机访问外网</p>
 <hr>
 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188050180720.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188050180720.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接"></p>
 <hr>
 <h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188059971635.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_linux_02"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188059971635.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_linux_02"></p>
 <hr>
 <h1 id="3-HOST-ONLY-模式介绍"><a href="#3-HOST-ONLY-模式介绍" class="headerlink" title="3 HOST-ONLY 模式介绍"></a>3 HOST-ONLY 模式介绍</h1><p>&emsp;&emsp;前面两章中细致分析并轻松完爆了 Bridged 和 NAT 方式，有了这两种方式的认识，接下来了解 HOST-ONLY 方式就会更容易一些。</p>
 <p>&emsp;&emsp;vmware 如果采用 HOST-ONLY 网络连接模式，则会绑定 VMnet1 虚拟交换机，同时会绑定虚拟网卡 vmware network adapter vmnet1。如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188069574714.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_04"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188069574714.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_04"></p>
 <p>&emsp;&emsp;HOST-ONLY 使用场景是虚拟机之间通信或者虚拟机与宿主机之间通信，而不作为跟互联网通信用。当然如果虚拟机也能联网，只需将宿主机网卡共享给 vmware network adapter vmnet1 即可。</p>
 <hr>
 <h1 id="4-HOST-ONLY-模式网络拓补图"><a href="#4-HOST-ONLY-模式网络拓补图" class="headerlink" title="4 HOST-ONLY 模式网络拓补图"></a>4 HOST-ONLY 模式网络拓补图</h1><p>&emsp;&emsp;网络拓补图如下所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188502803604.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware bridged_06"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188502803604.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware bridged_06"></p>
 <hr>
 <h1 id="5-宿主机和虚拟机通信"><a href="#5-宿主机和虚拟机通信" class="headerlink" title="5 宿主机和虚拟机通信"></a>5 宿主机和虚拟机通信</h1><p>&emsp;&emsp;如果要保持宿主机和虚拟机可以通信，首先要保证 vmware network adapter vmnet1 处于已启用状态，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188516938160.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_08"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188516938160.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_08"></p>
 <p>&emsp;&emsp;选择已经创建完毕的虚拟机，然后点击“编辑虚拟机设置选项”：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188524728701.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_linux_10"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188524728701.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_linux_10"></p>
 <p>&emsp;&emsp;在“虚拟机设置”弹出框中，指定网络连接为“仅主机模式”，然后点击“确定”：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188532190976.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware bridged_12"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188532190976.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware bridged_12"></p>
 <p>&emsp;&emsp;启动虚拟机。设置为 dhcp 方式，即：自动分配 IP 方式。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188541740374.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware bridged_14"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188541740374.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware bridged_14"></p>
 <p>&emsp;&emsp;然后重启网络：</p>
 <blockquote>
 <p>systemctl restart network</p>
 </blockquote>
 <p>&emsp;&emsp;宿主机 vmware network adapter vmnet1 信息如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188549784963.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_linux_16"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188549784963.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_linux_16"></p>
 <p>&emsp;&emsp;虚拟机网卡信息如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188557742480.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware nat_18"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188557742480.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware nat_18"></p>
 <p>&emsp;&emsp;重启网络，宿主机访问虚拟机可以连通，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188564287676.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware bridged_20"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188564287676.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware bridged_20"></p>
 <p>&emsp;&emsp;虚拟机访问宿主机也可以连通，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188574832806.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_22"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188574832806.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_22"></p>
 <p>&emsp;&emsp;如果虚拟机无法访问宿主机，而宿主机却可以正常访问虚拟机，关闭宿主机防火墙重新尝试，一般可以轻松完爆。</p>
 <hr>
 <h1 id="6-虚拟机访问外网"><a href="#6-虚拟机访问外网" class="headerlink" title="6 虚拟机访问外网"></a>6 虚拟机访问外网</h1><p>&emsp;&emsp;由网络拓补可知，如果虚拟机要联通外网，必须要通过宿主机物理网卡共享给 vmware network adapter vmnet1。具体操作方式如下：</p>
 <p>&emsp;&emsp;选择宿主机上网网卡，比如本人是通过无线网卡上网，那么打开网络连接，选中上网网卡，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188584629036.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware bridged_24"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188584629036.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware bridged_24"></p>
 <p>&emsp;&emsp;右键网卡选择“属性”，在弹出框中选择“共享”，然后再选择 Internet 连接共享，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188599453126.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware host-only_26"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188599453126.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware host-only_26"></p>
 <p>&emsp;&emsp;宿主机网卡绑定 vmnet1 虚拟网卡之后，再次查看 vmnet1 虚拟网卡信息，发现此时网卡信息已经改变，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188607319360.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware nat_27"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188607319360.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware nat_27"></p>
 <p>&emsp;&emsp;编辑 vmware 的“虚拟网络编辑器”，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188615426782.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_30"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188615426782.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_30"></p>
 <p>&emsp;&emsp;在弹出框中选择“更改设置”，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188623321047.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_32"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188623321047.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_32"></p>
 <p>&emsp;&emsp;修改 vmnet1 的子网信息，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188633661731.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware host-only_33"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188633661731.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware host-only_33"></p>
 <p>&emsp;&emsp;编辑虚拟机的网卡信息，添加网关和 DNS 配置，分别制定为宿主机 vmnet1 虚拟网卡的 IP。如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188643405064.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware host-only_36"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188643405064.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware host-only_36"></p>
 <p>&emsp;&emsp;重启网络访问外网，发现可以轻松完爆：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188650191681.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware nat_38"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188650191681.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware nat_38"></p>
 <p>&emsp;&emsp;如果你发现无法访问外网，可以通过设置路由的方式，添加默认网关，网关地址为 192.168.137.1。如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188661792308.png" srcset="/img/loading.gif" lazyload alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_40"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589188661792308.png" alt="第九章 九析带你轻松完爆 Linux - vmware 网络连接之 HOST_ONLY_vmware 桥接_40"></p>
 <p>&emsp;&emsp;自此，九析带你轻松完爆了 vmware 网络连接的三种方式。</p>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/vmware/">vmware</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆 Linux - 网络虚拟化之 network namespace</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-NAT/">
-                        <span class="hidden-mobile">九析带你轻松完爆 Linux - vmware 网络连接之 NAT</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
     </div>
+
     
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vmware/" rel="tag"># vmware</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-vmware-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B9%8B-NAT/" rel="prev" title="九析带你轻松完爆 Linux - vmware 网络连接之 NAT">
+                  <i class="fa fa-chevron-left"></i> 九析带你轻松完爆 Linux - vmware 网络连接之 NAT
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Linux-%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B9%8B-network-namespace/" rel="next" title="九析带你轻松完爆 Linux - 网络虚拟化之 network namespace">
+                  九析带你轻松完爆 Linux - 网络虚拟化之 network namespace <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
 </div>
 
-      </div>
-    
-  </div>
+
+
+
+
+
 </div>
-
-<!-- Custom -->
-
-
-    
-
-    
-      <a id="scroll-top-button" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-    
-
-    
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
-  
-  <div class="statistics">
-    
-    
+  <footer class="footer">
+    <div class="footer-inner">
 
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">九析</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
+    </div>
+  </footer>
 
   
-
-  
-</footer>
-
-
-  <!-- SCRIPTS -->
-  
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    
-      <script  src="/js/img-lazyload.js" ></script>
-    
-  
-
-
-
-  
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
 
@@ -574,8 +373,10 @@
 
 
 
-<!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script>
+  
+
+
+
 
 
 </body>

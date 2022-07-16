@@ -1,274 +1,244 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
-
-
-
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1 前言 2 istio 之 profile 3 istioctl profile   3.1 demo   3.2 minimal   3.3 default   3.4 empty   3.5 remote   3.6 separate 4 总结  1 前言​    如果你对博客有任何疑问，请告诉我。  ​    你可以从下面截图中获取免费的、更生动的视频资料：  2 istio 之 prof">
+<meta property="og:type" content="article">
+<meta property="og:title" content="九析带你轻松完爆 service mesh - istio profile 详述">
+<meta property="og:url" content="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-profile-%E8%AF%A6%E8%BF%B0/index.html">
+<meta property="og:site_name" content="九析">
+<meta property="og:description" content="1 前言 2 istio 之 profile 3 istioctl profile   3.1 demo   3.2 minimal   3.3 default   3.4 empty   3.5 remote   3.6 separate 4 总结  1 前言​    如果你对博客有任何疑问，请告诉我。  ​    你可以从下面截图中获取免费的、更生动的视频资料：  2 istio 之 prof">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368141584701.jpeg">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584440587356556.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368156493068.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368172412822.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368188341223.png">
+<meta property="og:image" content="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368199256308.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368214844438.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368226455115.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368242534892.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368252181812.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368262600119.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368292162685.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368303338153.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368314215522.png">
+<meta property="article:published_time" content="2021-09-11T09:46:47.000Z">
+<meta property="article:modified_time" content="2021-09-11T09:47:42.807Z">
+<meta property="article:author" content="九析">
+<meta property="article:tag" content="istio">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368141584701.jpeg">
+
+
+<link rel="canonical" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-profile-%E8%AF%A6%E8%BF%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-profile-%E8%AF%A6%E8%BF%B0/","path":"2021/09/11/九析带你轻松完爆-service-mesh-istio-profile-详述/","title":"九析带你轻松完爆 service mesh - istio profile 详述"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>九析带你轻松完爆 service mesh - istio profile 详述 | 九析</title>
   
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="九析">
-  <meta name="keywords" content="">
-  
-  <title>九析带你轻松完爆 service mesh - istio profile 详述 - 九析</title>
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
 
 
 
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>九析</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" target="_self" role="button"
-                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="iconfont icon-books"></i>
-                文档
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/">
-                    
-                    主题博客
-                  </a>
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/">
-                    
-                    配置指南
-                  </a>
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/icon/">
-                    
-                    图标用法
-                  </a>
-                
-              </div>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
     </div>
   </div>
-</nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/ss.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松完爆 service mesh - istio profile 详述">
-              
-            </span>
+  <div class="site-meta">
 
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-11 17:46" pubdate>
-        2021年9月11日 下午
-      </time>
-    </span>
-  
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">九析</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      818 字
-    </span>
-  
 
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      9
-       分钟
-    </span>
-  
 
+
+
+
+
+</div>
+        
   
-  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">1 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-istio-%E4%B9%8B-profile"><span class="nav-number">2.</span> <span class="nav-text">2 istio 之 profile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-istioctl-profile"><span class="nav-number">3.</span> <span class="nav-text">3 istioctl profile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-demo"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 demo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-minimal"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 minimal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-default"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 default</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-empty"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 empty</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-remote"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 remote</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-separate"><span class="nav-number">3.6.</span> <span class="nav-text">3.6 separate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">4 总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">九析</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
 </div>
 
-            
-          </div>
 
-          
+
         </div>
       </div>
     </div>
-  </header>
+  </aside>
+  <div class="sidebar-dimmer"></div>
 
-  <main>
+
+    </header>
+
     
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-profile-%E8%AF%A6%E8%BF%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="九析">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="九析">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="九析带你轻松完爆 service mesh - istio profile 详述 | 九析">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          九析带你轻松完爆 service mesh - istio profile 详述
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
 
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松完爆 service mesh - istio profile 详述</h1>
-            
-            <div class="markdown-body">
-              <p>1 前言</p>
+      <time title="创建时间：2021-09-11 17:46:47 / 修改时间：17:47:42" itemprop="dateCreated datePublished" datetime="2021-09-11T17:46:47+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/istio/" itemprop="url" rel="index"><span itemprop="name">istio</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>1 前言</p>
 <p>2 istio 之 profile</p>
 <p>3 istioctl profile</p>
 <p>  3.1 demo</p>
@@ -280,277 +250,100 @@
 <p>4 总结</p>
 <hr>
 <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368141584701.jpeg" srcset="/img/loading.gif" lazyload alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 安装"></p>
-<p>​    你可以从下面截图中获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584440587356556.png" srcset="/img/loading.gif" lazyload alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 视频_02"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368141584701.jpeg" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 安装"></p>
+<p>​    你可以从下面截图中获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584440587356556.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 视频_02"></p>
 <hr>
-<h2 id="2-istio-之-profile"><a href="#2-istio-之-profile" class="headerlink" title="2 istio 之 profile"></a>2 istio 之 profile</h2><p>​    在介绍 istio profile 之前，我们先介绍一下电信的套餐：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368156493068.png" srcset="/img/loading.gif" lazyload alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 教程_03"></p>
+<h2 id="2-istio-之-profile"><a href="#2-istio-之-profile" class="headerlink" title="2 istio 之 profile"></a>2 istio 之 profile</h2><p>​    在介绍 istio profile 之前，我们先介绍一下电信的套餐：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368156493068.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 教程_03"></p>
 <p>​    我们去电信开通手机业务时，一般都会选择手机套餐，不同的手机套餐会提供不同的增值服务。如上图所示，每个套餐就是一个 profile。istioctl 在安装 istio 时提供的 profile 概念与此类似，不同 profile 定义了不同的 istio  控制面行为。</p>
 <hr>
 <h2 id="3-istioctl-profile"><a href="#3-istioctl-profile" class="headerlink" title="3 istioctl profile"></a>3 istioctl profile</h2><p>​    使用如下命令查看 istioctl  profile：</p>
 <blockquote>
 <p>istioctl profile list</p>
 </blockquote>
-<p>​    执行结果如下图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368172412822.png" srcset="/img/loading.gif" lazyload alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_04"></p>
+<p>​    执行结果如下图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368172412822.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_04"></p>
 <h3 id="3-1-demo"><a href="#3-1-demo" class="headerlink" title="3.1 demo"></a>3.1 demo</h3><p>​    demo profile 仅供学习使用，并不合适作为生产环境。该 profile 会安装  ingressgateway、egressgateway、istio-pilot 等 istio 组件，同时会安装  grafana、istio-tracing、kiali、prometheus 等外部插件。使用如下命令查看 demo profile 的  istio 安装配置清单：</p>
 <blockquote>
 <p>istioctl profile dump demo</p>
 </blockquote>
-<p>​    从 dump 出的 profile 来看，最重要的是两块配置：插件和组件。插件是指外部第三方依赖，比如  grafana、kiali、prometheus、tracing；组件是指 istio 自身的组件，比如  citadel、egressgateway、ingressgateway、pilot、policy、sidecarInjector、telemetry 等。如下截图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368188341223.png" srcset="/img/loading.gif" lazyload alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_05"><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" srcset="/img/loading.gif" lazyload alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_06"></p>
+<p>​    从 dump 出的 profile 来看，最重要的是两块配置：插件和组件。插件是指外部第三方依赖，比如  grafana、kiali、prometheus、tracing；组件是指 istio 自身的组件，比如  citadel、egressgateway、ingressgateway、pilot、policy、sidecarInjector、telemetry 等。如下截图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368188341223.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_05"><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_06"></p>
 <p>​    部分组件信息如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368199256308.png" srcset="/img/loading.gif" lazyload alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 安装_07"></p>
-<p>​    总结 demo profile 的组件、插件的开关情况信息如下截图所示，其中 X 代表开启组件或插件：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368214844438.png" srcset="/img/loading.gif" lazyload alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_08"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368199256308.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 安装_07"></p>
+<p>​    总结 demo profile 的组件、插件的开关情况信息如下截图所示，其中 X 代表开启组件或插件：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368214844438.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_08"></p>
 <h3 id="3-2-minimal"><a href="#3-2-minimal" class="headerlink" title="3.2 minimal"></a>3.2 minimal</h3><p>​    minimal profile 仅仅开启了 pilot 组件，其他的组件或者插件都是关闭的状态，可以通过如下命令查看明细：</p>
 <blockquote>
 <p>istioctl profile dump minimal &gt; minimal.yaml</p>
 </blockquote>
 <p>​    如下图所示，minimal 插件都是关闭的：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368226455115.png" srcset="/img/loading.gif" lazyload alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 视频_09"></p>
-<p>​    仅有 pilot 组件是开启状态：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368242534892.png" srcset="/img/loading.gif" lazyload alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 安装_10"></p>
-<p>​    符合官方描述，如下图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368252181812.png" srcset="/img/loading.gif" lazyload alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_11"></p>
-<h3 id="3-3-default"><a href="#3-3-default" class="headerlink" title="3.3 default"></a>3.3 default</h3><p>​    default 是官方推荐的 istio 安装 profile。它在组件和插件的选择上做到了最合适，比如组件中它只开启了 ingressgateway、pilot，插件中只开启了 prometheus。如下图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368262600119.png" srcset="/img/loading.gif" lazyload alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_12"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368226455115.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 视频_09"></p>
+<p>​    仅有 pilot 组件是开启状态：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368242534892.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 安装_10"></p>
+<p>​    符合官方描述，如下图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368252181812.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_11"></p>
+<h3 id="3-3-default"><a href="#3-3-default" class="headerlink" title="3.3 default"></a>3.3 default</h3><p>​    default 是官方推荐的 istio 安装 profile。它在组件和插件的选择上做到了最合适，比如组件中它只开启了 ingressgateway、pilot，插件中只开启了 prometheus。如下图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368262600119.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_12"></p>
 <h3 id="3-4-empty"><a href="#3-4-empty" class="headerlink" title="3.4 empty"></a>3.4 empty</h3><p>​    empty profile 不会开启任何组件或者插件。该 profile 的作用是提供一个干净的模板供有经验的 istio 使用者自定义配置。</p>
-<h3 id="3-5-remote"><a href="#3-5-remote" class="headerlink" title="3.5 remote"></a>3.5 remote</h3><p>​    remote profile 在实际使用中情况并不多见。该 profile 提供共享控制面去操作多集群服务网格。remote profile 官方提供的组件、插件描述如下图所示，但是根据本人实际观察，发现并不准确，特别标注在下图中：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368292162685.png" srcset="/img/loading.gif" lazyload alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 服务网格_13"></p>
-<p>​    dump 出的 ingress-gateway 组件应该处于开启状态：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368303338153.png" srcset="/img/loading.gif" lazyload alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_14"></p>
-<p>​    dump 出来的 pilot 组件应该处于开启状态：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368314215522.png" srcset="/img/loading.gif" lazyload alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 教程_15"></p>
+<h3 id="3-5-remote"><a href="#3-5-remote" class="headerlink" title="3.5 remote"></a>3.5 remote</h3><p>​    remote profile 在实际使用中情况并不多见。该 profile 提供共享控制面去操作多集群服务网格。remote profile 官方提供的组件、插件描述如下图所示，但是根据本人实际观察，发现并不准确，特别标注在下图中：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368292162685.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 服务网格_13"></p>
+<p>​    dump 出的 ingress-gateway 组件应该处于开启状态：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368303338153.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_14"></p>
+<p>​    dump 出来的 pilot 组件应该处于开启状态：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368314215522.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 教程_15"></p>
 <h3 id="3-6-separate"><a href="#3-6-separate" class="headerlink" title="3.6 separate"></a>3.6 separate</h3><p>​    官方宣称 separate profile 在未来的版本中将要被废弃掉了，所以就直接略过不提了吧。大家都生活得够艰难了，就不要给自己找麻烦了。</p>
 <hr>
 <h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4 总结"></a>4 总结</h2><p>​    本小节介绍了 istioctl 安装 istio 时提供的各个 profile，已经可以覆盖 90%  上的工作场景了。但是有些技术小骚仍然不会满足，那么后续哥将会继续提供自定义配置安装的方法，请继续跟随九析的脚步，我们一同轻松完爆 istio。</p>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/istio/">istio</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/istio/">istio</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E5%AE%89%E8%A3%85/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio kiali 安装</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-upgrade-%E5%8D%87%E7%BA%A7/">
-                        <span class="hidden-mobile">九析带你轻松完爆 service mesh - istio upgrade 升级</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
     </div>
+
     
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/istio/" rel="tag"># istio</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-upgrade-%E5%8D%87%E7%BA%A7/" rel="prev" title="九析带你轻松完爆 service mesh - istio upgrade 升级">
+                  <i class="fa fa-chevron-left"></i> 九析带你轻松完爆 service mesh - istio upgrade 升级
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E5%AE%89%E8%A3%85/" rel="next" title="九析带你轻松完爆 service mesh - istio kiali 安装">
+                  九析带你轻松完爆 service mesh - istio kiali 安装 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
 </div>
 
-      </div>
-    
-  </div>
+
+
+
+
+
 </div>
-
-<!-- Custom -->
-
-
-    
-
-    
-      <a id="scroll-top-button" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-    
-
-    
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
-  
-  <div class="statistics">
-    
-    
+  <footer class="footer">
+    <div class="footer-inner">
 
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">九析</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
+    </div>
+  </footer>
 
   
-
-  
-</footer>
-
-
-  <!-- SCRIPTS -->
-  
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    
-      <script  src="/js/img-lazyload.js" ></script>
-    
-  
-
-
-
-  
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
 
@@ -558,8 +351,10 @@
 
 
 
-<!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script>
+  
+
+
+
 
 
 </body>

@@ -1,274 +1,238 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
-
-
-
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1 前言 2 邀约 3 故障注入简介 4 Istio 故障注入 5 Istio 故障注入实例   5.1 客户端资源文件   5.2 k8s 服务文件   5.3 部署工作负载（deployment）   5.4 虚拟服务文件 6 验证故障注入  1 前言​    如果你对博客有任何疑问，请告诉我。   2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：   3 故障">
+<meta property="og:type" content="article">
+<meta property="og:title" content="九析带你轻松完爆 Istio - fault injection 故障注入">
+<meta property="og:url" content="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-fault-injection-%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:site_name" content="九析">
+<meta property="og:description" content="1 前言 2 邀约 3 故障注入简介 4 Istio 故障注入 5 Istio 故障注入实例   5.1 客户端资源文件   5.2 k8s 服务文件   5.3 部署工作负载（deployment）   5.4 虚拟服务文件 6 验证故障注入  1 前言​    如果你对博客有任何疑问，请告诉我。   2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：   3 故障">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943444388659.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943453222671.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943462847897.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943486418393.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943499357696.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943507931635.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943513722118.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943521891904.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943531644226.png">
+<meta property="article:published_time" content="2021-09-12T02:36:10.000Z">
+<meta property="article:modified_time" content="2021-09-12T02:39:08.942Z">
+<meta property="article:author" content="九析">
+<meta property="article:tag" content="istio">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943444388659.png">
+
+
+<link rel="canonical" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-fault-injection-%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-fault-injection-%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5/","path":"2021/09/12/九析带你轻松完爆-Istio-fault-injection-故障注入/","title":"九析带你轻松完爆 Istio - fault injection 故障注入"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>九析带你轻松完爆 Istio - fault injection 故障注入 | 九析</title>
   
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="九析">
-  <meta name="keywords" content="">
-  
-  <title>九析带你轻松完爆 Istio - fault injection 故障注入 - 九析</title>
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
 
 
 
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>九析</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" target="_self" role="button"
-                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="iconfont icon-books"></i>
-                文档
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/">
-                    
-                    主题博客
-                  </a>
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/">
-                    
-                    配置指南
-                  </a>
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/icon/">
-                    
-                    图标用法
-                  </a>
-                
-              </div>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
     </div>
   </div>
-</nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/ss.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松完爆 Istio - fault injection 故障注入">
-              
-            </span>
+  <div class="site-meta">
 
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-12 10:36" pubdate>
-        2021年9月12日 上午
-      </time>
-    </span>
-  
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">九析</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      831 字
-    </span>
-  
 
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      9
-       分钟
-    </span>
-  
 
+
+
+
+
+</div>
+        
   
-  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">1 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E9%82%80%E7%BA%A6"><span class="nav-number">2.</span> <span class="nav-text">2 邀约</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5%E7%AE%80%E4%BB%8B"><span class="nav-number">3.</span> <span class="nav-text">3 故障注入简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Istio-%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5"><span class="nav-number">4.</span> <span class="nav-text">4 Istio 故障注入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-Istio-%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5%E5%AE%9E%E4%BE%8B"><span class="nav-number">5.</span> <span class="nav-text">5 Istio 故障注入实例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 客户端资源文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-k8s-%E6%9C%8D%E5%8A%A1%E6%96%87%E4%BB%B6"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 k8s 服务文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-%E9%83%A8%E7%BD%B2%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD%EF%BC%88deployment%EF%BC%89"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 部署工作负载（deployment）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-%E8%99%9A%E6%8B%9F%E6%9C%8D%E5%8A%A1%E6%96%87%E4%BB%B6"><span class="nav-number">5.4.</span> <span class="nav-text">5.4 虚拟服务文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E9%AA%8C%E8%AF%81%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5"><span class="nav-number">6.</span> <span class="nav-text">6 验证故障注入</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">九析</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
 </div>
 
-            
-          </div>
 
-          
+
         </div>
       </div>
     </div>
-  </header>
+  </aside>
+  <div class="sidebar-dimmer"></div>
 
-  <main>
+
+    </header>
+
     
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-fault-injection-%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="九析">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="九析">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="九析带你轻松完爆 Istio - fault injection 故障注入 | 九析">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          九析带你轻松完爆 Istio - fault injection 故障注入
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
 
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松完爆 Istio - fault injection 故障注入</h1>
-            
-            <div class="markdown-body">
-              <p>1 前言</p>
+      <time title="创建时间：2021-09-12 10:36:10 / 修改时间：10:39:08" itemprop="dateCreated datePublished" datetime="2021-09-12T10:36:10+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/istio/" itemprop="url" rel="index"><span itemprop="name">istio</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>1 前言</p>
 <p>2 邀约</p>
 <p>3 故障注入简介</p>
 <p>4 Istio 故障注入</p>
@@ -280,13 +244,13 @@
 <p>6 验证故障注入</p>
 <hr>
 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943444388659.png" srcset="/img/loading.gif" lazyload alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_Istio 故障注入"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943444388659.png" alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_Istio 故障注入"></p>
 <hr>
 <h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943453222671.png" srcset="/img/loading.gif" lazyload alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_istio 教程_02"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943453222671.png" alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_istio 教程_02"></p>
 <hr>
 <h1 id="3-故障注入简介"><a href="#3-故障注入简介" class="headerlink" title="3 故障注入简介"></a>3 故障注入简介</h1><p>​    很多年前，我看过这样一部电影：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943462847897.png" srcset="/img/loading.gif" lazyload alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_istio 教程_04"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943462847897.png" alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_istio 教程_04"></p>
 <p>​    没错，周星驰演得，逃学威龙2。电影的开头讲述了周星驰的飞虎队执行反恐演习，在最后却误射了可爱的小骚妹。</p>
 <p>​    但是这跟故障注入有神马关系呢？</p>
 <p>​    周星驰的反恐演习其实并不是真的反恐，而只是演习；故障注入本身也并没有故障，而是人为引入故障。这种机制都是为了测试和提高体系健壮性的手段。</p>
@@ -307,27 +271,27 @@
 <p>jiuxi-nginx-vs.yaml</p>
 </blockquote>
 <h2 id="5-1-客户端资源文件"><a href="#5-1-客户端资源文件" class="headerlink" title="5.1 客户端资源文件"></a>5.1 客户端资源文件</h2><p>​    jiuxi-client.yaml 内容如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943486418393.png" srcset="/img/loading.gif" lazyload alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_Istio 失败注入_06"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943486418393.png" alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_Istio 失败注入_06"></p>
 <p>​    执行如下语句进行 Istio 注入，注入后，此 client 将处于网格之内：</p>
 <blockquote>
 <p>istioctl kube-inject -f jiuxi-client.yaml | kubectl apply -f -</p>
 </blockquote>
 <p>​    Istio 注入成功成功如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943499357696.png" srcset="/img/loading.gif" lazyload alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_istio 教程_08"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943499357696.png" alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_istio 教程_08"></p>
 <h2 id="5-2-k8s-服务文件"><a href="#5-2-k8s-服务文件" class="headerlink" title="5.2 k8s 服务文件"></a>5.2 k8s 服务文件</h2><p>​    jiuxi-nginx-svc.yaml 内容如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943507931635.png" srcset="/img/loading.gif" lazyload alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_Istio 失败注入_10"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943507931635.png" alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_Istio 失败注入_10"></p>
 <p>​    执行如下语句部署 service：</p>
 <blockquote>
 <p>kubectl apply -f jiuxi-nginx-svc.yaml</p>
 </blockquote>
 <h2 id="5-3-部署工作负载（deployment）"><a href="#5-3-部署工作负载（deployment）" class="headerlink" title="5.3 部署工作负载（deployment）"></a>5.3 部署工作负载（deployment）</h2><p>​    jiuxi-nginx-deploy.yaml 内容如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943513722118.png" srcset="/img/loading.gif" lazyload alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_istio 教程_12"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943513722118.png" alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_istio 教程_12"></p>
 <p>​    部署语句如下：</p>
 <blockquote>
 <p>kubectl apply -f jiuxi-nginx-deploy.yaml</p>
 </blockquote>
 <h2 id="5-4-虚拟服务文件"><a href="#5-4-虚拟服务文件" class="headerlink" title="5.4 虚拟服务文件"></a>5.4 虚拟服务文件</h2><p>​    故障注入就在虚拟服务资源中，内容如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943521891904.png" srcset="/img/loading.gif" lazyload alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_Istio fault inject_14"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943521891904.png" alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_Istio fault inject_14"></p>
 <p>​    部署语句如下：</p>
 <blockquote>
 <p>kubectl apply -f jiuxi-nginx-vs.yaml</p>
@@ -343,244 +307,67 @@
 <p>wget -q -O - <a target="_blank" rel="noopener" href="http://nginx-svc/"> http://nginx-svc</a></p>
 </blockquote>
 <p>​    发现延迟生效，因为设置的延迟时间是 5s。除去我中间操作花去了大约 3s，发现最终的延迟确实是 5s。如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943531644226.png" srcset="/img/loading.gif" lazyload alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_Istio fault inject_16"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589943531644226.png" alt="第三十三章 九析带你轻松完爆 Istio - fault injection 故障注入_Istio fault inject_16"></p>
 <p>​    自此，九析带你轻松完爆了 Istio 故障注入。</p>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/istio/">istio</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/istio/">istio</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-fault-injection-%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5%E4%B9%8B%E4%B8%AD%E6%AD%A2/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆 Istio - fault injection 故障注入之中止</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-configmap-istio-ca-root-cer/">
-                        <span class="hidden-mobile">九析带你轻松完爆 Istio - configmap istio-ca-root-cer</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
     </div>
+
     
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/istio/" rel="tag"># istio</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-configmap-istio-ca-root-cer/" rel="prev" title="九析带你轻松完爆 Istio - configmap istio-ca-root-cer">
+                  <i class="fa fa-chevron-left"></i> 九析带你轻松完爆 Istio - configmap istio-ca-root-cer
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-fault-injection-%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5%E4%B9%8B%E4%B8%AD%E6%AD%A2/" rel="next" title="九析带你轻松完爆 Istio - fault injection 故障注入之中止">
+                  九析带你轻松完爆 Istio - fault injection 故障注入之中止 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
 </div>
 
-      </div>
-    
-  </div>
+
+
+
+
+
 </div>
-
-<!-- Custom -->
-
-
-    
-
-    
-      <a id="scroll-top-button" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-    
-
-    
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
-  
-  <div class="statistics">
-    
-    
+  <footer class="footer">
+    <div class="footer-inner">
 
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">九析</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
+    </div>
+  </footer>
 
   
-
-  
-</footer>
-
-
-  <!-- SCRIPTS -->
-  
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    
-      <script  src="/js/img-lazyload.js" ></script>
-    
-  
-
-
-
-  
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
 
@@ -588,8 +375,10 @@
 
 
 
-<!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script>
+  
+
+
+
 
 
 </body>

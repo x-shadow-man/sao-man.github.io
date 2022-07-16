@@ -1,274 +1,236 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
-
-
-
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1 前言 2 邀约 3 上章总结 4 监听器   4.1 TCP 监听器   4.2 UDP 监听器  1 前言&amp;emsp;&amp;emsp;如果你对博客有任何疑问，请告诉我。   2 邀约&amp;emsp;&amp;emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：   3 上章总结&amp;emsp;&amp;emsp;上节介绍了 Envoy 的基础配置信息，如下图所示：  &amp;emsp;&amp;emsp;上面配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="九析带你轻松完爆 Istio - Envoy 监听器简介">
+<meta property="og:url" content="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%9B%91%E5%90%AC%E5%99%A8%E7%AE%80%E4%BB%8B/index.html">
+<meta property="og:site_name" content="九析">
+<meta property="og:description" content="1 前言 2 邀约 3 上章总结 4 监听器   4.1 TCP 监听器   4.2 UDP 监听器  1 前言&amp;emsp;&amp;emsp;如果你对博客有任何疑问，请告诉我。   2 邀约&amp;emsp;&amp;emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：   3 上章总结&amp;emsp;&amp;emsp;上节介绍了 Envoy 的基础配置信息，如下图所示：  &amp;emsp;&amp;emsp;上面配置">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661295647236.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661302961492.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661310554278.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661537504319.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661545300104.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661365273203.png">
+<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661577790290.png">
+<meta property="article:published_time" content="2021-09-12T06:57:40.000Z">
+<meta property="article:modified_time" content="2021-09-12T06:58:49.503Z">
+<meta property="article:author" content="九析">
+<meta property="article:tag" content="istio">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661295647236.png">
+
+
+<link rel="canonical" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%9B%91%E5%90%AC%E5%99%A8%E7%AE%80%E4%BB%8B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%9B%91%E5%90%AC%E5%99%A8%E7%AE%80%E4%BB%8B/","path":"2021/09/12/九析带你轻松完爆-Istio-Envoy-监听器简介/","title":"九析带你轻松完爆 Istio - Envoy 监听器简介"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>九析带你轻松完爆 Istio - Envoy 监听器简介 | 九析</title>
   
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="九析">
-  <meta name="keywords" content="">
-  
-  <title>九析带你轻松完爆 Istio - Envoy 监听器简介 - 九析</title>
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
 
 
 
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>九析</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" target="_self" role="button"
-                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="iconfont icon-books"></i>
-                文档
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/">
-                    
-                    主题博客
-                  </a>
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/">
-                    
-                    配置指南
-                  </a>
-                
-                  
-                  
-                  
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/icon/">
-                    
-                    图标用法
-                  </a>
-                
-              </div>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
     </div>
   </div>
-</nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/ss.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="九析带你轻松完爆 Istio - Envoy 监听器简介">
-              
-            </span>
+  <div class="site-meta">
 
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-12 14:57" pubdate>
-        2021年9月12日 下午
-      </time>
-    </span>
-  
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">九析</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      924 字
-    </span>
-  
 
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      10
-       分钟
-    </span>
-  
 
+
+
+
+
+</div>
+        
   
-  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">1 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E9%82%80%E7%BA%A6"><span class="nav-number">2.</span> <span class="nav-text">2 邀约</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E4%B8%8A%E7%AB%A0%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">3 上章总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E7%9B%91%E5%90%AC%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">4 监听器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-TCP-%E7%9B%91%E5%90%AC%E5%99%A8"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 TCP 监听器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-UDP-%E7%9B%91%E5%90%AC%E5%99%A8"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 UDP 监听器</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">九析</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
 </div>
 
-            
-          </div>
 
-          
+
         </div>
       </div>
     </div>
-  </header>
+  </aside>
+  <div class="sidebar-dimmer"></div>
 
-  <main>
+
+    </header>
+
     
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%9B%91%E5%90%AC%E5%99%A8%E7%AE%80%E4%BB%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="九析">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="九析">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="九析带你轻松完爆 Istio - Envoy 监听器简介 | 九析">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          九析带你轻松完爆 Istio - Envoy 监听器简介
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
 
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">九析带你轻松完爆 Istio - Envoy 监听器简介</h1>
-            
-            <div class="markdown-body">
-              <p>1 前言</p>
+      <time title="创建时间：2021-09-12 14:57:40 / 修改时间：14:58:49" itemprop="dateCreated datePublished" datetime="2021-09-12T14:57:40+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/istio/" itemprop="url" rel="index"><span itemprop="name">istio</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>1 前言</p>
 <p>2 邀约</p>
 <p>3 上章总结</p>
 <p>4 监听器</p>
@@ -276,21 +238,21 @@
 <p>  4.2 UDP 监听器</p>
 <hr>
 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661295647236.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 监听器"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661295647236.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 监听器"></p>
 <hr>
 <h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661302961492.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Istio 视频_02"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661302961492.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Istio 视频_02"></p>
 <hr>
 <h1 id="3-上章总结"><a href="#3-上章总结" class="headerlink" title="3 上章总结"></a>3 上章总结</h1><p>&emsp;&emsp;上节介绍了 Envoy 的基础配置信息，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661310554278.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 视频_03"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661310554278.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 视频_03"></p>
 <p>&emsp;&emsp;上面配置信息重点介绍了两块内容，管理信息（admin 部分）和静态配置信息（static_resources 部分）。管理信息包括 Envoy 的 web 管理控制台。在用 Docker  运行时可对外开放 9901 端口（并对所有客户端可见，即 address 为 0.0.0.0）。关于如何运行 Envoy  可参考我上一篇文章，轻松完爆就是。运行后的结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661537504319.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 视频_04"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661537504319.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 视频_04"></p>
 <p>&emsp;&emsp;从上图可知，对外服务端口 9901 已经开启。打开浏览器访问，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661545300104.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_k8s 视频_05"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661545300104.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_k8s 视频_05"></p>
 <p>&emsp;&emsp;静态配置信息主要包括两部分内容，分别是监听器（listener，今天介绍的主角）和集群（cluster），如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661365273203.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 监听器_06"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661365273203.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 监听器_06"></p>
 <p>&emsp;&emsp;   listener 是 Envoy 对外提供的监听端口，默认 10000。客户端通过此端口可以与 Envoy  建立通讯，获取连接（connection）。此外，在监听器上还可设置过滤器链（filter_chains），链上设置多过滤器，这样的设置可保证对进入 Envoy 的网络流量（请求）进行相应的处理，比如：上图就设置了http 过滤器，即：进入 Envoy 的所有 http  网络流量，都将被路由到集群（clusters）配置中，在集群（clusters）配置了 http 网络流量最终流向端点（endpoints，即  baidu.com）。整个过程如图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661577790290.png" srcset="/img/loading.gif" lazyload alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 教程_07"></p>
+<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661577790290.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 教程_07"></p>
 <hr>
 <h1 id="4-监听器"><a href="#4-监听器" class="headerlink" title="4 监听器"></a>4 监听器</h1><p>&emsp;&emsp;Envoy 配置在单个进程中支持任意数量的监听器（listener）。Envoy 支持 TCP 和 UDP 的监听器。</p>
 <h2 id="4-1-TCP-监听器"><a href="#4-1-TCP-监听器" class="headerlink" title="4.1 TCP 监听器"></a>4.1 TCP 监听器</h2><p>&emsp;&emsp;监听器上可以配置一系列的过滤器构成的链，并且根据匹配条件来选择某个链。单个过滤器链由一个或多个 L3 / L4 过滤器组成。当监听器上收到连接时，将选择匹配的过滤器链，实例化本地过滤器，并开始处理后续事件。这样通用的监听器体系架构设计使得 Envoy 可以执行绝大多数的代理任务（比如，速率限制、TLS 客户端身份认证、HTTP 连接管理、MongoDB 嗅探、原始 TCP  代理）等。</p>
@@ -300,241 +262,64 @@
 <h2 id="4-2-UDP-监听器"><a href="#4-2-UDP-监听器" class="headerlink" title="4.2 UDP 监听器"></a>4.2 UDP 监听器</h2><p>&emsp;&emsp;Envoy 还支持 UDP 监听器，尤其是 UDP 监听器过滤器。每个监听器过滤器都会处理工作进程在监听器端口上监听的每个 UDP 数据报。实际上，UDP 监听器配置有 SO_REUSEPORT 内核选项（该选项作用是可以将多个进程绑定在同一个端口上），这将导致内核将每个 UDP  四元组一致地散列到同一个工作程序。如果需要，这可使 UDP 监听器过滤器面向“会话”。</p>
 <p>&emsp;&emsp;自此，九析带你轻松完爆 Envoy 监听器简介，有关监听器更多的内容，请查看本人接下来的文章。</p>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/istio/">istio</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/istio/">istio</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">九析带你轻松完爆 Istio - Envoy 架构概述</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%B8%80%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B/">
-                        <span class="hidden-mobile">九析带你轻松完爆 Istio - Envoy 一分钟上手</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
     </div>
+
     
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/istio/" rel="tag"># istio</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%B8%80%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B/" rel="prev" title="九析带你轻松完爆 Istio - Envoy 一分钟上手">
+                  <i class="fa fa-chevron-left"></i> 九析带你轻松完爆 Istio - Envoy 一分钟上手
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0/" rel="next" title="九析带你轻松完爆 Istio - Envoy 架构概述">
+                  九析带你轻松完爆 Istio - Envoy 架构概述 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
 </div>
 
-      </div>
-    
-  </div>
+
+
+
+
+
 </div>
-
-<!-- Custom -->
-
-
-    
-
-    
-      <a id="scroll-top-button" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-    
-
-    
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
-  
-  <div class="statistics">
-    
-    
+  <footer class="footer">
+    <div class="footer-inner">
 
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">九析</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
+    </div>
+  </footer>
 
   
-
-  
-</footer>
-
-
-  <!-- SCRIPTS -->
-  
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    
-      <script  src="/js/img-lazyload.js" ></script>
-    
-  
-
-
-
-  
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
 
@@ -542,8 +327,10 @@
 
 
 
-<!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script>
+  
+
+
+
 
 
 </body>
