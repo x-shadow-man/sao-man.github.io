@@ -147,7 +147,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="九析"
-      src="/images/bb.jpg">
+      src="/images/bb.png">
   <p class="site-author-name" itemprop="name">九析</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -206,7 +206,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-profile-%E8%AF%A6%E8%BF%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -231,9 +231,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 17:46:47 / 修改时间：17:47:42" itemprop="dateCreated datePublished" datetime="2021-09-11T17:46:47+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 17:46:47" itemprop="dateCreated datePublished" datetime="2021-09-11T17:46:47+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -265,38 +271,38 @@
 <p>4 总结</p>
 <hr>
 <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368141584701.jpeg" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 安装"></p>
-<p>​    你可以从下面截图中获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584440587356556.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 视频_02"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584368141584701.jpeg" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 安装"></p>
+<p>​    你可以从下面截图中获取免费的、更生动的视频资料：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584440587356556.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 视频_02"></p>
 <hr>
-<h2 id="2-istio-之-profile"><a href="#2-istio-之-profile" class="headerlink" title="2 istio 之 profile"></a>2 istio 之 profile</h2><p>​    在介绍 istio profile 之前，我们先介绍一下电信的套餐：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368156493068.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 教程_03"></p>
+<h2 id="2-istio-之-profile"><a href="#2-istio-之-profile" class="headerlink" title="2 istio 之 profile"></a>2 istio 之 profile</h2><p>​    在介绍 istio profile 之前，我们先介绍一下电信的套餐：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584368156493068.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 教程_03"></p>
 <p>​    我们去电信开通手机业务时，一般都会选择手机套餐，不同的手机套餐会提供不同的增值服务。如上图所示，每个套餐就是一个 profile。istioctl 在安装 istio 时提供的 profile 概念与此类似，不同 profile 定义了不同的 istio  控制面行为。</p>
 <hr>
 <h2 id="3-istioctl-profile"><a href="#3-istioctl-profile" class="headerlink" title="3 istioctl profile"></a>3 istioctl profile</h2><p>​    使用如下命令查看 istioctl  profile：</p>
 <blockquote>
 <p>istioctl profile list</p>
 </blockquote>
-<p>​    执行结果如下图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368172412822.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_04"></p>
+<p>​    执行结果如下图所示：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584368172412822.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_04"></p>
 <h3 id="3-1-demo"><a href="#3-1-demo" class="headerlink" title="3.1 demo"></a>3.1 demo</h3><p>​    demo profile 仅供学习使用，并不合适作为生产环境。该 profile 会安装  ingressgateway、egressgateway、istio-pilot 等 istio 组件，同时会安装  grafana、istio-tracing、kiali、prometheus 等外部插件。使用如下命令查看 demo profile 的  istio 安装配置清单：</p>
 <blockquote>
 <p>istioctl profile dump demo</p>
 </blockquote>
-<p>​    从 dump 出的 profile 来看，最重要的是两块配置：插件和组件。插件是指外部第三方依赖，比如  grafana、kiali、prometheus、tracing；组件是指 istio 自身的组件，比如  citadel、egressgateway、ingressgateway、pilot、policy、sidecarInjector、telemetry 等。如下截图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368188341223.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_05"><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_06"></p>
+<p>​    从 dump 出的 profile 来看，最重要的是两块配置：插件和组件。插件是指外部第三方依赖，比如  grafana、kiali、prometheus、tracing；组件是指 istio 自身的组件，比如  citadel、egressgateway、ingressgateway、pilot、policy、sidecarInjector、telemetry 等。如下截图所示：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584368188341223.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_05"><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_06"></p>
 <p>​    部分组件信息如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368199256308.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 安装_07"></p>
-<p>​    总结 demo profile 的组件、插件的开关情况信息如下截图所示，其中 X 代表开启组件或插件：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368214844438.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_08"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584368199256308.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 安装_07"></p>
+<p>​    总结 demo profile 的组件、插件的开关情况信息如下截图所示，其中 X 代表开启组件或插件：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584368214844438.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_08"></p>
 <h3 id="3-2-minimal"><a href="#3-2-minimal" class="headerlink" title="3.2 minimal"></a>3.2 minimal</h3><p>​    minimal profile 仅仅开启了 pilot 组件，其他的组件或者插件都是关闭的状态，可以通过如下命令查看明细：</p>
 <blockquote>
 <p>istioctl profile dump minimal &gt; minimal.yaml</p>
 </blockquote>
 <p>​    如下图所示，minimal 插件都是关闭的：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368226455115.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 视频_09"></p>
-<p>​    仅有 pilot 组件是开启状态：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368242534892.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 安装_10"></p>
-<p>​    符合官方描述，如下图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368252181812.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_11"></p>
-<h3 id="3-3-default"><a href="#3-3-default" class="headerlink" title="3.3 default"></a>3.3 default</h3><p>​    default 是官方推荐的 istio 安装 profile。它在组件和插件的选择上做到了最合适，比如组件中它只开启了 ingressgateway、pilot，插件中只开启了 prometheus。如下图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368262600119.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_12"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584368226455115.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 视频_09"></p>
+<p>​    仅有 pilot 组件是开启状态：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584368242534892.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 安装_10"></p>
+<p>​    符合官方描述，如下图所示：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584368252181812.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_11"></p>
+<h3 id="3-3-default"><a href="#3-3-default" class="headerlink" title="3.3 default"></a>3.3 default</h3><p>​    default 是官方推荐的 istio 安装 profile。它在组件和插件的选择上做到了最合适，比如组件中它只开启了 ingressgateway、pilot，插件中只开启了 prometheus。如下图所示：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584368262600119.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_12"></p>
 <h3 id="3-4-empty"><a href="#3-4-empty" class="headerlink" title="3.4 empty"></a>3.4 empty</h3><p>​    empty profile 不会开启任何组件或者插件。该 profile 的作用是提供一个干净的模板供有经验的 istio 使用者自定义配置。</p>
-<h3 id="3-5-remote"><a href="#3-5-remote" class="headerlink" title="3.5 remote"></a>3.5 remote</h3><p>​    remote profile 在实际使用中情况并不多见。该 profile 提供共享控制面去操作多集群服务网格。remote profile 官方提供的组件、插件描述如下图所示，但是根据本人实际观察，发现并不准确，特别标注在下图中：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368292162685.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 服务网格_13"></p>
-<p>​    dump 出的 ingress-gateway 组件应该处于开启状态：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368303338153.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_14"></p>
-<p>​    dump 出来的 pilot 组件应该处于开启状态：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584368314215522.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 教程_15"></p>
+<h3 id="3-5-remote"><a href="#3-5-remote" class="headerlink" title="3.5 remote"></a>3.5 remote</h3><p>​    remote profile 在实际使用中情况并不多见。该 profile 提供共享控制面去操作多集群服务网格。remote profile 官方提供的组件、插件描述如下图所示，但是根据本人实际观察，发现并不准确，特别标注在下图中：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584368292162685.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 服务网格_13"></p>
+<p>​    dump 出的 ingress-gateway 组件应该处于开启状态：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584368303338153.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio profile_14"></p>
+<p>​    dump 出来的 pilot 组件应该处于开启状态：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584368314215522.png" alt="第十章 九析带你轻松完爆 service mesh - istio profile 详述_istio 教程_15"></p>
 <h3 id="3-6-separate"><a href="#3-6-separate" class="headerlink" title="3.6 separate"></a>3.6 separate</h3><p>​    官方宣称 separate profile 在未来的版本中将要被废弃掉了，所以就直接略过不提了吧。大家都生活得够艰难了，就不要给自己找麻烦了。</p>
 <hr>
 <h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4 总结"></a>4 总结</h2><p>​    本小节介绍了 istioctl 安装 istio 时提供的各个 profile，已经可以覆盖 90%  上的工作场景了。但是有些技术小骚仍然不会满足，那么后续哥将会继续提供自定义配置安装的方法，请继续跟随九析的脚步，我们一同轻松完爆 istio。</p>
@@ -329,7 +335,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-upgrade-%E5%8D%87%E7%BA%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -354,9 +360,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 17:42:56 / 修改时间：17:43:41" itemprop="dateCreated datePublished" datetime="2021-09-11T17:42:56+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 17:42:56" itemprop="dateCreated datePublished" datetime="2021-09-11T17:42:56+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -391,7 +403,7 @@
 <p>​    3.8 重设数据平面</p>
 <hr>
 <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173739515.png" alt="image-20210911173739515"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173739515.png" alt="image-20210911173739515"></p>
 <p>​    今天杭州阴天，哥的心情不怎么嗨！因为哥前期都在使用 1.4.5 版本，但是这周 istio 官方没经我允许就擅自升级到了 1.5 版本，打了我一个措手不及。但是互联网这十几年没少教育我，于是痛定思痛决定拥抱变化。</p>
 <hr>
 <h2 id="2-升级前的准备"><a href="#2-升级前的准备" class="headerlink" title="2 升级前的准备"></a>2 升级前的准备</h2><p>​    就像你撸管前要先把纸准备好一样，在升级 istio 前，要先做一些前期准备工作。</p>
@@ -404,10 +416,10 @@
 <p>istioctl version</p>
 </blockquote>
 <p>​    命令截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173755955.png" alt="image-20210911173755955"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173755955.png" alt="image-20210911173755955"></p>
 <p>​    由此可知，istio 当前的客户端、控制平面、数据平面的版本都是 1.4.5 版本。</p>
 <p>​    通过查看 istio pod 的镜像也可以确认当前 istio 各组件的相关版本，如下图：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173809501.png" alt="image-20210911173809501"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173809501.png" alt="image-20210911173809501"></p>
 <hr>
 <h2 id="3-升级步骤"><a href="#3-升级步骤" class="headerlink" title="3 升级步骤"></a>3 升级步骤</h2><h3 id="3-1-下载新版本的-istio"><a href="#3-1-下载新版本的-istio" class="headerlink" title="3.1 下载新版本的 istio"></a>3.1 下载新版本的 istio</h3><p>​    执行如下命令下载最新版的 istio：</p>
 <blockquote>
@@ -418,17 +430,17 @@
 <p>curl -L <a target="_blank" rel="noopener" href="https://istio.io/downloadIstio">https://istio.io/downloadIstio</a> | ISTIO_VERSION=1.5.0 sh -</p>
 </blockquote>
 <p>​    当然很多情况下，你都会遭遇网络情况，如下所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173821564.png" alt="image-20210911173821564"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173821564.png" alt="image-20210911173821564"></p>
 <p>​    你能怎么办？你什么感觉？是不是就像大便找不到厕所？或者找到厕所却发现没坑？</p>
 <p>​    实在下不到，你也不要悲愤，可以告诉哥，哥直接发给你，不用谢！</p>
 <p>​    如下截图有没有看到，哥可以下，但是你们却下不到，你说气人不？</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173831924.png" alt="image-20210911173831924"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173831924.png" alt="image-20210911173831924"></p>
 <h3 id="3-2-解压缩-istio"><a href="#3-2-解压缩-istio" class="headerlink" title="3.2 解压缩 istio"></a>3.2 解压缩 istio</h3><p>​    安装 istio 前，首先解压缩：</p>
 <blockquote>
 <p>tar -zxvf istio-1.5.0-linux.tar.gz</p>
 </blockquote>
 <p>​    解压缩后的目录结构截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173847127.png" alt="image-20210911173847127"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173847127.png" alt="image-20210911173847127"></p>
 <p>​    关键目录、文件说明如下：</p>
 <blockquote>
 <p>1 bin/istioctl    # 客户端工具</p>
@@ -436,13 +448,13 @@
 <p>3 samples    # 学习样例</p>
 </blockquote>
 <h3 id="3-3-设置-istioctl-环境变量"><a href="#3-3-设置-istioctl-环境变量" class="headerlink" title="3.3 设置 istioctl 环境变量"></a>3.3 设置 istioctl 环境变量</h3><p>​    因为我曾经设置过老版本 istioctl 环境变量，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173859461.png" alt="image-20210911173859461"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173859461.png" alt="image-20210911173859461"></p>
 <p>​    所以首先需要通过如下命令进行删除：</p>
 <blockquote>
 <p>export PATH=<code>echo $PATH | sed -e &#39;s/:\/root\/istio\/istio-1.4.5\/bin//g&#39;</code></p>
 </blockquote>
 <p>​    删除后截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173926207.png" alt="image-20210911173926207"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173926207.png" alt="image-20210911173926207"></p>
 <p>​    将新版本 istioctl 路径添加到系统环境路径中：</p>
 <blockquote>
 <p>cd istio-1.5.0</p>
@@ -450,7 +462,7 @@
 <p>istioctl version</p>
 </blockquote>
 <p>​    执行成功后，验证版本如下图所示，发现当前 istioctl 客户端版本已经更新为 1.5.0，但是控制面和数据面仍然是 1.4.5，这说明当前我们只是完成了 istio 客户端的改造，而控制面和数据面版本要升级完才会更改：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173939403.png" alt="image-20210911173939403"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173939403.png" alt="image-20210911173939403"></p>
 <h3 id="3-4-设置-istio-自动补全功能"><a href="#3-4-设置-istio-自动补全功能" class="headerlink" title="3.4 设置 istio 自动补全功能"></a>3.4 设置 istio 自动补全功能</h3><p>​    将 istio 安装包 tools 目录下的 istioctl.bash 拷贝到用户根目录下：</p>
 <blockquote>
 <p>cp istio-1.5.0/tools/istioctl.bash ~</p>
@@ -467,23 +479,23 @@
 <p>source ~/.bash_profile</p>
 </blockquote>
 <p>​    然后输入 istioctl 然后按两次 tab 键，发现自动补全功能已经生效：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173949422.png" alt="image-20210911173949422"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173949422.png" alt="image-20210911173949422"></p>
 <h3 id="3-5-验证新版本-istio-是否兼容老版本"><a href="#3-5-验证新版本-istio-是否兼容老版本" class="headerlink" title="3.5 验证新版本 istio 是否兼容老版本"></a>3.5 验证新版本 istio 是否兼容老版本</h3><p>​    执行如下命令查看新版本 istio 可兼容的版本范围：</p>
 <blockquote>
 <p>istioctl manifest versions</p>
 </blockquote>
 <p>​    如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173959253.png" alt="image-20210911173959253"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173959253.png" alt="image-20210911173959253"></p>
 <p>​    明确新版本 istio 可升级，则继续往下操作。</p>
 <h3 id="3-6-创建升级配置文件"><a href="#3-6-创建升级配置文件" class="headerlink" title="3.6 创建升级配置文件"></a>3.6 创建升级配置文件</h3><p>​    我以前安装 istio 采用的 profile 是 demo：</p>
 <blockquote>
 <p>istioctl manifest apply –set profile=demo</p>
 </blockquote>
 <p>​    怎么理解 profile，你可以跟下图做类比：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174010406.png" alt="image-20210911174010406"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911174010406.png" alt="image-20210911174010406"></p>
 <p>​    也就是同样型号比如 G 级别车，一共有三个版本，每个版本就是一个 profile，每个 profile 的参数或者配置都有区别。</p>
 <p>​    你也可以通过如下命令查看你的 istio 1.5.0 版本共有几个 profile：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174020192.png" alt="image-20210911174020192"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911174020192.png" alt="image-20210911174020192"></p>
 <p>​    但是可惜地是，istio 安装时支持 set 参数，比如你可以使用如下命令安装：</p>
 <blockquote>
 <p>istioctl manifest apply –set profile=demo</p>
@@ -498,16 +510,16 @@
 <p>istioctl upgrade -f demo.yaml</p>
 </blockquote>
 <p>​    升级过程截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174030581.png" alt="image-20210911174030581"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911174030581.png" alt="image-20210911174030581"></p>
 <p>​    如果升级过程很顺畅，就可以跳过此小节继续下面的内容；如果升级过程并不顺利，可以根据下面的介绍进行修改。</p>
 <h4 id="3-7-1-资源等待错误"><a href="#3-7-1-资源等待错误" class="headerlink" title="3.7.1 资源等待错误"></a>3.7.1 资源等待错误</h4><p>​    如果在升级过程中遭遇如下日志信息：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174040082.png" alt="image-20210911174040082"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911174040082.png" alt="image-20210911174040082"></p>
 <blockquote>
 <p>error    installer    Failed to wait for resource: resources not ready after 10m0s: timed out waiting for the condition</p>
 <p>Deployment/istio-system/istiod</p>
 </blockquote>
 <p>​    多半是因为镜像下载问题，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174050011.png" alt="image-20210911174050011"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911174050011.png" alt="image-20210911174050011"></p>
 <p>​    可以指定 aliyun 作为镜像源：</p>
 <blockquote>
 <p>touch /etc/docker/daemon.json</p>
@@ -529,26 +541,26 @@
 <p>Error: failed to read the current Istio version, error: different versions of Istio components found</p>
 </blockquote>
 <p>​    错误截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174102383.png" alt="image-20210911174102383"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911174102383.png" alt="image-20210911174102383"></p>
 <p>​    多半是因为镜像版本冲突，可以执行如下命令查看：</p>
 <blockquote>
 <p>istioctl version</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174112229.png" alt="image-20210911174112229"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911174112229.png" alt="image-20210911174112229"></p>
 <p>​    改正办法是删除错误版本的 deployment 后再升级（istioctl upgrade）：</p>
 <blockquote>
 <p>kubectl delete deployments.apps -n istio-system istio-egressgateway</p>
 </blockquote>
 <p>​    升级成功后的截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174121033.png" alt="image-20210911174121033"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911174121033.png" alt="image-20210911174121033"></p>
 <p>​    再次执行 istioctl version，可以发现 istioctl 的客户端、数据面、控制面都从 1.4.5 变成了 1.5.0。如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174133509.png" alt="image-20210911174133509"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911174133509.png" alt="image-20210911174133509"></p>
 <h3 id="3-8-重设数据平面"><a href="#3-8-重设数据平面" class="headerlink" title="3.8 重设数据平面"></a>3.8 重设数据平面</h3><p>​    从上面的截图中，其实可以发现一个端倪，就是 data plane version 有一个 proxy 仍是 1.4.5。产生这样的原因是我在升级 istio 版本前就已经手工注入了一个  deployment，现在需要重置原有数据平面。执行如下命令重置原有被注入的 nginx deployment：</p>
 <blockquote>
 <p>istioctl kube-inject -f nginx-deploy.yaml | kubectl apply -f -</p>
 </blockquote>
 <p>​    再次执行 istioctl version 命令发现客户端、数据面、控制面的版本都更新到了最新的状态，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911174144682.png" alt="image-20210911174144682"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911174144682.png" alt="image-20210911174144682"></p>
 <p>​    自此，九析带你轻松完爆 istio 的升级。</p>
 
       
@@ -579,7 +591,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E6%B3%A8%E5%85%A5%E5%90%8E%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E6%B5%81%E5%90%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -604,9 +616,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 17:34:02 / 修改时间：17:34:52" itemprop="dateCreated datePublished" datetime="2021-09-11T17:34:02+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 17:34:02" itemprop="dateCreated datePublished" datetime="2021-09-11T17:34:02+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -640,29 +658,29 @@
 <p>7 小节</p>
 <hr>
 <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911172944559.png" alt="image-20210911172944559"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911172944559.png" alt="image-20210911172944559"></p>
 <p>​    上节中我们举例介绍了执行 istio 注入操作后，对 nginx pod 所产生的影响，即在 pod 中会多创建两个容器：istio-init、istio-proxy，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911172956747.png" alt="image-20210911172956747"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911172956747.png" alt="image-20210911172956747"></p>
 <p>​    如果从进程角度来看 pod，则是下面这个样子：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173007202.png" alt="image-20210911173007202"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173007202.png" alt="image-20210911173007202"></p>
 <p>​    从上图可知，nginx pod 内的三个容器共享同一个网络命名空间，该网络命名空间内的流量流向规则在初始化容器 istio-init 启动时完成的，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173017468.png" alt="image-20210911173017468"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173017468.png" alt="image-20210911173017468"></p>
 <hr>
 <h2 id="2-查看-iptables-规则"><a href="#2-查看-iptables-规则" class="headerlink" title="2 查看 iptables 规则"></a>2 查看 iptables 规则</h2><p>​    一般情况下，我们可以通过 kubectl exec 命令跟 pod 进行交互并获取到 pod 内信息，但这里我们不能此法获取到 pod 内的 iptables 信息。如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173028740.png" alt="image-20210911173028740"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173028740.png" alt="image-20210911173028740"></p>
 <p>​    如果想获取到 iptables 信息，必须通过宿主机的 docker 才能获取到。</p>
 <h3 id="2-1-确定-pod-所在主机"><a href="#2-1-确定-pod-所在主机" class="headerlink" title="2.1 确定 pod 所在主机"></a>2.1 确定 pod 所在主机</h3><p>​    使用如下命令获取运行 nginx pod 的宿主机地址：</p>
 <blockquote>
 <p>kubectl get pods -n jiuxi -o wide</p>
 </blockquote>
 <p>​    命令执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173039235.png" alt="image-20210911173039235"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173039235.png" alt="image-20210911173039235"></p>
 <h3 id="2-2-定位-istio-proxy-容器"><a href="#2-2-定位-istio-proxy-容器" class="headerlink" title="2.2 定位 istio-proxy 容器"></a>2.2 定位 istio-proxy 容器</h3><p>​    ssh 命令登录到 10.244.10.80 宿主机，并执行如下命令定位 istio-proxy 容器：</p>
 <blockquote>
 <p>docker ps | grep -i istio-proxy</p>
 </blockquote>
 <p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173049597.png" alt="image-20210911173049597"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173049597.png" alt="image-20210911173049597"></p>
 <h3 id="2-3-登录-istio-proxy-容器"><a href="#2-3-登录-istio-proxy-容器" class="headerlink" title="2.3 登录 istio-proxy 容器"></a>2.3 登录 istio-proxy 容器</h3><blockquote>
 <p>docker exec -it –privileged $(docker ps | grep -i istio-proxy | awk ‘{print $(1)}’) bash</p>
 </blockquote>
@@ -679,20 +697,20 @@
 <p>sudo su root</p>
 </blockquote>
 <p>​    再次执行 iptables 即可，操作成功如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173100959.png" alt="image-20210911173100959"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173100959.png" alt="image-20210911173100959"></p>
 <hr>
 <h2 id="3-网络宏观流量流向介绍"><a href="#3-网络宏观流量流向介绍" class="headerlink" title="3 网络宏观流量流向介绍"></a>3 网络宏观流量流向介绍</h2><p>​    下面宏观介绍一下基本的网络流量流向知识，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173113518.png" alt="image-20210911173113518"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173113518.png" alt="image-20210911173113518"></p>
 <p>​    用户从客户端发起一个 http  请求，该请求会通过互联网到达公司网络的外部边界（路由器），路由器会将网络流量送到交换机，因为反向代理服务器跟交换机联通，因此流量到达反向代理服务器（nginx），nginx 再将网络请求按照预先制定的分发策略转给后面真正处理请求的 web 服务器。</p>
 <p>​    你可以通过 traceroute 命令定位一下外部网络流向。比如访问 <a href="http://www.baidu.com：">www.baidu.com：</a></p>
 <blockquote>
 <p>traceroute -I <a target="_blank" rel="noopener" href="http://www.baidu.com/"> www.baidu.com</a></p>
 </blockquote>
 <p>​    访问截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173124326.png" alt="image-20210911173124326"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173124326.png" alt="image-20210911173124326"></p>
 <p>​    通过上面的截图可知，本人访问 baidu.com 共经过了 13 个路由器。</p>
 <p>​    当然也可以通过 traceroute 定位 k8s 中 pod 的网络流向，如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173134127.png" alt="image-20210911173134127"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173134127.png" alt="image-20210911173134127"></p>
 <p>​    由上图可知：</p>
 <blockquote>
 <p>1 首先定位 nginx pod 的 ip 为 10.244.10.80</p>
@@ -702,7 +720,7 @@
 </blockquote>
 <hr>
 <h2 id="4-网络微观流量流向介绍"><a href="#4-网络微观流量流向介绍" class="headerlink" title="4 网络微观流量流向介绍"></a>4 网络微观流量流向介绍</h2><p>​    微观是指流量进入宿主机的情况分析，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173145054.png" alt="image-20210911173145054"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173145054.png" alt="image-20210911173145054"></p>
 <p>​    由上图可知：</p>
 <blockquote>
 <p>1 入口流量经过服务器网卡进入服务器的网络协议栈</p>
@@ -714,13 +732,13 @@
 <hr>
 <h2 id="5-istio-入口流量分析"><a href="#5-istio-入口流量分析" class="headerlink" title="5 istio 入口流量分析"></a>5 istio 入口流量分析</h2><p>​    有了宏观和微观的网络流量流向分析之后，下一步就可以分析一下 istio 的入口流量了。因为涉及到 iptables 相关的知识，这里我仅仅把结论呈现给大家，具体 iptables 的使用如果大家有兴趣可以参考本人其他的博客轻松完爆。</p>
 <p>​    在上面我们已经展示了 istio-init 容器在启动时就完成了网络空间协议栈规则的初始化，如下图：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173156740.png" alt="image-20210911173156740"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173156740.png" alt="image-20210911173156740"></p>
 <p>​    现在可以通过 curl 访问 nginx pod。</p>
 <blockquote>
 <p>curl 10.244.10.80</p>
 </blockquote>
 <p>​    curl 后的入口流量进入 nginx pod 后的流转路径如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173207619.png" alt="image-20210911173207619"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173207619.png" alt="image-20210911173207619"></p>
 <p>​    由上图可知，整个网络流向如下：</p>
 <blockquote>
 <p>1 因为匹配 iptables nat 表的 prerouting 链的第一条规则，因此网络流量被路由到 ISTIO_INBOUND 链</p>
@@ -728,9 +746,9 @@
 <p>3 路由到 ISTIO_IN_REDIRECT 链的流量最终会从内核态打入到用户态监听端口为 15006 的进程</p>
 </blockquote>
 <p>​    端口 15006 的进程是什么呢？通过 netstat -ntlp 命令可知是 envoy 进程，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173220599.png" alt="image-20210911173220599"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173220599.png" alt="image-20210911173220599"></p>
 <p>​    由此可知，当我们 curl nginx pod 时，虽然指定的目标访问端口为 80，但是网络协议栈规则仍然会将整个流量劫持送到 envoy 进程，由于  envoy 进程可以获取到入口流量，所以可以在此制定一系列的操作起到流控的目的。envoy 处理完后，流量会继续移动，流向路径如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173229115.png" alt="image-20210911173229115"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173229115.png" alt="image-20210911173229115"></p>
 <p>​    由上图可知，整个网络流向如下：</p>
 <blockquote>
 <p>1 端口 15006 的进程处理完流量后，会将流量从用户态的进程传回内核态的网络协议栈，根据预先定义好的协议栈规则，流量会流经 output 链，output 链又会根据规则再把流量路由给 ISTIO_OUTPUT 链</p>
@@ -744,7 +762,7 @@
 <p>curl <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
 </blockquote>
 <p>​    下面截图展示出口流量的流向：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173241410.png" alt="image-20210911173241410"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173241410.png" alt="image-20210911173241410"></p>
 <p>​    从图可知：</p>
 <blockquote>
 <p>1 出口流量首先会通过 iptables nat 表的 output 链进入到 istio_output 链</p>
@@ -752,9 +770,9 @@
 <p>3 istio_redirect 会将流量路由给端口 15001 的进程</p>
 </blockquote>
 <p>​    端口 15001 进程依旧是 envoy 进程，该端口处理的是 outbound 流量。如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173252400.png" alt="image-20210911173252400"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173252400.png" alt="image-20210911173252400"></p>
 <p>​    由此可知，访问 baidu 前，流量依旧会被 envoy 劫持。处理完毕后，envoy 流量处理结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173302757.png" alt="image-20210911173302757"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173302757.png" alt="image-20210911173302757"></p>
 <blockquote>
 <p>1 envoy 将处理后的网络流量重新通过用户态进入到内核态的网络协议栈，流量会首先经过 OUTPUT 链</p>
 <p>2 流经 OUTPUT 链的流量会进入 ISTIO_OUTPUT 链</p>
@@ -793,7 +811,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E6%B3%A8%E5%85%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -818,9 +836,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 17:23:22 / 修改时间：17:27:06" itemprop="dateCreated datePublished" datetime="2021-09-11T17:23:22+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 17:23:22" itemprop="dateCreated datePublished" datetime="2021-09-11T17:23:22+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -852,7 +876,7 @@
 <p>3 小节</p>
 <hr>
 <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171710644.png" alt="image-20210911171710644"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911171710644.png" alt="image-20210911171710644"></p>
 <hr>
 <h2 id="2-istio-注入与平台生态影响"><a href="#2-istio-注入与平台生态影响" class="headerlink" title="2 istio 注入与平台生态影响"></a>2 istio 注入与平台生态影响</h2><p>​    虽然 istio 是平台间独立的，不仅支持 K8s、Consul，也同样支持虚拟机，但是本文部署平台环境还是聚焦在 k8s。</p>
 <h3 id="2-1-环境准备"><a href="#2-1-环境准备" class="headerlink" title="2.1 环境准备"></a>2.1 环境准备</h3><p>​    在本系列文章的第二篇中提到过资源的 istio 注入，这里再做一个回顾。</p>
@@ -890,14 +914,14 @@
 <p>kubectl apply -f nginx-deploy.yaml</p>
 </blockquote>
 <p>​    创建成功后的截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171726710.png" alt="image-20210911171726710"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911171726710.png" alt="image-20210911171726710"></p>
 <h3 id="2-2-istio-注入操作"><a href="#2-2-istio-注入操作" class="headerlink" title="2.2 istio 注入操作"></a>2.2 istio 注入操作</h3><p>​    执行 istio 注入操作之前，须确保 istio 和 istioctl 都正确安装，安装操作请参阅《<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2474224"> 第一章</a>》。</p>
 <p>​    手动执行 istio 注入操作：</p>
 <blockquote>
 <p>istioctl kube-inject -f nginx-deploy.yaml | kubectl apply -f -</p>
 </blockquote>
 <p>​    执行成功之后截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171737004.png" alt="image-20210911171737004"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911171737004.png" alt="image-20210911171737004"></p>
 <p>​    此时 nginx pod 内部容器从原来的 1 个变成了 2 个（严格意义上应该是 3 个，因为有个启动容器执行完就结束了，因此这里看不到，后面会细说）。</p>
 <h3 id="2-3-istio-注入本质"><a href="#2-3-istio-注入本质" class="headerlink" title="2.3 istio 注入本质"></a>2.3 istio 注入本质</h3><p>​    我们再审视一下 istio 注入过程：</p>
 <blockquote>
@@ -909,33 +933,33 @@
 <p>kubectl edit deployment -n jiuxi nginx</p>
 </blockquote>
 <p>​    发现在原来基础上增加了一个初始化容器（initContainers）：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171748249.png" alt="image-20210911171748249"></p>
-<p>​    <img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171800364.png"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911171748249.png" alt="image-20210911171748249"></p>
+<p>​    <img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911171800364.png"></p>
 <p>又增加了一个 istio-proxy 容器：</p>
 <p>还有一些环境变量信息，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171857892.png" alt="image-20210911171857892"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911171857892.png" alt="image-20210911171857892"></p>
 <p>​    由此可知，istio 注入本质就是在宿主资源中添加 istio 特性，从而起到提高整个平台的能力。类似克拉克加了披风变成超人，布洛克吸附外星物质变成毒液一样的道理。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171911243.png" alt="image-20210911171911243"></p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171923945.png" alt="image-20210911171923945"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911171911243.png" alt="image-20210911171911243"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911171923945.png" alt="image-20210911171923945"></p>
 <p>​    下图展示了 istio 在 nginx pod 中注入新容器 istio-init、istio-proxy：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171936581.png" alt="image-20210911171936581"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911171936581.png" alt="image-20210911171936581"></p>
 <h3 id="2-4-istio-注入-pod-后各容器作用以及关系"><a href="#2-4-istio-注入-pod-后各容器作用以及关系" class="headerlink" title="2.4 istio 注入 pod 后各容器作用以及关系"></a>2.4 istio 注入 pod 后各容器作用以及关系</h3><p>​    上图演示了 pod 在 istio 注入后产生了 2 个新的容器，这样原来单容器的 pod 现在变成了 3 个容器共存同一个 pod 中，而且宿主容器（nginx）跟 istio-proxy 容器还处于同一网络空间。</p>
 <blockquote>
 <p>istio-init: 初始化容器。作用是初始化 pod 网络空间，创建 iptables 规则。</p>
 <p>istio-proxy: sidecar 容器。作用是启动 pilot-agent 和 envoy 进程。</p>
 </blockquote>
 <p>​    可以通过 kubectl exec -it 命令进入 nginx pod 的 nginx 和 istio-proxy 容器，发现两个容器共享同一网络空间。如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171953779.png" alt="image-20210911171953779"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911171953779.png" alt="image-20210911171953779"></p>
 <h3 id="2-5-istio-proxy-和-envoy-关系"><a href="#2-5-istio-proxy-和-envoy-关系" class="headerlink" title="2.5 istio-proxy 和 envoy 关系"></a>2.5 istio-proxy 和 envoy 关系</h3><p>​    envoy 其实本质与 nginx 和 haproxy 一样，都属于网络代理服务器，运行时则是一个进程。envoy 在架构设计上也采用了类似 nginx 的设计模式（多线程、非阻塞、异步IO），后面的课程我会详细讲解。</p>
 <p>​    istio-proxy 是运行在 pod 中的一个容器。该容器运行时会启动两个关键的进程 pilot-agent 和 envoy。pilot-agent 进程会定时跟 istio 的 pilot 组件进行通信，envoy 进程会接收入口和出口网络流量。istio-proxy 容器内的进程如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911172004111.png" alt="image-20210911172004111"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911172004111.png" alt="image-20210911172004111"></p>
 <h3 id="2-6-istio-proxy-和-kube-proxy-关系"><a href="#2-6-istio-proxy-和-kube-proxy-关系" class="headerlink" title="2.6 istio-proxy 和 kube-proxy 关系"></a>2.6 istio-proxy 和 kube-proxy 关系</h3><p>​    从表现形式上说，istio-proxy 是容器(运行在 pod 内)，kube-proxy 是 pod (资源类型是 daemonset)。</p>
 <p>​    从处理网络流量角度来说，istio-proxy 和 kube-proxy 本质上都是通过 iptables/netfilter 来处理网络流量。只不过 istio-proxy 和  kube-proxy 活动在不同的网络空间。istio-proxy 位于 pod 网络空间，处理的是 pod 内的网络流量，而  kube-proxy 位于宿主机网络空间，处理的是宿主机内网络流量（因为 kube-proxy 是 daemonset，因此它位于 k8s  集群的每个 node 节点上）。</p>
 <h3 id="2-7-envoy-进程服务端口"><a href="#2-7-envoy-进程服务端口" class="headerlink" title="2.7 envoy 进程服务端口"></a>2.7 envoy 进程服务端口</h3><p>​    上面我们介绍了 envoy 是运行在 istio-proxy 容器内的一个进程，改进程的作用是管理网络流量（类比 nginx），下图展示 envoy  进程开启的网络端口，网络流量可以通过端口进入到 envoy 进程内部。网络流量、网络端口和 envoy  进程的关系就像风、窗户和房屋的关系一样，风（网络流量）通过窗口（网络端口）进入到房屋（envoy），一个房屋（envoy）可以不止一个窗户（网络端口）。</p>
 <p>​    下图展示 envoy 进程监听的端口号：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911172014710.png" alt="image-20210911172014710"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911172014710.png" alt="image-20210911172014710"></p>
 <p>​    服务端口作用截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911172033996.png" alt="image-20210911172033996"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911172033996.png" alt="image-20210911172033996"></p>
 <hr>
 <h2 id="3-小节"><a href="#3-小节" class="headerlink" title="3 小节"></a>3 小节</h2><p>​    自此，九析带你轻松完爆了 istio 的注入以及对平台生态的影响。下章节将继续介绍 istio 注入后对网络流量的流向的改变。</p>
 
@@ -967,7 +991,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E4%BB%8A%E7%94%9F%E7%AF%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -992,9 +1016,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 17:12:02 / 修改时间：17:12:53" itemprop="dateCreated datePublished" datetime="2021-09-11T17:12:02+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 17:12:02" itemprop="dateCreated datePublished" datetime="2021-09-11T17:12:02+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -1026,7 +1056,7 @@
 <p>6 多平台支持</p>
 <hr>
 <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911171103398.png" alt="image-20210911171103398"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911171103398.png" alt="image-20210911171103398"></p>
 <p>​    上章介绍了 istio 前世，讲述了微服务架构模型的演变史，也讲了微服务今天所遭遇的问题和面临的尴尬窘境，这里我们再复习一下。</p>
 <p>   目前微服务治理遭遇的问题：</p>
 <blockquote>
@@ -1119,7 +1149,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E5%89%8D%E4%B8%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -1144,9 +1174,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 17:07:26 / 修改时间：17:09:51" itemprop="dateCreated datePublished" datetime="2021-09-11T17:07:26+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 17:07:26" itemprop="dateCreated datePublished" datetime="2021-09-11T17:07:26+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -1193,7 +1229,7 @@
 </blockquote>
 <p>​    本文很多内容来自我在多个公司的技术分享后的 ppt 截图，如果你对此 ppt 感兴趣，可以向我索要。</p>
 <hr>
-<h2 id="2-架构演变史"><a href="#2-架构演变史" class="headerlink" title="2 架构演变史"></a>2 架构演变史</h2><h3 id="2-1-单体架构"><a href="#2-1-单体架构" class="headerlink" title="2.1 单体架构"></a>2.1 单体架构</h3><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911170031961.png" alt="image-20210911170031961"></p>
+<h2 id="2-架构演变史"><a href="#2-架构演变史" class="headerlink" title="2 架构演变史"></a>2 架构演变史</h2><h3 id="2-1-单体架构"><a href="#2-1-单体架构" class="headerlink" title="2.1 单体架构"></a>2.1 单体架构</h3><p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911170031961.png" alt="image-20210911170031961"></p>
 <blockquote>
 <p>特点：</p>
 <p>1 所有功能集成在一个项目工程中</p>
@@ -1207,7 +1243,7 @@
 <p>2 系统性能扩展只能通过扩展集群，成本高</p>
 <p>3 技术栈受限</p>
 </blockquote>
-<h3 id="2-2-垂直架构"><a href="#2-2-垂直架构" class="headerlink" title="2.2 垂直架构"></a>2.2 垂直架构</h3><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911170047249.png" alt="image-20210911170047249"></p>
+<h3 id="2-2-垂直架构"><a href="#2-2-垂直架构" class="headerlink" title="2.2 垂直架构"></a>2.2 垂直架构</h3><p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911170047249.png" alt="image-20210911170047249"></p>
 <blockquote>
 <p>特点：</p>
 <p>当访问量逐渐增大，单一应用增加机器带来的性价比越来越小，将应用拆成互不相关的几个应用，以提升效率。</p>
@@ -1220,7 +1256,7 @@
 <p>2 系统性能扩展只能通过扩展集群，成本高，有瓶颈</p>
 <p>3 单体之间的函数调用过度到系统之间的 rpc 或者 http 调用，服务发现需要单独机制保证</p>
 </blockquote>
-<h3 id="2-3-微服务架构"><a href="#2-3-微服务架构" class="headerlink" title="2.3 微服务架构"></a>2.3 微服务架构</h3><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911170101322.png" alt="image-20210911170101322"></p>
+<h3 id="2-3-微服务架构"><a href="#2-3-微服务架构" class="headerlink" title="2.3 微服务架构"></a>2.3 微服务架构</h3><p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911170101322.png" alt="image-20210911170101322"></p>
 <blockquote>
 <p>特点：</p>
 <p>1 将系统服务层完全独立出来，并将服务层抽取为一个个微服务</p>
@@ -1238,32 +1274,32 @@
 <hr>
 <h2 id="3-微服务架构模型演进史"><a href="#3-微服务架构模型演进史" class="headerlink" title="3 微服务架构模型演进史"></a>3 微服务架构模型演进史</h2><p>​    微服务架构的模型也是一个从简单到复杂的演进过程。</p>
 <h3 id="3-1-框架与通信"><a href="#3-1-框架与通信" class="headerlink" title="3.1 框架与通信"></a>3.1 框架与通信</h3><p>​    微服务架构初期，主要的技术诉求是寻找更简单和轻量的开发框架，不同的开发框架意味着采用不同的通信协议。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911170123931.png" alt="image-20210911170123931"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911170123931.png" alt="image-20210911170123931"></p>
 <h3 id="3-2-运行时的支撑服务"><a href="#3-2-运行时的支撑服务" class="headerlink" title="3.2 运行时的支撑服务"></a>3.2 运行时的支撑服务</h3><p>​    当服务的编写和通信解决了之后，接下来就要考虑一些运行时的支撑服务了。这些服务跟业务去耦，属于基础层的支撑服务，比如网关、负载均衡、服务注册与发现、配置中心等。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911170145110.png" alt="image-20210911170145110"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911170145110.png" alt="image-20210911170145110"></p>
 <h3 id="3-3-服务安全"><a href="#3-3-服务安全" class="headerlink" title="3.3 服务安全"></a>3.3 服务安全</h3><p>​    解决了服务的通信以及基础支撑后，大体上业务就可以开展了。但是这样裸奔的服务是有很大安全风险的，很多敏感的信息在不经过认证和授权就可以轻易获取到，因此服务安全就加入到了微服务的模型体系中。服务安全主要有两种，分别是 jwt 和 oauth2。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911170159703.png" alt="image-20210911170159704"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911170159703.png" alt="image-20210911170159704"></p>
 <h3 id="3-4-服务监控和告警"><a href="#3-4-服务监控和告警" class="headerlink" title="3.4 服务监控和告警"></a>3.4 服务监控和告警</h3><p>​    服务在解决了通信、支撑和安全之后，就可以愉快地展开工作了。但就跟判断健康需要做体检一样，判断在线服务是否健康就需要监控和遥测，当工作负载超过了阈值就要告警通知人为介入。服务的监控有很多的维度，常见地有系统指标监控、业务指标监控、服务健康检查、调用链监控、日志监控等。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911170231781.png" alt="image-20210911170231781"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911170231781.png" alt="image-20210911170231781"></p>
 <h3 id="3-5-服务部署"><a href="#3-5-服务部署" class="headerlink" title="3.5 服务部署"></a>3.5 服务部署</h3><p>​    容器化时代带来了新的运维思路，原有基于虚拟机、物理机的重运维开始向基于容器以及容器编排的轻运维转换，这种转换也带来了服务部署方式的改变。更快、更好、更有效的部署成为微服务架构模型新的挑战。</p>
 <p>​    服务部署需要解决的问题有发布机制的引入、镜像治理、容器治理、卷管理、CI/CD 等方面。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911170305561.png" alt="image-20210911170305561"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911170305561.png" alt="image-20210911170305561"></p>
 <h3 id="3-6-底层服务"><a href="#3-6-底层服务" class="headerlink" title="3.6 底层服务"></a>3.6 底层服务</h3><p>​    当业务范围越来越广，再大的公司也不可能解决任何技术问题，这时就需要引入一些业界优秀的第三方服务作为底层服务来解决特定问题。有时这些第三方服务并不可能完全适合自己的架构，因此就需要做适当的剪裁。尽管如此，这些第三方服务也构成了整个微服务架构模型中不可或缺的一部分。常用的第三方底层服务有分布式消息中间件、分布式数据访问、分布式任务调度和分布式缓存等。底层服务跟基础支撑服务的区别在于前者更多在业务问题域，而后者则主要是通用问题域。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911170327813.png" alt="image-20210911170327813"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911170327813.png" alt="image-20210911170327813"></p>
 <h3 id="3-7-服务防护"><a href="#3-7-服务防护" class="headerlink" title="3.7 服务防护"></a>3.7 服务防护</h3><p>​    就像胃口再好的人也不可能一次吃下整头大象一样，编写再好的服务也不可能支持无限的请求。技术人员在处理无限、不可期技术场景的技术方案时，经常的策略是以不变应万变：根据目前的服务负载设置峰值，超过峰值就进行熔断、限流等措施。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911170345259.png" alt="image-20210911170345259"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911170345259.png" alt="image-20210911170345259"></p>
 <p>​    熔断如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911170426093.png" alt="image-20210911170426093"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911170426093.png" alt="image-20210911170426093"></p>
 <p>​    降级如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911170435845.png" alt="image-20210911170435845"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911170435845.png" alt="image-20210911170435845"></p>
 <p>​    限流如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911170444859.png" alt="image-20210911170444859"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911170444859.png" alt="image-20210911170444859"></p>
 <h3 id="3-8-全链路压测"><a href="#3-8-全链路压测" class="headerlink" title="3.8 全链路压测"></a>3.8 全链路压测</h3><p>​    在上面的介绍中，我们介绍了微服务架构模型的各个维度。本来可以在这里结束，但是想想实在不妥，因为我们缺少了很关键的一环，那便是测试。</p>
 <p>​    全链路压测是稍具规模的科技公司都必须要做的工作之一。它的重要性不言而喻，当业务发展超出预期，系统要具有先知先觉的能力以抵御洪灾。毕竟未雨绸缪总好过亡羊补牢。全链路压测是一个大的话题，因为这里介绍的是 istio，故这里一笔带过，有关 ppt 详情我也照顾篇幅不再赘述，如果有朋友对此感兴趣，可以向我索要。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911170456807.png" alt="image-20210911170456807"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911170456807.png" alt="image-20210911170456807"></p>
 <hr>
 <h2 id="4-微服务架构模型全景图"><a href="#4-微服务架构模型全景图" class="headerlink" title="4 微服务架构模型全景图"></a>4 微服务架构模型全景图</h2><p>​    下图展示了整个微服务架构模型：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911170507833.png" alt="image-20210911170507833"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911170507833.png" alt="image-20210911170507833"></p>
 <hr>
 <h2 id="5-带来的问题"><a href="#5-带来的问题" class="headerlink" title="5 带来的问题"></a>5 带来的问题</h2><p>​    微服务架构的引入带来了很多好处，但同时也带来了服务治理诸多的问题。核心问题如下：</p>
 <h3 id="5-1-服务治理方式不统一"><a href="#5-1-服务治理方式不统一" class="headerlink" title="5.1 服务治理方式不统一"></a>5.1 服务治理方式不统一</h3><p>​    不同服务治理的方式会引入不同的中间件，而这些中间件的技术标准和维护标准都不同。因此运维人员或者架构人员必须掌握每种中间件的使用方法，很多时候这对一个人力资源有限的科技公司并不现实。</p>
@@ -1300,7 +1336,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-Gateway-%E8%AE%BE%E7%BD%AE%E8%B7%AF%E7%94%B1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -1325,9 +1361,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 16:58:05 / 修改时间：16:58:59" itemprop="dateCreated datePublished" datetime="2021-09-11T16:58:05+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 16:58:05" itemprop="dateCreated datePublished" datetime="2021-09-11T16:58:05+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -1362,12 +1404,12 @@
 <p>5 小节</p>
 <hr>
 <h2 id="1-流量管理（traffic-management）"><a href="#1-流量管理（traffic-management）" class="headerlink" title="1 流量管理（traffic management）"></a>1 流量管理（traffic management）</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165314268.png" alt="image-20210911165314268"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911165314268.png" alt="image-20210911165314268"></p>
 <p>​    istio 四大特性是流量管理（traffic management）、安全（security）、策略（policies）和遥测（observability）。</p>
 <p>​    本节重点介绍 istio 流量管理。流量管理的本质是对网络流量的路由和控制。生活中经常有这样的例子，比如下雨塌方，交警会疏导新的交通路线，这便是路由；比如景区周末实行单双号限行，这便是流量控制。</p>
 <p>​    在介绍流量管理之前，首先介绍一下网络流向，介绍一个 http 请求在安装了 istio 的 k8s 中都经过哪些点，有了这个介绍之后，再谈流量管理将是水到渠成的事情。</p>
 <p>​    下图便是网络流向图：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165357073.png" alt="image-20210911165357073"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911165357073.png" alt="image-20210911165357073"></p>
 <p>​    当用户使用浏览器发起一个请求( <a target="_blank" rel="noopener" href="http://jiuxi.com/xxx">http://jiuxi.com/xxx</a> )进入 k8s 中的 istio-ingressgateway，因为在  istio-ingressgateway 上设置了 istio 的 gateway，而且此 gateway 又绑定了 virtual  service，在 virtual service 设置了 2 条路由规则，分别指向 tomcat 和 nginx 这 2 个 k8s  service，而每个 service 又关联到各自的 pod，于是此请求最终可根据 url 触达到 pod 内的容器。</p>
 <p>​    了解了请求流向的整个流程，下面介绍如何操作。前提是你已经安装好了 k8s 和 istio。关于如何安装和配置 istio，可以查看本人的系列文章第一章。</p>
 <hr>
@@ -1531,13 +1573,13 @@
 <p>kubectl edit deployment -n istio-system istio-ingressgateway</p>
 </blockquote>
 <p>​    修改内容如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165456105.png" alt="image-20210911165456105"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911165456105.png" alt="image-20210911165456105"></p>
 <hr>
 <h2 id="4-尝试网关路由功能"><a href="#4-尝试网关路由功能" class="headerlink" title="4 尝试网关路由功能"></a>4 尝试网关路由功能</h2><h3 id="4-1-确定-INGRESS-HOST"><a href="#4-1-确定-INGRESS-HOST" class="headerlink" title="4.1 确定 INGRESS_HOST"></a>4.1 确定 INGRESS_HOST</h3><blockquote>
 <p>kubectl get pod -n istio-system -o wide</p>
 </blockquote>
 <p>​    执行结果如下图所示，本人的 INGRESS_HOST 就是 10.110.101.205。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165522752.png" alt="image-20210911165522752"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911165522752.png" alt="image-20210911165522752"></p>
 <h3 id="4-2-编辑浏览器所在主机-hosts-文件"><a href="#4-2-编辑浏览器所在主机-hosts-文件" class="headerlink" title="4.2 编辑浏览器所在主机 hosts 文件"></a>4.2 编辑浏览器所在主机 hosts 文件</h3><blockquote>
 <p>vim /etc/hosts    # linux</p>
 <p>c:/windows/system32/drivers/etc/hosts    # windows</p>
@@ -1547,8 +1589,8 @@
 <p>10.110.101.205    jiuxi.com        # 根据个人实际情况改写</p>
 </blockquote>
 <h3 id="4-3-访问-tomcat"><a href="#4-3-访问-tomcat" class="headerlink" title="4.3 访问 tomcat"></a>4.3 访问 tomcat</h3><p>​    浏览器输入 <a target="_blank" rel="noopener" href="http://jiuxi.com,帮尝试多刷新几次,你就会看到流量分别路由到/">http://jiuxi.com，帮尝试多刷新几次，你就会看到流量分别路由到</a> tomcat 和 nginx 服务去了，并且流量上基本达到了均分，各 50%。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165604673.png" alt="image-20210911165604673"></p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911165626103.png" alt="image-20210911165626103"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911165604673.png" alt="image-20210911165604673"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911165626103.png" alt="image-20210911165626103"></p>
 <hr>
 <h2 id="5-小节"><a href="#5-小节" class="headerlink" title="5 小节"></a>5 小节</h2><p>​    自此我们使用了 istio 的 gateway 和 virtual service 实现了流量管理的功能。下面我们还会继续庖丁解牛 istio 其他强大的特性。</p>
 
@@ -1580,7 +1622,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-Bookinfo-%E5%BA%94%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -1605,9 +1647,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 16:48:23 / 修改时间：16:50:42" itemprop="dateCreated datePublished" datetime="2021-09-11T16:48:23+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 16:48:23" itemprop="dateCreated datePublished" datetime="2021-09-11T16:48:23+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -1645,11 +1693,11 @@
 <p>7 总结</p>
 <hr>
 <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问或者想更深入学习 istio，请加微信群，我们一起进步：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164235979.png" alt="image-20210911164235979"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164235979.png" alt="image-20210911164235979"></p>
 <hr>
 <h2 id="2-bookinfo-架构介绍"><a href="#2-bookinfo-架构介绍" class="headerlink" title="2 bookinfo 架构介绍"></a>2 bookinfo 架构介绍</h2><p>​    bookinfo 是 istio 的学习样例，通过 bookinfo 你可以对 istio 提供的路由、遥测等功能有更加深入的理解。</p>
 <p>​    下图是 bookinfo 在没有嵌入 istio 前的物理架构图：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164302523.png" alt="image-20210911164302523"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164302523.png" alt="image-20210911164302523"></p>
 <p>​    bookinfo 是一个在线书店应用，该应用由 4 个微服务组成，分别为 Product page、Reviews、Details 和 Ratings。为了表现 istio 的无侵入性，这 4 个微服务分别由 python、java、ruby 和 node 开发。下面分别说明如下：</p>
 <blockquote>
 <p>Product page：聚合服务，内容由 Reviews 和 Details 内容聚合而成</p>
@@ -1658,7 +1706,7 @@
 <p>Ratings：图书预订排名服务</p>
 </blockquote>
 <p>​    下图是 bookinfo 嵌入 istio 后的物理架构图：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164323375.png" alt="image-20210911164323375"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164323375.png" alt="image-20210911164323375"></p>
 <p>​    该架构图演示了嵌入 istio 后 bookinfo 的每个微服务都会新增一个 Envoy，这个 Envoy 就是所谓的  sidecar，它会接管跟它配对的微服务的所有网络进、出口流量。其实  Envoy（sidecar）的作用就像你的手机，它正在逐渐把你变成哑巴、聋子和植物人，它承接了你所有的信息入口和出口，某些别有用心的人和组织通过对手机进行监控、遥测、路由等控制，起到控制你的思维、舆论导向、审美爱好等目的。</p>
 <hr>
 <h2 id="3-bookinfo-配置与部署"><a href="#3-bookinfo-配置与部署" class="headerlink" title="3 bookinfo 配置与部署"></a>3 bookinfo 配置与部署</h2><h3 id="3-1-配置-istio-自动注入"><a href="#3-1-配置-istio-自动注入" class="headerlink" title="3.1 配置 istio 自动注入"></a>3.1 配置 istio 自动注入</h3><p>​    因为 bookinfo 会启动多个 pod，每次手动注入 sidecar 会特别繁琐，因此我们使用批注入的方式。如果你对 sidecar 注入不了解，请参考本人的<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2474271"> 上篇</a>博客。</p>
@@ -1668,31 +1716,31 @@
 <p>kubectl get ns jiuxi –show-labels</p>
 </blockquote>
 <p>​    命令操作成功后截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164338022.png" alt="image-20210911164338022"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164338022.png" alt="image-20210911164338022"></p>
 <h3 id="3-2-部署-bookinfo-应用"><a href="#3-2-部署-bookinfo-应用" class="headerlink" title="3.2 部署 bookinfo 应用"></a>3.2 部署 bookinfo 应用</h3><p>​    在命名空间 jiuxi 中部署了 bookinfo 应用：</p>
 <blockquote>
 <p>kubectl apply -f bookinfo/platform/kube/bookinfo.yaml -n jiuxi</p>
 </blockquote>
 <p>​    部署过程截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164350324.png" alt="image-20210911164350324"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164350324.png" alt="image-20210911164350324"></p>
 <p>​    执行如下命令查看 bookinfo 的 service 列表：</p>
 <blockquote>
 <p>kubectl get svc -n jiuxi</p>
 </blockquote>
 <p>​    服务列表截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164402895.png" alt="image-20210911164402895"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164402895.png" alt="image-20210911164402895"></p>
 <p>​    执行如下命令查看 bookinfo 的 pod 列表：</p>
 <blockquote>
 <p>kubectl get pod -n jiuxi</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164416004.png" alt="image-20210911164416004"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164416004.png" alt="image-20210911164416004"></p>
 <h3 id="3-3-验证-bookinfo-部署情况"><a href="#3-3-验证-bookinfo-部署情况" class="headerlink" title="3.3 验证 bookinfo 部署情况"></a>3.3 验证 bookinfo 部署情况</h3><p>​    在服务列表中寻找 productpage 服务，然后使用 curl 命令验证服务是否发布成功。</p>
 <blockquote>
 <p>kubectl get svc -n jiuxi</p>
 <p>curl <a target="_blank" rel="noopener" href="http://svc_cluster_ip:9080/">http://SVC_CLUSTER_IP:9080</a> | grep -o “<title>.*</title>“</p>
 </blockquote>
 <p>​    执行成功的结果如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164429965.png" alt="image-20210911164429965"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164429965.png" alt="image-20210911164429965"></p>
 <p>​    自此，整个 bookinfo 应用就已经成功部署了。</p>
 <hr>
 <h2 id="4-设置-bookinfo-网关"><a href="#4-设置-bookinfo-网关" class="headerlink" title="4 设置 bookinfo 网关"></a>4 设置 bookinfo 网关</h2><p>​    上面的步骤已经可以让你访问到 bookinfo 应用了。但是我知道有些同学依旧觉得寒碜，因为很多人还是通过浏览器来看世界的。</p>
@@ -1703,7 +1751,7 @@
 <h3 id="4-2-确认网关已创建"><a href="#4-2-确认网关已创建" class="headerlink" title="4.2 确认网关已创建"></a>4.2 确认网关已创建</h3><blockquote>
 <p>kubectl get gateways.networking.istio.io -n jiuxi</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164445960.png" alt="image-20210911164445960"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164445960.png" alt="image-20210911164445960"></p>
 <hr>
 <h2 id="5-访问-bookinfo-应用"><a href="#5-访问-bookinfo-应用" class="headerlink" title="5 访问 bookinfo 应用"></a>5 访问 bookinfo 应用</h2><h3 id="5-1-获取-INGRESS-HOST"><a href="#5-1-获取-INGRESS-HOST" class="headerlink" title="5.1 获取 INGRESS_HOST"></a>5.1 获取 INGRESS_HOST</h3><blockquote>
 <p>kubectl get po -l istio=ingressgateway -n istio-system -o jsonpath=’{.items[0].status.hostIP}’</p>
@@ -1712,20 +1760,20 @@
 <p>kubectl -n istio-system get service istio-ingressgateway -o jsonpath=’{.spec.ports[?(@.name==”http2”)].nodePort}’</p>
 </blockquote>
 <h3 id="5-3-通过浏览器访问-bookinfo-应用"><a href="#5-3-通过浏览器访问-bookinfo-应用" class="headerlink" title="5.3 通过浏览器访问 bookinfo 应用"></a>5.3 通过浏览器访问 bookinfo 应用</h3><p>​    根据 5.1 和 5.2 获取到 host 和 port 信息，如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164506614.png" alt="image-20210911164506614"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164506614.png" alt="image-20210911164506614"></p>
 <p>​    根据此 host 和 port，打开浏览器进行访问：</p>
 <p>​    多刷新几次页面，你会发现 bookinfo 应用使用到的多个 reviews 版本，如下所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164538736.png" alt="image-20210911164538736"></p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164551497.png" alt="image-20210911164551497"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164538736.png" alt="image-20210911164538736"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164551497.png" alt="image-20210911164551497"></p>
 <p>​    正好可以对应到 pod 信息：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164605008.png" alt="image-20210911164605009"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164605008.png" alt="image-20210911164605009"></p>
 <hr>
 <h2 id="6-卸载-bookinfo-应用"><a href="#6-卸载-bookinfo-应用" class="headerlink" title="6 卸载 bookinfo 应用"></a>6 卸载 bookinfo 应用</h2><p>​    你已经创建了 bookinfo，有了创建的快感。也许你有点怅然若失，因为你觉得你的技术人生不够圆满，你想亲身完爆你创建的一切，那么还等什么，执行下面的语句吧：</p>
 <blockquote>
 <p>./istio-1.4.5/samples/bookinfo/platform/kube/cleanup.sh</p>
 </blockquote>
 <p>​    命令执行成功后，会显示如下截图：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164619983.png" alt="image-20210911164619983"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164619983.png" alt="image-20210911164619983"></p>
 <h3 id="6-1-验证卸载"><a href="#6-1-验证卸载" class="headerlink" title="6.1 验证卸载"></a>6.1 验证卸载</h3><p>​    执行如下命令验证你是否成功卸载：</p>
 <blockquote>
 <p>kubectl get virtualservices.networking.istio.io -n jiuxi</p>
@@ -1768,7 +1816,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-%E5%88%9D%E6%8E%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -1793,9 +1841,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 16:40:16 / 修改时间：16:40:56" itemprop="dateCreated datePublished" datetime="2021-09-11T16:40:16+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 16:40:16" itemprop="dateCreated datePublished" datetime="2021-09-11T16:40:16+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -1821,9 +1875,9 @@
 <p>  2.2 自动注入 sidecar</p>
 <hr>
 <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请加微信沟通：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584496625204864.png" alt="第二章 九析带你轻松完爆服务网格 - istio 初探_服务网格"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584496625204864.png" alt="第二章 九析带你轻松完爆服务网格 - istio 初探_服务网格"></p>
 <p>​    你可以从下面截图中获取免费的、更生动的视频资料，在 b 站搜索“九析”：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584496646484217.png" alt="第二章 九析带你轻松完爆服务网格 - istio 初探_服务网格_02"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584496646484217.png" alt="第二章 九析带你轻松完爆服务网格 - istio 初探_服务网格_02"></p>
 <hr>
 <h2 id="2-istio-初探"><a href="#2-istio-初探" class="headerlink" title="2 istio 初探"></a>2 istio 初探</h2><p>​    上节九析带你轻松完爆了 istio 的安装。但是我相信安装成功的小伙伴依然云里雾里，因为看着一大坨 pod 在那里 running  着，似乎并没有产生任何作用。这节，九析就带你“莫畏浮云遮望眼，守得云开见月明”。为了预期效果，我们不妨先建立一个  deployment，内容如下：</p>
 <blockquote>
@@ -1859,21 +1913,21 @@
 <p>kubectl get pods -n jiuxi</p>
 </blockquote>
 <p>​    截图如下：需要注意 ready 这一列，内容为 1/1，表示的含义是 pod 内有一个容器，且该容器运行成功并处于就绪状态。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163851179.png" alt="image-20210911163851179"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911163851179.png" alt="image-20210911163851179"></p>
 <p>​    下面到了激动人心的时刻了，因为 istio 即将闪亮登场。</p>
 <h3 id="2-1-手动注入-sidecar"><a href="#2-1-手动注入-sidecar" class="headerlink" title="2.1 手动注入 sidecar"></a>2.1 手动注入 sidecar</h3><p>​    执行如下语句：</p>
 <blockquote>
 <p>kube-inject -f nginx-deployment.yaml | kubectl apply  -n jiuxi -f -</p>
 </blockquote>
 <p>​    命令执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163908323.png" alt="image-20210911163908323"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911163908323.png" alt="image-20210911163908323"></p>
 <p>​    此时你会发现一个奇怪的现象，nginx-deployment.yaml 并没修改，但是 ready 状态却变成了 2/2。根据上面的解释可知，现在 pod 内有两个容器，且这两个容器都运行成功并处于就绪状态。为什么多了一个容器呢？</p>
 <p>​    查看 pod 的详细信息：</p>
 <blockquote>
 <p>kubectl get pod -n jiuxi nginx-xxxx -o yaml # xxxx 根据自己实际情况填写</p>
 </blockquote>
 <p>​    如果你有类似 rancher 这样的 web 控制台，可以看得更仔细些，如下图所示。如果你还没有安装和配置 rancher，你可以参考哥的轻松完爆 rancher 系列进行安装，放心，容易到爆，容易到你尖叫。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163928463.png" alt="image-20210911163928463"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911163928463.png" alt="image-20210911163928463"></p>
 <p>​    从上图可知。此时 nginx pod 内部一共有 3 个容器，一个初始化容器 istio-init 已经运行成功并结束了，一个就是 nginx  本尊，另外一个就是本文的主角 istio-proxy 了，它就是 sidecar，作用跟鸡你太美的经纪人的作用差不多，负责跟外部打交道用的。</p>
 <p>​    此时此刻，你已经为 pod 手工织入了 istio。但是这样似乎有点不够爽。因为每建立一个 pod 都撸这么一管，感觉有点累，有没有批量或者更自然的方式呢？</p>
 <h3 id="2-2-命名空间注入-sidecar"><a href="#2-2-命名空间注入-sidecar" class="headerlink" title="2.2 命名空间注入 sidecar"></a>2.2 命名空间注入 sidecar</h3><p>​    现在我们删除掉刚才创建的 nginx：</p>
@@ -1920,7 +1974,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -1945,9 +1999,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 16:36:13 / 修改时间：16:37:09" itemprop="dateCreated datePublished" datetime="2021-09-11T16:36:13+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 16:36:13" itemprop="dateCreated datePublished" datetime="2021-09-11T16:36:13+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -1979,9 +2039,9 @@
 <p>  4.6 卸载 istio</p>
 <p>5 总结</p>
 <hr>
-<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请加微信沟通：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584453790467569.jpg" alt="第一章 九析带你轻松完爆服务网格 - istio 安装_k8s istio"></p>
+<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请加微信沟通：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584453790467569.jpg" alt="第一章 九析带你轻松完爆服务网格 - istio 安装_k8s istio"></p>
 <p>​    你可以从下面截图中获取免费的、更生动的视频资料，在 b 站搜索“九析”：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584453854320948.png" alt="第一章 九析带你轻松完爆服务网格 - istio 安装_service mesh_02"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584453854320948.png" alt="第一章 九析带你轻松完爆服务网格 - istio 安装_service mesh_02"></p>
 <hr>
 <h2 id="2-微服务的历史"><a href="#2-微服务的历史" class="headerlink" title="2 微服务的历史"></a>2 微服务的历史</h2><p>​    微服务从马丁提出到今天为止，大体上经过了四代。</p>
 <p>​    第一代（1.0  时代）：服务发现阶段。单体服务发展到微服务后，原先的通信方式从进程内函数调用发展到了不同服务器上的不同服务之间的进程调用，这样的架构变化，首先要解决的关键问题就是服务的注册与发现。代表技术便是 dubbo 和 grpc、brpc 框架之争。</p>
@@ -2015,13 +2075,13 @@
 <p>export ISTIO_VERSION=1.4.5</p>
 </blockquote>
 <p>​    下载成功后的截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163236926.png" alt="image-20210911163236926"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911163236926.png" alt="image-20210911163236926"></p>
 <h3 id="4-2-安装-istio"><a href="#4-2-安装-istio" class="headerlink" title="4.2 安装 istio"></a>4.2 安装 istio</h3><p>​    安装 istio 前，首先解压缩：</p>
 <blockquote>
 <p>tar -zxvf istio-1.4.5-linux.tar.gz</p>
 </blockquote>
 <p>​    解压缩后的目录结构截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163255978.png" alt="image-20210911163255978"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911163255978.png" alt="image-20210911163255978"></p>
 <p>​    关键目录说明如下：</p>
 <blockquote>
 <p>install/kubernetes    # istio 资源文件</p>
@@ -2048,33 +2108,33 @@
 <p>source ~/.bash_profile</p>
 </blockquote>
 <p>​    然后输入 istioctl 然后按两次 tab 键，发现增强自动补全功能已经生效：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163319451.png" alt="image-20210911163319451"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911163319451.png" alt="image-20210911163319451"></p>
 <h3 id="4-5-安装学习版-istio"><a href="#4-5-安装学习版-istio" class="headerlink" title="4.5 安装学习版 istio"></a>4.5 安装学习版 istio</h3><p>​    为了降低学习成本，我们选择安装学习版本的 istio。如果你想直接在生产环境安装 istio，可以参考我后续的章节。</p>
 <p>​    执行如下语句安装 istio 学习版：</p>
 <blockquote>
 <p>istioctl manifest apply –set profile=demo</p>
 </blockquote>
 <p>​    安装后的截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163332691.png" alt="image-20210911163332691"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911163332691.png" alt="image-20210911163332691"></p>
 <p>​    不要一看到 Installation complete 就高兴到尖叫！因为安装完毕不报错并不意味着你就成功了，就像你看到一个美丽、性感、火辣、清纯、高贵、华丽集一身的女人向你走过来时就以为人家觉得你长得帅想泡你一样的道理。</p>
 <p>​    使用如下命令查看一下 istio 的服务状态：</p>
 <blockquote>
 <p>kubectl get svc -n istio-system</p>
 </blockquote>
 <p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163351397.png" alt="image-20210911163351397"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911163351397.png" alt="image-20210911163351397"></p>
 <p>​    服务使用 LoadBalancer 类型一般是在第三方云厂商支持下才有用。如果你是在自己搭建的 k8s 集群环境下一般使用 NodePort 类型。执行如下语句完爆：</p>
 <blockquote>
 <p>kubectl patch svc -n istio-system istio-ingressgateway -p ‘{“spec”: {“type”: “NodePort”}}’</p>
 </blockquote>
 <p>​    执行完毕后，再次查看 svc，发现原来的 LoadBalancer 类型已经被修改为 NodePort 类型，此外 external-ip 也从 pending 状态变成了 <none>(即：不需要)状态。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163422494.png" alt="image-20210911163422494"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911163422494.png" alt="image-20210911163422494"></p>
 <p>​    查看 istio 的 pod 运行状态：</p>
 <blockquote>
 <p>kubectl get pod -n istio-system</p>
 </blockquote>
 <p>​    运行状态截图如下，所有 pod 状态都是 running 状态：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163442809.png" alt="image-20210911163442809"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911163442809.png" alt="image-20210911163442809"></p>
 <p>​    自此，整个 istio 环境就被你轻松完爆了。现在你可以停下来，上厕所，喝水和尖叫了。</p>
 <h3 id="4-6-卸载-istio"><a href="#4-6-卸载-istio" class="headerlink" title="4.6 卸载 istio"></a>4.6 卸载 istio</h3><p>​    但是假如你觉得不够爽，光有建立的快感，没有破坏的快感总是觉得技术人生不够圆满的话，你可以执行如下语句轻松完爆 istio。</p>
 <blockquote>

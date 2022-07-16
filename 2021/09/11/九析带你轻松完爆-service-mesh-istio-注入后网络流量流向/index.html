@@ -30,31 +30,31 @@
 <meta property="og:site_name" content="九析">
 <meta property="og:description" content="目录 1 前言 2 查看 iptables 规则   2.1 确定 pod 所在主机   2.2 定位 istio-proxy 容器   2.3 登录 istio-proxy 容器   2.4 查看 iptables 规则 3 网络宏观流量流向介绍 4 网络微观流量流向介绍 5 istio 入口流量分析 6 istio 出口流量分析 7 小节  1 前言​    如果你对博客有任何疑问，请告诉我。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911172944559.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911172956747.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173007202.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173017468.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173028740.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173039235.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173049597.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173100959.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173113518.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173124326.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173134127.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173145054.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173156740.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173207619.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173220599.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173229115.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173241410.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173252400.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173302757.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911172944559.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911172956747.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173007202.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173017468.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173028740.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173039235.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173049597.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173100959.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173113518.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173124326.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173134127.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173145054.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173156740.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173207619.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173220599.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173229115.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173241410.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173252400.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173302757.png">
 <meta property="article:published_time" content="2021-09-11T09:34:02.000Z">
-<meta property="article:modified_time" content="2021-09-11T09:34:52.065Z">
+<meta property="article:modified_time" content="2022-07-16T14:49:27.070Z">
 <meta property="article:author" content="九析">
 <meta property="article:tag" content="istio">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911172944559.png">
+<meta name="twitter:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911172944559.png">
 
 
 <link rel="canonical" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E6%B3%A8%E5%85%A5%E5%90%8E%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E6%B5%81%E5%90%91/">
@@ -173,7 +173,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="九析"
-      src="/images/bb.jpg">
+      src="/images/bb.png">
   <p class="site-author-name" itemprop="name">九析</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -233,7 +233,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-%E6%B3%A8%E5%85%A5%E5%90%8E%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E6%B5%81%E5%90%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -258,9 +258,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 17:34:02 / 修改时间：17:34:52" itemprop="dateCreated datePublished" datetime="2021-09-11T17:34:02+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 17:34:02" itemprop="dateCreated datePublished" datetime="2021-09-11T17:34:02+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -301,29 +307,29 @@
 <p>7 小节</p>
 <hr>
 <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911172944559.png" alt="image-20210911172944559"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911172944559.png" alt="image-20210911172944559"></p>
 <p>​    上节中我们举例介绍了执行 istio 注入操作后，对 nginx pod 所产生的影响，即在 pod 中会多创建两个容器：istio-init、istio-proxy，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911172956747.png" alt="image-20210911172956747"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911172956747.png" alt="image-20210911172956747"></p>
 <p>​    如果从进程角度来看 pod，则是下面这个样子：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173007202.png" alt="image-20210911173007202"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173007202.png" alt="image-20210911173007202"></p>
 <p>​    从上图可知，nginx pod 内的三个容器共享同一个网络命名空间，该网络命名空间内的流量流向规则在初始化容器 istio-init 启动时完成的，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173017468.png" alt="image-20210911173017468"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173017468.png" alt="image-20210911173017468"></p>
 <hr>
 <h2 id="2-查看-iptables-规则"><a href="#2-查看-iptables-规则" class="headerlink" title="2 查看 iptables 规则"></a>2 查看 iptables 规则</h2><p>​    一般情况下，我们可以通过 kubectl exec 命令跟 pod 进行交互并获取到 pod 内信息，但这里我们不能此法获取到 pod 内的 iptables 信息。如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173028740.png" alt="image-20210911173028740"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173028740.png" alt="image-20210911173028740"></p>
 <p>​    如果想获取到 iptables 信息，必须通过宿主机的 docker 才能获取到。</p>
 <h3 id="2-1-确定-pod-所在主机"><a href="#2-1-确定-pod-所在主机" class="headerlink" title="2.1 确定 pod 所在主机"></a>2.1 确定 pod 所在主机</h3><p>​    使用如下命令获取运行 nginx pod 的宿主机地址：</p>
 <blockquote>
 <p>kubectl get pods -n jiuxi -o wide</p>
 </blockquote>
 <p>​    命令执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173039235.png" alt="image-20210911173039235"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173039235.png" alt="image-20210911173039235"></p>
 <h3 id="2-2-定位-istio-proxy-容器"><a href="#2-2-定位-istio-proxy-容器" class="headerlink" title="2.2 定位 istio-proxy 容器"></a>2.2 定位 istio-proxy 容器</h3><p>​    ssh 命令登录到 10.244.10.80 宿主机，并执行如下命令定位 istio-proxy 容器：</p>
 <blockquote>
 <p>docker ps | grep -i istio-proxy</p>
 </blockquote>
 <p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173049597.png" alt="image-20210911173049597"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173049597.png" alt="image-20210911173049597"></p>
 <h3 id="2-3-登录-istio-proxy-容器"><a href="#2-3-登录-istio-proxy-容器" class="headerlink" title="2.3 登录 istio-proxy 容器"></a>2.3 登录 istio-proxy 容器</h3><blockquote>
 <p>docker exec -it –privileged $(docker ps | grep -i istio-proxy | awk ‘{print $(1)}’) bash</p>
 </blockquote>
@@ -340,20 +346,20 @@
 <p>sudo su root</p>
 </blockquote>
 <p>​    再次执行 iptables 即可，操作成功如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173100959.png" alt="image-20210911173100959"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173100959.png" alt="image-20210911173100959"></p>
 <hr>
 <h2 id="3-网络宏观流量流向介绍"><a href="#3-网络宏观流量流向介绍" class="headerlink" title="3 网络宏观流量流向介绍"></a>3 网络宏观流量流向介绍</h2><p>​    下面宏观介绍一下基本的网络流量流向知识，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173113518.png" alt="image-20210911173113518"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173113518.png" alt="image-20210911173113518"></p>
 <p>​    用户从客户端发起一个 http  请求，该请求会通过互联网到达公司网络的外部边界（路由器），路由器会将网络流量送到交换机，因为反向代理服务器跟交换机联通，因此流量到达反向代理服务器（nginx），nginx 再将网络请求按照预先制定的分发策略转给后面真正处理请求的 web 服务器。</p>
 <p>​    你可以通过 traceroute 命令定位一下外部网络流向。比如访问 <a href="http://www.baidu.com：">www.baidu.com：</a></p>
 <blockquote>
 <p>traceroute -I <a target="_blank" rel="noopener" href="http://www.baidu.com/"> www.baidu.com</a></p>
 </blockquote>
 <p>​    访问截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173124326.png" alt="image-20210911173124326"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173124326.png" alt="image-20210911173124326"></p>
 <p>​    通过上面的截图可知，本人访问 baidu.com 共经过了 13 个路由器。</p>
 <p>​    当然也可以通过 traceroute 定位 k8s 中 pod 的网络流向，如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173134127.png" alt="image-20210911173134127"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173134127.png" alt="image-20210911173134127"></p>
 <p>​    由上图可知：</p>
 <blockquote>
 <p>1 首先定位 nginx pod 的 ip 为 10.244.10.80</p>
@@ -363,7 +369,7 @@
 </blockquote>
 <hr>
 <h2 id="4-网络微观流量流向介绍"><a href="#4-网络微观流量流向介绍" class="headerlink" title="4 网络微观流量流向介绍"></a>4 网络微观流量流向介绍</h2><p>​    微观是指流量进入宿主机的情况分析，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173145054.png" alt="image-20210911173145054"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173145054.png" alt="image-20210911173145054"></p>
 <p>​    由上图可知：</p>
 <blockquote>
 <p>1 入口流量经过服务器网卡进入服务器的网络协议栈</p>
@@ -375,13 +381,13 @@
 <hr>
 <h2 id="5-istio-入口流量分析"><a href="#5-istio-入口流量分析" class="headerlink" title="5 istio 入口流量分析"></a>5 istio 入口流量分析</h2><p>​    有了宏观和微观的网络流量流向分析之后，下一步就可以分析一下 istio 的入口流量了。因为涉及到 iptables 相关的知识，这里我仅仅把结论呈现给大家，具体 iptables 的使用如果大家有兴趣可以参考本人其他的博客轻松完爆。</p>
 <p>​    在上面我们已经展示了 istio-init 容器在启动时就完成了网络空间协议栈规则的初始化，如下图：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173156740.png" alt="image-20210911173156740"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173156740.png" alt="image-20210911173156740"></p>
 <p>​    现在可以通过 curl 访问 nginx pod。</p>
 <blockquote>
 <p>curl 10.244.10.80</p>
 </blockquote>
 <p>​    curl 后的入口流量进入 nginx pod 后的流转路径如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173207619.png" alt="image-20210911173207619"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173207619.png" alt="image-20210911173207619"></p>
 <p>​    由上图可知，整个网络流向如下：</p>
 <blockquote>
 <p>1 因为匹配 iptables nat 表的 prerouting 链的第一条规则，因此网络流量被路由到 ISTIO_INBOUND 链</p>
@@ -389,9 +395,9 @@
 <p>3 路由到 ISTIO_IN_REDIRECT 链的流量最终会从内核态打入到用户态监听端口为 15006 的进程</p>
 </blockquote>
 <p>​    端口 15006 的进程是什么呢？通过 netstat -ntlp 命令可知是 envoy 进程，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173220599.png" alt="image-20210911173220599"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173220599.png" alt="image-20210911173220599"></p>
 <p>​    由此可知，当我们 curl nginx pod 时，虽然指定的目标访问端口为 80，但是网络协议栈规则仍然会将整个流量劫持送到 envoy 进程，由于  envoy 进程可以获取到入口流量，所以可以在此制定一系列的操作起到流控的目的。envoy 处理完后，流量会继续移动，流向路径如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173229115.png" alt="image-20210911173229115"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173229115.png" alt="image-20210911173229115"></p>
 <p>​    由上图可知，整个网络流向如下：</p>
 <blockquote>
 <p>1 端口 15006 的进程处理完流量后，会将流量从用户态的进程传回内核态的网络协议栈，根据预先定义好的协议栈规则，流量会流经 output 链，output 链又会根据规则再把流量路由给 ISTIO_OUTPUT 链</p>
@@ -405,7 +411,7 @@
 <p>curl <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
 </blockquote>
 <p>​    下面截图展示出口流量的流向：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173241410.png" alt="image-20210911173241410"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173241410.png" alt="image-20210911173241410"></p>
 <p>​    从图可知：</p>
 <blockquote>
 <p>1 出口流量首先会通过 iptables nat 表的 output 链进入到 istio_output 链</p>
@@ -413,9 +419,9 @@
 <p>3 istio_redirect 会将流量路由给端口 15001 的进程</p>
 </blockquote>
 <p>​    端口 15001 进程依旧是 envoy 进程，该端口处理的是 outbound 流量。如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173252400.png" alt="image-20210911173252400"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173252400.png" alt="image-20210911173252400"></p>
 <p>​    由此可知，访问 baidu 前，流量依旧会被 envoy 劫持。处理完毕后，envoy 流量处理结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911173302757.png" alt="image-20210911173302757"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911173302757.png" alt="image-20210911173302757"></p>
 <blockquote>
 <p>1 envoy 将处理后的网络流量重新通过用户态进入到内核态的网络协议栈，流量会首先经过 OUTPUT 链</p>
 <p>2 流经 OUTPUT 链的流量会进入 ISTIO_OUTPUT 链</p>

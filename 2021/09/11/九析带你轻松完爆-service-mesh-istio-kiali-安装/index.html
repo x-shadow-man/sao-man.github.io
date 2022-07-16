@@ -30,19 +30,19 @@
 <meta property="og:site_name" content="九析">
 <meta property="og:description" content="1 前言 2 邀约 3 kiali 简介 4 kiali 安装 5 kiali 访问  1 前言​    如果你对博客有任何疑问，请告诉我。   2 邀约​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：   3 kiali 简介​    kiali 是一款 istio 服务网格可视化工具，提供了服务拓补图、全链路跟踪、指标遥测、配置校验、健康检查等功能。  4 kiali">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516653984882.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516661797993.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516715612147.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516724636987.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516731417402.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516740649530.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516749156466.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584516653984882.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584516661797993.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584516715612147.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584516724636987.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584516731417402.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584516740649530.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584516749156466.png">
 <meta property="article:published_time" content="2021-09-11T13:34:34.000Z">
-<meta property="article:modified_time" content="2021-09-11T13:35:41.969Z">
+<meta property="article:modified_time" content="2022-07-16T14:49:27.117Z">
 <meta property="article:author" content="九析">
 <meta property="article:tag" content="istio">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516653984882.png">
+<meta name="twitter:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584516653984882.png">
 
 
 <link rel="canonical" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E5%AE%89%E8%A3%85/">
@@ -161,7 +161,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="九析"
-      src="/images/bb.jpg">
+      src="/images/bb.png">
   <p class="site-author-name" itemprop="name">九析</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -221,7 +221,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-istio-kiali-%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -246,9 +246,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 21:34:34 / 修改时间：21:35:41" itemprop="dateCreated datePublished" datetime="2021-09-11T21:34:34+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 21:34:34" itemprop="dateCreated datePublished" datetime="2021-09-11T21:34:34+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -282,10 +288,10 @@
 <p>5 kiali 访问</p>
 <hr>
 <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516653984882.png" alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584516653984882.png" alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger"></p>
 <hr>
 <h2 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h2><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516661797993.png" alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kaili_02"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584516661797993.png" alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kaili_02"></p>
 <hr>
 <h2 id="3-kiali-简介"><a href="#3-kiali-简介" class="headerlink" title="3 kiali 简介"></a>3 kiali 简介</h2><p>​    kiali 是一款 istio 服务网格可视化工具，提供了服务拓补图、全链路跟踪、指标遥测、配置校验、健康检查等功能。</p>
 <hr>
@@ -294,24 +300,24 @@
 <p>kubectl get all -n istion-system</p>
 </blockquote>
 <p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516715612147.png" alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 学习_03"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584516715612147.png" alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 学习_03"></p>
 <hr>
 <h2 id="5-kiali-访问"><a href="#5-kiali-访问" class="headerlink" title="5 kiali 访问"></a>5 kiali 访问</h2><p>​    在集群内，通过 curl 命令行工具访问 kiali：</p>
 <blockquote>
 <p>curl <a target="_blank" rel="noopener" href="http://10.101.30.105:20001/"> http://10.101.30.105:20001</a></p>
 </blockquote>
 <p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516724636987.png" alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger_04"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584516724636987.png" alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_kiali jaeger_04"></p>
 <p>​    上图所示 kiali 已经部署成功，服务处于就绪状态。下面改成外部浏览器可以直接访问，需要将 service 的服务类型设置为 nodeport，执行命令如下：</p>
 <blockquote>
 <p>kubectl patch svc -n istio-system kiali -p ‘{“spec”: {“type”: “NodePort”}}’</p>
 </blockquote>
 <p>​    执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516731417402.png" alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 视频_05"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584516731417402.png" alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio 视频_05"></p>
 <p>​    打开浏览器，访问 k8s 所在服务器 IP 和 NodePort 暴露出来的端口号（这里是 31479），如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516740649530.png" alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_06"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584516740649530.png" alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_06"></p>
 <p>​    默认用户名密码是 admin/admin，输入后登录：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584516749156466.png" alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_07"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584516749156466.png" alt="第十一章 九析带你轻松完爆 service mesh - istio kiali 安装_istio kiali_07"></p>
 <p>​    自此，九析带你轻松完爆 istio kiali 安装。关于 kiali 说明和使用将在下章说明。</p>
 
     </div>

@@ -30,23 +30,23 @@
 <meta property="og:site_name" content="九析">
 <meta property="og:description" content="1 前言 2 邀约 3 介绍 4 灰度 5 destination rule 样例   5.1 客户端资源文件   5.2 deployment 资源文件   5.3 service 资源文件   5.4 Istio virtual service 资源文件   5.5 Istio destination rule 资源文件 6 Istio 注入 7 验证 destination rule  1">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921192580920.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921199348308.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921280361186.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921289867471.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921312295542.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921328294728.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921339777599.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921348536422.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921359681595.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921368116463.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921382193476.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921192580920.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921199348308.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921280361186.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921289867471.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921312295542.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921328294728.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921339777599.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921348536422.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921359681595.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921368116463.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921382193476.png">
 <meta property="article:published_time" content="2021-09-11T14:07:50.000Z">
-<meta property="article:modified_time" content="2021-09-11T14:08:37.627Z">
+<meta property="article:modified_time" content="2022-07-16T14:49:27.035Z">
 <meta property="article:author" content="九析">
 <meta property="article:tag" content="istio">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921192580920.png">
+<meta name="twitter:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921192580920.png">
 
 
 <link rel="canonical" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-destination-rule-%E5%AE%9E%E4%BE%8B/">
@@ -165,7 +165,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="九析"
-      src="/images/bb.jpg">
+      src="/images/bb.png">
   <p class="site-author-name" itemprop="name">九析</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -225,7 +225,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-destination-rule-%E5%AE%9E%E4%BE%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -250,9 +250,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 22:07:50 / 修改时间：22:08:37" itemprop="dateCreated datePublished" datetime="2021-09-11T22:07:50+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 22:07:50" itemprop="dateCreated datePublished" datetime="2021-09-11T22:07:50+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -293,15 +299,15 @@
 <p>7 验证 destination rule</p>
 <hr>
 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921192580920.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921192580920.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理"></p>
 <hr>
 <h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921199348308.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio destination r_02"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921199348308.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio destination r_02"></p>
 <hr>
 <h1 id="3-介绍"><a href="#3-介绍" class="headerlink" title="3 介绍"></a>3 介绍</h1><p>​    在上章节介绍了一个使用 Virtual Service 实现按权重（weight）分配流量的例子。整个过程如下架构图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921280361186.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 视频_03"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921280361186.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 视频_03"></p>
 <p>​    整个流控过程仅仅添加了一个 virtual service 就得以解决，有关 virtual service 的代码如下所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921289867471.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio virtual servi_04"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921289867471.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio virtual servi_04"></p>
 <p>​    但是上面这种方案在于调用方通过两层服务才能调用到最终的 Pod（比如：客户端需要通过 web-svc 和 nginx-svc 才能最终调用到 Nginx  Pod）。能不能仅仅只通过一层服务就能达到这样的效果呢？（即：只通过 web-svc）。答案是必须可以。</p>
 <hr>
 <h1 id="4-灰度"><a href="#4-灰度" class="headerlink" title="4 灰度"></a>4 灰度</h1><p>​    其实上面的样例非常山寨，导致根本就没有实际工作场景可以复制，仅仅只是为了展示独立 virtual service 功能。</p>
@@ -309,7 +315,7 @@
 <p>​    灰度，意味着做事并没有那么敞亮，比如，你想跟一个心仪的女子上演一幕东京爱情故事，你的做法大概是跟她暧昧、爱抚、亲吻、最后进行爱的鼓掌。整个过程的本质就是完成一次状态转移，即从孤军奋战式撸管状态转移到团队协作式鼓掌状态。</p>
 <p>​    灰度发布的过程跟上面的过程比较类似，都是亦步亦趋，循循善诱的过程。即：将版本 v1 的服务变更到版本 v2，但是却并不采用刚烈的极端做法。具体做法是先切 20% 流量给版本 v2，观察一阵子没啥异常事情发生，就再切  20% 流量，然后逐步切换剩下的其他流量，最终完成整个版本的替换以及所有用户流量的转移。</p>
 <hr>
-<h1 id="5-destination-rule-样例"><a href="#5-destination-rule-样例" class="headerlink" title="5 destination rule 样例"></a>5 destination rule 样例</h1><p>​    下面介绍使用 virtual service + destination rule 来实现灰度发布。有关 destination rule 的理论在下章节介绍。整个样例的架构图如下：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921312295542.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理_05"></p>
+<h1 id="5-destination-rule-样例"><a href="#5-destination-rule-样例" class="headerlink" title="5 destination rule 样例"></a>5 destination rule 样例</h1><p>​    下面介绍使用 virtual service + destination rule 来实现灰度发布。有关 destination rule 的理论在下章节介绍。整个样例的架构图如下：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921312295542.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理_05"></p>
 <p>​    样例所需要的资源文件介绍如下：</p>
 <blockquote>
 <p># 客户端，用来访问 httpd-v1 和 httpd-v2 的容器资源文件</p>
@@ -323,11 +329,11 @@
 <p># Istio destination rule，定义流量路由的资源文件</p>
 <p>jiuxi-dr.yaml</p>
 </blockquote>
-<h2 id="5-1-客户端资源文件"><a href="#5-1-客户端资源文件" class="headerlink" title="5.1 客户端资源文件"></a>5.1 客户端资源文件</h2><p>​    jiuxi-client.yaml:<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921328294728.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_06"></p>
-<h2 id="5-2-deployment-资源文件"><a href="#5-2-deployment-资源文件" class="headerlink" title="5.2 deployment 资源文件"></a>5.2 deployment 资源文件</h2><p>​    jiuxi-deploy.yaml：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921339777599.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理_07"></p>
-<h2 id="5-3-service-资源文件"><a href="#5-3-service-资源文件" class="headerlink" title="5.3 service 资源文件"></a>5.3 service 资源文件</h2><p>​    jiuxi-svc.yaml：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921348536422.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理_08"></p>
-<h2 id="5-4-Istio-virtual-service-资源文件"><a href="#5-4-Istio-virtual-service-资源文件" class="headerlink" title="5.4 Istio virtual service 资源文件"></a>5.4 Istio virtual service 资源文件</h2><p>​    jiuxi-vs.yaml:<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921359681595.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_09"></p>
-<h2 id="5-5-Istio-destination-rule-资源文件"><a href="#5-5-Istio-destination-rule-资源文件" class="headerlink" title="5.5 Istio destination rule 资源文件"></a>5.5 Istio destination rule 资源文件</h2><p>​    jiuxi-dr.yaml：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921368116463.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_10"></p>
+<h2 id="5-1-客户端资源文件"><a href="#5-1-客户端资源文件" class="headerlink" title="5.1 客户端资源文件"></a>5.1 客户端资源文件</h2><p>​    jiuxi-client.yaml:<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921328294728.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_06"></p>
+<h2 id="5-2-deployment-资源文件"><a href="#5-2-deployment-资源文件" class="headerlink" title="5.2 deployment 资源文件"></a>5.2 deployment 资源文件</h2><p>​    jiuxi-deploy.yaml：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921339777599.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理_07"></p>
+<h2 id="5-3-service-资源文件"><a href="#5-3-service-资源文件" class="headerlink" title="5.3 service 资源文件"></a>5.3 service 资源文件</h2><p>​    jiuxi-svc.yaml：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921348536422.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理_08"></p>
+<h2 id="5-4-Istio-virtual-service-资源文件"><a href="#5-4-Istio-virtual-service-资源文件" class="headerlink" title="5.4 Istio virtual service 资源文件"></a>5.4 Istio virtual service 资源文件</h2><p>​    jiuxi-vs.yaml:<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921359681595.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_09"></p>
+<h2 id="5-5-Istio-destination-rule-资源文件"><a href="#5-5-Istio-destination-rule-资源文件" class="headerlink" title="5.5 Istio destination rule 资源文件"></a>5.5 Istio destination rule 资源文件</h2><p>​    jiuxi-dr.yaml：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921368116463.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_10"></p>
 <hr>
 <h1 id="6-Istio-注入"><a href="#6-Istio-注入" class="headerlink" title="6 Istio 注入"></a>6 Istio 注入</h1><p>​    要使得 virtual service 和 destination rule 生效，必须要保证通讯双方都处于 Istio 服务网格之内，即：必须经过 Istio 的注入，执行语句如下：</p>
 <blockquote>
@@ -335,7 +341,7 @@
 <p>istioctl kube-inject -f jiuxi-deploy.yaml | kubectl apply -f -</p>
 </blockquote>
 <hr>
-<h1 id="7-验证-destination-rule"><a href="#7-验证-destination-rule" class="headerlink" title="7 验证 destination rule"></a>7 验证 destination rule</h1><p>​    登入 busybox client 容器，访问 jiuxi-svc，发现 dr 已经生效，截图如下：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921382193476.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_11"></p>
+<h1 id="7-验证-destination-rule"><a href="#7-验证-destination-rule" class="headerlink" title="7 验证 destination rule"></a>7 验证 destination rule</h1><p>​    登入 busybox client 容器，访问 jiuxi-svc，发现 dr 已经生效，截图如下：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921382193476.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_11"></p>
 <p>​    自此，九析带你轻松完爆了 Istio destination rule 实例。</p>
 
     </div>

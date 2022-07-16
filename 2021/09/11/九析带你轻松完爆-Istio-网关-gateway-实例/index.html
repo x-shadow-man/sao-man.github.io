@@ -30,40 +30,40 @@
 <meta property="og:site_name" content="九析">
 <meta property="og:description" content="1 前言 2 邀约 3 Istio 网关介绍 4 Istio 网关实例资源   4.1 k8s 服务资源   4.2 k8s deployment 资源   4.3 Istio virtual service 资源   4.4 Istio gateway 资源 5 istio-ingressgateway 配置   5.1 修改 istio-ingressgateway 服务类型   5.2 修改">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788560717573.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788568456395.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788560717573.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788568456395.png">
 <meta property="og:image" content="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788579365947.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788579365947.png">
 <meta property="og:image" content="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788588283935.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788588283935.png">
 <meta property="og:image" content="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788596424833.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788596424833.png">
 <meta property="og:image" content="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788605151298.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788605151298.png">
 <meta property="og:image" content="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788613855533.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788613855533.png">
 <meta property="og:image" content="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788623896776.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788623896776.png">
 <meta property="og:image" content="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788633797421.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788633797421.png">
 <meta property="og:image" content="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788649368734.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788649368734.png">
 <meta property="og:image" content="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788660219227.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788660219227.png">
 <meta property="og:image" content="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788676122086.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788676122086.png">
 <meta property="og:image" content="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788686108792.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788686108792.png">
 <meta property="og:image" content="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788693327159.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788693327159.png">
 <meta property="og:image" content="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788702452360.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788702452360.png">
 <meta property="article:published_time" content="2021-09-11T14:25:51.000Z">
-<meta property="article:modified_time" content="2021-09-11T14:26:37.826Z">
+<meta property="article:modified_time" content="2022-07-16T14:49:27.085Z">
 <meta property="article:author" content="九析">
 <meta property="article:tag" content="istio">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788560717573.png">
+<meta name="twitter:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788560717573.png">
 
 
 <link rel="canonical" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E5%85%B3-gateway-%E5%AE%9E%E4%BE%8B/">
@@ -182,7 +182,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="九析"
-      src="/images/bb.jpg">
+      src="/images/bb.png">
   <p class="site-author-name" itemprop="name">九析</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -242,7 +242,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E5%85%B3-gateway-%E5%AE%9E%E4%BE%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -267,9 +267,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 22:25:51 / 修改时间：22:26:37" itemprop="dateCreated datePublished" datetime="2021-09-11T22:25:51+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 22:25:51" itemprop="dateCreated datePublished" datetime="2021-09-11T22:25:51+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -314,22 +320,22 @@
 <p>8 总结</p>
 <hr>
 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788560717573.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_Docker"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788560717573.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_Docker"></p>
 <hr>
 <h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788568456395.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_02"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788568456395.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_02"></p>
 <hr>
 <h1 id="3-Istio-网关介绍"><a href="#3-Istio-网关介绍" class="headerlink" title="3 Istio 网关介绍"></a>3 Istio 网关介绍</h1><p>​    在前面的 Istio 系列文章中轻松完爆了 Virtual Service、Destination Rule 等，同时也介绍了网格的概念（Service Mesh，资源被 Istio 注入，在 Pod 中创建并运行了一个 Istio-proxy 容器，该容器内部运行 Envoy  代理）。在本小节将轻松完爆 Istio 网关（gateway）。</p>
 <p>​    Istio  使用网关来管理网格边缘流量（即：入站和出站流量），明确地说是 istio-ingressgateway  管理网格的入口流量，istio-egressgateway 管理网格的出口流量。在以前的章节中，我们了解网格的流量只所以可被管理，是因为资源被  istio 注入后在 Pod 中创建并运行了 istio-proxy 容器的缘故。而网关流量管理的本质也基于同样道理，唯一不同的是  istio-ingressgateway 和 istio-egressgateway 运行时就是一个 istio-proxy 容器，即独立的  Envoy 代理，而不是与 pod 一起运行的 sidecar Envoy 代理。</p>
 <p>​    与其他控制进入系统的流量机制（例如：K8S Ingress API ）不同，Istio 网关充分利用了 Istio 流量路由的功能和灵活性。因为 Istio 的网关资源仅配置 4-6  层负载平衡属性，例如要公开的 port 和 tls 设置等，而将 L7 层（即应用层）流量路由使用 Istio 虚拟服务（virtual  service）绑定网关来实现，这样的一番神操作就可以像管理 Istio 网格中的任何其他数据平面流量一样，来管理网关流量。</p>
 <p>​    k8s ingress 资源如下图所示：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788579365947.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_04"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788579365947.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_04"></p>
 <p>​    由上图可知，在 Ingress 层直接就实现了流量管理。</p>
 <p>​    istio gateway 资源如下图所示：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788588283935.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio gateway_06"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788588283935.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio gateway_06"></p>
 <p>​    由上图可知，istio gateway 并不像 k8s ingress 一样直接在网关层实现流量路由，而是通过 virtual service  绑定到网关的机制实现流量路由，这样的方式就像将 virtual service 跟 gateway 解耦一样，大家各司其职。gateway  的作用就是分流，而 virtual service 的作用就是将分流来的流量进行管理。</p>
 <p>​    virtual service 资源如下图所示：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788596424833.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_08"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788596424833.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_08"></p>
 <hr>
 <h1 id="4-Istio-网关实例资源"><a href="#4-Istio-网关实例资源" class="headerlink" title="4 Istio 网关实例资源"></a>4 Istio 网关实例资源</h1><p>​    该实例需要如下四个资源文件，前两个资源是 Istio 专有的，后两个是 k8s 层面的：</p>
 <blockquote>
@@ -338,10 +344,10 @@
 <p>jiuxi-svc.yaml        # k8s 服务资源</p>
 <p>jiuxi-deploy.yaml    # k8s deployment 资源</p>
 </blockquote>
-<h2 id="4-1-k8s-服务资源"><a href="#4-1-k8s-服务资源" class="headerlink" title="4.1 k8s 服务资源"></a>4.1 k8s 服务资源</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788605151298.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_10"></p>
-<h2 id="4-2-k8s-deployment-资源"><a href="#4-2-k8s-deployment-资源" class="headerlink" title="4.2 k8s deployment 资源"></a>4.2 k8s deployment 资源</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788613855533.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_12"></p>
-<h2 id="4-3-Istio-virtual-service-资源"><a href="#4-3-Istio-virtual-service-资源" class="headerlink" title="4.3 Istio virtual service 资源"></a>4.3 Istio virtual service 资源</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788623896776.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio 流量管理_14"></p>
-<h2 id="4-4-Istio-gateway-资源"><a href="#4-4-Istio-gateway-资源" class="headerlink" title="4.4 Istio gateway 资源"></a>4.4 Istio gateway 资源</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788633797421.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_16"></p>
+<h2 id="4-1-k8s-服务资源"><a href="#4-1-k8s-服务资源" class="headerlink" title="4.1 k8s 服务资源"></a>4.1 k8s 服务资源</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788605151298.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_10"></p>
+<h2 id="4-2-k8s-deployment-资源"><a href="#4-2-k8s-deployment-资源" class="headerlink" title="4.2 k8s deployment 资源"></a>4.2 k8s deployment 资源</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788613855533.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_12"></p>
+<h2 id="4-3-Istio-virtual-service-资源"><a href="#4-3-Istio-virtual-service-资源" class="headerlink" title="4.3 Istio virtual service 资源"></a>4.3 Istio virtual service 资源</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788623896776.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio 流量管理_14"></p>
+<h2 id="4-4-Istio-gateway-资源"><a href="#4-4-Istio-gateway-资源" class="headerlink" title="4.4 Istio gateway 资源"></a>4.4 Istio gateway 资源</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788633797421.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_16"></p>
 <p>​    自此，整个网关运行需要的资源文件已经编写完毕。</p>
 <hr>
 <h1 id="5-istio-ingressgateway-配置"><a href="#5-istio-ingressgateway-配置" class="headerlink" title="5 istio-ingressgateway 配置"></a>5 istio-ingressgateway 配置</h1><h2 id="5-1-修改-istio-ingressgateway-服务类型"><a href="#5-1-修改-istio-ingressgateway-服务类型" class="headerlink" title="5.1 修改 istio-ingressgateway 服务类型"></a>5.1 修改 istio-ingressgateway 服务类型</h2><p>​    默认情况下，istio-ingressgateway 的 k8s 服务类型是 LoadBalancer，因为 LoadBalancer 服务类型一般针对的是云服务商，所以使用基于 NodePort 的 k8s 服务方式。</p>
@@ -350,24 +356,24 @@
 <p>kubectl patch svc -n istio-system istio-ingressgateway -p ‘{“spec”: {“type”: “NodePort”}}’</p>
 </blockquote>
 <h2 id="5-2-修改-istio-ingressgateway-网络命名空间配置"><a href="#5-2-修改-istio-ingressgateway-网络命名空间配置" class="headerlink" title="5.2 修改 istio-ingressgateway 网络命名空间配置"></a>5.2 修改 istio-ingressgateway 网络命名空间配置</h2><h3 id="5-2-1-开启-istio-ingressgateway-容器-80、443-端口"><a href="#5-2-1-开启-istio-ingressgateway-容器-80、443-端口" class="headerlink" title="5.2.1 开启 istio-ingressgateway 容器 80、443 端口"></a>5.2.1 开启 istio-ingressgateway 容器 80、443 端口</h3><p>​    使用 kubectl edit deployment -n istio-system istio-ingressgateway 指令编辑资源配置，添加 istio-proxy 容器对外服务端口 80 和 443，截图如下所示：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788649368734.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio 流量管理_18"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788649368734.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio 流量管理_18"></p>
 <h3 id="5-2-2-将容器网络空间绑定宿主机网络空间"><a href="#5-2-2-将容器网络空间绑定宿主机网络空间" class="headerlink" title="5.2.2 将容器网络空间绑定宿主机网络空间"></a>5.2.2 将容器网络空间绑定宿主机网络空间</h3><p>​    执行此步是因为 istio gateway 资源指定名为 jiuxi-gw 的 host 端口为 80，而上面 istio-ingressgateway 的  NodePort 服务端口默认只能处于 30000 ~ 32767 之间，所以基于“jiuxi-gw：NodePort”方式是无法访问到  istio gateway 的。如果要直接通过 istio gateway 访问，需要开放 istio-ingressgateway pod 的 hostNetwork 配置项：</p>
 <p>​    使用 kubectl edit deployment -n istio-system istio-ingressgateway 指令编辑资源配置：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788660219227.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio gateway_20"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788660219227.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio gateway_20"></p>
 <p>​    修改完毕后，执行如下命令查看 istio-ingressgateway pod 所在宿主机 IP：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788676122086.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_22"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788676122086.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_22"></p>
 <p>​    ssh 登录宿主机 IP（本人是 10.110.101.203），执行如下指令验证是否宿主机开启了 80 端口：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788686108792.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio gateway_24"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788686108792.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio gateway_24"></p>
 <hr>
 <h1 id="6-部署-Istio-资源"><a href="#6-部署-Istio-资源" class="headerlink" title="6 部署 Istio 资源"></a>6 部署 Istio 资源</h1><p>​    执行如下语句部署前面创建的 4 个 Istio 资源：</p>
 <blockquote>
 <p>kubectl apply -f .</p>
 </blockquote>
 <p>​    执行结果如下图所示：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788693327159.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_Docker_26"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788693327159.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_Docker_26"></p>
 <hr>
 <h1 id="7-访问-istio-网关"><a href="#7-访问-istio-网关" class="headerlink" title="7 访问 istio 网关"></a>7 访问 istio 网关</h1><p>​    随便找一台虚拟机，编辑 /etc/hosts 文件，添加 istio-ingressgateway pod 所在主机映射：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788702452360.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio gateway_28"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788702452360.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio gateway_28"></p>
 <p>​    映射内容如下：</p>
 <blockquote>
 <p>10.110.101.203 jiuxi.gw.org</p>

@@ -23,20 +23,20 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="1 前言&amp;emsp;&amp;emsp;本节介绍如何反序列化 yaml 文件，并将其转换为 K8S Deployment 对象。  备注：有关 GO SDK 安装、GO 项目配置请查看本系列前面的文章，本文不再赘述。  2 序列化与反序列化&amp;emsp;&amp;emsp;1907年3月12日，一个叫斯坦因的英国人来到敦煌，随后的几天里，他通过小恩小惠取得了守护人王道士的信任，并在3月16日进入了千佛洞。 &amp;ems">
+    <meta name="description" content="1 前言&amp;emsp;&amp;emsp;本节介绍如何反序列化 yaml 文件，并将其转换为 K8S Deployment 对象。  备注：有关 GO SDK 安装、GO 项目配置请查看本系列前面的文章，本文不再赘述。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="client-go 系列之四《go 反序列化》">
 <meta property="og:url" content="http://example.com/2021/09/19/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9B%E3%80%8AGO-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E3%80%8B/index.html">
 <meta property="og:site_name" content="九析">
-<meta property="og:description" content="1 前言&amp;emsp;&amp;emsp;本节介绍如何反序列化 yaml 文件，并将其转换为 K8S Deployment 对象。  备注：有关 GO SDK 安装、GO 项目配置请查看本系列前面的文章，本文不再赘述。  2 序列化与反序列化&amp;emsp;&amp;emsp;1907年3月12日，一个叫斯坦因的英国人来到敦煌，随后的几天里，他通过小恩小惠取得了守护人王道士的信任，并在3月16日进入了千佛洞。 &amp;ems">
+<meta property="og:description" content="1 前言&amp;emsp;&amp;emsp;本节介绍如何反序列化 yaml 文件，并将其转换为 K8S Deployment 对象。  备注：有关 GO SDK 安装、GO 项目配置请查看本系列前面的文章，本文不再赘述。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/dea1a354e9794e24ae97e2125bc4c0d8_th.jpeg">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/dea1a354e9794e24ae97e2125bc4c0d8_th.jpeg">
 <meta property="article:published_time" content="2021-09-19T03:16:05.000Z">
-<meta property="article:modified_time" content="2021-09-21T15:15:08.562Z">
+<meta property="article:modified_time" content="2022-07-16T14:49:27.202Z">
 <meta property="article:author" content="九析">
 <meta property="article:tag" content="clien-go">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/dea1a354e9794e24ae97e2125bc4c0d8_th.jpeg">
+<meta name="twitter:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/dea1a354e9794e24ae97e2125bc4c0d8_th.jpeg">
 
 
 <link rel="canonical" href="http://example.com/2021/09/19/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9B%E3%80%8AGO-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E3%80%8B/">
@@ -155,7 +155,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="九析"
-      src="/images/bb.jpg">
+      src="/images/bb.png">
   <p class="site-author-name" itemprop="name">九析</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -215,7 +215,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/19/k8s%E5%BC%80%E5%8F%91%E4%B9%8Bclient-go%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9B%E3%80%8AGO-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E3%80%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -248,7 +248,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-09-21 23:15:08" itemprop="dateModified" datetime="2021-09-21T23:15:08+08:00">2021-09-21</time>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -279,11 +279,12 @@
 <blockquote>
 <p>备注：有关 GO SDK 安装、GO 项目配置请查看本系列前面的文章，本文不再赘述。</p>
 </blockquote>
+<span id="more"></span>
 <h1 id="2-序列化与反序列化"><a href="#2-序列化与反序列化" class="headerlink" title="2 序列化与反序列化"></a>2 序列化与反序列化</h1><p>&emsp;&emsp;1907年3月12日，一个叫斯坦因的英国人来到敦煌，随后的几天里，他通过小恩小惠取得了守护人王道士的信任，并在3月16日进入了千佛洞。</p>
 <p>&emsp;&emsp;那一天，一个震惊世界的文化奇迹从历史的尘封中露出真貌，这——便是敦煌。</p>
 <p>&emsp;&emsp;那里曾经风雨西窗，那里曾经衰草斜阳。</p>
 <p>&emsp;&emsp;斯坦因以极低的价格买走了许多珍贵的文物，其中不乏精美的壁画。因为有些壁画实在过于庞大，为了方便运输，斯坦因竟然“肢解”了它们，尽管这些壁画在到达英国后经过了重新拼装，但却带来了不可估量的艺术损失。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/dea1a354e9794e24ae97e2125bc4c0d8_th.jpeg" alt="被切割的敦煌壁画"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/dea1a354e9794e24ae97e2125bc4c0d8_th.jpeg" alt="被切割的敦煌壁画"></p>
 <p>&emsp;&emsp;斯坦因先将壁画切割成碎片，再从碎片恢复成原样的过程，就是对象的序列化与反序列化过程。</p>
 <p>&emsp;&emsp;序列化和反序列化的本质是实现对象数据类型转换（比如对象转换成切片），而对象类型转换的目的是方便数据的存储和传输。        </p>
 <h1 id="3-运行环境"><a href="#3-运行环境" class="headerlink" title="3 运行环境"></a>3 运行环境</h1><p>&emsp;&emsp;本系列文章使用的环境配置如下（不要求读者完全匹配，可根据自己实际情况酌情处理）：</p>

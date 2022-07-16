@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="九析">
 <meta property="og:description" content="1 前言 2 邀约 3 Envoy 介绍 4 Envoy 特性   4.1 自包含   4.2 C++ 11 代码库   4.3 L3 &#x2F; L4 过滤器体系架构   4.4 HTTP L7 过滤器体系架构   4.5 HTTP &#x2F; 2 支持   4.6 MongoDB &amp; DynamoDB L7 支持  1 前言&amp;emsp;&amp;emsp;如果你对博客有任何疑问，请告诉我。   2 邀约&amp;em">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483307304493.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483316585445.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483325727030.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483333452261.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592483307304493.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592483316585445.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592483325727030.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592483333452261.png">
 <meta property="article:published_time" content="2021-09-12T06:47:59.000Z">
-<meta property="article:modified_time" content="2021-09-12T06:49:33.679Z">
+<meta property="article:modified_time" content="2022-07-16T14:49:27.047Z">
 <meta property="article:author" content="九析">
 <meta property="article:tag" content="istio">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483307304493.png">
+<meta name="twitter:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592483307304493.png">
 
 
 <link rel="canonical" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%BB%8B%E7%BB%8D/">
@@ -158,7 +158,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="九析"
-      src="/images/bb.jpg">
+      src="/images/bb.png">
   <p class="site-author-name" itemprop="name">九析</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -218,7 +218,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%BB%8B%E7%BB%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -243,9 +243,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-12 14:47:59 / 修改时间：14:49:33" itemprop="dateCreated datePublished" datetime="2021-09-12T14:47:59+08:00">2021-09-12</time>
+      <time title="创建时间：2021-09-12 14:47:59" itemprop="dateCreated datePublished" datetime="2021-09-12T14:47:59+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -284,17 +290,17 @@
 <p>  4.6 MongoDB &amp; DynamoDB L7 支持</p>
 <hr>
 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483307304493.png" alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_envoy"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592483307304493.png" alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_envoy"></p>
 <hr>
 <h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483316585445.png" alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_Istio 视频_02"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592483316585445.png" alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_Istio 视频_02"></p>
 <hr>
 <h1 id="3-Envoy-介绍"><a href="#3-Envoy-介绍" class="headerlink" title="3 Envoy 介绍"></a>3 Envoy 介绍</h1><p>&emsp;&emsp;Envoy 是类似 Nginx 的网络边缘代理工具，是专为大型现代微服务架构而设计的。</p>
 <p>&emsp;&emsp;下图是 Nginx 使用场景：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483325727030.png" alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_Istio 视频_03"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592483325727030.png" alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_Istio 视频_03"></p>
 <p>&emsp;&emsp;上图中，Nginx 作为边缘代理，是整个网络流量的入口。通过配置 Nginx，可将访问者请求路由到后端 Server 内的 Service  进行处理。但是问题来了，如果我们想控制 Service A 和 Service B 之间的流量就没有办法了，因为它们之间并没有任何边缘代理。</p>
 <p>&emsp;&emsp;下图是 Envoy 使用场景：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483333452261.png" alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_envoy_04"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592483333452261.png" alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_envoy_04"></p>
 <p>&emsp;&emsp;上图中，Envoy 不但作为边缘代理（类似  Nginx）是整个网络流量的入口，同时也可以作为服务（service）代理。这样的网络拓补结构不但可以设置访问者路由规则，也可以设置  service A 与 Service B 之间的路由规则。因此，这样就可以全方位控制微服务内部到内部、外部到内部的所有网络流量，而上图中  Nginx 仅仅控制由外到内的网络流量。</p>
 <hr>
 <h1 id="4-Envoy-特性"><a href="#4-Envoy-特性" class="headerlink" title="4 Envoy 特性"></a>4 Envoy 特性</h1><h2 id="4-1-自包含"><a href="#4-1-自包含" class="headerlink" title="4.1 自包含"></a>4.1 自包含</h2><p>&emsp;&emsp;Envoy 是自包含的设计，它和应用服务器各自独立运行，并不对服务器内的应用进行侵入。这样设计的好处在于可以支持任何语言、任何框架所编写的微服务。此外，正因为自包含、无侵入的设计可以使得升级或部署更透明和高效</p>

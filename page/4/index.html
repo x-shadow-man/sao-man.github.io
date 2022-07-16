@@ -147,7 +147,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="九析"
-      src="/images/bb.jpg">
+      src="/images/bb.png">
   <p class="site-author-name" itemprop="name">九析</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -206,7 +206,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E5%85%B3-gateway-%E5%AE%9E%E4%BE%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -231,9 +231,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 22:25:51 / 修改时间：22:26:37" itemprop="dateCreated datePublished" datetime="2021-09-11T22:25:51+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 22:25:51" itemprop="dateCreated datePublished" datetime="2021-09-11T22:25:51+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -271,22 +277,22 @@
 <p>8 总结</p>
 <hr>
 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788560717573.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_Docker"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788560717573.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_Docker"></p>
 <hr>
 <h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788568456395.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_02"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788568456395.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_02"></p>
 <hr>
 <h1 id="3-Istio-网关介绍"><a href="#3-Istio-网关介绍" class="headerlink" title="3 Istio 网关介绍"></a>3 Istio 网关介绍</h1><p>​    在前面的 Istio 系列文章中轻松完爆了 Virtual Service、Destination Rule 等，同时也介绍了网格的概念（Service Mesh，资源被 Istio 注入，在 Pod 中创建并运行了一个 Istio-proxy 容器，该容器内部运行 Envoy  代理）。在本小节将轻松完爆 Istio 网关（gateway）。</p>
 <p>​    Istio  使用网关来管理网格边缘流量（即：入站和出站流量），明确地说是 istio-ingressgateway  管理网格的入口流量，istio-egressgateway 管理网格的出口流量。在以前的章节中，我们了解网格的流量只所以可被管理，是因为资源被  istio 注入后在 Pod 中创建并运行了 istio-proxy 容器的缘故。而网关流量管理的本质也基于同样道理，唯一不同的是  istio-ingressgateway 和 istio-egressgateway 运行时就是一个 istio-proxy 容器，即独立的  Envoy 代理，而不是与 pod 一起运行的 sidecar Envoy 代理。</p>
 <p>​    与其他控制进入系统的流量机制（例如：K8S Ingress API ）不同，Istio 网关充分利用了 Istio 流量路由的功能和灵活性。因为 Istio 的网关资源仅配置 4-6  层负载平衡属性，例如要公开的 port 和 tls 设置等，而将 L7 层（即应用层）流量路由使用 Istio 虚拟服务（virtual  service）绑定网关来实现，这样的一番神操作就可以像管理 Istio 网格中的任何其他数据平面流量一样，来管理网关流量。</p>
 <p>​    k8s ingress 资源如下图所示：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788579365947.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_04"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788579365947.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_04"></p>
 <p>​    由上图可知，在 Ingress 层直接就实现了流量管理。</p>
 <p>​    istio gateway 资源如下图所示：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788588283935.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio gateway_06"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788588283935.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio gateway_06"></p>
 <p>​    由上图可知，istio gateway 并不像 k8s ingress 一样直接在网关层实现流量路由，而是通过 virtual service  绑定到网关的机制实现流量路由，这样的方式就像将 virtual service 跟 gateway 解耦一样，大家各司其职。gateway  的作用就是分流，而 virtual service 的作用就是将分流来的流量进行管理。</p>
 <p>​    virtual service 资源如下图所示：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788596424833.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_08"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788596424833.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_08"></p>
 <hr>
 <h1 id="4-Istio-网关实例资源"><a href="#4-Istio-网关实例资源" class="headerlink" title="4 Istio 网关实例资源"></a>4 Istio 网关实例资源</h1><p>​    该实例需要如下四个资源文件，前两个资源是 Istio 专有的，后两个是 k8s 层面的：</p>
 <blockquote>
@@ -295,10 +301,10 @@
 <p>jiuxi-svc.yaml        # k8s 服务资源</p>
 <p>jiuxi-deploy.yaml    # k8s deployment 资源</p>
 </blockquote>
-<h2 id="4-1-k8s-服务资源"><a href="#4-1-k8s-服务资源" class="headerlink" title="4.1 k8s 服务资源"></a>4.1 k8s 服务资源</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788605151298.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_10"></p>
-<h2 id="4-2-k8s-deployment-资源"><a href="#4-2-k8s-deployment-资源" class="headerlink" title="4.2 k8s deployment 资源"></a>4.2 k8s deployment 资源</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788613855533.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_12"></p>
-<h2 id="4-3-Istio-virtual-service-资源"><a href="#4-3-Istio-virtual-service-资源" class="headerlink" title="4.3 Istio virtual service 资源"></a>4.3 Istio virtual service 资源</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788623896776.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio 流量管理_14"></p>
-<h2 id="4-4-Istio-gateway-资源"><a href="#4-4-Istio-gateway-资源" class="headerlink" title="4.4 Istio gateway 资源"></a>4.4 Istio gateway 资源</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788633797421.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_16"></p>
+<h2 id="4-1-k8s-服务资源"><a href="#4-1-k8s-服务资源" class="headerlink" title="4.1 k8s 服务资源"></a>4.1 k8s 服务资源</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788605151298.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_10"></p>
+<h2 id="4-2-k8s-deployment-资源"><a href="#4-2-k8s-deployment-资源" class="headerlink" title="4.2 k8s deployment 资源"></a>4.2 k8s deployment 资源</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788613855533.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_12"></p>
+<h2 id="4-3-Istio-virtual-service-资源"><a href="#4-3-Istio-virtual-service-资源" class="headerlink" title="4.3 Istio virtual service 资源"></a>4.3 Istio virtual service 资源</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788623896776.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio 流量管理_14"></p>
+<h2 id="4-4-Istio-gateway-资源"><a href="#4-4-Istio-gateway-资源" class="headerlink" title="4.4 Istio gateway 资源"></a>4.4 Istio gateway 资源</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788633797421.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio traffic manag_16"></p>
 <p>​    自此，整个网关运行需要的资源文件已经编写完毕。</p>
 <hr>
 <h1 id="5-istio-ingressgateway-配置"><a href="#5-istio-ingressgateway-配置" class="headerlink" title="5 istio-ingressgateway 配置"></a>5 istio-ingressgateway 配置</h1><h2 id="5-1-修改-istio-ingressgateway-服务类型"><a href="#5-1-修改-istio-ingressgateway-服务类型" class="headerlink" title="5.1 修改 istio-ingressgateway 服务类型"></a>5.1 修改 istio-ingressgateway 服务类型</h2><p>​    默认情况下，istio-ingressgateway 的 k8s 服务类型是 LoadBalancer，因为 LoadBalancer 服务类型一般针对的是云服务商，所以使用基于 NodePort 的 k8s 服务方式。</p>
@@ -307,24 +313,24 @@
 <p>kubectl patch svc -n istio-system istio-ingressgateway -p ‘{“spec”: {“type”: “NodePort”}}’</p>
 </blockquote>
 <h2 id="5-2-修改-istio-ingressgateway-网络命名空间配置"><a href="#5-2-修改-istio-ingressgateway-网络命名空间配置" class="headerlink" title="5.2 修改 istio-ingressgateway 网络命名空间配置"></a>5.2 修改 istio-ingressgateway 网络命名空间配置</h2><h3 id="5-2-1-开启-istio-ingressgateway-容器-80、443-端口"><a href="#5-2-1-开启-istio-ingressgateway-容器-80、443-端口" class="headerlink" title="5.2.1 开启 istio-ingressgateway 容器 80、443 端口"></a>5.2.1 开启 istio-ingressgateway 容器 80、443 端口</h3><p>​    使用 kubectl edit deployment -n istio-system istio-ingressgateway 指令编辑资源配置，添加 istio-proxy 容器对外服务端口 80 和 443，截图如下所示：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788649368734.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio 流量管理_18"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788649368734.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio 流量管理_18"></p>
 <h3 id="5-2-2-将容器网络空间绑定宿主机网络空间"><a href="#5-2-2-将容器网络空间绑定宿主机网络空间" class="headerlink" title="5.2.2 将容器网络空间绑定宿主机网络空间"></a>5.2.2 将容器网络空间绑定宿主机网络空间</h3><p>​    执行此步是因为 istio gateway 资源指定名为 jiuxi-gw 的 host 端口为 80，而上面 istio-ingressgateway 的  NodePort 服务端口默认只能处于 30000 ~ 32767 之间，所以基于“jiuxi-gw：NodePort”方式是无法访问到  istio gateway 的。如果要直接通过 istio gateway 访问，需要开放 istio-ingressgateway pod 的 hostNetwork 配置项：</p>
 <p>​    使用 kubectl edit deployment -n istio-system istio-ingressgateway 指令编辑资源配置：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788660219227.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio gateway_20"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788660219227.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio gateway_20"></p>
 <p>​    修改完毕后，执行如下命令查看 istio-ingressgateway pod 所在宿主机 IP：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788676122086.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_22"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788676122086.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_22"></p>
 <p>​    ssh 登录宿主机 IP（本人是 10.110.101.203），执行如下指令验证是否宿主机开启了 80 端口：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788686108792.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio gateway_24"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788686108792.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio gateway_24"></p>
 <hr>
 <h1 id="6-部署-Istio-资源"><a href="#6-部署-Istio-资源" class="headerlink" title="6 部署 Istio 资源"></a>6 部署 Istio 资源</h1><p>​    执行如下语句部署前面创建的 4 个 Istio 资源：</p>
 <blockquote>
 <p>kubectl apply -f .</p>
 </blockquote>
 <p>​    执行结果如下图所示：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788693327159.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_Docker_26"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788693327159.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_Docker_26"></p>
 <hr>
 <h1 id="7-访问-istio-网关"><a href="#7-访问-istio-网关" class="headerlink" title="7 访问 istio 网关"></a>7 访问 istio 网关</h1><p>​    随便找一台虚拟机，编辑 /etc/hosts 文件，添加 istio-ingressgateway pod 所在主机映射：</p>
-<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1589788702452360.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio gateway_28"></p>
+<p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio virtual servi_03"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1589788702452360.png" alt="第三十章 九析带你轻松完爆 Istio - 网关 gateway 实例_istio gateway_28"></p>
 <p>​    映射内容如下：</p>
 <blockquote>
 <p>10.110.101.203 jiuxi.gw.org</p>
@@ -363,7 +369,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E6%B5%81%E5%90%91%E4%B9%8B-iptables-chain/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -388,9 +394,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 22:22:44 / 修改时间：22:23:14" itemprop="dateCreated datePublished" datetime="2021-09-11T22:22:44+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 22:22:44" itemprop="dateCreated datePublished" datetime="2021-09-11T22:22:44+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -414,9 +426,9 @@
 <p>2 邀约</p>
 <p>3 正文</p>
 <hr>
-<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587895000811110.png" alt="第二十九章 九析带你轻松完爆 Istio - 网络流向之 iptables chain_istio 视频"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587895000811110.png" alt="第二十九章 九析带你轻松完爆 Istio - 网络流向之 iptables chain_istio 视频"></p>
 <hr>
-<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587895007995640.png" alt="第二十九章 九析带你轻松完爆 Istio - 网络流向之 iptables chain_k8s 视频_02"></p>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587895007995640.png" alt="第二十九章 九析带你轻松完爆 Istio - 网络流向之 iptables chain_k8s 视频_02"></p>
 <hr>
 <h1 id="3-正文"><a href="#3-正文" class="headerlink" title="3 正文"></a>3 正文</h1><p>​    一切都是那么明亮，光线照在身上，暖暖的。</p>
 <p>​    仰起头，依稀能听到风声。庭院里早春的鸟儿在围墙上啁啾，三五个下人在打扫着庭院，丫鬟婆子们在天井嗑着瓜子闲聊天，嬉笑声惊动了房脊上的信鸽，扑棱棱扇动双翅滑向远处湛蓝的天空……</p>
@@ -435,7 +447,7 @@
 <p>佛卧德：接受来自扑入锐的奏折，这些奏折表面跟和府无关，经过规则检查之后，直接转给剖思特。</p>
 <p>剖思特：接受来自鳌扑特和佛卧德的奏折，并做规则检查。处理完把它们送到该送的地方去。</p>
 </blockquote>
-<p>​    整个数据信息流的处理极其缜密。我将他们紧紧编制在我设计的链条里。我观察着他们，规范着他们的一举一动。每天我都要把这一幕幕绘制成图，然后牢牢地印在我的脑海里。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587894981198101.png" alt="第二十九章 九析带你轻松完爆 Istio - 网络流向之 iptables chain_istio 视频_03"></p>
+<p>​    整个数据信息流的处理极其缜密。我将他们紧紧编制在我设计的链条里。我观察着他们，规范着他们的一举一动。每天我都要把这一幕幕绘制成图，然后牢牢地印在我的脑海里。<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587894981198101.png" alt="第二十九章 九析带你轻松完爆 Istio - 网络流向之 iptables chain_istio 视频_03"></p>
 <p>============================================================================</p>
 <p>​    数据在主机中的具体流向，一般会有三种路径：</p>
 <blockquote>
@@ -452,7 +464,7 @@
 <p>output（鳌扑特）</p>
 <p>postrouting（剖思特）</p>
 </blockquote>
-<p>​    iptables 通过在上述五道关卡上设置更多的规则来对主机中流动的数据做流向控制。数据流向图如下所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587894989758506.png" alt="第二十九章 九析带你轻松完爆 Istio - 网络流向之 iptables chain_istio 视频_04"></p>
+<p>​    iptables 通过在上述五道关卡上设置更多的规则来对主机中流动的数据做流向控制。数据流向图如下所示：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587894989758506.png" alt="第二十九章 九析带你轻松完爆 Istio - 网络流向之 iptables chain_istio 视频_04"></p>
 <p>​    未完待续……</p>
 
       
@@ -483,7 +495,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E7%BD%91%E7%BB%9C%E5%8C%85%E4%B9%8B-iptables-netfilter-%E5%85%B3%E7%B3%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -508,9 +520,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 22:21:02 / 修改时间：22:21:30" itemprop="dateCreated datePublished" datetime="2021-09-11T22:21:02+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 22:21:02" itemprop="dateCreated datePublished" datetime="2021-09-11T22:21:02+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -534,9 +552,9 @@
 <p>2 邀约</p>
 <p>3 正文</p>
 <hr>
-<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587698518570214.png" alt="第二十八章 九析带你轻松完爆 Istio - 网络包之 iptables netfilter 关系_k8s iptables"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587698518570214.png" alt="第二十八章 九析带你轻松完爆 Istio - 网络包之 iptables netfilter 关系_k8s iptables"></p>
 <hr>
-<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587698527213780.png" alt="第二十八章 九析带你轻松完爆 Istio - 网络包之 iptables netfilter 关系_iptables_02"></p>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587698527213780.png" alt="第二十八章 九析带你轻松完爆 Istio - 网络包之 iptables netfilter 关系_iptables_02"></p>
 <hr>
 <h1 id="3-正文"><a href="#3-正文" class="headerlink" title="3 正文"></a>3 正文</h1><p>​    淅淅沥沥的雨不像下在外面，而是下在心里。</p>
 <p>​    清秀的男人推开重重的府门，外面的光线一点点透进去，就像蹑手蹑脚的小偷，悄无声息。空间中有潮湿木头腐朽的味道，男人微皱一下浓眉。</p>
@@ -595,7 +613,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-Ingress/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -620,9 +638,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 22:19:17 / 修改时间：22:19:54" itemprop="dateCreated datePublished" datetime="2021-09-11T22:19:17+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 22:19:17" itemprop="dateCreated datePublished" datetime="2021-09-11T22:19:17+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -655,16 +679,16 @@
 <p>  5.3 访问 ingress</p>
 <p>6 结论</p>
 <hr>
-<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587613783382115.png" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587613783382115.png" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频"></p>
 <hr>
-<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587613790304553.png" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_ingress-controller_02"></p>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587613790304553.png" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_ingress-controller_02"></p>
 <hr>
 <h1 id="3-Ingress-介绍"><a href="#3-Ingress-介绍" class="headerlink" title="3 Ingress 介绍"></a>3 Ingress 介绍</h1><p>​    Ingress 中文含义就是“入口”，非常形象地定义了这种资源的本质：Ingress 就是 k8s 的门户。</p>
 <p>​    就像一幢建筑物，比如酒店、商场等，不止一个入口，k8s 也可以定义多个入口放流量进来。</p>
 <p>​    k8s 集群必须部署一个 Ingress 控制器（比如 nginx、traefik 等），Ingress 控制器的作用就是创建 Ingress  资源，好让其生效。Ingress 控制器跟 Ingress 的关系就像 nginx 跟 nginx.conf( nginx 配置文件) 一样。</p>
 <p>​    Ingress 控制器容器内一般有两个关键的进程，分别是一个负载均衡器（比如 nginx、haproxy 等）和一个控制器守护进程。控制器守护进程会从 k8s 接收所需的 Ingress 创建需求，并将其生成一个 nginx 或 haproxy 的配置片段，并重新加载负载均衡器来使其生效。</p>
 <p>​    就拿 nginx-ingress-controller 举例，nginx 是 nginx-ingress-controller 内部进程，也是其负载均衡器，而 nginx-ingress-controller 是 k8s 的负载均衡器。</p>
-<p>nginx-ingress-controller 内部进程截图如下所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587613800164339.png" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频_03"></p>
+<p>nginx-ingress-controller 内部进程截图如下所示：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587613800164339.png" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频_03"></p>
 <hr>
 <h1 id="4-ingress-实例"><a href="#4-ingress-实例" class="headerlink" title="4 ingress 实例"></a>4 ingress 实例</h1><p>​    如果要展示 ingress 实例，需要三个资源文件：</p>
 <blockquote>
@@ -672,11 +696,11 @@
 <p>2 service 流量从入口进入后的流向资源文件</p>
 <p>3 pod 流量最终目的地资源文件</p>
 </blockquote>
-<h2 id="4-1-ingress-资源文件"><a href="#4-1-ingress-资源文件" class="headerlink" title="4.1 ingress 资源文件"></a>4.1 ingress 资源文件</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频_04"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587613808888408.png" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频_05"></p>
-<h2 id="4-2-service-资源文件"><a href="#4-2-service-资源文件" class="headerlink" title="4.2 service 资源文件"></a>4.2 service 资源文件</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频_04"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587613813933169.png" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_ingress-controller_07"></p>
-<h2 id="4-3-pod-资源文件"><a href="#4-3-pod-资源文件" class="headerlink" title="4.3 pod 资源文件"></a>4.3 pod 资源文件</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频_04"><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587613818578144.png" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_ingress-controller_09"></p>
+<h2 id="4-1-ingress-资源文件"><a href="#4-1-ingress-资源文件" class="headerlink" title="4.1 ingress 资源文件"></a>4.1 ingress 资源文件</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频_04"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587613808888408.png" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频_05"></p>
+<h2 id="4-2-service-资源文件"><a href="#4-2-service-资源文件" class="headerlink" title="4.2 service 资源文件"></a>4.2 service 资源文件</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频_04"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587613813933169.png" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_ingress-controller_07"></p>
+<h2 id="4-3-pod-资源文件"><a href="#4-3-pod-资源文件" class="headerlink" title="4.3 pod 资源文件"></a>4.3 pod 资源文件</h2><p><img src="https://blog.51cto.com/static/js/ueditor1.4.3/themes/default/images/spacer.gif" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s 视频_04"><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587613818578144.png" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_ingress-controller_09"></p>
 <hr>
-<h1 id="5-访问-ingress"><a href="#5-访问-ingress" class="headerlink" title="5 访问 ingress"></a>5 访问 ingress</h1><h2 id="5-1-获取-ingress-HOST"><a href="#5-1-获取-ingress-HOST" class="headerlink" title="5.1 获取 ingress HOST"></a>5.1 获取 ingress HOST</h2><p>​    上面介绍了 nginx-ingress-controller 其实就是 k8s 的负载均衡器，或者说 nginx-ingress-controller  就是 k8s 的 nginx。那么 nginx-ingress-controller pod 所在宿主机地址就是 k8s  的入口地址。如下截图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587613823485947.png" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s ingress_10"></p>
+<h1 id="5-访问-ingress"><a href="#5-访问-ingress" class="headerlink" title="5 访问 ingress"></a>5 访问 ingress</h1><h2 id="5-1-获取-ingress-HOST"><a href="#5-1-获取-ingress-HOST" class="headerlink" title="5.1 获取 ingress HOST"></a>5.1 获取 ingress HOST</h2><p>​    上面介绍了 nginx-ingress-controller 其实就是 k8s 的负载均衡器，或者说 nginx-ingress-controller  就是 k8s 的 nginx。那么 nginx-ingress-controller pod 所在宿主机地址就是 k8s  的入口地址。如下截图所示：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587613823485947.png" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_k8s ingress_10"></p>
 <p>​    因为我的 nginx-ingress-controller pod 直接采用的是 hostNetwork: true，也就是使用了宿主机的网络命名空间。因此这里的 Pod IP 就是宿主机的 IP，也就是说访问的时候可以直接使用此 IP。</p>
 <h2 id="5-2-域名解析绑定"><a href="#5-2-域名解析绑定" class="headerlink" title="5.2 域名解析绑定"></a>5.2 域名解析绑定</h2><p>​    编辑 /etc/hosts（centos）文件，添加域名解析定义：</p>
 <blockquote>
@@ -686,7 +710,7 @@
 <blockquote>
 <p>curl <a target="_blank" rel="noopener" href="http://ingress.jiuxi.org/"> http://ingress.jiuxi.org</a></p>
 </blockquote>
-<p>​    命令执行结果如下所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587613831548777.png" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_nginx-ingress-contr_11"></p>
+<p>​    命令执行结果如下所示：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587613831548777.png" alt="第二十七章 九析带你轻松完爆 Istio - k8s 流量进入集群之 Ingress_nginx-ingress-contr_11"></p>
 <hr>
 <h1 id="6-结论"><a href="#6-结论" class="headerlink" title="6 结论"></a>6 结论</h1><p>​    使用 nodeport、loadbalancer 跟 ingress 在实现路由方式上有所不同。对于 loadbalancer 和  nodeport，都是将流量导入到节点上的 kube-proxy 进程，后者再将流量转发到后面的 pod。而 Ingress  负载均衡器则将流量直接转发到选定的 Pod，这样效率更高。</p>
 
@@ -718,7 +742,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-NodePort/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -743,9 +767,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 22:16:43 / 修改时间：22:17:19" itemprop="dateCreated datePublished" datetime="2021-09-11T22:16:43+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 22:16:43" itemprop="dateCreated datePublished" datetime="2021-09-11T22:16:43+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -772,25 +802,25 @@
 <p>5 实例演示</p>
 <p>6 缺点</p>
 <hr>
-<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550119779184.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_k8s 视频"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587550119779184.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_k8s 视频"></p>
 <hr>
-<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550126151290.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_k8s nodeport_02"></p>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587550126151290.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_k8s nodeport_02"></p>
 <hr>
 <h1 id="3-NodePort-样例"><a href="#3-NodePort-样例" class="headerlink" title="3 NodePort 样例"></a>3 NodePort 样例</h1><p>​    跟 hostNetwork 和 hostPort 不同，NodePort 属于 service 类型之一。hostPort 和 hostNetwork 作用对象是 Pod，而 NodePort 作用对象则是 service。</p>
-<p>​    pod 文件如下所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550204849539.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_istio 教程_03"></p>
-<p>​    service 文件如下：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550210984313.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_istio 教程_04"></p>
+<p>​    pod 文件如下所示：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587550204849539.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_istio 教程_03"></p>
+<p>​    service 文件如下：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587550210984313.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_istio 教程_04"></p>
 <p>​    创建 NodePort 服务时，用户可以在 30000 ~ 32767 范围内指定一个端口，也可以通过 patch 打补丁的方式修改 service 类型，这样 NodePort 端口将会在范围 30000 ~ 32767 之间自动分配。</p>
 <blockquote>
 <p>kubectl patch svc svc_name -n ns_name -p ‘{“type”: “NodePort”}’</p>
 </blockquote>
 <hr>
-<h1 id="4-访问流程"><a href="#4-访问流程" class="headerlink" title="4 访问流程"></a>4 访问流程</h1><p>​    下图展示当 k8s svc 创建之后，k8s 集群内部都发生了哪些变化。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550218909632.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_istio 视频_05"></p>
-<p>​    当 client 发送 kubectl apply 指令给 APIServer 后，会生成相关的 service 对象，k8s 集群内的所有节点（master 和 node）上都会运行 kube-proxy 进程，如下截图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550225387994.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_istio 视频_06"></p>
+<h1 id="4-访问流程"><a href="#4-访问流程" class="headerlink" title="4 访问流程"></a>4 访问流程</h1><p>​    下图展示当 k8s svc 创建之后，k8s 集群内部都发生了哪些变化。<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587550218909632.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_istio 视频_05"></p>
+<p>​    当 client 发送 kubectl apply 指令给 APIServer 后，会生成相关的 service 对象，k8s 集群内的所有节点（master 和 node）上都会运行 kube-proxy 进程，如下截图所示：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587550225387994.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_istio 视频_06"></p>
 <p>​    该进程的作用就是负责跟 APIServer 进行通信并对 node 上的 pod 进行生命周期管理。如果创建了 k8s service ，那么 kube-proxy  会创建相应的 iptables 规则，并将发送到 service nodePort 的流量转发到 service 后端提供的 Pod  的相应端口上。</p>
 <hr>
-<h1 id="5-实例演示"><a href="#5-实例演示" class="headerlink" title="5 实例演示"></a>5 实例演示</h1><p>​    当执行 jiuxi-svc.yaml 资源文件后，如下截图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550231487434.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_k8s nodeport_07"></p>
-<p>​    查看网络监控接口可知 30088 对应的服务进程就是 kube-proxy，如下图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550237774324.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_k8s nodeport_08"></p>
-<p>​    当我们通过 curl 访问 hostIP:30088 时，数据包会通过 30088 端口送给 kube-proxy 进程，kube-proxy 进程会根据 k8s service 的 endpoint 将数据包路由到实际的 pod IP 和对应的端口去。如下截图查看 service 对应的  endpoints。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587550245651146.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_istio 视频_09"></p>
+<h1 id="5-实例演示"><a href="#5-实例演示" class="headerlink" title="5 实例演示"></a>5 实例演示</h1><p>​    当执行 jiuxi-svc.yaml 资源文件后，如下截图所示：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587550231487434.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_k8s nodeport_07"></p>
+<p>​    查看网络监控接口可知 30088 对应的服务进程就是 kube-proxy，如下图所示：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587550237774324.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_k8s nodeport_08"></p>
+<p>​    当我们通过 curl 访问 hostIP:30088 时，数据包会通过 30088 端口送给 kube-proxy 进程，kube-proxy 进程会根据 k8s service 的 endpoint 将数据包路由到实际的 pod IP 和对应的端口去。如下截图查看 service 对应的  endpoints。<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587550245651146.png" alt="第二十六章 九析带你轻松完爆 Istio - k8s 流量进入集群之 NodePort_istio 视频_09"></p>
 <hr>
 <h1 id="6-缺点"><a href="#6-缺点" class="headerlink" title="6 缺点"></a>6 缺点</h1><p>​    使用 NodePort 方式，在 k8s 集群内部，每个节点（master 或 node）上 kube-proxy 进程都会开启相关的端口。如果服务都采用这样的方式，端口就有冲突的可能。因此建议谨慎使用。</p>
 
@@ -822,7 +852,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-hostPort/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -847,9 +877,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 22:14:29 / 修改时间：22:15:10" itemprop="dateCreated datePublished" datetime="2021-09-11T22:14:29+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 22:14:29" itemprop="dateCreated datePublished" datetime="2021-09-11T22:14:29+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -878,17 +914,17 @@
 <p>5 hostPort 使用场景</p>
 <p>6 注意</p>
 <hr>
-<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587465765267666.png" alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_istio 流量管理"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587465765267666.png" alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_istio 流量管理"></p>
 <hr>
-<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587465773277912.png" alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_k8s 视频_02"></p>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587465773277912.png" alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_k8s 视频_02"></p>
 <hr>
-<h1 id="3-hostPort-样例"><a href="#3-hostPort-样例" class="headerlink" title="3 hostPort 样例"></a>3 hostPort 样例</h1><p>​    样例代码如下所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587465780365910.png" alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_k8s hostPort_03"></p>
+<h1 id="3-hostPort-样例"><a href="#3-hostPort-样例" class="headerlink" title="3 hostPort 样例"></a>3 hostPort 样例</h1><p>​    样例代码如下所示：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587465780365910.png" alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_k8s hostPort_03"></p>
 <p>​    pod 发布之后，便会将容器端口开放给了外部网络。外部可以通过 pod 所在宿主机和 hostPort 值访问到 Pod 内的容器提供的服务。</p>
 <hr>
 <h1 id="4-hostPort-与-hostNetwork-异同"><a href="#4-hostPort-与-hostNetwork-异同" class="headerlink" title="4 hostPort 与 hostNetwork 异同"></a>4 hostPort 与 hostNetwork 异同</h1><h2 id="4-1-相同点"><a href="#4-1-相同点" class="headerlink" title="4.1 相同点"></a>4.1 相同点</h2><p>​    hostPort 与 hostNetwork 本质上都是暴露 pod 宿主机 IP 给终端用户，因为 pod 生命周期并不固定，随时都有可能被完爆，故 IP  的不确定最终导致用户使用上的不方便；此外宿主机端口占用也导致不能在同一台机子上有多个程序使用同一端口。因此一般情况下，不要使用 hostPort 方式。</p>
 <h2 id="4-2-不同点"><a href="#4-2-不同点" class="headerlink" title="4.2 不同点"></a>4.2 不同点</h2><p>​    使用 hostNetwork，pod 实际上用的是 pod 宿主机的网络地址空间：即 pod  IP 是宿主机 IP，而非 cni 分配的 pod IP，端口是宿主机网络监听接口。</p>
-<p>使用 hostPort，pod IP 并非宿主机 IP，而是 cni 分配的 pod IP，跟其他普通的 pod 使用一样的 ip  分配方式，端口并非宿主机网络监听端口，只是使用了 DNAT 机制将 hostPort 指定的端口映射到了容器的端口之上（可以通过  iptables 命令进行查看）。外部访问此 pod 时，仍然使用宿主机和 hostPort 方式。pod ip 跟宿主机 ip 截图如下：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587465825662942.png" alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_istio 流量管理_04"></p>
-<p>​    有关端口 DNAT 通过 iptables 命令进行查看，如下截图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587465835982578.png" alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_istio 视频_05"></p>
+<p>使用 hostPort，pod IP 并非宿主机 IP，而是 cni 分配的 pod IP，跟其他普通的 pod 使用一样的 ip  分配方式，端口并非宿主机网络监听端口，只是使用了 DNAT 机制将 hostPort 指定的端口映射到了容器的端口之上（可以通过  iptables 命令进行查看）。外部访问此 pod 时，仍然使用宿主机和 hostPort 方式。pod ip 跟宿主机 ip 截图如下：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587465825662942.png" alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_istio 流量管理_04"></p>
+<p>​    有关端口 DNAT 通过 iptables 命令进行查看，如下截图所示：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587465835982578.png" alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_istio 视频_05"></p>
 <p>​    由上图可知，pod 所在宿主机上的 iptables nat 表流向如下：</p>
 <blockquote>
 <p>1 当客户端发起 pod 访问时，比如 curl <a href="http://pod_in_host:hostPort">http://pod_in_host:hostPort</a></p>
@@ -897,7 +933,7 @@
 </blockquote>
 <p>​    基于此，当客户端访问 pod 所在主机的 9998 端口时，流量会自动被路由到 IP 为 10.244.11.55（也就是 pod ip）的 80 端口上。</p>
 <hr>
-<h1 id="5-hostPort-使用场景"><a href="#5-hostPort-使用场景" class="headerlink" title="5 hostPort 使用场景"></a>5 hostPort 使用场景</h1><p>​    nginx-ingress-controller 就使用到了 hostPort 方式，同时开启了 80 和 443 端口，如下截图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587465846114894.png" alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_istio 视频_06"></p>
+<h1 id="5-hostPort-使用场景"><a href="#5-hostPort-使用场景" class="headerlink" title="5 hostPort 使用场景"></a>5 hostPort 使用场景</h1><p>​    nginx-ingress-controller 就使用到了 hostPort 方式，同时开启了 80 和 443 端口，如下截图所示：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587465846114894.png" alt="第二十五章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostPort_istio 视频_06"></p>
 <hr>
 <h1 id="6-注意"><a href="#6-注意" class="headerlink" title="6 注意"></a>6 注意</h1><p>​    当 pod 同时使用了 hostNetwork 和 hostPort，那么 hostNetwork 将会直接使用宿主机网络命名空间，hostPort 其实就形同虚设了。可以认为 hostNetwork 选项优先级要高于 hostPort。</p>
 
@@ -929,7 +965,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-k8s-%E6%B5%81%E9%87%8F%E8%BF%9B%E5%85%A5%E9%9B%86%E7%BE%A4%E4%B9%8B-hostNetwork/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -954,9 +990,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 22:12:05 / 修改时间：22:12:57" itemprop="dateCreated datePublished" datetime="2021-09-11T22:12:05+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 22:12:05" itemprop="dateCreated datePublished" datetime="2021-09-11T22:12:05+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -985,9 +1027,9 @@
 <p>  5.2 node 个数跟 pod 副本数</p>
 <p>6 hostNetwork 使用场景</p>
 <hr>
-<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587352067700864.png" alt="第二十四章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork_istio 视频"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587352067700864.png" alt="第二十四章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork_istio 视频"></p>
 <hr>
-<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587352077750654.png" alt="第二十四章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork_k8s 视频_02"></p>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587352077750654.png" alt="第二十四章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork_k8s 视频_02"></p>
 <hr>
 <h1 id="3-k8s-流量进入集群方式"><a href="#3-k8s-流量进入集群方式" class="headerlink" title="3 k8s 流量进入集群方式"></a>3 k8s 流量进入集群方式</h1><p>​    k8s 集群外的流量如果要进入 k8s，通常有如下几种方式：</p>
 <blockquote>
@@ -1000,15 +1042,15 @@
 </blockquote>
 <p>​    本节重点介绍 hostNetwork 方式。</p>
 <hr>
-<h1 id="4-hostNetwork-样例"><a href="#4-hostNetwork-样例" class="headerlink" title="4 hostNetwork 样例"></a>4 hostNetwork 样例</h1><p>​    截图如下：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587352085511041.png" alt="第二十四章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork_istio 网络_03"></p>
+<h1 id="4-hostNetwork-样例"><a href="#4-hostNetwork-样例" class="headerlink" title="4 hostNetwork 样例"></a>4 hostNetwork 样例</h1><p>​    截图如下：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587352085511041.png" alt="第二十四章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork_istio 网络_03"></p>
 <p>​    hostNetwork 只能作用在 Pod 上。如果 Pod 开启了 hostNetwork: true，则该 Pod 直接使用当前宿主机的网络空间，如果 Pod  内的进程需要开启网络监听接口，就会直接在当前宿主机开启。如上图可知一个 Pod 内运行一个 busybox 的容器，该 busybox 容器内的 httpd 进程会开启 8888 网络监听端口，而该端口会直接开启在 Pod 所在宿主机上。</p>
 <hr>
-<h1 id="5-hostNetwork-影响"><a href="#5-hostNetwork-影响" class="headerlink" title="5 hostNetwork 影响"></a>5 hostNetwork 影响</h1><h2 id="5-1-Pod-IP-和-Port"><a href="#5-1-Pod-IP-和-Port" class="headerlink" title="5.1 Pod IP 和 Port"></a>5.1 Pod IP 和 Port</h2><p>​    如果 Pod 采用主机网络策略（hostNetwork：true），其 IP 就是宿主机的 IP，其 Port 就是宿主机的 Port。如下图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587352096237988.png" alt="第二十四章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork_k8s 网络_04"></p>
-<h2 id="5-2-node-个数跟-pod-副本数"><a href="#5-2-node-个数跟-pod-副本数" class="headerlink" title="5.2 node 个数跟 pod 副本数"></a>5.2 node 个数跟 pod 副本数</h2><p>​    如果 Pod 采用主机网络策略（hostNetwork：true），Pod 副本数不能超过 node 数，因为 pod 最终会采用 node  的网络命名空间，如果 pod 副本数多于 node 数，则会有些 pod 不能创建成功。如下图所示：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587352103773057.png" alt="第二十四章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork_istio 网络_05"></p>
-<p>​    由上图可知，因为采用了 hostNetwork，所以在同一个 Node 节点（k8s-w-202）上就不能同时运行两个 pod，因为该 pod 都使用了同一个网络端口 8888。如下日志截图可知：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587352110241577.png" alt="第二十四章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork_k8s 网络_06"></p>
+<h1 id="5-hostNetwork-影响"><a href="#5-hostNetwork-影响" class="headerlink" title="5 hostNetwork 影响"></a>5 hostNetwork 影响</h1><h2 id="5-1-Pod-IP-和-Port"><a href="#5-1-Pod-IP-和-Port" class="headerlink" title="5.1 Pod IP 和 Port"></a>5.1 Pod IP 和 Port</h2><p>​    如果 Pod 采用主机网络策略（hostNetwork：true），其 IP 就是宿主机的 IP，其 Port 就是宿主机的 Port。如下图所示：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587352096237988.png" alt="第二十四章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork_k8s 网络_04"></p>
+<h2 id="5-2-node-个数跟-pod-副本数"><a href="#5-2-node-个数跟-pod-副本数" class="headerlink" title="5.2 node 个数跟 pod 副本数"></a>5.2 node 个数跟 pod 副本数</h2><p>​    如果 Pod 采用主机网络策略（hostNetwork：true），Pod 副本数不能超过 node 数，因为 pod 最终会采用 node  的网络命名空间，如果 pod 副本数多于 node 数，则会有些 pod 不能创建成功。如下图所示：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587352103773057.png" alt="第二十四章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork_istio 网络_05"></p>
+<p>​    由上图可知，因为采用了 hostNetwork，所以在同一个 Node 节点（k8s-w-202）上就不能同时运行两个 pod，因为该 pod 都使用了同一个网络端口 8888。如下日志截图可知：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587352110241577.png" alt="第二十四章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork_k8s 网络_06"></p>
 <p>​    自此，我们可以得知，使用 hostNetwork 具有相当大的局限，首先 Pod 有可能被完爆，所以如果直接采用 IP 的方式跟 Pod  打交道会有不可预期的后果。此外，随着宿主机运行程序的增多，端口冲突的概率就会大大增加，因此 hostNetwork 的采用必须慎之又慎。</p>
 <hr>
-<h1 id="6-hostNetwork-使用场景"><a href="#6-hostNetwork-使用场景" class="headerlink" title="6 hostNetwork 使用场景"></a>6 hostNetwork 使用场景</h1><p>​    一般情况下使用 hostNetwork 的场景多用在操作或者管理宿主机的网络环境上，比如我们经常使用的网络插件，比如 flannel、canal  等。这些网络插件可以完全控制集群中每个节点上的网络，比如可以将其他 pod （hotNetwork：false）连接到 overlay  网络中。下图展示本人的 canal 网络插件 pod 的配置：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1587352121991492.png" alt="第二十四章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork_istio 视频_07"></p>
+<h1 id="6-hostNetwork-使用场景"><a href="#6-hostNetwork-使用场景" class="headerlink" title="6 hostNetwork 使用场景"></a>6 hostNetwork 使用场景</h1><p>​    一般情况下使用 hostNetwork 的场景多用在操作或者管理宿主机的网络环境上，比如我们经常使用的网络插件，比如 flannel、canal  等。这些网络插件可以完全控制集群中每个节点上的网络，比如可以将其他 pod （hotNetwork：false）连接到 overlay  网络中。下图展示本人的 canal 网络插件 pod 的配置：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1587352121991492.png" alt="第二十四章 九析带你轻松完爆 Istio - k8s 流量进入集群之 hostNetwork_istio 视频_07"></p>
 <p>​        </p>
 
       
@@ -1039,7 +1081,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-destination-rule-%E4%BB%8B%E7%BB%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -1064,9 +1106,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 22:09:51 / 修改时间：22:10:26" itemprop="dateCreated datePublished" datetime="2021-09-11T22:09:51+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 22:09:51" itemprop="dateCreated datePublished" datetime="2021-09-11T22:09:51+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -1092,9 +1140,9 @@
 <p>4 路由策略</p>
 <p>5 样例说明</p>
 <hr>
-<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586941964975167.png" alt="第二十三章 九析带你轻松完爆 Istio - destination rule 介绍_Istio destination r"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586941964975167.png" alt="第二十三章 九析带你轻松完爆 Istio - destination rule 介绍_Istio destination r"></p>
 <hr>
-<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586941972382785.png" alt="第二十三章 九析带你轻松完爆 Istio - destination rule 介绍_Istio 视频_02"></p>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586941972382785.png" alt="第二十三章 九析带你轻松完爆 Istio - destination rule 介绍_Istio 视频_02"></p>
 <hr>
 <h1 id="3-介绍"><a href="#3-介绍" class="headerlink" title="3 介绍"></a>3 介绍</h1><p>​    上章展示了 destination rule 一个实例。</p>
 <p>​    destination rules 是 Istio 流量路由的关键功能，它不能独自使用，必须跟 Virtual Service 共同发挥作用。当  destination rules 跟 virtual service 共同使用的时候，virtual service  决定将流量路由到逻辑地址，而 destination rules 则决定流量路由到物理地址。</p>
@@ -1109,7 +1157,7 @@
 <p>Least requests：请求被分配给服务最少被访问的实例</p>
 </blockquote>
 <hr>
-<h1 id="5-样例说明"><a href="#5-样例说明" class="headerlink" title="5 样例说明"></a>5 样例说明</h1><p>​    Istio 官方给出的 destination rule 样例如下：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586941984155387.png" alt="第二十三章 九析带你轻松完爆 Istio - destination rule 介绍_Istio 流量管理_03"></p>
+<h1 id="5-样例说明"><a href="#5-样例说明" class="headerlink" title="5 样例说明"></a>5 样例说明</h1><p>​    Istio 官方给出的 destination rule 样例如下：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586941984155387.png" alt="第二十三章 九析带你轻松完爆 Istio - destination rule 介绍_Istio 流量管理_03"></p>
 <p>​    上例 destination rule 中指定了 subsets，子集是根据 version 来定义。注意，这里 labels  内容可以自由定义，不一定非要是 version。其中的 trafficPolicy  就是流量路由到服务所有实例的策略（比如随机、轮询、按权重、最少访问等）。此外针对 v2 这个  subsets，它的路由策略比较特殊，它覆盖了默认的 RANDOM 方式，而是直接采用了 ROUND_ROBIN 方式。</p>
 
       
@@ -1140,7 +1188,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-destination-rule-%E5%AE%9E%E4%BE%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -1165,9 +1213,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 22:07:50 / 修改时间：22:08:37" itemprop="dateCreated datePublished" datetime="2021-09-11T22:07:50+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 22:07:50" itemprop="dateCreated datePublished" datetime="2021-09-11T22:07:50+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -1201,15 +1255,15 @@
 <p>7 验证 destination rule</p>
 <hr>
 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921192580920.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921192580920.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理"></p>
 <hr>
 <h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921199348308.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio destination r_02"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921199348308.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio destination r_02"></p>
 <hr>
 <h1 id="3-介绍"><a href="#3-介绍" class="headerlink" title="3 介绍"></a>3 介绍</h1><p>​    在上章节介绍了一个使用 Virtual Service 实现按权重（weight）分配流量的例子。整个过程如下架构图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921280361186.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 视频_03"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921280361186.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 视频_03"></p>
 <p>​    整个流控过程仅仅添加了一个 virtual service 就得以解决，有关 virtual service 的代码如下所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921289867471.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio virtual servi_04"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921289867471.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio virtual servi_04"></p>
 <p>​    但是上面这种方案在于调用方通过两层服务才能调用到最终的 Pod（比如：客户端需要通过 web-svc 和 nginx-svc 才能最终调用到 Nginx  Pod）。能不能仅仅只通过一层服务就能达到这样的效果呢？（即：只通过 web-svc）。答案是必须可以。</p>
 <hr>
 <h1 id="4-灰度"><a href="#4-灰度" class="headerlink" title="4 灰度"></a>4 灰度</h1><p>​    其实上面的样例非常山寨，导致根本就没有实际工作场景可以复制，仅仅只是为了展示独立 virtual service 功能。</p>
@@ -1217,7 +1271,7 @@
 <p>​    灰度，意味着做事并没有那么敞亮，比如，你想跟一个心仪的女子上演一幕东京爱情故事，你的做法大概是跟她暧昧、爱抚、亲吻、最后进行爱的鼓掌。整个过程的本质就是完成一次状态转移，即从孤军奋战式撸管状态转移到团队协作式鼓掌状态。</p>
 <p>​    灰度发布的过程跟上面的过程比较类似，都是亦步亦趋，循循善诱的过程。即：将版本 v1 的服务变更到版本 v2，但是却并不采用刚烈的极端做法。具体做法是先切 20% 流量给版本 v2，观察一阵子没啥异常事情发生，就再切  20% 流量，然后逐步切换剩下的其他流量，最终完成整个版本的替换以及所有用户流量的转移。</p>
 <hr>
-<h1 id="5-destination-rule-样例"><a href="#5-destination-rule-样例" class="headerlink" title="5 destination rule 样例"></a>5 destination rule 样例</h1><p>​    下面介绍使用 virtual service + destination rule 来实现灰度发布。有关 destination rule 的理论在下章节介绍。整个样例的架构图如下：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921312295542.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理_05"></p>
+<h1 id="5-destination-rule-样例"><a href="#5-destination-rule-样例" class="headerlink" title="5 destination rule 样例"></a>5 destination rule 样例</h1><p>​    下面介绍使用 virtual service + destination rule 来实现灰度发布。有关 destination rule 的理论在下章节介绍。整个样例的架构图如下：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921312295542.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理_05"></p>
 <p>​    样例所需要的资源文件介绍如下：</p>
 <blockquote>
 <p># 客户端，用来访问 httpd-v1 和 httpd-v2 的容器资源文件</p>
@@ -1231,11 +1285,11 @@
 <p># Istio destination rule，定义流量路由的资源文件</p>
 <p>jiuxi-dr.yaml</p>
 </blockquote>
-<h2 id="5-1-客户端资源文件"><a href="#5-1-客户端资源文件" class="headerlink" title="5.1 客户端资源文件"></a>5.1 客户端资源文件</h2><p>​    jiuxi-client.yaml:<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921328294728.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_06"></p>
-<h2 id="5-2-deployment-资源文件"><a href="#5-2-deployment-资源文件" class="headerlink" title="5.2 deployment 资源文件"></a>5.2 deployment 资源文件</h2><p>​    jiuxi-deploy.yaml：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921339777599.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理_07"></p>
-<h2 id="5-3-service-资源文件"><a href="#5-3-service-资源文件" class="headerlink" title="5.3 service 资源文件"></a>5.3 service 资源文件</h2><p>​    jiuxi-svc.yaml：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921348536422.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理_08"></p>
-<h2 id="5-4-Istio-virtual-service-资源文件"><a href="#5-4-Istio-virtual-service-资源文件" class="headerlink" title="5.4 Istio virtual service 资源文件"></a>5.4 Istio virtual service 资源文件</h2><p>​    jiuxi-vs.yaml:<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921359681595.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_09"></p>
-<h2 id="5-5-Istio-destination-rule-资源文件"><a href="#5-5-Istio-destination-rule-资源文件" class="headerlink" title="5.5 Istio destination rule 资源文件"></a>5.5 Istio destination rule 资源文件</h2><p>​    jiuxi-dr.yaml：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921368116463.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_10"></p>
+<h2 id="5-1-客户端资源文件"><a href="#5-1-客户端资源文件" class="headerlink" title="5.1 客户端资源文件"></a>5.1 客户端资源文件</h2><p>​    jiuxi-client.yaml:<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921328294728.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_06"></p>
+<h2 id="5-2-deployment-资源文件"><a href="#5-2-deployment-资源文件" class="headerlink" title="5.2 deployment 资源文件"></a>5.2 deployment 资源文件</h2><p>​    jiuxi-deploy.yaml：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921339777599.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理_07"></p>
+<h2 id="5-3-service-资源文件"><a href="#5-3-service-资源文件" class="headerlink" title="5.3 service 资源文件"></a>5.3 service 资源文件</h2><p>​    jiuxi-svc.yaml：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921348536422.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 流量管理_08"></p>
+<h2 id="5-4-Istio-virtual-service-资源文件"><a href="#5-4-Istio-virtual-service-资源文件" class="headerlink" title="5.4 Istio virtual service 资源文件"></a>5.4 Istio virtual service 资源文件</h2><p>​    jiuxi-vs.yaml:<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921359681595.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_09"></p>
+<h2 id="5-5-Istio-destination-rule-资源文件"><a href="#5-5-Istio-destination-rule-资源文件" class="headerlink" title="5.5 Istio destination rule 资源文件"></a>5.5 Istio destination rule 资源文件</h2><p>​    jiuxi-dr.yaml：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921368116463.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_10"></p>
 <hr>
 <h1 id="6-Istio-注入"><a href="#6-Istio-注入" class="headerlink" title="6 Istio 注入"></a>6 Istio 注入</h1><p>​    要使得 virtual service 和 destination rule 生效，必须要保证通讯双方都处于 Istio 服务网格之内，即：必须经过 Istio 的注入，执行语句如下：</p>
 <blockquote>
@@ -1243,7 +1297,7 @@
 <p>istioctl kube-inject -f jiuxi-deploy.yaml | kubectl apply -f -</p>
 </blockquote>
 <hr>
-<h1 id="7-验证-destination-rule"><a href="#7-验证-destination-rule" class="headerlink" title="7 验证 destination rule"></a>7 验证 destination rule</h1><p>​    登入 busybox client 容器，访问 jiuxi-svc，发现 dr 已经生效，截图如下：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586921382193476.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_11"></p>
+<h1 id="7-验证-destination-rule"><a href="#7-验证-destination-rule" class="headerlink" title="7 验证 destination rule"></a>7 验证 destination rule</h1><p>​    登入 busybox client 容器，访问 jiuxi-svc，发现 dr 已经生效，截图如下：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586921382193476.png" alt="第二十二章 九析带你轻松完爆 Istio - destination rule 实例_Istio 教程_11"></p>
 <p>​    自此，九析带你轻松完爆了 Istio destination rule 实例。</p>
 
       
@@ -1274,7 +1328,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-service-mesh-Istio-%E8%B7%AF%E7%94%B1%E8%A7%84%E5%88%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -1299,9 +1353,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 22:04:36 / 修改时间：22:05:20" itemprop="dateCreated datePublished" datetime="2021-09-11T22:04:36+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 22:04:36" itemprop="dateCreated datePublished" datetime="2021-09-11T22:04:36+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -1333,7 +1393,7 @@
 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>​    如果你对博客有任何疑问，请告诉我。</p>
 <hr>
 <h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>​    你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586422323756366.png" alt="第二十一章 九析带你轻松完爆 service mesh - Istio 路由规则_istio 视频"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586422323756366.png" alt="第二十一章 九析带你轻松完爆 service mesh - Istio 路由规则_istio 视频"></p>
 <hr>
 <h1 id="3-Routing-Rule-语法"><a href="#3-Routing-Rule-语法" class="headerlink" title="3 Routing Rule 语法"></a>3 Routing Rule 语法</h1><p>​    在上节中介绍了 Virtual Service 的概念，并运行了一个简单的样例，大家应该对 Virtual Service 有了一个大致的了解。</p>
 <p>​    Virutal Service 中最重要的概念就是路由规则（Routing Rule），注意跟 Istio traffic management 中的另外一个概念——目的地规则（Destination Rule）区分，前者是一个逻辑概念，而后者则跟 Virtual  Service 一样，是实际可以部署到 K8S 上的 Istio 资源。</p>
@@ -1346,14 +1406,14 @@
 </blockquote>
 <p>​    上面的例子提到了两个概念。一：匹配规则（或匹配条件）；二：路由目的地。这其实也就是这节介绍的主角 Routing Rule，Routing Rule 这两个单词就完美的包含了上面两个概念。</p>
 <p>下面再接着看代码，加深一下理解：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586422367807809.png" alt="第二十一章 九析带你轻松完爆 service mesh - Istio 路由规则_istio traffic manag_02"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586422367807809.png" alt="第二十一章 九析带你轻松完爆 service mesh - Istio 路由规则_istio traffic manag_02"></p>
 <p>​    语法简单解释如下，大意也就是匹配 XX 规则就路由到 OO，如果不匹配规则就路由到 SY（有点 if…else… 的味道）：</p>
 <blockquote>
 <p>match…route destination…/ route destination …</p>
 </blockquote>
 <p>​    当然这里有一点需要澄清，就是匹配条件并非强制，也就是说路由规则不一定非要有匹配项（match），仅有路由也是可以的。</p>
 <p>​    翻看第二十章运行本人设计的用例，执行命令和执行结果如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1586422376843726.png" alt="第二十一章 九析带你轻松完爆 service mesh - Istio 路由规则_istio traffic manag_03"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1586422376843726.png" alt="第二十一章 九析带你轻松完爆 service mesh - Istio 路由规则_istio traffic manag_03"></p>
 <hr>
 <h1 id="4-Routing-Rule-优先级"><a href="#4-Routing-Rule-优先级" class="headerlink" title="4 Routing Rule 优先级"></a>4 Routing Rule 优先级</h1><p>​    路由规则从上到下按顺序进行评估，其中 Virtual Service  定义的第一个路由规则具有最高优先级。当然这里建议在每个虚拟服务中提供默认的“无条件”或者基于权重（weight）的规则来作为最后一个规则，以确保到虚拟服务的流量始终具有至少一条匹配的路由。</p>
 <hr>

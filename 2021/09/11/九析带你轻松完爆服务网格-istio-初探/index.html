@@ -30,17 +30,17 @@
 <meta property="og:site_name" content="九析">
 <meta property="og:description" content="1 前言 2 istio 初探   2.1 手动注入 sidecar   2.2 自动注入 sidecar  1 前言​    如果你对博客有任何疑问，请加微信沟通：  ​    你可以从下面截图中获取免费的、更生动的视频资料，在 b 站搜索“九析”：   2 istio 初探​    上节九析带你轻松完爆了 istio 的安装。但是我相信安装成功的小伙伴依然云里雾里，因为看着一大坨 pod 在那">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584496625204864.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584496646484217.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163851179.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163908323.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163928463.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584496625204864.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584496646484217.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911163851179.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911163908323.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911163928463.png">
 <meta property="article:published_time" content="2021-09-11T08:40:16.000Z">
-<meta property="article:modified_time" content="2021-09-11T08:40:56.548Z">
+<meta property="article:modified_time" content="2022-07-16T14:49:27.049Z">
 <meta property="article:author" content="九析">
 <meta property="article:tag" content="istio">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584496625204864.png">
+<meta name="twitter:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584496625204864.png">
 
 
 <link rel="canonical" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-%E5%88%9D%E6%8E%A2/">
@@ -159,7 +159,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="九析"
-      src="/images/bb.jpg">
+      src="/images/bb.png">
   <p class="site-author-name" itemprop="name">九析</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -219,7 +219,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-%E5%88%9D%E6%8E%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -244,9 +244,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 16:40:16 / 修改时间：16:40:56" itemprop="dateCreated datePublished" datetime="2021-09-11T16:40:16+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 16:40:16" itemprop="dateCreated datePublished" datetime="2021-09-11T16:40:16+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -279,9 +285,9 @@
 <p>  2.2 自动注入 sidecar</p>
 <hr>
 <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问，请加微信沟通：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584496625204864.png" alt="第二章 九析带你轻松完爆服务网格 - istio 初探_服务网格"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584496625204864.png" alt="第二章 九析带你轻松完爆服务网格 - istio 初探_服务网格"></p>
 <p>​    你可以从下面截图中获取免费的、更生动的视频资料，在 b 站搜索“九析”：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1584496646484217.png" alt="第二章 九析带你轻松完爆服务网格 - istio 初探_服务网格_02"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1584496646484217.png" alt="第二章 九析带你轻松完爆服务网格 - istio 初探_服务网格_02"></p>
 <hr>
 <h2 id="2-istio-初探"><a href="#2-istio-初探" class="headerlink" title="2 istio 初探"></a>2 istio 初探</h2><p>​    上节九析带你轻松完爆了 istio 的安装。但是我相信安装成功的小伙伴依然云里雾里，因为看着一大坨 pod 在那里 running  着，似乎并没有产生任何作用。这节，九析就带你“莫畏浮云遮望眼，守得云开见月明”。为了预期效果，我们不妨先建立一个  deployment，内容如下：</p>
 <blockquote>
@@ -317,21 +323,21 @@
 <p>kubectl get pods -n jiuxi</p>
 </blockquote>
 <p>​    截图如下：需要注意 ready 这一列，内容为 1/1，表示的含义是 pod 内有一个容器，且该容器运行成功并处于就绪状态。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163851179.png" alt="image-20210911163851179"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911163851179.png" alt="image-20210911163851179"></p>
 <p>​    下面到了激动人心的时刻了，因为 istio 即将闪亮登场。</p>
 <h3 id="2-1-手动注入-sidecar"><a href="#2-1-手动注入-sidecar" class="headerlink" title="2.1 手动注入 sidecar"></a>2.1 手动注入 sidecar</h3><p>​    执行如下语句：</p>
 <blockquote>
 <p>kube-inject -f nginx-deployment.yaml | kubectl apply  -n jiuxi -f -</p>
 </blockquote>
 <p>​    命令执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163908323.png" alt="image-20210911163908323"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911163908323.png" alt="image-20210911163908323"></p>
 <p>​    此时你会发现一个奇怪的现象，nginx-deployment.yaml 并没修改，但是 ready 状态却变成了 2/2。根据上面的解释可知，现在 pod 内有两个容器，且这两个容器都运行成功并处于就绪状态。为什么多了一个容器呢？</p>
 <p>​    查看 pod 的详细信息：</p>
 <blockquote>
 <p>kubectl get pod -n jiuxi nginx-xxxx -o yaml # xxxx 根据自己实际情况填写</p>
 </blockquote>
 <p>​    如果你有类似 rancher 这样的 web 控制台，可以看得更仔细些，如下图所示。如果你还没有安装和配置 rancher，你可以参考哥的轻松完爆 rancher 系列进行安装，放心，容易到爆，容易到你尖叫。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911163928463.png" alt="image-20210911163928463"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911163928463.png" alt="image-20210911163928463"></p>
 <p>​    从上图可知。此时 nginx pod 内部一共有 3 个容器，一个初始化容器 istio-init 已经运行成功并结束了，一个就是 nginx  本尊，另外一个就是本文的主角 istio-proxy 了，它就是 sidecar，作用跟鸡你太美的经纪人的作用差不多，负责跟外部打交道用的。</p>
 <p>​    此时此刻，你已经为 pod 手工织入了 istio。但是这样似乎有点不够爽。因为每建立一个 pod 都撸这么一管，感觉有点累，有没有批量或者更自然的方式呢？</p>
 <h3 id="2-2-命名空间注入-sidecar"><a href="#2-2-命名空间注入-sidecar" class="headerlink" title="2.2 命名空间注入 sidecar"></a>2.2 命名空间注入 sidecar</h3><p>​    现在我们删除掉刚才创建的 nginx：</p>

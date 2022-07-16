@@ -30,26 +30,26 @@
 <meta property="og:site_name" content="九析">
 <meta property="og:description" content="1 前言 2 bookinfo 架构介绍 3 bookinfo 配置与部署   3.1 配置 istio 自动注入   3.2 部署 bookinfo 应用   3.3 验证 bookinfo 部署情况 4 设置 bookinfo 网关   4.1 定义 bookinfo 入口网关   4.2 确认网关已创建 5 访问 bookinfo 应用   5.1 获取 INGRESS_HOST   5.2">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164235979.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164302523.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164323375.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164338022.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164350324.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164402895.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164416004.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164429965.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164445960.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164506614.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164538736.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164551497.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164605008.png">
-<meta property="og:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164619983.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164235979.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164302523.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164323375.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164338022.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164350324.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164402895.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164416004.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164429965.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164445960.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164506614.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164538736.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164551497.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164605008.png">
+<meta property="og:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164619983.png">
 <meta property="article:published_time" content="2021-09-11T08:48:23.000Z">
-<meta property="article:modified_time" content="2021-09-11T08:50:42.078Z">
+<meta property="article:modified_time" content="2022-07-16T14:49:27.052Z">
 <meta property="article:author" content="九析">
 <meta property="article:tag" content="istio">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164235979.png">
+<meta name="twitter:image" content="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164235979.png">
 
 
 <link rel="canonical" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-Bookinfo-%E5%BA%94%E7%94%A8/">
@@ -168,7 +168,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="九析"
-      src="/images/bb.jpg">
+      src="/images/bb.png">
   <p class="site-author-name" itemprop="name">九析</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -228,7 +228,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC-istio-Bookinfo-%E5%BA%94%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -253,9 +253,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-11 16:48:23 / 修改时间：16:50:42" itemprop="dateCreated datePublished" datetime="2021-09-11T16:48:23+08:00">2021-09-11</time>
+      <time title="创建时间：2021-09-11 16:48:23" itemprop="dateCreated datePublished" datetime="2021-09-11T16:48:23+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -300,11 +306,11 @@
 <p>7 总结</p>
 <hr>
 <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>​    如果你对博客有任何疑问或者想更深入学习 istio，请加微信群，我们一起进步：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164235979.png" alt="image-20210911164235979"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164235979.png" alt="image-20210911164235979"></p>
 <hr>
 <h2 id="2-bookinfo-架构介绍"><a href="#2-bookinfo-架构介绍" class="headerlink" title="2 bookinfo 架构介绍"></a>2 bookinfo 架构介绍</h2><p>​    bookinfo 是 istio 的学习样例，通过 bookinfo 你可以对 istio 提供的路由、遥测等功能有更加深入的理解。</p>
 <p>​    下图是 bookinfo 在没有嵌入 istio 前的物理架构图：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164302523.png" alt="image-20210911164302523"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164302523.png" alt="image-20210911164302523"></p>
 <p>​    bookinfo 是一个在线书店应用，该应用由 4 个微服务组成，分别为 Product page、Reviews、Details 和 Ratings。为了表现 istio 的无侵入性，这 4 个微服务分别由 python、java、ruby 和 node 开发。下面分别说明如下：</p>
 <blockquote>
 <p>Product page：聚合服务，内容由 Reviews 和 Details 内容聚合而成</p>
@@ -313,7 +319,7 @@
 <p>Ratings：图书预订排名服务</p>
 </blockquote>
 <p>​    下图是 bookinfo 嵌入 istio 后的物理架构图：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164323375.png" alt="image-20210911164323375"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164323375.png" alt="image-20210911164323375"></p>
 <p>​    该架构图演示了嵌入 istio 后 bookinfo 的每个微服务都会新增一个 Envoy，这个 Envoy 就是所谓的  sidecar，它会接管跟它配对的微服务的所有网络进、出口流量。其实  Envoy（sidecar）的作用就像你的手机，它正在逐渐把你变成哑巴、聋子和植物人，它承接了你所有的信息入口和出口，某些别有用心的人和组织通过对手机进行监控、遥测、路由等控制，起到控制你的思维、舆论导向、审美爱好等目的。</p>
 <hr>
 <h2 id="3-bookinfo-配置与部署"><a href="#3-bookinfo-配置与部署" class="headerlink" title="3 bookinfo 配置与部署"></a>3 bookinfo 配置与部署</h2><h3 id="3-1-配置-istio-自动注入"><a href="#3-1-配置-istio-自动注入" class="headerlink" title="3.1 配置 istio 自动注入"></a>3.1 配置 istio 自动注入</h3><p>​    因为 bookinfo 会启动多个 pod，每次手动注入 sidecar 会特别繁琐，因此我们使用批注入的方式。如果你对 sidecar 注入不了解，请参考本人的<a target="_blank" rel="noopener" href="https://blog.51cto.com/14625168/2474271"> 上篇</a>博客。</p>
@@ -323,31 +329,31 @@
 <p>kubectl get ns jiuxi –show-labels</p>
 </blockquote>
 <p>​    命令操作成功后截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164338022.png" alt="image-20210911164338022"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164338022.png" alt="image-20210911164338022"></p>
 <h3 id="3-2-部署-bookinfo-应用"><a href="#3-2-部署-bookinfo-应用" class="headerlink" title="3.2 部署 bookinfo 应用"></a>3.2 部署 bookinfo 应用</h3><p>​    在命名空间 jiuxi 中部署了 bookinfo 应用：</p>
 <blockquote>
 <p>kubectl apply -f bookinfo/platform/kube/bookinfo.yaml -n jiuxi</p>
 </blockquote>
 <p>​    部署过程截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164350324.png" alt="image-20210911164350324"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164350324.png" alt="image-20210911164350324"></p>
 <p>​    执行如下命令查看 bookinfo 的 service 列表：</p>
 <blockquote>
 <p>kubectl get svc -n jiuxi</p>
 </blockquote>
 <p>​    服务列表截图如下：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164402895.png" alt="image-20210911164402895"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164402895.png" alt="image-20210911164402895"></p>
 <p>​    执行如下命令查看 bookinfo 的 pod 列表：</p>
 <blockquote>
 <p>kubectl get pod -n jiuxi</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164416004.png" alt="image-20210911164416004"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164416004.png" alt="image-20210911164416004"></p>
 <h3 id="3-3-验证-bookinfo-部署情况"><a href="#3-3-验证-bookinfo-部署情况" class="headerlink" title="3.3 验证 bookinfo 部署情况"></a>3.3 验证 bookinfo 部署情况</h3><p>​    在服务列表中寻找 productpage 服务，然后使用 curl 命令验证服务是否发布成功。</p>
 <blockquote>
 <p>kubectl get svc -n jiuxi</p>
 <p>curl <a target="_blank" rel="noopener" href="http://svc_cluster_ip:9080/">http://SVC_CLUSTER_IP:9080</a> | grep -o “<title>.*</title>“</p>
 </blockquote>
 <p>​    执行成功的结果如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164429965.png" alt="image-20210911164429965"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164429965.png" alt="image-20210911164429965"></p>
 <p>​    自此，整个 bookinfo 应用就已经成功部署了。</p>
 <hr>
 <h2 id="4-设置-bookinfo-网关"><a href="#4-设置-bookinfo-网关" class="headerlink" title="4 设置 bookinfo 网关"></a>4 设置 bookinfo 网关</h2><p>​    上面的步骤已经可以让你访问到 bookinfo 应用了。但是我知道有些同学依旧觉得寒碜，因为很多人还是通过浏览器来看世界的。</p>
@@ -358,7 +364,7 @@
 <h3 id="4-2-确认网关已创建"><a href="#4-2-确认网关已创建" class="headerlink" title="4.2 确认网关已创建"></a>4.2 确认网关已创建</h3><blockquote>
 <p>kubectl get gateways.networking.istio.io -n jiuxi</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164445960.png" alt="image-20210911164445960"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164445960.png" alt="image-20210911164445960"></p>
 <hr>
 <h2 id="5-访问-bookinfo-应用"><a href="#5-访问-bookinfo-应用" class="headerlink" title="5 访问 bookinfo 应用"></a>5 访问 bookinfo 应用</h2><h3 id="5-1-获取-INGRESS-HOST"><a href="#5-1-获取-INGRESS-HOST" class="headerlink" title="5.1 获取 INGRESS_HOST"></a>5.1 获取 INGRESS_HOST</h3><blockquote>
 <p>kubectl get po -l istio=ingressgateway -n istio-system -o jsonpath=’{.items[0].status.hostIP}’</p>
@@ -367,20 +373,20 @@
 <p>kubectl -n istio-system get service istio-ingressgateway -o jsonpath=’{.spec.ports[?(@.name==”http2”)].nodePort}’</p>
 </blockquote>
 <h3 id="5-3-通过浏览器访问-bookinfo-应用"><a href="#5-3-通过浏览器访问-bookinfo-应用" class="headerlink" title="5.3 通过浏览器访问 bookinfo 应用"></a>5.3 通过浏览器访问 bookinfo 应用</h3><p>​    根据 5.1 和 5.2 获取到 host 和 port 信息，如下截图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164506614.png" alt="image-20210911164506614"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164506614.png" alt="image-20210911164506614"></p>
 <p>​    根据此 host 和 port，打开浏览器进行访问：</p>
 <p>​    多刷新几次页面，你会发现 bookinfo 应用使用到的多个 reviews 版本，如下所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164538736.png" alt="image-20210911164538736"></p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164551497.png" alt="image-20210911164551497"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164538736.png" alt="image-20210911164538736"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164551497.png" alt="image-20210911164551497"></p>
 <p>​    正好可以对应到 pod 信息：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164605008.png" alt="image-20210911164605009"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164605008.png" alt="image-20210911164605009"></p>
 <hr>
 <h2 id="6-卸载-bookinfo-应用"><a href="#6-卸载-bookinfo-应用" class="headerlink" title="6 卸载 bookinfo 应用"></a>6 卸载 bookinfo 应用</h2><p>​    你已经创建了 bookinfo，有了创建的快感。也许你有点怅然若失，因为你觉得你的技术人生不够圆满，你想亲身完爆你创建的一切，那么还等什么，执行下面的语句吧：</p>
 <blockquote>
 <p>./istio-1.4.5/samples/bookinfo/platform/kube/cleanup.sh</p>
 </blockquote>
 <p>​    命令执行成功后，会显示如下截图：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210911164619983.png" alt="image-20210911164619983"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210911164619983.png" alt="image-20210911164619983"></p>
 <h3 id="6-1-验证卸载"><a href="#6-1-验证卸载" class="headerlink" title="6.1 验证卸载"></a>6.1 验证卸载</h3><p>​    执行如下命令验证你是否成功卸载：</p>
 <blockquote>
 <p>kubectl get virtualservices.networking.istio.io -n jiuxi</p>

@@ -147,7 +147,7 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="九析"
-      src="/images/bb.jpg">
+      src="/images/bb.png">
   <p class="site-author-name" itemprop="name">九析</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -206,7 +206,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E7%8E%A9%E8%BD%AC-linux-%E8%87%AA%E5%BB%BA-DNS-%E6%9C%8D%E5%8A%A1%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -231,9 +231,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-12 21:00:05 / 修改时间：21:00:52" itemprop="dateCreated datePublished" datetime="2021-09-12T21:00:05+08:00">2021-09-12</time>
+      <time title="创建时间：2021-09-12 21:00:05" itemprop="dateCreated datePublished" datetime="2021-09-12T21:00:05+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -280,7 +286,7 @@
 <h1 id="2-DNS-服务器配置"><a href="#2-DNS-服务器配置" class="headerlink" title="2 DNS 服务器配置"></a>2 DNS 服务器配置</h1><h2 id="2-1-DNS-服务器启动"><a href="#2-1-DNS-服务器启动" class="headerlink" title="2.1 DNS 服务器启动"></a>2.1 DNS 服务器启动</h2><blockquote>
 <p>yum enable named &amp;&amp; yum start named</p>
 </blockquote>
-<h2 id="2-2-DNS-服务器状态查看"><a href="#2-2-DNS-服务器状态查看" class="headerlink" title="2.2 DNS 服务器状态查看"></a>2.2 DNS 服务器状态查看</h2><p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912205518770.png" alt="image-20210912205518770"></p>
+<h2 id="2-2-DNS-服务器状态查看"><a href="#2-2-DNS-服务器状态查看" class="headerlink" title="2.2 DNS 服务器状态查看"></a>2.2 DNS 服务器状态查看</h2><p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912205518770.png" alt="image-20210912205518770"></p>
 <h2 id="2-3-DNS-服务器配置"><a href="#2-3-DNS-服务器配置" class="headerlink" title="2.3 DNS 服务器配置"></a>2.3 DNS 服务器配置</h2><p>&emsp;&emsp;DNS 主要配置文件为：</p>
 <blockquote>
 <p>1） /etc/named.conf         # 主配置文件</p>
@@ -415,7 +421,7 @@
 <p>named-checkconf</p>
 <p>named-checkzone nexus.com /var/named/nexus.com.zone</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912205543870.png" alt="image-20210912205543870"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912205543870.png" alt="image-20210912205543870"></p>
 <h2 id="2-6-DNS-服务器配置文件权限修改"><a href="#2-6-DNS-服务器配置文件权限修改" class="headerlink" title="2.6 DNS 服务器配置文件权限修改"></a>2.6 DNS 服务器配置文件权限修改</h2><blockquote>
 <p>chmod 777 /etc/named.conf</p>
 <p>chmod 777 /etc/named.rfc1912.zones</p>
@@ -426,7 +432,7 @@
 <h2 id="2-8-查看-DNS-服务器启动状态"><a href="#2-8-查看-DNS-服务器启动状态" class="headerlink" title="2.8 查看 DNS 服务器启动状态"></a>2.8 查看 DNS 服务器启动状态</h2><blockquote>
 <p>systemctl status named</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912205600707.png" alt="image-20210912205600707"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912205600707.png" alt="image-20210912205600707"></p>
 <h2 id="2-9-关闭服务器防火墙"><a href="#2-9-关闭服务器防火墙" class="headerlink" title="2.9 关闭服务器防火墙"></a>2.9 关闭服务器防火墙</h2><blockquote>
 <p>systemctl stop firewalld</p>
 </blockquote>
@@ -451,26 +457,26 @@
 </blockquote>
 <hr>
 <h1 id="4-DNS-windows-客户端配置"><a href="#4-DNS-windows-客户端配置" class="headerlink" title="4 DNS windows 客户端配置"></a>4 DNS windows 客户端配置</h1><h2 id="4-1-设置-windows-客户端"><a href="#4-1-设置-windows-客户端" class="headerlink" title="4.1 设置 windows 客户端"></a>4.1 设置 windows 客户端</h2><p>&emsp;&emsp;打开“运行”，输入 “ncpa.cpl” ：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912205624934.png" alt="image-20210912205624934"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912205624934.png" alt="image-20210912205624934"></p>
 <p>&emsp;&emsp;选择你当前使用的网络连接：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912205648841.png" alt="image-20210912205648841"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912205648841.png" alt="image-20210912205648841"></p>
 <p>&emsp;&emsp;选择 TCP/IPv4 协议：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912205704614.png" alt="image-20210912205704614"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912205704614.png" alt="image-20210912205704614"></p>
 <p>&emsp;&emsp;填写 DNS 配置信息。注意，将自定义 DNS 设为“首选”：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912205719847.png" alt="image-20210912205719847"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912205719847.png" alt="image-20210912205719847"></p>
 <p>&emsp;&emsp;选择“高级” 标签，在弹出选框中选中 “WINS” 标签页，禁用 NetBIOS：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912205739475.png" alt="image-20210912205739475"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912205739475.png" alt="image-20210912205739475"></p>
 <h2 id="4-2-验证-windows-客户端"><a href="#4-2-验证-windows-客户端" class="headerlink" title="4.2 验证 windows 客户端"></a>4.2 验证 windows 客户端</h2><p>&emsp;&emsp;打开控制台：</p>
 <blockquote>
 <p>ipconfig/flushdns</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912205756666.png" alt="image-20210912205756666"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912205756666.png" alt="image-20210912205756666"></p>
 <p>&emsp;&emsp;验证 win 客户端：</p>
 <blockquote>
 <p>nslookup jiuxi.nexus.com</p>
 <p>ping jiuxi.nexus.com</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912205812599.png" alt="image-20210912205812599"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912205812599.png" alt="image-20210912205812599"></p>
 <p>&emsp;&emsp;自此，整个自建 DNS 完成。</p>
 
       
@@ -501,7 +507,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E5%A4%84%E7%90%86-zombie-defunct-%E8%BF%9B%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -526,9 +532,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-12 20:53:40 / 修改时间：20:54:21" itemprop="dateCreated datePublished" datetime="2021-09-12T20:53:40+08:00">2021-09-12</time>
+      <time title="创建时间：2021-09-12 20:53:40" itemprop="dateCreated datePublished" datetime="2021-09-12T20:53:40+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -569,7 +581,7 @@
 </blockquote>
 <hr>
 <h1 id="2-僵尸进程"><a href="#2-僵尸进程" class="headerlink" title="2 僵尸进程"></a>2 僵尸进程</h1><h2 id="2-1-进程简介"><a href="#2-1-进程简介" class="headerlink" title="2.1 进程简介"></a>2.1 进程简介</h2><p>&emsp;&emsp;在 linux 中，父进程通过 fork 调用创建子进程。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912205225426.png" alt="image-20210912205225426"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912205225426.png" alt="image-20210912205225426"></p>
 <p>&emsp;&emsp;子进程执行完毕之后，内核会释放该子进程所占用的资源，包括打开的文件，占用的内存等，但仍然会在进程表中保留一个槽位（slot）存放该子进程的文件描述符（比如进程PID、进程退出状态、进程运行时间等），直到父进程发送 wait() 或 waitpid() 调用，内核才会把子进程文件描述符从进程表中彻底清除。如果父进程不调用 wait() 或  waitpid()对子进程进行清理，那子进程将处于僵尸状态。</p>
 <p>&emsp;&emsp;但是如果父进程先于子进程结束的话，会导致子进程变成僵尸进程吗？答案是不会。因为每当进程结束的时候，系统都会扫描当前所有运行的进程，查找是否有这个结束进程的子进程，如果有，就由 init 进程（或者 systemd 进程）来接管子进程，成为子进程的新父进程，并自动 wait  这个子进程，确保以后该子进程不会变成僵尸进程。</p>
 <h2 id="2-2-僵尸进程例子"><a href="#2-2-僵尸进程例子" class="headerlink" title="2.2 僵尸进程例子"></a>2.2 僵尸进程例子</h2><p>&emsp;&emsp;下面展示一个 c 语言编写的僵尸进程样例，样例中主进程并不会 wait 子进程，生成文件 zombie.c：</p>
@@ -602,12 +614,12 @@
 <p>gcc zombie.c -o zombie</p>
 <p>./ zombie</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912205239556.png" alt="image-20210912205239556"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912205239556.png" alt="image-20210912205239556"></p>
 <p>&emsp;&emsp;上图中主进程 PID：11552，子进程 PID：11553。执行如下语句：发现 PID 为 11553 的子进程正好处于僵尸状态（defunct），由程序可知，因为主进程并没有 wait 子进程。</p>
 <blockquote>
 <p>ps aux | grep -i defunct</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912205249036.png" alt="image-20210912205249036"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912205249036.png" alt="image-20210912205249036"></p>
 <p>&emsp;&emsp;分析一下 zombie.c，特别注意 fork() 调用，在 pid_t pid = fork()  语句之前，只有一个进程，但是执行到这条语句之后，就变成2个进程了，这2个进程几乎完全相同，将要执行的下一条语句都是 if ( pid &lt; 0 )。</p>
 <p>&emsp;&emsp;fork() 函数比较特殊，它被调用一次，却能够返回两次结果，它的返回值也根据进程的不同而不同：</p>
 <blockquote>
@@ -671,7 +683,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Vagrant/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -696,9 +708,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-12 20:48:29 / 修改时间：20:50:25" itemprop="dateCreated datePublished" datetime="2021-09-12T20:48:29+08:00">2021-09-12</time>
+      <time title="创建时间：2021-09-12 20:48:29" itemprop="dateCreated datePublished" datetime="2021-09-12T20:48:29+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -757,34 +775,34 @@
 <p>sudo vagrant up</p>
 </blockquote>
 <p>&emsp;&emsp;启动过程有2个环节：检查本地是否有 centos7 的镜像，如果没有，则在线下载；如果有，则直接启动运行。当然很多情况下，第一次的经验都不会特别愉悦，vagrant  也不例外，毕竟下载个操作系统镜像真不是分分钟的事情。所以你唯一能做的就是等待，你可以去打个球、约个会什么的，应该不会有啥影响。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912204630822.png" alt="image-20210912204630822"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912204630822.png" alt="image-20210912204630822"></p>
 <hr>
 <h1 id="6-vagrant-登录虚拟机"><a href="#6-vagrant-登录虚拟机" class="headerlink" title="6 vagrant 登录虚拟机"></a>6 vagrant 登录虚拟机</h1><p>&emsp;&emsp;启动完虚拟机，你就可以愉快地登录它，感受它，搓揉它了。是不是很兴奋，很想尖叫？</p>
 <blockquote>
 <p>sudo vagrant ssh</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912204659101.png" alt="image-20210912204659101"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912204659101.png" alt="image-20210912204659101"></p>
 <hr>
 <h1 id="7-vagrant-logout-虚拟机"><a href="#7-vagrant-logout-虚拟机" class="headerlink" title="7 vagrant logout 虚拟机"></a>7 vagrant logout 虚拟机</h1><p>&emsp;&emsp;如果你只是想暂时 logout，而不是关闭虚拟机的话，只需要在 centos7 命令行下输入 <strong>exit</strong> 即可。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912204723705.png" alt="image-20210912204723705"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912204723705.png" alt="image-20210912204723705"></p>
 <hr>
 <h1 id="8-vagrant-查看状态"><a href="#8-vagrant-查看状态" class="headerlink" title="8 vagrant 查看状态"></a>8 vagrant 查看状态</h1><p>&emsp;&emsp;当你 logout 出虚拟机时，可以通过如下命令查看当前虚拟机的运行状态。</p>
 <blockquote>
 <p>sudo vagrant status</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912204735344.png" alt="image-20210912204735344"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912204735344.png" alt="image-20210912204735344"></p>
 <hr>
 <h1 id="9-vagrant-停止虚拟机"><a href="#9-vagrant-停止虚拟机" class="headerlink" title="9 vagrant 停止虚拟机"></a>9 vagrant 停止虚拟机</h1><p>&emsp;&emsp;可以使用 halt 命令来停止虚拟机。</p>
 <blockquote>
 <p>sudo vagrant halt</p>
 </blockquote>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912204747168.png" alt="image-20210912204747168"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912204747168.png" alt="image-20210912204747168"></p>
 <hr>
 <h1 id="10-vagrant-卸载虚拟机"><a href="#10-vagrant-卸载虚拟机" class="headerlink" title="10 vagrant 卸载虚拟机"></a>10 vagrant 卸载虚拟机</h1><blockquote>
 <p>sudo vagrant destroy</p>
 </blockquote>
 <p>&emsp;&emsp;别担心，这里只是删除了虚拟机而已，并没有删除掉你辛苦下载下来的 centos 镜像。所以尽情地试验吧。对待技术，就是要猛操啊。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/image-20210912204759346.png" alt="image-20210912204759346"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/image-20210912204759346.png" alt="image-20210912204759346"></p>
 <hr>
 <h1 id="11-vagrant-文件"><a href="#11-vagrant-文件" class="headerlink" title="11 vagrant 文件"></a>11 vagrant 文件</h1><p>&emsp;&emsp;vagrant 运行主要是依靠 Vagrant 文件。该文件就是 vagrant 的清单配置文件。它就像是 vagrant 的引擎，没有它，vagrant 将一事无成。<a target="_blank" rel="noopener" href="https://app.vagrantup.com/"> vagrant cloud</a> 网站维护了很多清单配置文件。你可以根据自己的需要寻找自己心仪的环境。</p>
 <hr>
@@ -819,7 +837,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -844,9 +862,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-12 15:02:19 / 修改时间：15:02:55" itemprop="dateCreated datePublished" datetime="2021-09-12T15:02:19+08:00">2021-09-12</time>
+      <time title="创建时间：2021-09-12 15:02:19" itemprop="dateCreated datePublished" datetime="2021-09-12T15:02:19+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -871,12 +895,12 @@
 <p>3 概述</p>
 <hr>
 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592970103347634.png" alt="第四十五章 九析带你轻松完爆 Istio - Envoy 架构概述_envoy 视频"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592970103347634.png" alt="第四十五章 九析带你轻松完爆 Istio - Envoy 架构概述_envoy 视频"></p>
 <hr>
-<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592970111662295.png" alt="第四十五章 九析带你轻松完爆 Istio - Envoy 架构概述_istio 视频_02"></p>
+<h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：<img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592970111662295.png" alt="第四十五章 九析带你轻松完爆 Istio - Envoy 架构概述_istio 视频_02"></p>
 <hr>
 <h1 id="3-Envoy-架构概述"><a href="#3-Envoy-架构概述" class="headerlink" title="3 Envoy 架构概述"></a>3 Envoy 架构概述</h1><p>&emsp;&emsp;下图展示了 Envoy 架构：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592970136404676.png" alt="第四十五章 九析带你轻松完爆 Istio - Envoy 架构概述_envoy 视频_03"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592970136404676.png" alt="第四十五章 九析带你轻松完爆 Istio - Envoy 架构概述_envoy 视频_03"></p>
 <p>&emsp;&emsp;后面将根据这十个方面一一进行说明。</p>
 
       
@@ -907,7 +931,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%9B%91%E5%90%AC%E5%99%A8%E7%AE%80%E4%BB%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -932,9 +956,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-12 14:57:40 / 修改时间：14:58:49" itemprop="dateCreated datePublished" datetime="2021-09-12T14:57:40+08:00">2021-09-12</time>
+      <time title="创建时间：2021-09-12 14:57:40" itemprop="dateCreated datePublished" datetime="2021-09-12T14:57:40+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -962,21 +992,21 @@
 <p>  4.2 UDP 监听器</p>
 <hr>
 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661295647236.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 监听器"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593661295647236.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 监听器"></p>
 <hr>
 <h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661302961492.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Istio 视频_02"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593661302961492.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Istio 视频_02"></p>
 <hr>
 <h1 id="3-上章总结"><a href="#3-上章总结" class="headerlink" title="3 上章总结"></a>3 上章总结</h1><p>&emsp;&emsp;上节介绍了 Envoy 的基础配置信息，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661310554278.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 视频_03"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593661310554278.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 视频_03"></p>
 <p>&emsp;&emsp;上面配置信息重点介绍了两块内容，管理信息（admin 部分）和静态配置信息（static_resources 部分）。管理信息包括 Envoy 的 web 管理控制台。在用 Docker  运行时可对外开放 9901 端口（并对所有客户端可见，即 address 为 0.0.0.0）。关于如何运行 Envoy  可参考我上一篇文章，轻松完爆就是。运行后的结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661537504319.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 视频_04"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593661537504319.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 视频_04"></p>
 <p>&emsp;&emsp;从上图可知，对外服务端口 9901 已经开启。打开浏览器访问，如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661545300104.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_k8s 视频_05"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593661545300104.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_k8s 视频_05"></p>
 <p>&emsp;&emsp;静态配置信息主要包括两部分内容，分别是监听器（listener，今天介绍的主角）和集群（cluster），如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661365273203.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 监听器_06"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593661365273203.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 监听器_06"></p>
 <p>&emsp;&emsp;   listener 是 Envoy 对外提供的监听端口，默认 10000。客户端通过此端口可以与 Envoy  建立通讯，获取连接（connection）。此外，在监听器上还可设置过滤器链（filter_chains），链上设置多过滤器，这样的设置可保证对进入 Envoy 的网络流量（请求）进行相应的处理，比如：上图就设置了http 过滤器，即：进入 Envoy 的所有 http  网络流量，都将被路由到集群（clusters）配置中，在集群（clusters）配置了 http 网络流量最终流向端点（endpoints，即  baidu.com）。整个过程如图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593661577790290.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 教程_07"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593661577790290.png" alt="第四十九章 九析带你轻松完爆 Istio - Envoy 监听器简介_Envoy 教程_07"></p>
 <hr>
 <h1 id="4-监听器"><a href="#4-监听器" class="headerlink" title="4 监听器"></a>4 监听器</h1><p>&emsp;&emsp;Envoy 配置在单个进程中支持任意数量的监听器（listener）。Envoy 支持 TCP 和 UDP 的监听器。</p>
 <h2 id="4-1-TCP-监听器"><a href="#4-1-TCP-监听器" class="headerlink" title="4.1 TCP 监听器"></a>4.1 TCP 监听器</h2><p>&emsp;&emsp;监听器上可以配置一系列的过滤器构成的链，并且根据匹配条件来选择某个链。单个过滤器链由一个或多个 L3 / L4 过滤器组成。当监听器上收到连接时，将选择匹配的过滤器链，实例化本地过滤器，并开始处理后续事件。这样通用的监听器体系架构设计使得 Envoy 可以执行绝大多数的代理任务（比如，速率限制、TLS 客户端身份认证、HTTP 连接管理、MongoDB 嗅探、原始 TCP  代理）等。</p>
@@ -1014,7 +1044,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%B8%80%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -1039,9 +1069,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-12 14:54:46 / 修改时间：14:55:29" itemprop="dateCreated datePublished" datetime="2021-09-12T14:54:46+08:00">2021-09-12</time>
+      <time title="创建时间：2021-09-12 14:54:46" itemprop="dateCreated datePublished" datetime="2021-09-12T14:54:46+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -1075,10 +1111,10 @@
 <p>  8.4 访问新 Envoy 容器</p>
 <hr>
 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504118517590.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Envoy 教程"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593504118517590.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Envoy 教程"></p>
 <hr>
 <h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504125131340.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Istio 视频_02"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593504125131340.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Istio 视频_02"></p>
 <hr>
 <h1 id="3-简介"><a href="#3-简介" class="headerlink" title="3 简介"></a>3 简介</h1><p>&emsp;&emsp;本小节使你快速上手 Envoy。在使用 Envoy 前，首先需要下载并运行它。有两种方式获取 Envoy：下载编译好的二进制包；直接下载 Envoy 的学习镜像。本文使用后者。</p>
 <hr>
@@ -1087,21 +1123,21 @@
 <p>docker pull envoyproxy/envoy-dev:89d6c6c6fa202aa7a01e85d2d887b56c8a3268ad</p>
 </blockquote>
 <p>&emsp;&emsp;下载成功后的截图如下所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504133206795.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Envoy 教程_03"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593504133206795.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Envoy 教程_03"></p>
 <hr>
 <h1 id="5-Envoy-运行"><a href="#5-Envoy-运行" class="headerlink" title="5 Envoy 运行"></a>5 Envoy 运行</h1><p>&emsp;&emsp;使用如下语句运行 Envoy 学习镜像：</p>
 <blockquote>
 <p>docker run –rm -d -p 10000:10000 envoyproxy/envoy-dev:89d6c6c6fa202aa7a01e85d2d887b56c8a3268ad</p>
 </blockquote>
 <p>&emsp;&emsp;上述命令会对外开启 Envoy 监听器，监听器端口为 10000。Envoy 容器启动成功后，可以执行如下命令查看 envoy 对外暴露的端口：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504197389764.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Istio 视频_04"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593504197389764.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Istio 视频_04"></p>
 <hr>
 <h1 id="6-Envoy-访问"><a href="#6-Envoy-访问" class="headerlink" title="6 Envoy 访问"></a>6 Envoy 访问</h1><p>&emsp;&emsp;使用如下语句来访问 Envoy 容器提供的 http 路由服务：</p>
 <blockquote>
 <p>curl -v <a target="_blank" rel="noopener" href="http://localhost:10000/"> http://localhost:10000</a></p>
 </blockquote>
 <p>&emsp;&emsp;执行结果一般会出错，结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504205343342.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_k8s 视频_05"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593504205343342.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_k8s 视频_05"></p>
 <p>&emsp;&emsp;出错的原因是官方提供的 Envoy 学习镜像是将所有对该 Envoy 的 http 请求路由到美国一个知名的搜索引擎网站去，而这个网站你们都知道，但是一般情况下却都访问不了。</p>
 <p>&emsp;&emsp;为了操作成功，需要做一定的调整，经过简单调整，你也可以对 Envoy 有比较深入的了解。</p>
 <hr>
@@ -1114,9 +1150,9 @@
 <p>ps -ef</p>
 </blockquote>
 <p>&emsp;&emsp;执行结果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504215202328.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_k8s 视频_06"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593504215202328.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_k8s 视频_06"></p>
 <p>&emsp;&emsp;由上图可知 Envoy 启动时的配置文件 envoy.yaml，查看该文件内容如下所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504223604962.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Envoy start_07"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593504223604962.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Envoy start_07"></p>
 <p>&emsp;&emsp;从上图中，我们可以看到基本 Envoy 配置包括两部分内容：</p>
 <blockquote>
 <p>admin：管理信息。配置管理服务器</p>
@@ -1139,7 +1175,7 @@
 <p>sni: <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a>        # 55行</p>
 </blockquote>
 <p>&emsp;&emsp;修改内容如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504236339192.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Envoy 视频_08"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593504236339192.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_Envoy 视频_08"></p>
 <h2 id="8-2-创建新-Envoy-镜像"><a href="#8-2-创建新-Envoy-镜像" class="headerlink" title="8.2 创建新 Envoy 镜像"></a>8.2 创建新 Envoy 镜像</h2><p>&emsp;&emsp;首先编写 Dockerfile 文件，内容如下 ：</p>
 <blockquote>
 <p>FROM envoyproxy/envoy-dev:89d6c6c6fa202aa7a01e85d2d887b56c8a3268ad</p>
@@ -1162,7 +1198,7 @@
 <p>curl <a target="_blank" rel="noopener" href="http://localhost:10000/"> http://localhost:10000</a></p>
 </blockquote>
 <p>&emsp;&emsp;执行效果如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593504248859976.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_k8s 视频_09"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593504248859976.png" alt="第四十八章 九析带你轻松完爆 Istio - Envoy 一分钟上手_k8s 视频_09"></p>
 
       
     </div>
@@ -1192,7 +1228,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -1217,9 +1253,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-12 14:50:50 / 修改时间：14:51:38" itemprop="dateCreated datePublished" datetime="2021-09-12T14:50:50+08:00">2021-09-12</time>
+      <time title="创建时间：2021-09-12 14:50:50" itemprop="dateCreated datePublished" datetime="2021-09-12T14:50:50+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -1245,13 +1287,13 @@
 <p>4 监听器连接负载均衡</p>
 <hr>
 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593409130289324.png" alt="第四十七章 九析带你轻松完爆 Istio - Envoy 线程模型_Istio 视频"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593409130289324.png" alt="第四十七章 九析带你轻松完爆 Istio - Envoy 线程模型_Istio 视频"></p>
 <hr>
 <h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593409138244915.png" alt="第四十七章 九析带你轻松完爆 Istio - Envoy 线程模型_Envoy 视频_02"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593409138244915.png" alt="第四十七章 九析带你轻松完爆 Istio - Envoy 线程模型_Envoy 视频_02"></p>
 <hr>
 <h1 id="3-Envoy-线程模型"><a href="#3-Envoy-线程模型" class="headerlink" title="3 Envoy 线程模型"></a>3 Envoy 线程模型</h1><p>&emsp;&emsp;Envoy 是单进程内包含多线程的架构设计。单进程内部包含两种线程-主线程（master thread）和工作线程（worker thread）。主线程的作用是控制、协调任务；工作线程的作用是执行监听、过滤和转发。如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1593409156694519.png" alt="第四十七章 九析带你轻松完爆 Istio - Envoy 线程模型_Envoy 视频_03"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1593409156694519.png" alt="第四十七章 九析带你轻松完爆 Istio - Envoy 线程模型_Envoy 视频_03"></p>
 <p>&emsp;&emsp;Envoy 进程启动时会开启监听端口（listener），一旦监听器接受了客户端的连接，此连接的生命周期就会绑定到 Envoy  内的一个工作线程上。由此可知，Envoy 被设计成多个单线程并行，100%  无阻塞的模式。对于大多数工作负载，我们建议将工作线程的数量配置为等于计算机上硬件线程的数量。查看 Linux 操作系统最大进程数命令为：</p>
 <blockquote>
 <p>sysctl kernel.pid_max 或 cat /proc/sys/kernel/pid_max</p>
@@ -1287,7 +1329,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-Envoy-%E4%BB%8B%E7%BB%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -1312,9 +1354,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-12 14:47:59 / 修改时间：14:49:33" itemprop="dateCreated datePublished" datetime="2021-09-12T14:47:59+08:00">2021-09-12</time>
+      <time title="创建时间：2021-09-12 14:47:59" itemprop="dateCreated datePublished" datetime="2021-09-12T14:47:59+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -1346,17 +1394,17 @@
 <p>  4.6 MongoDB &amp; DynamoDB L7 支持</p>
 <hr>
 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483307304493.png" alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_envoy"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592483307304493.png" alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_envoy"></p>
 <hr>
 <h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483316585445.png" alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_Istio 视频_02"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592483316585445.png" alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_Istio 视频_02"></p>
 <hr>
 <h1 id="3-Envoy-介绍"><a href="#3-Envoy-介绍" class="headerlink" title="3 Envoy 介绍"></a>3 Envoy 介绍</h1><p>&emsp;&emsp;Envoy 是类似 Nginx 的网络边缘代理工具，是专为大型现代微服务架构而设计的。</p>
 <p>&emsp;&emsp;下图是 Nginx 使用场景：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483325727030.png" alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_Istio 视频_03"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592483325727030.png" alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_Istio 视频_03"></p>
 <p>&emsp;&emsp;上图中，Nginx 作为边缘代理，是整个网络流量的入口。通过配置 Nginx，可将访问者请求路由到后端 Server 内的 Service  进行处理。但是问题来了，如果我们想控制 Service A 和 Service B 之间的流量就没有办法了，因为它们之间并没有任何边缘代理。</p>
 <p>&emsp;&emsp;下图是 Envoy 使用场景：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592483333452261.png" alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_envoy_04"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592483333452261.png" alt="第四十四章 九析带你轻松完爆 Istio - Envoy 介绍_envoy_04"></p>
 <p>&emsp;&emsp;上图中，Envoy 不但作为边缘代理（类似  Nginx）是整个网络流量的入口，同时也可以作为服务（service）代理。这样的网络拓补结构不但可以设置访问者路由规则，也可以设置  service A 与 Service B 之间的路由规则。因此，这样就可以全方位控制微服务内部到内部、外部到内部的所有网络流量，而上图中  Nginx 仅仅控制由外到内的网络流量。</p>
 <hr>
 <h1 id="4-Envoy-特性"><a href="#4-Envoy-特性" class="headerlink" title="4 Envoy 特性"></a>4 Envoy 特性</h1><h2 id="4-1-自包含"><a href="#4-1-自包含" class="headerlink" title="4.1 自包含"></a>4.1 自包含</h2><p>&emsp;&emsp;Envoy 是自包含的设计，它和应用服务器各自独立运行，并不对服务器内的应用进行侵入。这样设计的好处在于可以支持任何语言、任何框架所编写的微服务。此外，正因为自包含、无侵入的设计可以使得升级或部署更透明和高效</p>
@@ -1394,7 +1442,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86%E4%B8%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -1419,9 +1467,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-12 14:40:57 / 修改时间：14:42:54" itemprop="dateCreated datePublished" datetime="2021-09-12T14:40:57+08:00">2021-09-12</time>
+      <time title="创建时间：2021-09-12 14:40:57" itemprop="dateCreated datePublished" datetime="2021-09-12T14:40:57+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -1449,10 +1503,10 @@
 <p>6 SSL / TLS 与非对称加密</p>
 <hr>
 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591602918289392.png" alt="第四十二章 九析带你轻松完爆 Istio - 安全之加密三_Istio security"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1591602918289392.png" alt="第四十二章 九析带你轻松完爆 Istio - 安全之加密三_Istio security"></p>
 <hr>
 <h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591602926907711.png" alt="第四十二章 九析带你轻松完爆 Istio - 安全之加密三_Istio 安全_02"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1591602926907711.png" alt="第四十二章 九析带你轻松完爆 Istio - 安全之加密三_Istio 安全_02"></p>
 <hr>
 <h1 id="3-加密简介"><a href="#3-加密简介" class="headerlink" title="3 加密简介"></a>3 加密简介</h1><p>&emsp;&emsp;加密是基础，是安全绕不开的话题。常用的加密方式有三种，分别为哈希、对称加密和非对称加密。上节我们重点介绍了 Hash 和对称密钥加密，这节介绍一下非对称密钥加密。</p>
 <hr>
@@ -1464,9 +1518,9 @@
 <h1 id="5-非对称加密原理"><a href="#5-非对称加密原理" class="headerlink" title="5 非对称加密原理"></a>5 非对称加密原理</h1><p>&emsp;&emsp;非对称加密跟对称加密相比有两个关注点，而不是一个。除了加密算法本身，还需要一对公私钥。其中公钥用来加密、私钥用来解密。在启动通信过程中，首先生成一对公私钥，</p>
 <p>&emsp;&emsp;公钥发送给对方，私钥则需要妥善保管。对方通过公钥对信息进行加密（加密算法会在公钥中指定），当你收到信息，就用保管好的私钥进行解密。</p>
 <p>&emsp;&emsp;加密过程如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592359257398290.png" alt="第四十二章 九析带你轻松完爆 Istio - 安全之加密三_Istio 视频_03"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592359257398290.png" alt="第四十二章 九析带你轻松完爆 Istio - 安全之加密三_Istio 视频_03"></p>
 <p>&emsp;&emsp;解密过程如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1592359474532732.png" alt="第四十二章 九析带你轻松完爆 Istio - 安全之加密三_Istio 安全_04"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1592359474532732.png" alt="第四十二章 九析带你轻松完爆 Istio - 安全之加密三_Istio 安全_04"></p>
 <hr>
 <h1 id="6-SSL-TLS-与非对称加密"><a href="#6-SSL-TLS-与非对称加密" class="headerlink" title="6 SSL / TLS 与非对称加密"></a>6 SSL / TLS 与非对称加密</h1><p>&emsp;&emsp;在本节介绍中，非对称加密显示出了它的安全优势，即：只要保持私钥安全，数据就是安全的。如果再结合前面的教程知道，SSL / TLS 是构建在传输层和应用层之间的虚拟层，这层主要负责数据安全。那么将非对称加密算法作为 SSL / TLS  的唯一性算法就是整个数据通路的安全解决方案了，但现实是这样的吗？答案是否定的。因为现实仍然是在 SSL / TLS  层主要使用对称加密，原因在于：双密钥架构的加密、解密开销非常高，与对称密钥相比，它需要更多的时间和 CPU  占有率，这就意味着在互联网使用非常频繁的今天，如果只通过非对称加密进行通信，那么浏览器和服务器之间数据通信会让用户等待更长的时间。</p>
 <p>&emsp;&emsp;因此在 SSL / TLS 层经常的做法是双密钥机制在客户端和服务器交换对称密钥时才使用，此过程建立之后，客户端和服务端通信就按照对称加密进行。至于整个操作如何进行，将在后续课程中一一指出。</p>
@@ -1499,7 +1553,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/%E4%B9%9D%E6%9E%90%E5%B8%A6%E4%BD%A0%E8%BD%BB%E6%9D%BE%E5%AE%8C%E7%88%86-Istio-%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86%E4%BA%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bb.jpg">
+      <meta itemprop="image" content="/images/bb.png">
       <meta itemprop="name" content="九析">
     </span>
 
@@ -1524,9 +1578,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-12 14:38:35 / 修改时间：14:39:17" itemprop="dateCreated datePublished" datetime="2021-09-12T14:38:35+08:00">2021-09-12</time>
+      <time title="创建时间：2021-09-12 14:38:35" itemprop="dateCreated datePublished" datetime="2021-09-12T14:38:35+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 22:49:27" itemprop="dateModified" datetime="2022-07-16T22:49:27+08:00">2022-07-16</time>
     </span>
 
   
@@ -1553,19 +1613,19 @@
 <p>5 对称秘钥不足</p>
 <hr>
 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>&emsp;&emsp;如果你对博客有任何疑问，请告诉我。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591588745379409.png" alt="第四十一章 九析带你轻松完爆 Istio - 安全之加密二_Istio 安全"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1591588745379409.png" alt="第四十一章 九析带你轻松完爆 Istio - 安全之加密二_Istio 安全"></p>
 <hr>
 <h1 id="2-邀约"><a href="#2-邀约" class="headerlink" title="2 邀约"></a>2 邀约</h1><p>&emsp;&emsp;你可以从 b 站搜索 “九析”，获取免费的、更生动的视频资料：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591588753179092.png" alt="第四十一章 九析带你轻松完爆 Istio - 安全之加密二_Istio security_02"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1591588753179092.png" alt="第四十一章 九析带你轻松完爆 Istio - 安全之加密二_Istio security_02"></p>
 <hr>
 <h1 id="3-加密简介"><a href="#3-加密简介" class="headerlink" title="3 加密简介"></a>3 加密简介</h1><p>&emsp;&emsp;加密是基础，是安全绕不开的话题。常用的加密方式有三种，分别为哈希、对称加密和非对称加密。上节我们重点介绍了 Hash，这节介绍一下对称密钥加密。</p>
 <hr>
 <h1 id="4-对称密钥加密"><a href="#4-对称密钥加密" class="headerlink" title="4  对称密钥加密"></a>4  对称密钥加密</h1><p>&emsp;&emsp;古罗马军事家凯撒大帝一生征战无数，鲜有敌手，除了卓越的军事才能之外，他对军事信息的流通和保护也特别重视，凯撒密码就是体现之一。据传，凯撒曾用此方法与其将军们进行联系。</p>
 <p>&emsp;&emsp;凯撒密码的原理非常简单，就是将明文中的所有字母在字母表上向后（或向前）按照一个固定数目（步长）进行偏移，比如明文是 “abc”，偏移量为 3，就变成了新的字符串 “def”，其中偏移量 3 就是加密密钥（对称密钥），而字符串 “def”  就是密文。如下图所示：</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591588767107074.png" alt="第四十一章 九析带你轻松完爆 Istio - 安全之加密二_Istio security_04"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1591588767107074.png" alt="第四十一章 九析带你轻松完爆 Istio - 安全之加密二_Istio security_04"></p>
 <hr>
 <h1 id="5-对称密钥不足"><a href="#5-对称密钥不足" class="headerlink" title="5  对称密钥不足"></a>5  对称密钥不足</h1><p>&emsp;&emsp;凯撒密码会有很多问题，这种算法很容易被破解。可以将密钥的值从 1 更改为任何值，并逐个轮询 26 个字母。如果使用计算机，破解几毫秒就搞定了。</p>
-<p><img src="https://gitee.com/jianshen-bao/blog-img/raw/master/img/1591588781156241.png" alt="第四十一章 九析带你轻松完爆 Istio - 安全之加密二_Istio 免费视频_05"></p>
+<p><img src="https://yangpiqiulaotou.oss-cn-hangzhou.aliyuncs.com/images/1591588781156241.png" alt="第四十一章 九析带你轻松完爆 Istio - 安全之加密二_Istio 免费视频_05"></p>
 <p>&emsp;&emsp;如今，比较安全的对称密钥算法是 AES（高级加密标准）和 3DES（三重数据加密算法）。它们都被公认为很难破解。</p>
 <p>&emsp;&emsp;即使密码再难破解，但如果偷窃者在信息交换双方共享密钥时捕获了密钥，一样会造成信息泄露。因此，就需要一种更为安全的机制来交换密码，而不让偷窃者真正看到它。这就是后文将要介绍的非对称加密算法。</p>
 
